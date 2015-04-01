@@ -179,22 +179,9 @@ public class ExampleGraphics2D extends JFrame {
         floor.addFixture(new BodyFixture(floorRect));
         floor.setMass(Mass.Type.INFINITE);
 
-
         // move the floor down a bit
         floor.translate(0.0, -4.0);
         this.world.addBody(floor);
-
-        // Create body
-
-        // Torso
-//        Rectangle torsoShape = new Rectangle(1.5, 2.0);
-//        GameObject torso = new GameObject();
-//        torso.addFixture(torsoShape);
-//        torso.setMass();
-//        torso.translate(2.0, 1.0);
-//        torso.getLinearVelocity().set(0, 0);
-//        this.world.addBody(torso);
-
 
         // HEAD
         Circle headShape = new Circle(0.5);
