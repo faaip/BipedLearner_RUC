@@ -209,9 +209,7 @@ public class ExampleGraphics2D extends JFrame {
         bodyList.add(body);
         this.world.addBody((Body) bodyList.get(0));
 
-        BalancingBody body2 = new BalancingBody();
-        bodyList.add(body2);
-        this.world.addBody((Body) bodyList.get(1));
+
 
 
 
@@ -288,29 +286,7 @@ public class ExampleGraphics2D extends JFrame {
         });
     }
 
-    CollisionListener bodyHit = new CollisionListener() {
-        @Override
-        public boolean collision(Body body, Body body1) {
 
-
-            return false;
-        }
-
-        @Override
-        public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Penetration penetration) {
-            return false;
-        }
-
-        @Override
-        public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Manifold manifold) {
-            return false;
-        }
-
-        @Override
-        public boolean collision(ContactConstraint contactConstraint) {
-            return false;
-        }
-    };
 
     public void jump(KeyEvent e) {
 
@@ -375,10 +351,6 @@ public class ExampleGraphics2D extends JFrame {
         // update the world with the elapsed time
         this.world.update(elapsedTime);
 
-        if(bodyHit.collision(bodyList.get(0),bodyList.get(1)))
-        {
-            System.out.println("COLLISION!!");
-        }
 
 
 

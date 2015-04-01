@@ -14,7 +14,6 @@ public class BalancingBody extends GameObject {
         addFixture(torsoShape);
         setMass();
         translate(2.0, 1.0);
-
     }
 
     public void jump() {
