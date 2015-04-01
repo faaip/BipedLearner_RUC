@@ -259,14 +259,29 @@ public class ExampleGraphics2D extends JFrame {
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                System.out.println("yes");
-//                bodyList.get().jump();
-                jump();
+
 
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+                switch (key) {
+                    case KeyEvent.VK_UP:
+                        bodyList.get(0).jump();
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        // down
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        // left
+                        bodyList.get(0).jumpLeft();
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        // right
+                        bodyList.get(0).jumpRight();
+                        break;
+                }
             }
 
             @Override
@@ -276,10 +291,21 @@ public class ExampleGraphics2D extends JFrame {
         });
     }
 
-    public void jump() {
-        System.out.println(        bodyList.get(0).toString()
-        );
-        bodyList.get(0).jump();
+
+    public void jump(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_A)
+            bodyList.get(0).jumpLeft();
+
+        if (e.getKeyCode() == KeyEvent.VK_D)
+            bodyList.get(0).jumpRight();
+
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            System.out.println("UP");
+            bodyList.get(0).jump();
+        }
+
+
     }
 
     /**
@@ -328,8 +354,6 @@ public class ExampleGraphics2D extends JFrame {
         double elapsedTime = (double) diff / NANO_TO_BASE;
         // update the world with the elapsed time
         this.world.update(elapsedTime);
-
-
 
 
     }

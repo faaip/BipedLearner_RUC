@@ -16,7 +16,15 @@ public class BalancingBody extends GameObject {
     }
 
    public void jump(){
-        getLinearVelocity().set(0, 10.0);
+        getLinearVelocity().set(0, 6.0);
     }
 
+    public void jumpRight() {
+        getLinearVelocity().set(6.0,0);
+    }
+
+    public void jumpLeft() {
+        getLinearVelocity().set(-6.0,0);
+
+    }
 }
