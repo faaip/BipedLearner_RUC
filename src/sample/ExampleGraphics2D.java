@@ -32,6 +32,7 @@ import java.awt.Toolkit;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -66,6 +67,10 @@ import org.dyn4j.geometry.Vector2;
  * @since 3.0.0
  */
 public class ExampleGraphics2D extends JFrame {
+
+    public ArrayList bodyList = new ArrayList();
+
+
     /**
      * The serial version id
      */
@@ -174,6 +179,7 @@ public class ExampleGraphics2D extends JFrame {
         floor.addFixture(new BodyFixture(floorRect));
         floor.setMass(Mass.Type.INFINITE);
 
+
         // move the floor down a bit
         floor.translate(0.0, -4.0);
         this.world.addBody(floor);
@@ -181,13 +187,14 @@ public class ExampleGraphics2D extends JFrame {
         // Create body
 
         // Torso
-        Rectangle torsoShape = new Rectangle(1.5, 2.0);
-        GameObject torso = new GameObject();
-        torso.addFixture(torsoShape);
-        torso.setMass();
-        torso.translate(2.0, 1.0);
-        torso.getLinearVelocity().set(0, 0);
-        this.world.addBody(torso);
+//        Rectangle torsoShape = new Rectangle(1.5, 2.0);
+//        GameObject torso = new GameObject();
+//        torso.addFixture(torsoShape);
+//        torso.setMass();
+//        torso.translate(2.0, 1.0);
+//        torso.getLinearVelocity().set(0, 0);
+//        this.world.addBody(torso);
+
 
         // HEAD
         Circle headShape = new Circle(0.5);
@@ -202,8 +209,14 @@ public class ExampleGraphics2D extends JFrame {
         this.world.addBody(head);
 
         // Neck
-        WeldJoint neck = new WeldJoint(head,torso, new Vector2(2.0,1.0));
-        this.world.addJoint(neck);
+//        WeldJoint neck = new WeldJoint(head,body, new Vector2(2.0,1.0));
+//        this.world.addJoint(neck);
+
+
+        // Body object
+        BalancingBody body = new BalancingBody();
+        bodyList.add(body);
+        this.world.addBody((Body) bodyList.get(0));
 
     }
 
@@ -247,6 +260,7 @@ public class ExampleGraphics2D extends JFrame {
             @Override
             public void keyTyped(KeyEvent e) {
                 System.out.println("yes");
+//                bodyList.get().jump();
 
             }
 
