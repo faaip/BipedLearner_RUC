@@ -88,53 +88,6 @@ public class ExampleGraphics2D extends JFrame {
      * @version 3.0.2
      * @since 3.0.0
      */
-    public static class GameObject extends Body {
-        /**
-         * The color of the object
-         */
-        protected Color color;
-
-        /**
-         * Default constructor.
-         */
-        public GameObject() {
-            // randomly generate the color
-            this.color = new Color(
-                    (float) Math.random() * 0.5f + 0.5f,
-                    (float) Math.random() * 0.5f + 0.5f,
-                    (float) Math.random() * 0.5f + 0.5f);
-        }
-
-        /**
-         * Draws the body.
-         * <p>
-         * Only coded for polygons and circles.
-         *
-         * @param g the graphics object to render to
-         */
-        public void render(Graphics2D g) {
-            // save the original transform
-            AffineTransform ot = g.getTransform();
-
-            // transform the coordinate system from world coordinates to local coordinates
-            AffineTransform lt = new AffineTransform();
-            lt.translate(this.transform.getTranslationX() * SCALE, this.transform.getTranslationY() * SCALE);
-            lt.rotate(this.transform.getRotation());
-
-            // apply the transform
-            g.transform(lt);
-
-            // loop over all the body fixtures for this body
-            for (BodyFixture fixture : this.fixtures) {
-                // get the shape on the fixture
-                Convex convex = fixture.getShape();
-                Graphics2DRenderer.render(g, convex, SCALE, color);
-            }
-
-            // set the original transform
-            g.setTransform(ot);
-        }
-    }
 
     /**
      * The canvas to draw to
@@ -243,7 +196,7 @@ public class ExampleGraphics2D extends JFrame {
         head.setMass();
         head.translate(2.0, 2.0);
         // test gaffadding some force
-//        head.applyForce(new Vector2(3.0, 0));
+        head.applyForce(new Vector2(3.0, 0));
         // set some linear damping to simulate rolling friction
         head.setLinearDamping(0.05);
         this.world.addBody(head);
@@ -287,6 +240,25 @@ public class ExampleGraphics2D extends JFrame {
         thread.setDaemon(true);
         // start the game loop
         thread.start();
+
+
+        // KEY LISTENER!!!
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("yes");
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -337,6 +309,8 @@ public class ExampleGraphics2D extends JFrame {
         this.world.update(elapsedTime);
 
 
+
+
     }
 
     /**
@@ -359,6 +333,8 @@ public class ExampleGraphics2D extends JFrame {
             // draw the object
             go.render(g);
         }
+
+
     }
 
     /**
