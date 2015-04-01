@@ -38,10 +38,14 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.dyn4j.collision.manifold.Manifold;
 import org.dyn4j.collision.narrowphase.MinkowskiSum;
+import org.dyn4j.collision.narrowphase.Penetration;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.dynamics.CollisionListener;
 import org.dyn4j.dynamics.World;
+import org.dyn4j.dynamics.contact.ContactConstraint;
 import org.dyn4j.dynamics.joint.DistanceJoint;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import org.dyn4j.dynamics.joint.WeldJoint;
@@ -205,6 +209,12 @@ public class ExampleGraphics2D extends JFrame {
         bodyList.add(body);
         this.world.addBody((Body) bodyList.get(0));
 
+        BalancingBody body2 = new BalancingBody();
+        bodyList.add(body2);
+        this.world.addBody((Body) bodyList.get(1));
+
+
+
     }
 
 
@@ -278,6 +288,29 @@ public class ExampleGraphics2D extends JFrame {
         });
     }
 
+    CollisionListener bodyHit = new CollisionListener() {
+        @Override
+        public boolean collision(Body body, Body body1) {
+
+
+            return false;
+        }
+
+        @Override
+        public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Penetration penetration) {
+            return false;
+        }
+
+        @Override
+        public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Manifold manifold) {
+            return false;
+        }
+
+        @Override
+        public boolean collision(ContactConstraint contactConstraint) {
+            return false;
+        }
+    };
 
     public void jump(KeyEvent e) {
 
@@ -341,6 +374,12 @@ public class ExampleGraphics2D extends JFrame {
         double elapsedTime = (double) diff / NANO_TO_BASE;
         // update the world with the elapsed time
         this.world.update(elapsedTime);
+
+        if(bodyHit.collision(bodyList.get(0),bodyList.get(1)))
+        {
+            System.out.println("COLLISION!!");
+        }
+
 
 
     }

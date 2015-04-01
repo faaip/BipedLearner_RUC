@@ -7,26 +7,28 @@ import org.dyn4j.geometry.Rectangle;
  */
 public class BalancingBody extends GameObject {
 
-    public BalancingBody()
-    {
+    private int score;
+
+    public BalancingBody() {
         Rectangle torsoShape = new Rectangle(1.5, 2.0);
         addFixture(torsoShape);
-       setMass();
+        setMass();
         translate(2.0, 1.0);
+
     }
 
-   public void jump(){
+    public void jump() {
         getLinearVelocity().set(0, 6.0);
 
     }
 
     public void jumpRight() {
-        getLinearVelocity().set(6.0,0);
+        getLinearVelocity().set(6.0, 0);
         setAngularVelocity(1);
     }
 
     public void jumpLeft() {
-        getLinearVelocity().set(-6.0,0);
+        getLinearVelocity().set(-6.0, 0);
 
     }
 }
