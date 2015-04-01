@@ -68,7 +68,7 @@ import org.dyn4j.geometry.Vector2;
  */
 public class ExampleGraphics2D extends JFrame {
 
-    public ArrayList bodyList = new ArrayList();
+    public ArrayList<BalancingBody> bodyList = new ArrayList<>();
 
 
     /**
@@ -261,6 +261,7 @@ public class ExampleGraphics2D extends JFrame {
             public void keyTyped(KeyEvent e) {
                 System.out.println("yes");
 //                bodyList.get().jump();
+                jump();
 
             }
 
@@ -273,6 +274,12 @@ public class ExampleGraphics2D extends JFrame {
 
             }
         });
+    }
+
+    public void jump() {
+        System.out.println(        bodyList.get(0).toString()
+        );
+        bodyList.get(0).jump();
     }
 
     /**

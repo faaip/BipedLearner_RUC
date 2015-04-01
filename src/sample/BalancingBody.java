@@ -15,7 +15,7 @@ public class BalancingBody extends GameObject {
         translate(2.0, 1.0);
     }
 
-    void jump(){
+   public void jump(){
         getLinearVelocity().set(0, 10.0);
     }
 
