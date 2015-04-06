@@ -39,6 +39,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.dyn4j.collision.manifold.Manifold;
+import org.dyn4j.collision.narrowphase.DistanceDetector;
 import org.dyn4j.collision.narrowphase.MinkowskiSum;
 import org.dyn4j.collision.narrowphase.Penetration;
 import org.dyn4j.dynamics.Body;
@@ -72,7 +73,7 @@ import org.dyn4j.geometry.Vector2;
  */
 public class ExampleGraphics2D extends JFrame {
 
-    public ArrayList<BalancingBody> bodyList = new ArrayList<>();
+    public ArrayList<Balancer> bodyList = new ArrayList<>();
 
 
     /**
@@ -187,28 +188,15 @@ public class ExampleGraphics2D extends JFrame {
         floor.translate(0.0, -4.0);
         this.world.addBody(floor);
 
-        // HEAD
-        Circle headShape = new Circle(0.5);
-        GameObject head = new GameObject();
-        head.addFixture(headShape);
-        head.setMass();
-        head.translate(2.0, 2.0);
-        // test gaffadding some force
-        head.applyForce(new Vector2(3.0, 0));
-        // set some linear damping to simulate rolling friction
-        head.setLinearDamping(0.05);
-        this.world.addBody(head);
-
-        // Neck
-//        WeldJoint neck = new WeldJoint(head,body, new Vector2(2.0,1.0));
-//        this.world.addJoint(neck);
-
 
         // Body object
         BalancingBody body = new BalancingBody();
-        bodyList.add(body);
-        this.world.addBody((Body) bodyList.get(0));
 
+//        this.world.addBody((Body) bodyList.get(0));
+
+        Balancer balancer = new Balancer(this.world);
+        bodyList.add(balancer);
+        this.world.addBody(balancer);
 
 
 
@@ -263,18 +251,18 @@ public class ExampleGraphics2D extends JFrame {
                 int key = e.getKeyCode();
                 switch (key) {
                     case KeyEvent.VK_UP:
-                        bodyList.get(0).jump();
+//                        bodyList.get(0).jump();
                         break;
                     case KeyEvent.VK_DOWN:
                         // down
                         break;
                     case KeyEvent.VK_LEFT:
                         // left
-                        bodyList.get(0).jumpLeft();
+                        bodyList.get(0).leanLeft();
                         break;
                     case KeyEvent.VK_RIGHT:
                         // right
-                        bodyList.get(0).jumpRight();
+                        bodyList.get(0).leanRight();
                         break;
                 }
             }
@@ -288,21 +276,9 @@ public class ExampleGraphics2D extends JFrame {
 
 
 
-    public void jump(KeyEvent e) {
-
-        if (e.getKeyCode() == KeyEvent.VK_A)
-            bodyList.get(0).jumpLeft();
-
-        if (e.getKeyCode() == KeyEvent.VK_D)
-            bodyList.get(0).jumpRight();
-
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            System.out.println("UP");
-            bodyList.get(0).jump();
-        }
 
 
-    }
+
 
     /**
      * The method calling the necessary methods to update

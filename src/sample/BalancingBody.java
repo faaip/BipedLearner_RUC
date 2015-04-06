@@ -2,6 +2,8 @@ package sample;
 
 import org.dyn4j.geometry.Rectangle;
 
+import java.awt.*;
+
 /**
  * Created by frederikjuutilainen on 01/04/15.
  */
@@ -14,6 +16,9 @@ public class BalancingBody extends GameObject {
         addFixture(torsoShape);
         setMass();
         translate(2.0, 1.0);
+//        setLinearDamping(0.1);
+
+
     }
 
     public void jump() {
