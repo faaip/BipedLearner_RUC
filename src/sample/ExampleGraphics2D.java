@@ -190,10 +190,6 @@ public class ExampleGraphics2D extends JFrame {
 
 
         // Body object
-        BalancingBody body = new BalancingBody();
-
-//        this.world.addBody((Body) bodyList.get(0));
-
         Balancer balancer = new Balancer(this.world);
         bodyList.add(balancer);
         this.world.addBody(balancer);

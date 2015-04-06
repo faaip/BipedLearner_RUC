@@ -65,7 +65,6 @@ public class Balancer extends GameObject {
     }
 
     public void leanLeft() {
-//        d.setLinearVelocity(-1.0,0.0);
         e.applyImpulse(1.0);
         System.out.println("Leaning left");
     }
