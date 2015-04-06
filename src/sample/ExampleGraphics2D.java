@@ -176,25 +176,22 @@ public class ExampleGraphics2D extends JFrame {
         // create the world
         this.world = new World();
 
-        // create all your bodies/joints
-
         // create the floor
         Rectangle floorRect = new Rectangle(15.0, 1.0);
         GameObject floor = new GameObject();
-        floor.addFixture(new BodyFixture(floorRect));
+        BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0,1.0));
+        floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
         // move the floor down a bit
         floor.translate(0.0, -4.0);
         this.world.addBody(floor);
 
-
-        // Body object
+        // Balancer object
         Balancer balancer = new Balancer(this.world);
+        balancer.setAngularDamping(2.0);
         bodyList.add(balancer);
         this.world.addBody(balancer);
-
-
 
 
     }
@@ -234,7 +231,7 @@ public class ExampleGraphics2D extends JFrame {
         thread.start();
 
 
-        // KEY LISTENER!!!
+        // Key Listener for arrow keys
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -254,11 +251,11 @@ public class ExampleGraphics2D extends JFrame {
                         break;
                     case KeyEvent.VK_LEFT:
                         // left
-                        bodyList.get(0).leanLeft();
+                        bodyList.get(0).lean(1.0);
                         break;
                     case KeyEvent.VK_RIGHT:
                         // right
-                        bodyList.get(0).leanRight();
+                        bodyList.get(0).lean(-1.0);
                         break;
                 }
             }
@@ -269,11 +266,6 @@ public class ExampleGraphics2D extends JFrame {
             }
         });
     }
-
-
-
-
-
 
 
     /**
@@ -322,8 +314,6 @@ public class ExampleGraphics2D extends JFrame {
         double elapsedTime = (double) diff / NANO_TO_BASE;
         // update the world with the elapsed time
         this.world.update(elapsedTime);
-
-
 
 
     }
