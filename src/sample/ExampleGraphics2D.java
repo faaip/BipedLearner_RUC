@@ -189,7 +189,7 @@ public class ExampleGraphics2D extends JFrame {
 
         // Balancer object
         Balancer balancer = new Balancer(this.world);
-        balancer.setAngularDamping(2.0);
+//        balancer.setAngularDamping(2.0);
         bodyList.add(balancer);
         this.world.addBody(balancer);
 

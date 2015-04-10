@@ -36,7 +36,6 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
         d.setMass();
         world.addBody(d);
 
-
 //        c.addFixture(Geometry.createHalfEllipseAtOrigin(3.0, 1.5)); // Bottom half-circle
         BodyFixture c1 = new BodyFixture(Geometry.createHalfEllipseAtOrigin(3.0, 1.5));
         c1.setFriction(5.0);
