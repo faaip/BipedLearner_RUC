@@ -20,6 +20,7 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
     int score; // Score
 
     float topPointDist; // Control points distance from init state
+    // Which direction it is moving - binary
 
     GameObject c = new GameObject(); // Bottom half circle
     GameObject d = new GameObject(); // "Stick"
