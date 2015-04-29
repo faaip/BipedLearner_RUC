@@ -187,9 +187,9 @@ public class ExampleGraphics2D extends JFrame {
         floor.translate(0.0, -4.0);
         this.world.addBody(floor);
 
-        // Balancer object
+//         Balancer object
         Balancer balancer = new Balancer(this.world);
-//        balancer.setAngularDamping(2.0);
+        balancer.setAngularDamping(2.0);
         bodyList.add(balancer);
         this.world.addBody(balancer);
 
@@ -364,8 +364,6 @@ public class ExampleGraphics2D extends JFrame {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-
-
         // set the look and feel to the system look and feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

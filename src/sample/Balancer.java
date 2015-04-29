@@ -16,7 +16,6 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
 
     boolean leaningRight; // Which direction it is moving - binary
 
-
     GameObject c = new GameObject(); // Bottom half circle
     GameObject d = new GameObject(); // "Stick"
 
@@ -77,7 +76,6 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
     public boolean isBalanced() {
         // Checks if angle is with a set threshold and returns boolean
         double threshold = 1.5;
-
         return (getAngle() < threshold && getAngle() > -threshold);
     }
 }
