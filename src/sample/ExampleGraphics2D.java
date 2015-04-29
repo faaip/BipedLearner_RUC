@@ -381,6 +381,7 @@ public class ExampleGraphics2D extends JFrame {
 
         // create the example JFrame
         ExampleGraphics2D window = new ExampleGraphics2D();
+        window.setTitle("Machine Learning");
 
         // show it
         window.setVisible(true);
