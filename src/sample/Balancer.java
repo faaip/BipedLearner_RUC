@@ -10,8 +10,6 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
 
-import java.util.ArrayList;
-
 public class Balancer extends GameObject { // Is sub-class of GameObject for drawing functions
 
     boolean leaningRight; // Which direction it is moving - binary
