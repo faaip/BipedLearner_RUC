@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         ExampleGraphics2D world = new ExampleGraphics2D();
         world.setTitle("Machine Learning");
 
@@ -42,6 +41,10 @@ public class Main {
             world.bodyList.get(0).lean(amount);
         });
 
+        amountSlider.addChangeListener(e -> {
+            amount = amountSlider.getValue();
+        });
+
         controls.add(leanLeftButton);
         controls.add(leanRightButton);
         controls.add(amountSlider);
@@ -51,9 +54,7 @@ public class Main {
         JLabel angleLabel = new JLabel();
         angleLabel.setText("Angle is: " + world.bodyList.get(0).getAngle());
 
-
         info.add(angleLabel);
-
 
         // Panels are added to splitpane
         JSplitPane split = new JSplitPane();
@@ -62,12 +63,8 @@ public class Main {
         split.setRightComponent(controls);
         gui.add(split);
 
-
 //        controls.add(angleLabel);
 //        controls.setPreferredSize(new Dimension(400,400));
 
-
-
     }
-
 }
