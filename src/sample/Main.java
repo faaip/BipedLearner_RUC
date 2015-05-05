@@ -62,9 +62,5 @@ public class Main {
         split.setLeftComponent(info);
         split.setRightComponent(controls);
         gui.add(split);
-
-//        controls.add(angleLabel);
-//        controls.setPreferredSize(new Dimension(400,400));
-
     }
 }
