@@ -72,6 +72,7 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
         return Math.toDegrees(e.getWorldCenter().getAngleBetween(new Vector2(0.0, 1.0)));
     }
 
+
     public boolean isBalanced() {
         // Checks if angle is with a set threshold and returns boolean
         double threshold = 1.5;
@@ -85,6 +86,16 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
 
     public State getCurrentState() {
 
-        return null;
+        State currentState = new State(this);
+        return currentState;
+
+
+    }
+
+
+    @Override
+    public int hashCode (){
+
+        return (int) getAngle();
     }
 }
