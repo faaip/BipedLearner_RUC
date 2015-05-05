@@ -4,6 +4,7 @@ import MDP.State;
 import Rendering_dyn4j.ExampleGraphics2D;
 
 import javax.swing.*;
+import java.util.HashSet;
 
 public class
         Main {
@@ -21,6 +22,16 @@ public class
 
         // Controls
         GUI gui = new GUI(world);
+
+        // Test
+        HashSet<State> states = new HashSet<>();
+
+        while (!world.balancer.hasFallen()) {
+            if (states.contains(world.balancer.getCurrentState()))
+            {
+                System.out.println("This state has been ");
+            }
+        }
 
 
     }

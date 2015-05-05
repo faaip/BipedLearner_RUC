@@ -1,5 +1,6 @@
 package sample;
 
+import MDP.State;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
@@ -80,5 +81,10 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
         // Maybe update with collision detection
         return (getAngle()< -122 || getAngle()> 122);
 
+    }
+
+    public State getCurrentState() {
+
+        return null;
     }
 }
