@@ -7,7 +7,8 @@ import javax.swing.*;
 /**
  * Created by frederikjuutilainen on 29/04/15.
  */
-public class Main {
+public class
+        Main {
 
     private static double amount = 1;
 
