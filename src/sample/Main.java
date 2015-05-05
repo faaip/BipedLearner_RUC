@@ -1,7 +1,8 @@
 package sample;
 
+import Rendering_dyn4j.ExampleGraphics2D;
+
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by frederikjuutilainen on 29/04/15.

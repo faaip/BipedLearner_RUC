@@ -1,31 +1,14 @@
 package sample;
 
-import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
-import java.awt.event.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferStrategy;
 
-import org.dyn4j.collision.narrowphase.MinkowskiSum;
+import Rendering_dyn4j.ExampleGraphics2D;
+import Rendering_dyn4j.Graphics2DRenderer;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.dynamics.World;
-import org.dyn4j.dynamics.joint.DistanceJoint;
-import org.dyn4j.dynamics.joint.RevoluteJoint;
-import org.dyn4j.dynamics.joint.WeldJoint;
-import org.dyn4j.geometry.Capsule;
-import org.dyn4j.geometry.Circle;
 import org.dyn4j.geometry.Convex;
-import org.dyn4j.geometry.Geometry;
-import org.dyn4j.geometry.Mass;
-import org.dyn4j.geometry.Polygon;
-import org.dyn4j.geometry.Rectangle;
-import org.dyn4j.geometry.Slice;
-import org.dyn4j.geometry.Triangle;
-import org.dyn4j.geometry.Vector2;
 
 public class GameObject extends Body {
         /**
