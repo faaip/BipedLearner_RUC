@@ -1,5 +1,6 @@
 package sample;
 
+import MDP.State;
 import Rendering_dyn4j.ExampleGraphics2D;
 
 import javax.swing.*;
@@ -9,7 +10,6 @@ import javax.swing.*;
  */
 public class
         Main {
-
     private static double amount = 1;
 
     public static void main(String[] args) {
@@ -26,21 +26,21 @@ public class
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setVisible(true);
-        gui.setSize(300,300);
+        gui.setSize(300, 300);
 
         // Add controls
         JButton leanRightButton = new JButton("Lean right");
         JButton leanLeftButton = new JButton("Left left");
-        JSlider amountSlider = new JSlider(1,10);
+        JSlider amountSlider = new JSlider(1, 10);
 
         // Panel for controls
         JPanel controls = new JPanel();
 
         leanRightButton.addActionListener(e -> {
-            world.bodyList.get(0).lean(-amount);
+            world.balancer.lean(-amount);
         });
         leanLeftButton.addActionListener(e -> {
-            world.bodyList.get(0).lean(amount);
+            world.balancer.lean(amount);
         });
 
         amountSlider.addChangeListener(e -> {
@@ -54,7 +54,7 @@ public class
         // Panel for info monitoring
         JPanel info = new JPanel();
         JLabel angleLabel = new JLabel();
-        angleLabel.setText("Angle is: " + world.bodyList.get(0).getAngle());
+        angleLabel.setText("Angle is: " + world.balancer.getAngle());
 
         info.add(angleLabel);
 

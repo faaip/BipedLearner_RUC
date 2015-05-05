@@ -59,6 +59,7 @@ import sample.GameObject;
 public class ExampleGraphics2D extends JFrame {
 
     public ArrayList<Balancer> bodyList = new ArrayList<>();
+    public static Balancer balancer;
 
 
     /**
@@ -173,7 +174,7 @@ public class ExampleGraphics2D extends JFrame {
         this.world.addBody(floor);
 
 //         Balancer object
-        Balancer balancer = new Balancer(this.world);
+        balancer = new Balancer(this.world);
         balancer.setAngularDamping(2.0);
         bodyList.add(balancer);
         this.world.addBody(balancer);
