@@ -77,6 +77,7 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
         return (getAngle() < threshold && getAngle() > -threshold);
     }
     public boolean hasFallen(){
+        // Maybe update with collision detection
         return (getAngle()< -122 || getAngle()> 122);
 
     }
