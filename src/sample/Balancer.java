@@ -69,7 +69,7 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
 
     public double getAngle() {
         // Return the angle of the stick in degrees
-        return Math.toDegrees(e.getWorldCenter().getAngleBetween(new Vector2(0.0, 1.0)));
+        return (int) Math.toDegrees(e.getWorldCenter().getAngleBetween(new Vector2(0.0, 1.0)));
     }
 
 
