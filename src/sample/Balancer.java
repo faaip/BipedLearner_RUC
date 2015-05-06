@@ -1,14 +1,11 @@
 package sample;
 
 import MDP.State;
-import org.dyn4j.dynamics.Body;
+import Rendering_dyn4j.GameObject;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
-import org.dyn4j.dynamics.joint.Joint;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
-import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Geometry;
-import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
 
 public class Balancer extends GameObject { // Is sub-class of GameObject for drawing functions

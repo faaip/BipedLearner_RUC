@@ -27,12 +27,17 @@ public class
         HashSet<State> states = new HashSet<>();
 
         while (!world.balancer.hasFallen()) {
+            gui.angleLabel.setText("Current angle: " + world.balancer.getAngle()+" °");
             if (states.contains(world.balancer.getCurrentState()))
             {
-                System.out.println("This state has been ");
+            }else
+            {
+                System.out.println("This state is new" + world.balancer.getCurrentState());
+                states.add(world.balancer.getCurrentState());
             }
         }
 
+        System.out.println(states);
 
     }
 }

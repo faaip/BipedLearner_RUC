@@ -44,7 +44,6 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
 import sample.Balancer;
-import sample.GameObject;
 
 /**
  * Class used to show a simple example of using the dyn4j project using

@@ -1,4 +1,4 @@
-package sample;
+package Rendering_dyn4j;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

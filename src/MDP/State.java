@@ -9,6 +9,7 @@ import java.util.List;
 
 public class State {
     double angle;
+    private double Qvalue;
     private double reward; // Reward for state
     boolean exitState = false;
     List<Action> actions = new ArrayList<>(); // List of actions
@@ -27,6 +28,18 @@ public class State {
         } else {
             this.reward = -0.05;
         }
+    }
+
+    public double getQValue()
+    {
+        // Q(s,a) = R(s,a) + decayRate * max (s',a')
+
+        return Qvalue;
+    }
+
+    public void updateQValue()
+    {
+
     }
 
     @Override

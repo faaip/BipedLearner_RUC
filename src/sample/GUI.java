@@ -9,6 +9,7 @@ import Rendering_dyn4j.ExampleGraphics2D;
 public class GUI {
 
     private static double amount = 1;
+    public static JLabel angleLabel = new JLabel();
 
 
     public GUI(ExampleGraphics2D world)
@@ -43,7 +44,7 @@ public class GUI {
 
         // Panel for info monitoring
         JPanel info = new JPanel();
-        JLabel angleLabel = new JLabel();
+
         angleLabel.setText("Angle is: " + world.balancer.getAngle());
 
         info.add(angleLabel);
