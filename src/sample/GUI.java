@@ -11,7 +11,6 @@ public class GUI {
     private static double amount = 1;
     public static JLabel angleLabel = new JLabel();
 
-
     public GUI(ExampleGraphics2D world)
     {
         JFrame gui = new JFrame();
@@ -28,10 +27,8 @@ public class GUI {
         JPanel controls = new JPanel();
 
         leanRightButton.addActionListener(e -> {
-            world.balancer.lean(-amount);
         });
         leanLeftButton.addActionListener(e -> {
-            world.balancer.lean(amount);
         });
 
         amountSlider.addChangeListener(e -> {
@@ -45,9 +42,9 @@ public class GUI {
         // Panel for info monitoring
         JPanel info = new JPanel();
 
-        angleLabel.setText("Angle is: " + world.balancer.getAngle());
+//        angleLabel.setText("Angle is: " + world.balancer.getAngle());
 
-        info.add(angleLabel);
+//        info.add(angleLabel);
 
         // Panels are added to splitpane
         JSplitPane split = new JSplitPane();

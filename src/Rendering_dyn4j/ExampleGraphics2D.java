@@ -44,6 +44,7 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
 import sample.Balancer;
+import sample.Walker;
 
 /**
  * Class used to show a simple example of using the dyn4j project using
@@ -59,6 +60,7 @@ public class ExampleGraphics2D extends JFrame {
 
     public ArrayList<Balancer> bodyList = new ArrayList<>();
     public static Balancer balancer;
+    public static Walker walker;
 
 
     /**
@@ -69,7 +71,7 @@ public class ExampleGraphics2D extends JFrame {
     /**
      * The scale 45 pixels per meter
      */
-    public static final double SCALE = 45.0;
+    public static final double SCALE = 55.0;
 
     /**
      * The conversion factor from nano to base
@@ -164,7 +166,7 @@ public class ExampleGraphics2D extends JFrame {
         // create the floor
         Rectangle floorRect = new Rectangle(15.0, 1.0);
         GameObject floor = new GameObject();
-        BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0,1.0));
+        BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
@@ -173,10 +175,14 @@ public class ExampleGraphics2D extends JFrame {
         this.world.addBody(floor);
 
 //         Balancer object
-        balancer = new Balancer(this.world);
-        balancer.setAngularDamping(2.0);
-        bodyList.add(balancer);
-        this.world.addBody(balancer);
+//        balancer = new Balancer(this.world);
+//        balancer.setAngularDamping(2.0);
+//        this.world.addBody(balancer);
+
+        // Walker object
+        walker = new Walker(this.world);
+
+
 
 
     }

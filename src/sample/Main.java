@@ -21,23 +21,21 @@ public class
         world.start();
 
         // Controls
-        GUI gui = new GUI(world);
+//        GUI gui = new GUI(world);
 
         // Test
         HashSet<State> states = new HashSet<>();
 
-        while (!world.balancer.hasFallen()) {
-            gui.angleLabel.setText("Current angle: " + world.balancer.getAngle()+" °");
-            if (states.contains(world.balancer.getCurrentState()))
-            {
-            }else
-            {
-                System.out.println("This state is new" + world.balancer.getCurrentState());
-                states.add(world.balancer.getCurrentState());
-            }
-        }
-
-        System.out.println(states);
+//        while (!world.balancer.hasFallen()) {
+//            gui.angleLabel.setText("Current angle: " + world.balancer.getAngle()+" °");
+//            if (states.contains(world.balancer.getCurrentState()))
+//            {
+//            }else
+//            {
+//                System.out.println("This state is new" + world.balancer.getCurrentState());
+//                states.add(world.balancer.getCurrentState());
+//            }
+//        }
 
     }
 }
