@@ -36,12 +36,22 @@ public class BiPedBody {
     Double maxHipTorque = 50.0;
     Double maxKneeTorque = 50.0;
     Double maxAnkleTorque = 50.0;
-
     Double jointSpeed = 180.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1,1);
     CategoryFilter f2 = new CategoryFilter(2,2);
+
+    public boolean isRightFootForward() {
+        return rightFootForward;
+    }
+
+    // Features for identifying state
+    boolean rightFootForward;
+    boolean rightKneeForward;
+    boolean torsoLeaningForward;
+    boolean rightFootOnGround;
+    boolean leftFootOnGround;
 
 
     public BiPedBody(World world)
