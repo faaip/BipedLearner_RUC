@@ -44,6 +44,7 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
 import sample.Balancer;
+import sample.BiPedBody;
 import sample.BiPedBodyStupid;
 
 /**
@@ -60,7 +61,8 @@ public class ExampleGraphics2D extends JFrame {
 
     public ArrayList<Balancer> bodyList = new ArrayList<>();
     public static Balancer balancer;
-    public static BiPedBodyStupid walker;
+//    public static BiPedBodyStupid walker;
+    public static BiPedBody walker;
 
 
     /**
@@ -180,7 +182,7 @@ public class ExampleGraphics2D extends JFrame {
 //        this.world.addBody(balancer);
 
         // Walker object
-        walker = new BiPedBodyStupid(this.world);
+        walker = new BiPedBody(this.world);
 
 
 
