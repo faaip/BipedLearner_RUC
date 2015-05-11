@@ -21,7 +21,7 @@ public class GUI {
         // Add controls
         JButton leanRightButton = new JButton("Lean right");
         JButton leanLeftButton = new JButton("Left left");
-        JSlider amountSlider = new JSlider(1, 10);
+        JSlider amountSlider = new JSlider(1, 360);
 
         // Panel for controls
         JPanel controls = new JPanel();
@@ -29,6 +29,7 @@ public class GUI {
         leanRightButton.addActionListener(e -> {
         });
         leanLeftButton.addActionListener(e -> {
+//            world.walker.rotateLeftKnee(amount);
         });
 
         amountSlider.addChangeListener(e -> {

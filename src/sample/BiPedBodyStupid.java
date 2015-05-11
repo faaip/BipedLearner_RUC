@@ -1,7 +1,6 @@
 package sample;
 
 import Rendering_dyn4j.GameObject;
-import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
@@ -10,23 +9,30 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
 
-public class Walker {
-
-    // Dimensions
-    double legWidth = .4;
-
+public class BiPedBodyStupid {
 
     // Limbs
-    GameObject torso = new GameObject(); // Hip
-    GameObject uleg1 = new GameObject(); // Upper leg 1
-    GameObject uleg2 = new GameObject(); // Upper leg 2
-    GameObject lleg1 = new GameObject(); // Lower leg 1
-    GameObject lleg2 = new GameObject(); // Lower leg 2
-    GameObject foot1 = new GameObject(); // Foot 1
-    GameObject foot2 = new GameObject(); // Foot 2
+    GameObject torso = new GameObject();
+
+    // Joints
+    RevoluteJoint joint10;
 
 
-    public Walker(World world) {
+    public BiPedBodyStupid(World world) {
+
+        // Torso
+        {// Fixture2
+            Convex c = Geometry.createRectangle(0.5,1.8);
+            BodyFixture bf = new BodyFixture(c);
+            torso.addFixture(bf);
+        }
+        torso.setMass(Mass.Type.NORMAL);
+        world.addBody(torso);
+
+
+
+        // Body model from dyn4j forum
+
         // Head
         GameObject body2 = new GameObject();
         {// Fixture2
@@ -244,7 +250,7 @@ public class Walker {
         joint9.setCollisionAllowed(false);
         world.addJoint(joint9);
         // Left Femur to Left Tibia
-        RevoluteJoint joint10 = new RevoluteJoint(body10, body12, new Vector2(-0.14, -1.9));
+        joint10 = new RevoluteJoint(body10, body12, new Vector2(-0.14, -1.9));
         joint10.setLimitEnabled(false);
         joint10.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
         joint10.setReferenceAngle(Math.toRadians(0.0));

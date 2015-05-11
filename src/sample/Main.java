@@ -21,7 +21,7 @@ public class
         world.start();
 
         // Controls
-//        GUI gui = new GUI(world);
+        GUI gui = new GUI(world);
 
         // Test
         HashSet<State> states = new HashSet<>();

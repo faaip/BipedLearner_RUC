@@ -44,7 +44,7 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
 import sample.Balancer;
-import sample.Walker;
+import sample.BiPedBodyStupid;
 
 /**
  * Class used to show a simple example of using the dyn4j project using
@@ -60,7 +60,7 @@ public class ExampleGraphics2D extends JFrame {
 
     public ArrayList<Balancer> bodyList = new ArrayList<>();
     public static Balancer balancer;
-    public static Walker walker;
+    public static BiPedBodyStupid walker;
 
 
     /**
@@ -69,9 +69,9 @@ public class ExampleGraphics2D extends JFrame {
     private static final long serialVersionUID = 5663760293144882635L;
 
     /**
-     * The scale 45 pixels per meter
+     * The scale 65 pixels per meter
      */
-    public static final double SCALE = 55.0;
+    public static final double SCALE = 65.0;
 
     /**
      * The conversion factor from nano to base
@@ -180,7 +180,7 @@ public class ExampleGraphics2D extends JFrame {
 //        this.world.addBody(balancer);
 
         // Walker object
-        walker = new Walker(this.world);
+        walker = new BiPedBodyStupid(this.world);
 
 
 
