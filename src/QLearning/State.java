@@ -26,12 +26,7 @@ public class State {
         this.foot1OnGround = walker.isFoot1OnGround();
     }
 
-//    public double getQValue()
-//    {
-//        // Q(s,a) = R(s,a) + decayRate * max (s',a')
-//
-//        return Qvalue;
-//    }
+
 
     public void updateQValue()
     {
@@ -45,7 +40,9 @@ public class State {
 
     @Override
     public String toString() {
-        return (torsoLeaningForward +""+knee1Forward + foot1Forward + foot1OnGround + foot2OnGround);
+
+        return booleanToInt(torsoLeaningForward)+booleanToInt(knee1Forward)+booleanToInt(foot1Forward)+booleanToInt(foot1OnGround)+booleanToInt(foot2OnGround)+"";
+
     }
 
     @Override
@@ -55,5 +52,8 @@ public class State {
 
     }
 
+    public int booleanToInt(boolean b) {
+        return b ? 1 : 0;
+    }
 
 }

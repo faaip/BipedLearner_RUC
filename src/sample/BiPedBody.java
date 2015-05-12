@@ -1,5 +1,6 @@
 package sample;
 
+import QLearning.State;
 import Rendering_dyn4j.GameObject;
 import org.dyn4j.collision.CategoryFilter;
 import org.dyn4j.dynamics.BodyFixture;
@@ -311,6 +312,25 @@ public class BiPedBody {
             ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
     }
 
+    public void setJoint(RevoluteJoint joint, int x){
+        switch (x) {
+            case 1:
+                joint.setMotorSpeed(jointSpeed);
+                break;
+            case 0:
+                joint.setMotorSpeed(0);
+                break;
+            case -1:
+                joint.setMotorSpeed(-jointSpeed);
+                break;
+        }
+    }
+
+    public void stiffenJoint(RevoluteJoint joint, boolean b)
+    {
+        joint.setMotorEnabled(b);
+    }
+
 
 
 
@@ -320,5 +340,14 @@ public class BiPedBody {
 
     public boolean isFoot2OnGround() {
         return foot2.getWorldCenter().y<-3.37;
+    }
+
+
+    public State getState() {
+        return new State(this);
+    }
+
+    public int boolToInt(boolean b) {
+        return b ? 1 : 0;
     }
 }

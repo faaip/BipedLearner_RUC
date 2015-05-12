@@ -1,6 +1,8 @@
 package sample;
 
 import javax.swing.*;
+
+import QLearning.StateAnalyser;
 import Rendering_dyn4j.ExampleGraphics2D;
 
 /**
@@ -45,6 +47,7 @@ public class GUI {
 
         amountSlider.addChangeListener(e -> {
             amount = amountSlider.getValue();
+            Main.analyser.getState(world.walker);
 //            world.walker.test();
         });
 

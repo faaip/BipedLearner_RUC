@@ -7,7 +7,10 @@ import burlap.datastructures.BoltzmannDistribution;
 import java.util.HashSet;
 
 public class
+
+
         Main {
+   static StateAnalyser analyser;
 
     public static void main(String[] args) {
 
@@ -34,6 +37,13 @@ public class
             // record result
             // update old q-value
         // move on
+
+        analyser = new StateAnalyser();
+
+
+
+
+
 
 
     }
