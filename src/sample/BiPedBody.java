@@ -223,7 +223,7 @@ public class BiPedBody {
         world.addJoint(ankle2);
 
     }
-Metho
+
 
     public void setJoint(RevoluteJoint joint, int x) {
         if (!joint.isMotorEnabled()) {
