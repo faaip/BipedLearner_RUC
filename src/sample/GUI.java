@@ -15,7 +15,6 @@ public class GUI {
     {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        gui.setVisible(true);
         gui.setSize(300, 300);
 
         // Add controls
@@ -66,6 +65,8 @@ public class GUI {
         split.setLeftComponent(info);
         split.setRightComponent(controls);
         gui.add(split);
+        gui.setVisible(true);
+
     }
 
 }
