@@ -30,7 +30,7 @@ public interface PolicyEvaluation<S, A extends Action> {
 	 * @param U
 	 *            a vector of utilities for states in S
 	 * @param mdp
-	 *            an MDP with states S, actions A(s), transition model P(s'|s,a)
+	 *            an QLearning with states S, actions A(s), transition model P(s'|s,a)
 	 * @return U<sub>i</sub>=U<sup>&pi;<sub>i</sub></sup>, the utility of each
 	 *         state if &pi;<sub>i</sub> were to be executed.
 	 */

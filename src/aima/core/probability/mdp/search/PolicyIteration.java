@@ -18,7 +18,7 @@ import java.util.Map;
  * 
  * <pre>
  * function POLICY-ITERATION(mdp) returns a policy
- *   inputs: mdp, an MDP with states S, actions A(s), transition model P(s' | s, a)
+ *   inputs: mdp, an QLearning with states S, actions A(s), transition model P(s' | s, a)
  *   local variables: U, a vector of utilities for states in S, initially zero
  *                    &pi;, a policy vector indexed by state, initially random
  *                    
@@ -63,7 +63,7 @@ public class PolicyIteration<S, A extends Action> {
 	 * The policy iteration algorithm for calculating an optimal policy.
 	 * 
 	 * @param mdp
-	 *            an MDP with states S, actions A(s), transition model P(s'|s,a)
+	 *            an QLearning with states S, actions A(s), transition model P(s'|s,a)
 	 * @return an optimal policy
 	 */
 	public Policy<S, A> policyIteration(MarkovDecisionProcess<S, A> mdp) {
@@ -124,7 +124,7 @@ public class PolicyIteration<S, A extends Action> {
 	 * Create a policy vector indexed by state, initially random.
 	 * 
 	 * @param mdp
-	 *            an MDP with states S, actions A(s), transition model P(s'|s,a)
+	 *            an QLearning with states S, actions A(s), transition model P(s'|s,a)
 	 * @return a policy vector indexed by state, initially random.
 	 */
 	public static <S, A extends Action> Map<S, A> initialPolicyVector(

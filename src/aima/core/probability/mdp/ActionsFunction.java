@@ -5,7 +5,7 @@ import aima.core.agent.Action;
 import java.util.Set;
 
 /**
- * An interface for MDP action functions.
+ * An interface for QLearning action functions.
  * 
  * @param <S>
  *            the state type.

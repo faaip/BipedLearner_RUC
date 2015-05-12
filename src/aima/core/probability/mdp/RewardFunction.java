@@ -1,7 +1,7 @@
 package aima.core.probability.mdp;
 
 /**
- * An interface for MDP reward functions.
+ * An interface for QLearning reward functions.
  * 
  * @param <S>
  *            the state type.

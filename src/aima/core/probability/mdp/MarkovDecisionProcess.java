@@ -10,7 +10,7 @@ import java.util.Set;
  * 
  * A sequential decision problem for a fully observable, stochastic environment
  * with a Markovian transition model and additive rewards is called a <b>Markov
- * decision process</b>, or <b>MDP</b>, and consists of a set of states (with an
+ * decision process</b>, or <b>QLearning</b>, and consists of a set of states (with an
  * initial state s<sub>0</sub>; a set ACTIONS(s) of actions in each state; a
  * transition model P(s' | s, a); and a reward function R(s).<br>
  * <br>

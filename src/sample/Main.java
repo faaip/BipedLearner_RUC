@@ -1,17 +1,10 @@
 package sample;
 
-import MDP.*;
+import QLearning.*;
 import Rendering_dyn4j.ExampleGraphics2D;
-import aima.core.learning.framework.Example;
-import aima.core.learning.reinforcement.agent.QLearningAgent;
-import aima.core.probability.mdp.ActionsFunction;
-import org.dyn4j.collision.Collisions;
-import org.dyn4j.dynamics.CollisionAdapter;
-import org.dyn4j.dynamics.CollisionListener;
+import burlap.behavior.learningrate.ConstantLR;
 
-import javax.swing.*;
 import java.util.HashSet;
-import java.util.Set;
 
 public class
         Main {
@@ -41,7 +34,6 @@ public class
             // record result
             // update old q-value
         // move on
-
 
 
 

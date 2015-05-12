@@ -1,6 +1,5 @@
 package sample;
 
-import MDP.State;
 import Rendering_dyn4j.GameObject;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;

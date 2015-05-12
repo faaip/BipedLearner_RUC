@@ -3,7 +3,7 @@ package aima.core.probability.mdp;
 import aima.core.agent.Action;
 
 /**
- * An interface for MDP transition probability functions.
+ * An interface for QLearning transition probability functions.
  * 
  * @param <S>
  *            the state type.

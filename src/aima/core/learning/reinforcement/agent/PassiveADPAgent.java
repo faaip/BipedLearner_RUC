@@ -23,7 +23,7 @@ import java.util.Set;
  * function PASSIVE-ADP-AGENT(percept) returns an action
  *   inputs: percept, a percept indicating the current state s' and reward signal r'
  *   persistent: &pi;, a fixed policy
- *               mdp, an MDP with model P, rewards R, discount &gamma;
+ *               mdp, an QLearning with model P, rewards R, discount &gamma;
  *               U, a table of utilities, initially empty
  *               N<sub>sa</sub>, a table of frequencies for state-action pairs, initially zero
  *               N<sub>s'|sa</sub>, a table of outcome frequencies give state-action pairs, initially zero
@@ -56,7 +56,7 @@ public class PassiveADPAgent<S, A extends Action> extends
 		ReinforcementAgent<S, A> {
 	// persistent: &pi;, a fixed policy
 	private Map<S, A> pi = new HashMap<S, A>();
-	// mdp, an MDP with model P, rewards R, discount &gamma;
+	// mdp, an QLearning with model P, rewards R, discount &gamma;
 	private MDP<S, A> mdp = null;
 	private Map<Pair<S, Pair<S, A>>, Double> P = new HashMap<Pair<S, Pair<S, A>>, Double>();
 	private Map<S, Double> R = new HashMap<S, Double>();

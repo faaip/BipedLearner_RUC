@@ -13,7 +13,7 @@ import java.util.Set;
  * 
  * <pre>
  * function VALUE-ITERATION(mdp, &epsilon;) returns a utility function
- *   inputs: mdp, an MDP with states S, actions A(s), transition model P(s' | s, a),
+ *   inputs: mdp, an QLearning with states S, actions A(s), transition model P(s' | s, a),
  *             rewards R(s), discount &gamma;
  *           &epsilon; the maximum error allowed in the utility of any state
  *   local variables: U, U', vectors of utilities for states in S, initially zero
@@ -66,7 +66,7 @@ public class ValueIteration<S, A extends Action> {
 	 * The value iteration algorithm for calculating the utility of states.
 	 * 
 	 * @param mdp
-	 *            an MDP with states S, actions A(s), <br>
+	 *            an QLearning with states S, actions A(s), <br>
 	 *            transition model P(s' | s, a), rewards R(s)
 	 * @param epsilon
 	 *            the maximum error allowed in the utility of any state

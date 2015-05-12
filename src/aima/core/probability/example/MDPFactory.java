@@ -19,12 +19,12 @@ import java.util.*;
 public class MDPFactory {
 
 	/**
-	 * Constructs an MDP that can be used to generate the utility values
+	 * Constructs an QLearning that can be used to generate the utility values
 	 * detailed in Fig 17.3.
 	 * 
 	 * @param cw
 	 *            the cell world from figure 17.1.
-	 * @return an MDP that can be used to generate the utility values detailed
+	 * @return an QLearning that can be used to generate the utility values detailed
 	 *         in Fig 17.3.
 	 */
 	public static MarkovDecisionProcess<Cell<Double>, CellWorldAction> createMDPForFigure17_3(
