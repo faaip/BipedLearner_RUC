@@ -37,53 +37,46 @@ public class BiPedBody {
     Double maxHipTorque = 150.0;
     Double maxKneeTorque = 150.0;
     Double maxAnkleTorque = 70.0;
-    Double jointSpeed = 130.0;
+    Double jointSpeed = 100.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
-    CategoryFilter f1 = new CategoryFilter(1,1);
-    CategoryFilter f2 = new CategoryFilter(2,2);
+    CategoryFilter f1 = new CategoryFilter(1, 1);
+    CategoryFilter f2 = new CategoryFilter(2, 2);
     private double angleIncrement = 2;
 
     // Features for identifying state
 
 
-
-
-
     public boolean isFoot1Forward() {
-        return (hip1.getJointAngle()+knee1.getJointAngle()<hip2.getJointAngle()+knee2.getJointAngle());
+        return (hip1.getJointAngle() + knee1.getJointAngle() < hip2.getJointAngle() + knee2.getJointAngle());
     }
 
 
     public boolean isKnee1Forward() {
-        return (hip1.getJointAngle()<hip2.getJointAngle());
+        return (hip1.getJointAngle() < hip2.getJointAngle());
     }
 
 
     public boolean isTorsoLeaningForward() {
 
-        Vector2 measure = new Vector2(hip1.getAnchor1(),new Vector2(0,1));
+        Vector2 measure = new Vector2(hip1.getAnchor1(), new Vector2(0, 1));
 
-        return torso.getWorldVector(measure).getAngleBetween(measure)>0;
+        return torso.getWorldVector(measure).getAngleBetween(measure) > 0;
     }
 
 
-
-
-
-    public BiPedBody(World world)
-    {
+    public BiPedBody(World world) {
         // Torso
         torso = new GameObject();
         {// Fixture4
             Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
-            torso.setMass(Mass.Type.NORMAL);
+//            torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
 
-    // Leg 1
+        // Leg 1
         // Upper leg
         upperLeg1 = new GameObject();
         {// Fixture4
@@ -122,7 +115,7 @@ public class BiPedBody {
         }
         world.addBody(foot1);
 
-    // Joints
+        // Joints
         // Hip
         hip1 = new RevoluteJoint(torso, upperLeg1, new Vector2(0.0, -.6));
         hip1.setLimitEnabled(true);
@@ -156,7 +149,7 @@ public class BiPedBody {
         ankle1.setCollisionAllowed(false);
         world.addJoint(ankle1);
 
-    // Leg 2
+        // Leg 2
         // Upper leg
         upperLeg2 = new GameObject();
         {// Fixture4
@@ -230,116 +223,38 @@ public class BiPedBody {
         world.addJoint(ankle2);
 
     }
+Metho
 
-    public void hip1Bend()
-    {
-            hip1.setMotorSpeed(Math.toRadians(jointSpeed));
-
-    }
-
-    public void knee1Bend()
-    {
-        knee1.setMotorSpeed(Math.toRadians(jointSpeed));
-    }
-
-    public void ankle1Bend()
-    {
-
-        if(ankle1.getJointAngle() + 0.04 < ankle1.getUpperLimit())
-        {
-            ankle1.setMotorSpeed(Math.toRadians(-jointSpeed));
+    public void setJoint(RevoluteJoint joint, int x) {
+        if (!joint.isMotorEnabled()) {
+            joint.setMotorEnabled(true);
         }
-        else
-        {
-            ankle1.setMotorSpeed(0);
-        }
-    }
-
-
-    public void hip1Stretch() {
-        hip1.setMotorSpeed(Math.toRadians(-jointSpeed));
-
-    }
-
-    public void knee1Stretch() {
-        knee1.setMotorSpeed(Math.toRadians(-jointSpeed));
-
-    }
-
-    public void ankle1Stretch() {
-        if(ankle1.getJointAngle() + 0.04 < ankle1.getUpperLimit())
-        {
-            ankle1.setMotorSpeed(Math.toRadians(jointSpeed));
-        }
-        else
-        {
-            ankle1.setMotorSpeed(0);
-        }
-    }
-
-    public void hip2Bend()
-    {
-        hip2.setMotorSpeed(Math.toRadians(jointSpeed));
-
-    }
-
-    public void knee2Bend()
-    {
-        knee2.setMotorSpeed(Math.toRadians(jointSpeed));
-    }
-
-    public void ankle2Bend()
-    {
-
-            ankle2.setMotorSpeed(Math.toRadians(-jointSpeed));
-
-    }
-
-    public void hip2Stretch() {
-        hip2.setMotorSpeed(Math.toRadians(-jointSpeed));
-
-    }
-
-    public void knee2Stretch() {
-
-
-            knee2.setMotorSpeed(Math.toRadians(-jointSpeed));
-
-
-    }
-
-    public void ankle2Stretch() {
-            ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
-    }
-
-    public void setJoint(RevoluteJoint joint, int x){
         switch (x) {
             case 1:
-                joint.setMotorSpeed(jointSpeed);
+                joint.setMotorSpeed(Math.toRadians(jointSpeed));
                 break;
             case 0:
                 joint.setMotorSpeed(0);
                 break;
             case -1:
-                joint.setMotorSpeed(-jointSpeed);
+                joint.setMotorSpeed(Math.toRadians(-jointSpeed));
                 break;
         }
     }
 
-    public void stiffenJoint(RevoluteJoint joint, boolean b)
-    {
-        joint.setMotorEnabled(b);
+    public void relaxJoint(RevoluteJoint joint) {
+        if (joint.isMotorEnabled()) {
+            joint.setMotorEnabled(false);
+        }
     }
-
-
 
 
     public boolean isFoot1OnGround() {
-        return foot1.getWorldCenter().y<-3.37;
+        return foot1.getWorldCenter().y < -3.37;
     }
 
     public boolean isFoot2OnGround() {
-        return foot2.getWorldCenter().y<-3.37;
+        return foot2.getWorldCenter().y < -3.37;
     }
 
 

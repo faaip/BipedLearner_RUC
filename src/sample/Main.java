@@ -40,6 +40,8 @@ public class
 
         analyser = new StateAnalyser();
 
+        // state.getAction()
+
 
 
 
