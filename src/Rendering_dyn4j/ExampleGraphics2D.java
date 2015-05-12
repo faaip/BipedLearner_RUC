@@ -46,7 +46,7 @@ import org.dyn4j.geometry.Rectangle;
 import sample.Balancer;
 import sample.BiPedBody;
 import sample.BiPedBodyStupid;
-import sample.Test;
+
 
 /**
  * Class used to show a simple example of using the dyn4j project using

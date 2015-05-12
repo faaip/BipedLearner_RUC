@@ -1,11 +1,6 @@
 package MDP;
 
-import Rendering_dyn4j.ExampleGraphics2D;
-import sample.Balancer;
 import sample.BiPedBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class State {
@@ -13,7 +8,7 @@ public class State {
     private boolean torsoLeaningForward;
     private boolean knee1Forward;
     private boolean foot1Forward;
-    private boolean foot1OnGound;
+    private boolean foot1OnGround;
     private boolean foot2OnGround;
 
     // -
@@ -25,7 +20,7 @@ public class State {
         this.torsoLeaningForward = walker.isTorsoLeaningForward();
         this.knee1Forward = walker.isKnee1Forward();
         this.foot1Forward = walker.isFoot1Forward();
-        this.foot1OnGound = walker.isFoot1OnGround();
+        this.foot1OnGround = walker.isFoot1OnGround();
     }
 
 //    public double getQValue()
@@ -47,7 +42,7 @@ public class State {
 
     @Override
     public String toString() {
-        return (torsoLeaningForward +""+knee1Forward + foot1Forward + foot1OnGound + foot2OnGround);
+        return (torsoLeaningForward +""+knee1Forward + foot1Forward + foot1OnGround + foot2OnGround);
     }
 
     @Override
