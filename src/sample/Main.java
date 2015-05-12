@@ -2,7 +2,7 @@ package sample;
 
 import QLearning.*;
 import Rendering_dyn4j.ExampleGraphics2D;
-import burlap.behavior.learningrate.ConstantLR;
+import burlap.datastructures.BoltzmannDistribution;
 
 import java.util.HashSet;
 
@@ -34,8 +34,6 @@ public class
             // record result
             // update old q-value
         // move on
-
-
 
 
     }
