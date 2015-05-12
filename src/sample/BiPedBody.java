@@ -36,7 +36,7 @@ public class BiPedBody {
     Double maxHipTorque = 150.0;
     Double maxKneeTorque = 150.0;
     Double maxAnkleTorque = 70.0;
-    Double jointSpeed = 30.0;
+    Double jointSpeed = 130.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1,1);
