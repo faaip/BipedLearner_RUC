@@ -81,13 +81,13 @@ public class Balancer extends GameObject { // Is sub-class of GameObject for dra
 
     }
 
-    public State getCurrentState() {
-
-        State currentState = new State(this);
-        return currentState;
-
-
-    }
+//    public State getCurrentState() {
+//
+////        State currentState = new State(this);
+//        return currentState;
+//
+//
+//    }
 
 
     @Override

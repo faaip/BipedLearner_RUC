@@ -1,10 +1,17 @@
 package sample;
 
-import MDP.State;
+import MDP.*;
 import Rendering_dyn4j.ExampleGraphics2D;
+import aima.core.learning.framework.Example;
+import aima.core.learning.reinforcement.agent.QLearningAgent;
+import aima.core.probability.mdp.ActionsFunction;
+import org.dyn4j.collision.Collisions;
+import org.dyn4j.dynamics.CollisionAdapter;
+import org.dyn4j.dynamics.CollisionListener;
 
 import javax.swing.*;
 import java.util.HashSet;
+import java.util.Set;
 
 public class
         Main {
@@ -26,16 +33,18 @@ public class
         // Test
         HashSet<State> states = new HashSet<>();
 
-//        while (!world.balancer.hasFallen()) {
-//            gui.angleLabel.setText("Current angle: " + world.balancer.getAngle()+" °");
-//            if (states.contains(world.balancer.getCurrentState()))
-//            {
-//            }else
-//            {
-//                System.out.println("This state is new" + world.balancer.getCurrentState());
-//                states.add(world.balancer.getCurrentState());
-//            }
-//        }
+        // while time left || !hasfallen
+        // state analysis (have I seen this state before)
+            // if not add to hashSet and get random action
+            // if yes, find optimal policy (get action)
+        // take action and observe outcome
+            // record result
+            // update old q-value
+        // move on
+
+
+
+
 
     }
 }

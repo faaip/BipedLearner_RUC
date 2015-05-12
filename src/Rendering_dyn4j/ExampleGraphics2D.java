@@ -64,6 +64,7 @@ public class ExampleGraphics2D extends JFrame {
     public static Balancer balancer;
 //    public static BiPedBodyStupid walker;
     public static BiPedBody walker;
+    public static GameObject floor;
 
 
     /**
@@ -168,7 +169,7 @@ public class ExampleGraphics2D extends JFrame {
 
         // create the floor
         Rectangle floorRect = new Rectangle(15.0, 1.0);
-        GameObject floor = new GameObject();
+        floor = new GameObject();
         BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);

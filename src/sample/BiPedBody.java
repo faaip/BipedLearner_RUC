@@ -33,25 +33,41 @@ public class BiPedBody {
     RevoluteJoint ankle1;
     RevoluteJoint ankle2;
 
-    Double maxHipTorque = 50.0;
-    Double maxKneeTorque = 50.0;
-    Double maxAnkleTorque = 50.0;
+    Double maxHipTorque = 150.0;
+    Double maxKneeTorque = 150.0;
+    Double maxAnkleTorque = 70.0;
     Double jointSpeed = 180.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1,1);
     CategoryFilter f2 = new CategoryFilter(2,2);
-
-    public boolean isRightFootForward() {
-        return rightFootForward;
-    }
+    private double angleIncrement = 2;
 
     // Features for identifying state
-    boolean rightFootForward;
-    boolean rightKneeForward;
-    boolean torsoLeaningForward;
-    boolean rightFootOnGround;
-    boolean leftFootOnGround;
+
+
+
+
+
+    public boolean isFoot1Forward() {
+        return (hip1.getJointAngle()+knee1.getJointAngle()<hip2.getJointAngle()+knee2.getJointAngle());
+    }
+
+
+    public boolean isKnee1Forward() {
+        return (hip1.getJointAngle()<hip2.getJointAngle());
+    }
+
+
+    public boolean isTorsoLeaningForward() {
+
+        Vector2 measure = new Vector2(hip1.getAnchor1(),new Vector2(0,1));
+
+        return torso.getWorldVector(measure).getAngleBetween(measure)>0;
+    }
+
+
+
 
 
     public BiPedBody(World world)
@@ -62,7 +78,7 @@ public class BiPedBody {
             Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
-            torso.setMass(Mass.Type.NORMAL);
+//            torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
 
@@ -212,7 +228,6 @@ public class BiPedBody {
         ankle2.setCollisionAllowed(false);
         world.addJoint(ankle2);
 
-        hip1Bend();
     }
 
     public void hip1Bend()
@@ -286,23 +301,56 @@ public class BiPedBody {
     }
 
     public void hip2Stretch() {
-        hip2.setMotorSpeed(Math.toRadians(jointSpeed));
+        double currentAngle = hip2.getJointAngle();
+
+
+//        if()
+
+
+
+
+
+//        if(hip2.getJointAngle() < hip2.getUpperLimit())
+
+//        while(Math.toDegrees(currentAngle) < Math.toDegrees(currentAngle+angleIncrement)) {
+////            hip2.setMotorSpeed(Math.toRadians(jointSpeed));
+//            System.out.println("still working");
+//        }
+
+//        System.out.println(Math.toDegrees(hip2.getJointAngle()) + " " + (Math.toDegrees(currentAngle)+angleIncrement));
+//                    hip2.setMotorSpeed(Math.toRadians(jointSpeed));
+
 
     }
 
     public void knee2Stretch() {
-        knee2.setMotorSpeed(Math.toRadians(-jointSpeed));
+
+//        double currentAngle = knee2.getJointAngle();
+//        while(currentAngle < currentAngle+angleIncrement) {
+//            knee2.setMotorSpeed(Math.toRadians(-jointSpeed));
+//        }
 
     }
 
     public void ankle2Stretch() {
-        if(ankle2.getJointAngle() + 0.04 < ankle2.getUpperLimit())
-        {
-            ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
-        }
-        else
-        {
-            ankle2.setMotorSpeed(0);
-        }
+//        double currentAngle = ankle2.getJointAngle();
+//        while(currentAngle > currentAngle+angleIncrement) {
+//            ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
+//        }
+
+    }
+
+    public void test()
+    {
+        System.out.println(isTorsoLeaningForward());
+    }
+
+
+    public boolean isFoot1OnGround() {
+        return foot1.getWorldCenter().y<-3.37;
+    }
+
+    public boolean isFoot2OnGround() {
+        return foot2.getWorldCenter().y<-3.37;
     }
 }
