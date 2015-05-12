@@ -36,7 +36,7 @@ public class BiPedBody {
     Double maxHipTorque = 150.0;
     Double maxKneeTorque = 150.0;
     Double maxAnkleTorque = 70.0;
-    Double jointSpeed = 180.0;
+    Double jointSpeed = 30.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1,1);
@@ -78,7 +78,7 @@ public class BiPedBody {
             Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
-//            torso.setMass(Mass.Type.NORMAL);
+            torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
 
@@ -125,7 +125,7 @@ public class BiPedBody {
         // Hip
         hip1 = new RevoluteJoint(torso, upperLeg1, new Vector2(0.0, -.6));
         hip1.setLimitEnabled(true);
-        hip1.setLimits(Math.toRadians(-60.0), Math.toRadians(90.0));
+        hip1.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
         hip1.setReferenceAngle(Math.toRadians(0.0));
         hip1.setMotorEnabled(true);
 //        hip1.setMotorSpeed(Math.toRadians(0.0));
@@ -197,8 +197,8 @@ public class BiPedBody {
         // Joints
         // Hip
         hip2 = new RevoluteJoint(torso, upperLeg2, new Vector2(0.0, -.6));
-        hip2.setLimitEnabled(false);
-        hip2.setLimits(Math.toRadians(-60.0), Math.toRadians(90.0));
+        hip2.setLimitEnabled(true);
+        hip2.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
         hip2.setReferenceAngle(Math.toRadians(0.0));
         hip2.setMotorEnabled(true);
         hip2.setMotorSpeed(Math.toRadians(0.0));
@@ -232,7 +232,7 @@ public class BiPedBody {
 
     public void hip1Bend()
     {
-            hip1.setMotorSpeed(Math.toRadians(-jointSpeed));
+            hip1.setMotorSpeed(Math.toRadians(jointSpeed));
 
     }
 
@@ -256,7 +256,7 @@ public class BiPedBody {
 
 
     public void hip1Stretch() {
-        hip1.setMotorSpeed(Math.toRadians(jointSpeed));
+        hip1.setMotorSpeed(Math.toRadians(-jointSpeed));
 
     }
 
@@ -278,7 +278,7 @@ public class BiPedBody {
 
     public void hip2Bend()
     {
-        hip2.setMotorSpeed(Math.toRadians(-jointSpeed));
+        hip2.setMotorSpeed(Math.toRadians(jointSpeed));
 
     }
 
@@ -290,60 +290,28 @@ public class BiPedBody {
     public void ankle2Bend()
     {
 
-        if(ankle2.getJointAngle() + 0.04 < ankle2.getUpperLimit())
-        {
             ankle2.setMotorSpeed(Math.toRadians(-jointSpeed));
-        }
-        else
-        {
-            ankle2.setMotorSpeed(0);
-        }
+
     }
 
     public void hip2Stretch() {
-        double currentAngle = hip2.getJointAngle();
-
-
-//        if()
-
-
-
-
-
-//        if(hip2.getJointAngle() < hip2.getUpperLimit())
-
-//        while(Math.toDegrees(currentAngle) < Math.toDegrees(currentAngle+angleIncrement)) {
-////            hip2.setMotorSpeed(Math.toRadians(jointSpeed));
-//            System.out.println("still working");
-//        }
-
-//        System.out.println(Math.toDegrees(hip2.getJointAngle()) + " " + (Math.toDegrees(currentAngle)+angleIncrement));
-//                    hip2.setMotorSpeed(Math.toRadians(jointSpeed));
-
+        hip2.setMotorSpeed(Math.toRadians(-jointSpeed));
 
     }
 
     public void knee2Stretch() {
 
-//        double currentAngle = knee2.getJointAngle();
-//        while(currentAngle < currentAngle+angleIncrement) {
-//            knee2.setMotorSpeed(Math.toRadians(-jointSpeed));
-//        }
+
+            knee2.setMotorSpeed(Math.toRadians(-jointSpeed));
+
 
     }
 
     public void ankle2Stretch() {
-//        double currentAngle = ankle2.getJointAngle();
-//        while(currentAngle > currentAngle+angleIncrement) {
-//            ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
-//        }
-
+            ankle2.setMotorSpeed(Math.toRadians(jointSpeed));
     }
 
-    public void test()
-    {
-        System.out.println(isTorsoLeaningForward());
-    }
+
 
 
     public boolean isFoot1OnGround() {

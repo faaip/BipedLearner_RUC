@@ -27,26 +27,26 @@ public class GUI {
         JPanel controls = new JPanel();
 
         leanRightButton.addActionListener(e -> {
-//            world.walker.hip1Stretch();
-//            world.walker.knee1Stretch();
-//            world.walker.ankle1Stretch();
-//            world.walker.hip2Bend();
-//            world.walker.knee2Bend();
-//            world.walker.ankle2Bend();
+            world.walker.hip1Stretch();
+            world.walker.knee1Stretch();
+            world.walker.ankle1Stretch();
+            world.walker.hip2Bend();
+            world.walker.knee2Bend();
+            world.walker.ankle2Bend();
         });
         leanLeftButton.addActionListener(e -> {
 //            world.walker.rotateLeftKnee(amount);
-//            world.walker.hip1Bend();
-//            world.walker.knee1Bend();
-//            world.walker.ankle1Bend();
+            world.walker.hip1Bend();
+            world.walker.knee1Bend();
+            world.walker.ankle1Bend();
             world.walker.hip2Stretch();
-//            world.walker.knee2Stretch();
-//            world.walker.ankle2Stretch();
+            world.walker.knee2Stretch();
+            world.walker.ankle2Stretch();
         });
 
         amountSlider.addChangeListener(e -> {
             amount = amountSlider.getValue();
-            world.walker.test();
+//            world.walker.test();
         });
 
         controls.add(leanLeftButton);
