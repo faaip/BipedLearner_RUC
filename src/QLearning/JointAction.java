@@ -6,7 +6,7 @@ import burlap.oomdp.core.State;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import burlap.oomdp.singleagent.Action;
 
-public class JointAction extends burlap.oomdp.singleagent.Action{
+public class JointAction extends Action{
 
     RevoluteJoint joint; // Joint used in action
     boolean motorOn; // is motor on or is joint relaxed in this particular action
@@ -43,7 +43,7 @@ public class JointAction extends burlap.oomdp.singleagent.Action{
     @Override
     public String toString()
     {
-        return "Joint: "+ joint. + " " + a;
+        return "Joint: "+ joint + " " + a;
     }
 }
 

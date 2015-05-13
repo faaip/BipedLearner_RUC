@@ -66,8 +66,20 @@ public class BiPedBody {
         return torso.getWorldVector(measure).getAngleBetween(measure) > 0;
     }
 
+    public boolean isUpperLeg1InFrontOfTorso(){
+
+        return upperLeg1.getWorldCenter().x>torso.getWorldCenter().x;
+    }
+
+    public boolean isUpperLeg2InFrontOfTorso(){
+
+        return upperLeg2.getWorldCenter().x>torso.getWorldCenter().x;
+    }
 
 
+
+
+    // Constructor
     public BiPedBody(World world) {
         // Torso
         torso = new GameObject();
