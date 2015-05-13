@@ -1,5 +1,6 @@
 package sample;
 
+import QLearning.JointAction;
 import QLearning.State;
 import Rendering_dyn4j.GameObject;
 import org.dyn4j.collision.CategoryFilter;
@@ -10,6 +11,8 @@ import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
+
+import java.util.ArrayList;
 
 /**
  * Created by frederikjuutilainen on 11/05/15.
@@ -27,12 +30,16 @@ public class BiPedBody {
     GameObject util;
 
     // Joints
+    public ArrayList<RevoluteJoint> joints = new ArrayList<>();
     RevoluteJoint hip1;
     RevoluteJoint hip2;
     RevoluteJoint knee1;
     RevoluteJoint knee2;
     RevoluteJoint ankle1;
     RevoluteJoint ankle2;
+
+    // TO-DO : MOVE THIS LIST OF ACTIONS TO ANOTHER CLASS
+    ArrayList<JointAction> actions = new ArrayList<JointAction>();
 
     Double maxHipTorque = 150.0;
     Double maxKneeTorque = 150.0;
@@ -42,20 +49,15 @@ public class BiPedBody {
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1, 1);
     CategoryFilter f2 = new CategoryFilter(2, 2);
-    private double angleIncrement = 2;
 
     // Features for identifying state
-
-
     public boolean isFoot1Forward() {
         return (hip1.getJointAngle() + knee1.getJointAngle() < hip2.getJointAngle() + knee2.getJointAngle());
     }
 
-
     public boolean isKnee1Forward() {
         return (hip1.getJointAngle() < hip2.getJointAngle());
     }
-
 
     public boolean isTorsoLeaningForward() {
 
@@ -65,6 +67,7 @@ public class BiPedBody {
     }
 
 
+
     public BiPedBody(World world) {
         // Torso
         torso = new GameObject();
@@ -72,7 +75,7 @@ public class BiPedBody {
             Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
-//            torso.setMass(Mass.Type.NORMAL);
+            torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
 
@@ -222,7 +225,25 @@ public class BiPedBody {
         ankle2.setCollisionAllowed(false);
         world.addJoint(ankle2);
 
+        // Add joints to list
+        joints.add(hip1);
+        joints.add(hip2);
+        joints.add(knee1);
+        joints.add(knee2);
+        joints.add(ankle1);
+        joints.add(ankle2);
+
+        // Create actions
+        for(RevoluteJoint joint : joints){
+            actions.add(new JointAction(joint));
+            for (int i = -1; i <= 1; i++) {
+                actions.add(new JointAction(joint,1));
+            }
+
+        }
+
     }
+
 
 
     public void setJoint(RevoluteJoint joint, int x) {
@@ -248,7 +269,6 @@ public class BiPedBody {
         }
     }
 
-
     public boolean isFoot1OnGround() {
         return foot1.getWorldCenter().y < -3.37;
     }
@@ -256,7 +276,6 @@ public class BiPedBody {
     public boolean isFoot2OnGround() {
         return foot2.getWorldCenter().y < -3.37;
     }
-
 
     public State getState() {
         return new State(this);

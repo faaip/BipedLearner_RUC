@@ -2,7 +2,6 @@ package sample;
 
 import QLearning.*;
 import Rendering_dyn4j.ExampleGraphics2D;
-import burlap.datastructures.BoltzmannDistribution;
 
 import java.util.HashSet;
 
@@ -40,9 +39,14 @@ public class
 
         analyser = new StateAnalyser();
 
-        // state.getAction()
 
+        System.out.println(ExampleGraphics2D.walker.actions.size());
 
+        for(JointAction a : ExampleGraphics2D.walker.actions){
+            a.doAction();
+        }
+
+//        System.out.println(Action.getActions().size());
 
 
 
