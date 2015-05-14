@@ -27,7 +27,6 @@ package Rendering_dyn4j;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
@@ -56,7 +55,7 @@ import sample.*;
  * @version 3.1.5
  * @since 3.0.0
  */
-public class ExampleGraphics2D extends JFrame {
+public class Graphics2D extends JFrame {
 
     public static ArrayList<BiPedBody> bodyList = new ArrayList<>();
     public static Balancer balancer;
@@ -109,7 +108,7 @@ public class ExampleGraphics2D extends JFrame {
     /**
      * Default constructor for the window
      */
-    public ExampleGraphics2D() {
+    public Graphics2D() {
         super("Graphics2D Example");
         // setup the JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -227,7 +226,7 @@ public class ExampleGraphics2D extends JFrame {
      */
     protected void gameLoop() {
         // get the graphics object to render to
-        Graphics2D g = (Graphics2D) this.canvas.getBufferStrategy().getDrawGraphics();
+        java.awt.Graphics2D g = (java.awt.Graphics2D) this.canvas.getBufferStrategy().getDrawGraphics();
 
         // before we render everything im going to flip the y axis and move the
         // origin to the center (instead of it being in the top left corner)
@@ -264,9 +263,9 @@ public class ExampleGraphics2D extends JFrame {
         // set the last time
         this.last = time;
         // convert from nanoseconds to seconds
-        double elapsedTime = (double) diff / NANO_TO_BASE;
+        double elapsedTime = ((double) diff / NANO_TO_BASE)*GUI.simulationSpeed;
         // update the world with the elapsed time
-        this.world.update(elapsedTime);
+        this.world.update(elapsedTime, Integer.MAX_VALUE);
     }
 
 
@@ -275,7 +274,7 @@ public class ExampleGraphics2D extends JFrame {
      *
      * @param g the graphics object to render to
      */
-    protected void render(Graphics2D g) {
+    protected void render(java.awt.Graphics2D g) {
         // lets draw over everything with a white background
         g.setColor(Color.WHITE);
         g.fillRect(-400, -300, 800, 600);
@@ -330,7 +329,7 @@ public class ExampleGraphics2D extends JFrame {
         }
 
         // create the example JFrame
-        ExampleGraphics2D window = new ExampleGraphics2D();
+        Graphics2D window = new Graphics2D();
         window.setTitle("Machine Learning");
 
         // show it

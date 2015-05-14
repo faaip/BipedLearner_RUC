@@ -1,8 +1,5 @@
 package QLearning;
 
-import Rendering_dyn4j.ExampleGraphics2D;
-import burlap.oomdp.core.*;
-
 
 public class QValue {
 

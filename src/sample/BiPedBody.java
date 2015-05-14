@@ -258,8 +258,6 @@ public class BiPedBody {
 
     }
 
-
-
     public void setJoint(RevoluteJoint joint, int x) {
         if (!joint.isMotorEnabled()) {
             joint.setMotorEnabled(true);
@@ -300,8 +298,7 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-
-        return (torso.getWorldCenter().y < - 2.1|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
+        return (torso.getWorldCenter().y < - 1.7|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
     }
 
     public double torsoChangeSinceLastFrame()
@@ -309,8 +306,5 @@ public class BiPedBody {
         return torso.getChangeInPosition().x*100;
     }
 
-    public void reset()
-    {
 
-    }
 }

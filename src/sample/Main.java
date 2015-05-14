@@ -1,17 +1,8 @@
 package sample;
 
 import QLearning.*;
-import Rendering_dyn4j.ExampleGraphics2D;
-import aima.core.learning.framework.Example;
+import Rendering_dyn4j.Graphics2D;
 import burlap.behavior.singleagent.Policy;
-import burlap.behavior.singleagent.QValue;
-import burlap.behavior.statehashing.StateHashTuple;
-import burlap.oomdp.core.AbstractGroundedAction;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 public class
         Main {
@@ -20,11 +11,11 @@ public class
     public static double gamma = 0.2; // Decay rate
     public static double learningRate = 0.2; // Learning rate
     public static GUI gui;
-    public static ExampleGraphics2D world;
+    public static Graphics2D world;
 
     public static void main(String[] args) {
 
-        world = new ExampleGraphics2D();
+        world = new Graphics2D();
         world.setTitle("Machine Learning");
 
         // show it
@@ -55,9 +46,7 @@ public class
 
 
         while(2>1) {
-            BiPedBody walker = ExampleGraphics2D.walker;
-            System.out.println("what 2000");
-
+            BiPedBody walker = Graphics2D.walker;
             while (!walker.hasFallen()) {
 //            currentState.getAction();
 
@@ -79,7 +68,6 @@ public class
 //            System.out.println(currentState.q);
 
             }
-            System.out.println("what");
 //        world.newWalker();
             world.initializeWorld();
         }

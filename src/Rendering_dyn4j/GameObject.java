@@ -1,11 +1,8 @@
 package Rendering_dyn4j;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import Rendering_dyn4j.ExampleGraphics2D;
-import Rendering_dyn4j.Graphics2DRenderer;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Convex;
@@ -34,13 +31,13 @@ public class GameObject extends Body {
          *
          * @param g the graphics object to render to
          */
-        public void render(Graphics2D g) {
+        public void render(java.awt.Graphics2D g) {
             // save the original transform
             AffineTransform ot = g.getTransform();
 
             // transform the coordinate system from world coordinates to local coordinates
             AffineTransform lt = new AffineTransform();
-            lt.translate(this.transform.getTranslationX() * ExampleGraphics2D.SCALE, this.transform.getTranslationY() * ExampleGraphics2D.SCALE);
+            lt.translate(this.transform.getTranslationX() * Graphics2D.SCALE, this.transform.getTranslationY() * Graphics2D.SCALE);
             lt.rotate(this.transform.getRotation());
 
             // apply the transform
@@ -50,7 +47,7 @@ public class GameObject extends Body {
             for (BodyFixture fixture : this.fixtures) {
                 // get the shape on the fixture
                 Convex convex = fixture.getShape();
-                Graphics2DRenderer.render(g, convex, ExampleGraphics2D.SCALE, color);
+                Graphics2DRenderer.render(g, convex, Graphics2D.SCALE, color);
             }
 
             // set the original transform

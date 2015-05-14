@@ -1,13 +1,10 @@
 package QLearning;
 
-import Rendering_dyn4j.ExampleGraphics2D;
-import aima.core.util.datastructure.Pair;
-import org.dyn4j.dynamics.joint.Joint;
+import Rendering_dyn4j.Graphics2D;
 import sample.BiPedBody;
 import sample.Main;
 
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,22 +72,25 @@ public class State extends burlap.oomdp.core.State {
     }
 
     public JointAction getBestAction() {
-        double max = 0;
+        double max = -100;
         JointAction action = null;
 
         for (JointAction a : actions) {
             if (q.get(a) > max) {
                 max = q.get(a);
                 action = a;
-                System.out.println(q.get(a));
-                ;
+                if(q.get(a) != 0.0)
+                {
+                    System.out.println(q.get(a));
+                }
+
             }
         }
 
         if(action == null)
         {
             System.out.println("Q-value was null");
-            return actions.get((int) (Math.random()*actions.size()));
+            return actions.get((int) ((Math.random()*actions.size())));
         }
 
         return action;
@@ -100,7 +100,7 @@ public class State extends burlap.oomdp.core.State {
         double oldQ = oldState.q.get(action);
         double gamma = Main.gamma;
         double learningRate = Main.learningRate;
-        double reward = ExampleGraphics2D.walker.torsoChangeSinceLastFrame() * 100;
+        double reward = Graphics2D.walker.torsoChangeSinceLastFrame() * 100;
 
         double newQ = oldQ + learningRate * (reward+gamma*nextState.q.get(nextState.getBestAction())-oldQ);
 
@@ -111,9 +111,6 @@ public class State extends burlap.oomdp.core.State {
     }
 
     public void doRandomAction() {
-
         actions.get((int) (Math.random()*actions.size())).doAction();
-        System.out.println("random action");
-
     }
 }

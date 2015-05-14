@@ -1,7 +1,5 @@
 package QLearning;
 
-import Rendering_dyn4j.ExampleGraphics2D;
-import aima.core.learning.framework.Example;
 import burlap.oomdp.core.*;
 import burlap.oomdp.core.State;
 
