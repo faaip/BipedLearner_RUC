@@ -51,15 +51,14 @@ public class
         BiPedBody walker = ExampleGraphics2D.walker;
 
 
-//        System.out.println(State.actions.size());
+        System.out.println(State.actions.size());
 
-//        for (JointAction a : State.actions) {
-//            a.doAction();
-//        }
+        for (JointAction a : State.actions) {
+            a.doAction();
+        }
 
         double t = System.currentTimeMillis();
         double x = walker.torso.getWorldCenter().x;
-
 
         while (!walker.hasFallen()) {
 //            currentState.getAction();
@@ -67,18 +66,23 @@ public class
             // Analyse state
             State currentState = analyser.getState(walker);
             // Get action
-//            JointAction action = currentState.getBestAction();
-            // Do action
-//            action.doAction();
+            JointAction action = currentState.getBestAction();
+            // Do action - or 80 % of the time
+            double r = Math.random();
+            if(r<0.8) {
+                action.doAction();
+            }else
+            {
+                currentState.doRandomAction();
+            }
             // Record outcome
-//            State nextState = analyser.getState(walker);
+            State nextState = analyser.getState(walker);
             // Update Q-Value
-//            currentState.updateQ(currentState,action,nextState);
+            currentState.updateQ(currentState, action, nextState);
+//            System.out.println(currentState.q);
+
 
         }
-        world.stop();
-
-
 
     }
 }

@@ -58,7 +58,7 @@ import sample.*;
  */
 public class ExampleGraphics2D extends JFrame {
 
-    public ArrayList<Balancer> bodyList = new ArrayList<>();
+    public static ArrayList<BiPedBody> bodyList = new ArrayList<>();
     public static Balancer balancer;
 //    public static BiPedBodyStupid walker;
     public static BiPedBody walker;
@@ -96,7 +96,7 @@ public class ExampleGraphics2D extends JFrame {
     /**
      * The dynamics engine
      */
-    protected World world;
+     protected World world;
 
     /**
      * Wether the example is stopped or not
@@ -183,9 +183,6 @@ public class ExampleGraphics2D extends JFrame {
 
         // Walker object
         walker = new BiPedBody(this.world);
-//        Test test = new Test(this.world);
-
-
 
 
     }
@@ -347,6 +344,9 @@ public class ExampleGraphics2D extends JFrame {
         // start it
         window.start();
 
-
     }
+
+//    public static void addNewWalker() {
+//        bodyList.add(new BiPedBody(this.world));
+//    }
 }

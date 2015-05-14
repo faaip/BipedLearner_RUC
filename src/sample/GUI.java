@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import QLearning.StateAnalyser;
 import Rendering_dyn4j.ExampleGraphics2D;
+import aima.core.learning.framework.Example;
 
 /**
  * Created by frederikjuutilainen on 05/05/15.
@@ -37,6 +38,7 @@ public class GUI {
 //            world.walker.knee2Bend();
 //            world.walker.ankle2Bend();
             world.walker.setJoint(world.walker.hip1,-1);
+//            ExampleGraphics2D.addNewWalker();
 
         });
         leanLeftButton.addActionListener(e -> {

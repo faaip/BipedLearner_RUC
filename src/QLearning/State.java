@@ -89,8 +89,8 @@ public class State extends burlap.oomdp.core.State {
 
         if(action == null)
         {
-            return actions.get((int) Math.random()*actions.size());
-
+            System.out.println("Q-value was null");
+            return actions.get((int) (Math.random()*actions.size()));
         }
 
         return action;
@@ -107,6 +107,13 @@ public class State extends burlap.oomdp.core.State {
 
         oldState.q.put(action, newQ);
 
+
+    }
+
+    public void doRandomAction() {
+
+        actions.get((int) (Math.random()*actions.size())).doAction();
+        System.out.println("random action");
 
     }
 }

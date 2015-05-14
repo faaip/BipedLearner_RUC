@@ -38,6 +38,6 @@ public class JointAction {
     @Override
     public String toString()
     {
-        return "Joint: "+ joint + " " + a;
+        return "Action " + a + " motor on: " + motorOn;
     }
 }
