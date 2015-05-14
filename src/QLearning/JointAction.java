@@ -1,11 +1,13 @@
 package QLearning;
 
 import Rendering_dyn4j.ExampleGraphics2D;
+import aima.core.learning.framework.Example;
+import burlap.oomdp.core.AbstractGroundedAction;
 import burlap.oomdp.core.State;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import burlap.oomdp.singleagent.Action;
 
-public class JointAction extends Action{
+public class JointAction {
     RevoluteJoint joint; // Joint used in action
     boolean motorOn; // is motor on or is joint relaxed in this particular action
     int a; // Optional int indicating negative, locked or positive action
@@ -25,17 +27,12 @@ public class JointAction extends Action{
 
     // Execute appropriate method for action
     public void doAction() {
-        if (motorOn) {
-            ExampleGraphics2D.walker.setJoint(joint, a);
+        if (this.motorOn) {
+            ExampleGraphics2D.walker.setJoint(this.joint, this.a);
         } else {
-            ExampleGraphics2D.walker.relaxJoint(joint
+            ExampleGraphics2D.walker.relaxJoint(this.joint
             );
         }
-    }
-
-    @Override
-    protected State performActionHelper(State s, String[] params) {
-        return null;
     }
 
     @Override

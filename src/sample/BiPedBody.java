@@ -39,7 +39,6 @@ public class BiPedBody {
     RevoluteJoint ankle2;
 
     // TO-DO : MOVE THIS LIST OF ACTIONS TO ANOTHER CLASS
-    ArrayList<JointAction> actions = new ArrayList<JointAction>();
 
     Double maxHipTorque = 150.0;
     Double maxKneeTorque = 150.0;
@@ -247,9 +246,9 @@ public class BiPedBody {
 
         // Create actions
         for(RevoluteJoint joint : joints){
-            actions.add(new JointAction(joint));
+            State.actions.add(new JointAction(joint));
             for (int i = -1; i <= 1; i++) {
-                actions.add(new JointAction(joint,1));
+                State.actions.add(new JointAction(joint,1));
             }
 
         }
@@ -295,5 +294,15 @@ public class BiPedBody {
 
     public int boolToInt(boolean b) {
         return b ? 1 : 0;
+    }
+
+    public boolean hasFallen() {
+
+        return torso.getWorldCenter().y < - 2.6;
+    }
+
+    public double torsoChangeSinceLastFrame()
+    {
+        return torso.getChangeInPosition().x*100;
     }
 }
