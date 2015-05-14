@@ -341,4 +341,12 @@ public class Graphics2D extends JFrame {
     }
 
 
+    public void step(int i) {
+        this.world.step(i);
+    }
+
+    public double getStepFrequency()
+    {
+        return this.world.getSettings().getStepFrequency();
+    }
 }

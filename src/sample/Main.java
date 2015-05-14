@@ -10,6 +10,7 @@ public class
     static Policy learningPolicy;
     public static double gamma = 0.2; // Decay rate
     public static double learningRate = 0.2; // Learning rate
+    public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
 
@@ -70,6 +71,8 @@ public class
             }
 //        world.newWalker();
             world.initializeWorld();
+            System.out.println("Generation: " + generation + " has terminated!");
+            generation++;
         }
     }
 

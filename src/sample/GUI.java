@@ -21,19 +21,21 @@ public class GUI {
         gui.setSize(300, 300);
 
         // Add controls
-        JButton leanRightButton = new JButton("Lean right");
-        JButton leanLeftButton = new JButton("Left left");
+        JButton skip1 = new JButton("Skip 1 minute");
+        JButton skip10 = new JButton("Skip 10 minutes");
         JSlider amountSlider = new JSlider(1, 20,1);
         JLabel simSpeed = new JLabel(simulationSpeed+" x Speed");
 
         // Panel for controls
         JPanel controls = new JPanel();
 
-        leanRightButton.addActionListener(e -> {
-            world.walker.setJoint(world.walker.hip1, -1);
+        skip1.addActionListener(e -> {
+            world.step(60);
+//        world.step((int) Math.floor(1/world.getStepFrequency()));
         });
-        leanLeftButton.addActionListener(e -> {;
-            world.walker.setJoint(world.walker.hip1,1);
+        skip10.addActionListener(e -> {
+            world.step((int) Math.floor(60*10/world.getStepFrequency()));
+
         });
 
         amountSlider.addChangeListener(e -> {
@@ -42,8 +44,8 @@ public class GUI {
 //            System.out.println(simulationSpeed + " x Speed");
         });
 
-        controls.add(leanLeftButton);
-        controls.add(leanRightButton);
+        controls.add(skip10);
+        controls.add(skip1);
         controls.add(amountSlider);
         controls.add(simSpeed);
 
