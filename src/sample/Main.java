@@ -19,6 +19,7 @@ public class
     static Policy learningPolicy;
     public static double gamma = 0.2; // Decay rate
     public static double learningRate = 0.2; // Learning rate
+    public static GUI gui;
 
     public static void main(String[] args) {
 
@@ -32,7 +33,7 @@ public class
         world.start();
 
         // Controls
-        GUI gui = new GUI(world);
+        gui = new GUI(world);
 
         // Test
         HashSet<State> states = new HashSet<>();
@@ -60,23 +61,23 @@ public class
         double x = walker.torso.getWorldCenter().x;
 
 
-        while (!walker.hasFallen() && (System.currentTimeMillis() < t + 15000)) {
+        while (!walker.hasFallen()) {
 //            currentState.getAction();
 
             // Analyse state
             State currentState = analyser.getState(walker);
             // Get action
-            JointAction action = currentState.getBestAction();
+//            JointAction action = currentState.getBestAction();
             // Do action
-            action.doAction();
+//            action.doAction();
             // Record outcome
-            State nextState = analyser.getState(walker);
+//            State nextState = analyser.getState(walker);
             // Update Q-Value
-            currentState.updateQ(currentState,action,nextState);
+//            currentState.updateQ(currentState,action,nextState);
 
         }
+        world.stop();
 
-//        System.exit(0);
 
 
     }

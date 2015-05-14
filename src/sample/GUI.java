@@ -12,6 +12,8 @@ public class GUI {
 
     private static double amount = 1;
     public static JLabel angleLabel = new JLabel();
+    public static int simulationSpeed =1;
+    
 
     public GUI(ExampleGraphics2D world)
     {
@@ -49,8 +51,7 @@ public class GUI {
         });
 
         amountSlider.addChangeListener(e -> {
-            amount = amountSlider.getValue();
-            Main.analyser.getState(world.walker);
+            simulationSpeed = amountSlider.getValue();
 //            world.walker.test();
         });
 
@@ -75,4 +76,7 @@ public class GUI {
 
     }
 
+    public int getSimulationSpeed() {
+        return simulationSpeed;
+    }
 }

@@ -43,9 +43,7 @@ import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
-import sample.Balancer;
-import sample.BiPedBody;
-import sample.BiPedBodyStupid;
+import sample.*;
 
 
 /**
@@ -227,40 +225,6 @@ public class ExampleGraphics2D extends JFrame {
         thread.start();
 
 
-        // Key Listener for arrow keys
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int key = e.getKeyCode();
-                switch (key) {
-                    case KeyEvent.VK_UP:
-//                        bodyList.get(0).jump();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        // down
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        // left
-                        bodyList.get(0).lean(1.0);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        // right
-                        bodyList.get(0).lean(-1.0);
-                        break;
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
     }
 
 
