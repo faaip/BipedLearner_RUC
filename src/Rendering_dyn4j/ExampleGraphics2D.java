@@ -60,10 +60,8 @@ public class ExampleGraphics2D extends JFrame {
 
     public static ArrayList<BiPedBody> bodyList = new ArrayList<>();
     public static Balancer balancer;
-//    public static BiPedBodyStupid walker;
     public static BiPedBody walker;
     public static GameObject floor;
-
 
     /**
      * The serial version id
@@ -80,7 +78,7 @@ public class ExampleGraphics2D extends JFrame {
      */
     public static final double NANO_TO_BASE = 1.0e9;
 
-    /**
+    /**i
      * Custom Body class to add drawing functionality.
      *
      * @author William Bittle
@@ -161,7 +159,7 @@ public class ExampleGraphics2D extends JFrame {
      * Basically the same shapes from the Shapes test in
      * the TestBed.
      */
-    protected void initializeWorld() {
+    public void initializeWorld() {
         // create the world
         this.world = new World();
 
@@ -173,18 +171,16 @@ public class ExampleGraphics2D extends JFrame {
         floor.setMass(Mass.Type.INFINITE);
 
         // move the floor down a bit
-        floor.translate(0.0, -4.0);
+        floor.translate(0.0, -2.95);
         this.world.addBody(floor);
 
-//         Balancer object
-//        balancer = new Balancer(this.world);
-//        balancer.setAngularDamping(2.0);
-//        this.world.addBody(balancer);
-
-        // Walker object
         walker = new BiPedBody(this.world);
 
+    }
 
+    public void newWalker()
+    {
+        // Walker object
     }
 
 
@@ -271,9 +267,8 @@ public class ExampleGraphics2D extends JFrame {
         double elapsedTime = (double) diff / NANO_TO_BASE;
         // update the world with the elapsed time
         this.world.update(elapsedTime);
-
-
     }
+
 
     /**
      * Renders the example.
@@ -346,7 +341,5 @@ public class ExampleGraphics2D extends JFrame {
 
     }
 
-//    public static void addNewWalker() {
-//        bodyList.add(new BiPedBody(this.world));
-//    }
+
 }

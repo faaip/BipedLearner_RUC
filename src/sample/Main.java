@@ -20,10 +20,11 @@ public class
     public static double gamma = 0.2; // Decay rate
     public static double learningRate = 0.2; // Learning rate
     public static GUI gui;
+    public static ExampleGraphics2D world;
 
     public static void main(String[] args) {
 
-        ExampleGraphics2D world = new ExampleGraphics2D();
+        world = new ExampleGraphics2D();
         world.setTitle("Machine Learning");
 
         // show it
@@ -35,9 +36,6 @@ public class
         // Controls
         gui = new GUI(world);
 
-        // Test
-        HashSet<State> states = new HashSet<>();
-
         // while time left || !hasfallen
         // state analysis (have I seen this state before)
         // if not add to hashSet and get random action
@@ -48,41 +46,44 @@ public class
         // move on
 
         analyser = new StateAnalyser();
-        BiPedBody walker = ExampleGraphics2D.walker;
+        System.out.println("this happened");
+//        BiPedBody walker = ExampleGraphics2D.walker;
 
 
         System.out.println(State.actions.size());
 
-        for (JointAction a : State.actions) {
-            a.doAction();
-        }
 
-        double t = System.currentTimeMillis();
-        double x = walker.torso.getWorldCenter().x;
 
-        while (!walker.hasFallen()) {
+        while(2>1) {
+            BiPedBody walker = ExampleGraphics2D.walker;
+            System.out.println("what 2000");
+
+            while (!walker.hasFallen()) {
 //            currentState.getAction();
 
-            // Analyse state
-            State currentState = analyser.getState(walker);
-            // Get action
-            JointAction action = currentState.getBestAction();
-            // Do action - or 80 % of the time
-            double r = Math.random();
-            if(r<0.8) {
-                action.doAction();
-            }else
-            {
-                currentState.doRandomAction();
-            }
-            // Record outcome
-            State nextState = analyser.getState(walker);
-            // Update Q-Value
-            currentState.updateQ(currentState, action, nextState);
+                // Analyse state
+                State currentState = analyser.getState(walker);
+                // Get action
+                JointAction action = currentState.getBestAction();
+                // Do action - or 80 % of the time
+                double r = Math.random();
+                if (r < 0.8) {
+                    action.doAction();
+                } else {
+                    currentState.doRandomAction();
+                }
+                // Record outcome
+                State nextState = analyser.getState(walker);
+                // Update Q-Value
+                currentState.updateQ(currentState, action, nextState);
 //            System.out.println(currentState.q);
 
-
+            }
+            System.out.println("what");
+//        world.newWalker();
+            world.initializeWorld();
         }
-
     }
+
+
 }

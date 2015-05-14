@@ -19,7 +19,10 @@ import java.util.ArrayList;
  */
 public class BiPedBody {
 
+    World world;
+
     // Limbs
+
     GameObject torso;
     GameObject upperLeg1;
     GameObject upperLeg2;
@@ -27,7 +30,6 @@ public class BiPedBody {
     GameObject lowerLeg2;
     GameObject foot1;
     GameObject foot2;
-    GameObject util;
 
     // Joints
     public ArrayList<RevoluteJoint> joints = new ArrayList<>();
@@ -80,6 +82,7 @@ public class BiPedBody {
 
     // Constructor
     public BiPedBody(World world) {
+        this.world = world;
         // Torso
         torso = new GameObject();
         {// Fixture4
@@ -298,11 +301,16 @@ public class BiPedBody {
 
     public boolean hasFallen() {
 
-        return torso.getWorldCenter().y < - 2.9;
+        return torso.getWorldCenter().y < - 2.3;
     }
 
     public double torsoChangeSinceLastFrame()
     {
         return torso.getChangeInPosition().x*100;
+    }
+
+    public void reset()
+    {
+
     }
 }

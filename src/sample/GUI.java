@@ -38,8 +38,6 @@ public class GUI {
 //            world.walker.knee2Bend();
 //            world.walker.ankle2Bend();
             world.walker.setJoint(world.walker.hip1,-1);
-//            ExampleGraphics2D.addNewWalker();
-
         });
         leanLeftButton.addActionListener(e -> {
 //            world.walker.rotateLeftKnee(amount);
@@ -77,6 +75,8 @@ public class GUI {
         gui.setVisible(true);
 
     }
+
+
 
     public int getSimulationSpeed() {
         return simulationSpeed;

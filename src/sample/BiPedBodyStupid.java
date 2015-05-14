@@ -1,6 +1,9 @@
 package sample;
 
+import QLearning.JointAction;
+import QLearning.State;
 import Rendering_dyn4j.GameObject;
+import org.dyn4j.collision.CategoryFilter;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
@@ -9,259 +12,303 @@ import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
 
+import java.util.ArrayList;
+
+/**
+ * Created by frederikjuutilainen on 11/05/15.
+ */
 public class BiPedBodyStupid {
 
+    World world;
+
     // Limbs
-    GameObject torso = new GameObject();
+
+    GameObject torso;
+    GameObject upperLeg1;
+    GameObject upperLeg2;
+    GameObject lowerLeg1;
+    GameObject lowerLeg2;
+    GameObject foot1;
+    GameObject foot2;
 
     // Joints
-    RevoluteJoint joint10;
+    public ArrayList<RevoluteJoint> joints = new ArrayList<>();
+    RevoluteJoint hip1;
+    RevoluteJoint hip2;
+    RevoluteJoint knee1;
+    RevoluteJoint knee2;
+    RevoluteJoint ankle1;
+    RevoluteJoint ankle2;
+
+    // TO-DO : MOVE THIS LIST OF ACTIONS TO ANOTHER CLASS
+
+    Double maxHipTorque = 150.0;
+    Double maxKneeTorque = 150.0;
+    Double maxAnkleTorque = 70.0;
+    Double jointSpeed = 100.0;
+
+    // Categories (for avoiding collision between leg 1 and leg 2)
+    CategoryFilter f1 = new CategoryFilter(1, 1);
+    CategoryFilter f2 = new CategoryFilter(2, 2);
+
+    // Features for identifying state
+    public boolean isFoot1Forward() {
+        return (hip1.getJointAngle() + knee1.getJointAngle() < hip2.getJointAngle() + knee2.getJointAngle());
+    }
+
+    public boolean isKnee1Forward() {
+        return (hip1.getJointAngle() < hip2.getJointAngle());
+    }
+
+    public boolean isTorsoLeaningForward() {
+
+        Vector2 measure = new Vector2(hip1.getAnchor1(), new Vector2(0, 1));
+
+        return torso.getWorldVector(measure).getAngleBetween(measure) > 0;
+    }
+
+    public boolean isUpperLeg1InFrontOfTorso(){
+
+        return upperLeg1.getWorldCenter().x>torso.getWorldCenter().x;
+    }
+
+    public boolean isUpperLeg2InFrontOfTorso(){
+
+        return upperLeg2.getWorldCenter().x>torso.getWorldCenter().x;
+    }
 
 
+
+
+    // Constructor
     public BiPedBodyStupid(World world) {
+        this.world = world;
+     reset();
+    }
 
+    public void reset() {
         // Torso
-        {// Fixture2
-            Convex c = Geometry.createRectangle(0.5,1.8);
+        torso = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
+            torso.setMass(Mass.Type.NORMAL);
         }
-        torso.setMass(Mass.Type.NORMAL);
         world.addBody(torso);
 
-
-
-        // Body model from dyn4j forum
-
-        // Head
-        GameObject body2 = new GameObject();
-        {// Fixture2
-            Convex c = Geometry.createCircle(0.25);
-            BodyFixture bf = new BodyFixture(c);
-            body2.addFixture(bf);
-        }
-        body2.setMass(Mass.Type.NORMAL);
-        world.addBody(body2);
-
-        // Torso
-        GameObject body3 = new GameObject();
+        // Leg 1
+        // Upper leg
+        upperLeg1 = new GameObject();
         {// Fixture4
-            Convex c = Geometry.createRectangle(0.5, 1.0);
+            Convex c = Geometry.createRectangle(0.4, 1.05);
             BodyFixture bf = new BodyFixture(c);
-            body3.addFixture(bf);
+            bf.setFilter(f1);
+            upperLeg1.addFixture(bf);
+            upperLeg1.translate(0, -1.0);
+            upperLeg1.setMass(Mass.Type.NORMAL);
+
         }
-        {// Fixture16
-            Convex c = Geometry.createRectangle(1.0, 0.25);
-            c.translate(new Vector2(0.00390625, 0.375));
+        world.addBody(upperLeg1);
+
+        // Lower leg
+        lowerLeg1 = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.32, 1.05);
             BodyFixture bf = new BodyFixture(c);
-            body3.addFixture(bf);
+            bf.setFilter(f1);
+            lowerLeg1.addFixture(bf);
+            lowerLeg1.translate(0, -1.8);
+            lowerLeg1.setMass(Mass.Type.NORMAL);
         }
-        body3.translate(new Vector2(0.0234375, -0.8125));
-        body3.setMass(Mass.Type.NORMAL);
-        world.addBody(body3);
+        world.addBody(lowerLeg1);
 
-        // Right Humerus
-        GameObject body4 = new GameObject();
-        {// Fixture5
-            Convex c = Geometry.createRectangle(0.25, 0.5);
+        // Foot
+        foot1 = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.6, 0.25);
             BodyFixture bf = new BodyFixture(c);
-            body4.addFixture(bf);
-        }
-        body4.translate(new Vector2(0.4375, -0.609375));
-        body4.setMass(Mass.Type.NORMAL);
-        world.addBody(body4);
+            bf.setFilter(f1);
+            foot1.addFixture(bf);
+            foot1.translate(0.15, -2.3);
+            foot1.setMass(Mass.Type.NORMAL);
 
-        // Right Ulna
-        GameObject body5 = new GameObject();
-        {// Fixture6
-            Convex c = Geometry.createRectangle(0.25, 0.4);
+        }
+        world.addBody(foot1);
+
+        // Joints
+        // Hip
+        hip1 = new RevoluteJoint(torso, upperLeg1, new Vector2(0.0, -.6));
+        hip1.setLimitEnabled(true);
+        hip1.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
+        hip1.setReferenceAngle(Math.toRadians(0.0));
+        hip1.setMotorEnabled(true);
+//        hip1.setMotorSpeed(Math.toRadians(0.0));
+        hip1.setMaximumMotorTorque(maxHipTorque);
+        hip1.setCollisionAllowed(false);
+        world.addJoint(hip1);
+
+        // Knee
+        knee1 = new RevoluteJoint(upperLeg1, lowerLeg1, new Vector2(0.0, -1.4));
+        knee1.setLimitEnabled(true);
+        knee1.setLimits(Math.toRadians(0.0), Math.toRadians(150.0));
+        knee1.setReferenceAngle(Math.toRadians(0.0));
+        knee1.setMotorEnabled(true);
+//        knee1.setMotorSpeed(Math.toRadians(0.0));
+        knee1.setMaximumMotorTorque(maxKneeTorque);
+        knee1.setCollisionAllowed(false);
+        world.addJoint(knee1);
+
+        // Ankle
+        ankle1 = new RevoluteJoint(lowerLeg1, foot1, new Vector2(0, -2.3));
+        ankle1.setLimitEnabled(true);
+        ankle1.setLimits(Math.toRadians(-35.0), Math.toRadians(35.0));
+        ankle1.setReferenceAngle(Math.toRadians(0.0));
+        ankle1.setMotorEnabled(true);
+//        ankle1.setMotorSpeed(Math.toRadians(0.0));
+        ankle1.setMaximumMotorTorque(maxAnkleTorque);
+        ankle1.setCollisionAllowed(false);
+        world.addJoint(ankle1);
+
+        // Leg 2
+        // Upper leg
+        upperLeg2 = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.4, 1.05);
             BodyFixture bf = new BodyFixture(c);
-            body5.addFixture(bf);
-        }
-        body5.translate(new Vector2(0.44140625, -0.98828125));
-        body5.setMass(Mass.Type.NORMAL);
-        world.addBody(body5);
+            bf.setFilter(f2);
+            upperLeg2.addFixture(bf);
+            upperLeg2.translate(0, -1.0);
+            upperLeg2.setMass(Mass.Type.NORMAL);
 
-        // Neck
-        GameObject body6 = new GameObject();
-        {// Fixture7
-            Convex c = Geometry.createRectangle(0.15, 0.2);
+        }
+        world.addBody(upperLeg2);
+
+        // Lower leg
+        lowerLeg2 = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.32, 1.05);
             BodyFixture bf = new BodyFixture(c);
-            body6.addFixture(bf);
+            bf.setFilter(f2);
+            lowerLeg2.addFixture(bf);
+            lowerLeg2.translate(0, -1.8);
+            lowerLeg2.setMass(Mass.Type.NORMAL);
         }
-        body6.translate(new Vector2(0.015625, -0.2734375));
-        body6.setMass(Mass.Type.NORMAL);
-        world.addBody(body6);
+        world.addBody(lowerLeg2);
 
-        // Left Humerus
-        GameObject body7 = new GameObject();
-        {// Fixture9
-            Convex c = Geometry.createRectangle(0.25, 0.5);
+        // Foot
+        foot2 = new GameObject();
+        {// Fixture4
+            Convex c = Geometry.createRectangle(0.6, 0.25);
             BodyFixture bf = new BodyFixture(c);
-            body7.addFixture(bf);
+            bf.setFilter(f2);
+            foot2.addFixture(bf);
+            foot2.translate(0.15, -2.3);
+            foot2.setMass(Mass.Type.NORMAL);
+
         }
-        body7.translate(new Vector2(-0.3828125, -0.609375));
-        body7.setMass(Mass.Type.NORMAL);
-        world.addBody(body7);
+        world.addBody(foot2);
 
-        // Left Ulna
-        GameObject body8 = new GameObject();
-        {// Fixture11
-            Convex c = Geometry.createRectangle(0.25, 0.4);
-            BodyFixture bf = new BodyFixture(c);
-            body8.addFixture(bf);
+        // Joints
+        // Hip
+        hip2 = new RevoluteJoint(torso, upperLeg2, new Vector2(0.0, -.6));
+        hip2.setLimitEnabled(true);
+        hip2.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
+        hip2.setReferenceAngle(Math.toRadians(0.0));
+        hip2.setMotorEnabled(true);
+        hip2.setMotorSpeed(Math.toRadians(0.0));
+        hip2.setMaximumMotorTorque(maxHipTorque);
+        hip2.setCollisionAllowed(false);
+        world.addJoint(hip2);
+
+        // Knee
+        knee2 = new RevoluteJoint(upperLeg2, lowerLeg2, new Vector2(0.0, -1.4));
+        knee2.setLimitEnabled(true);
+        knee2.setLimits(Math.toRadians(0.0), Math.toRadians(150.0));
+        knee2.setReferenceAngle(Math.toRadians(0.0));
+        knee2.setMotorEnabled(true);
+        knee2.setMotorSpeed(Math.toRadians(0.0));
+        knee2.setMaximumMotorTorque(maxKneeTorque);
+        knee2.setCollisionAllowed(false);
+        world.addJoint(knee2);
+
+        // Ankle
+        ankle2 = new RevoluteJoint(lowerLeg2, foot2, new Vector2(0, -2.3));
+        ankle2.setLimitEnabled(true);
+        ankle2.setLimits(Math.toRadians(-35.0), Math.toRadians(35.0));
+        ankle2.setReferenceAngle(Math.toRadians(0.0));
+        ankle2.setMotorEnabled(true);
+        ankle2.setMotorSpeed(Math.toRadians(0.0));
+        ankle2.setMaximumMotorTorque(maxAnkleTorque);
+        ankle2.setCollisionAllowed(false);
+        world.addJoint(ankle2);
+
+        // Add joints to list
+        joints.add(hip1);
+        joints.add(hip2);
+        joints.add(knee1);
+        joints.add(knee2);
+        joints.add(ankle1);
+        joints.add(ankle2);
+
+        // Create actions
+        for(RevoluteJoint joint : joints){
+            State.actions.add(new JointAction(joint));
+            for (int i = -1; i <= 1; i++) {
+                State.actions.add(new JointAction(joint,1));
+            }
+
         }
-        body8.translate(new Vector2(-0.3828125, -0.9765625));
-        body8.setMass(Mass.Type.NORMAL);
-        world.addBody(body8);
-
-        // Right Femur
-        GameObject body9 = new GameObject();
-        {// Fixture12
-            Convex c = Geometry.createRectangle(0.25, 0.75);
-            BodyFixture bf = new BodyFixture(c);
-            body9.addFixture(bf);
-        }
-        body9.translate(new Vector2(0.1796875, -1.5703125));
-        body9.setMass(Mass.Type.NORMAL);
-        world.addBody(body9);
-
-        // Left Femur
-        GameObject body10 = new GameObject();
-        {// Fixture13
-            Convex c = Geometry.createRectangle(0.25, 0.75);
-            BodyFixture bf = new BodyFixture(c);
-            body10.addFixture(bf);
-        }
-        body10.translate(new Vector2(-0.1328125, -1.5703125));
-        body10.setMass(Mass.Type.NORMAL);
-        world.addBody(body10);
-
-        // Right Tibia
-        GameObject body11 = new GameObject();
-        {// Fixture14
-            Convex c = Geometry.createRectangle(0.25, 0.5);
-            BodyFixture bf = new BodyFixture(c);
-            body11.addFixture(bf);
-        }
-        body11.translate(new Vector2(0.18359375, -2.11328125));
-        body11.setMass(Mass.Type.NORMAL);
-        world.addBody(body11);
-
-        // Left Tibia
-        GameObject body12 = new GameObject();
-        {// Fixture15
-            Convex c = Geometry.createRectangle(0.25, 0.5);
-            BodyFixture bf = new BodyFixture(c);
-            body12.addFixture(bf);
-        }
-        body12.translate(new Vector2(-0.1328125, -2.1171875));
-        body12.setMass(Mass.Type.NORMAL);
-        world.addBody(body12);
-
-        // Head to Neck
-        RevoluteJoint joint1 = new RevoluteJoint(body2, body6, new Vector2(0.01, -0.2));
-        joint1.setLimitEnabled(false);
-        joint1.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint1.setReferenceAngle(Math.toRadians(0.0));
-        joint1.setMotorEnabled(false);
-        joint1.setMotorSpeed(Math.toRadians(0.0));
-        joint1.setMaximumMotorTorque(0.0);
-        joint1.setCollisionAllowed(false);
-        world.addJoint(joint1);
-        // Neck to Torso
-        RevoluteJoint joint2 = new RevoluteJoint(body6, body3, new Vector2(0.01, -0.35));
-        joint2.setLimitEnabled(false);
-        joint2.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint2.setReferenceAngle(Math.toRadians(0.0));
-        joint2.setMotorEnabled(false);
-        joint2.setMotorSpeed(Math.toRadians(0.0));
-        joint2.setMaximumMotorTorque(0.0);
-        joint2.setCollisionAllowed(false);
-        world.addJoint(joint2);
-        // Torso to Left Humerus
-        RevoluteJoint joint3 = new RevoluteJoint(body3, body7, new Vector2(-0.4, -0.4));
-        joint3.setLimitEnabled(false);
-        joint3.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint3.setReferenceAngle(Math.toRadians(0.0));
-        joint3.setMotorEnabled(false);
-        joint3.setMotorSpeed(Math.toRadians(0.0));
-        joint3.setMaximumMotorTorque(0.0);
-        joint3.setCollisionAllowed(false);
-        world.addJoint(joint3);
-        // Torso to Right Humerus
-        RevoluteJoint joint4 = new RevoluteJoint(body3, body4, new Vector2(0.4, -0.4));
-        joint4.setLimitEnabled(false);
-        joint4.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint4.setReferenceAngle(Math.toRadians(0.0));
-        joint4.setMotorEnabled(false);
-        joint4.setMotorSpeed(Math.toRadians(0.0));
-        joint4.setMaximumMotorTorque(0.0);
-        joint4.setCollisionAllowed(false);
-        world.addJoint(joint4);
-        // Right Humerus to Right Ulna
-        RevoluteJoint joint5 = new RevoluteJoint(body4, body5, new Vector2(0.43, -0.82));
-        joint5.setLimitEnabled(false);
-        joint5.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint5.setReferenceAngle(Math.toRadians(0.0));
-        joint5.setMotorEnabled(false);
-        joint5.setMotorSpeed(Math.toRadians(0.0));
-        joint5.setMaximumMotorTorque(0.0);
-        joint5.setCollisionAllowed(false);
-        world.addJoint(joint5);
-        // Left Humerus to Left Ulna
-        RevoluteJoint joint6 = new RevoluteJoint(body7, body8, new Vector2(-0.4, -0.81));
-        joint6.setLimitEnabled(false);
-        joint6.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint6.setReferenceAngle(Math.toRadians(0.0));
-        joint6.setMotorEnabled(false);
-        joint6.setMotorSpeed(Math.toRadians(0.0));
-        joint6.setMaximumMotorTorque(0.0);
-        joint6.setCollisionAllowed(false);
-        world.addJoint(joint6);
-        // Torso to Right Femur
-        RevoluteJoint joint7 = new RevoluteJoint(body3, body9, new Vector2(0.16, -1.25));
-        joint7.setLimitEnabled(false);
-        joint7.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint7.setReferenceAngle(Math.toRadians(0.0));
-        joint7.setMotorEnabled(false);
-        joint7.setMotorSpeed(Math.toRadians(0.0));
-        joint7.setMaximumMotorTorque(0.0);
-        joint7.setCollisionAllowed(false);
-        world.addJoint(joint7);
-        // Torso to Left Femur
-        RevoluteJoint joint8 = new RevoluteJoint(body3, body10, new Vector2(-0.13, -1.25));
-        joint8.setLimitEnabled(false);
-        joint8.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint8.setReferenceAngle(Math.toRadians(0.0));
-        joint8.setMotorEnabled(false);
-        joint8.setMotorSpeed(Math.toRadians(0.0));
-        joint8.setMaximumMotorTorque(0.0);
-        joint8.setCollisionAllowed(false);
-        world.addJoint(joint8);
-        // Right Femur to Right Tibia
-        RevoluteJoint joint9 = new RevoluteJoint(body9, body11, new Vector2(0.17, -1.9));
-        joint9.setLimitEnabled(false);
-        joint9.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint9.setReferenceAngle(Math.toRadians(0.0));
-        joint9.setMotorEnabled(false);
-        joint9.setMotorSpeed(Math.toRadians(0.0));
-        joint9.setMaximumMotorTorque(0.0);
-        joint9.setCollisionAllowed(false);
-        world.addJoint(joint9);
-        // Left Femur to Left Tibia
-        joint10 = new RevoluteJoint(body10, body12, new Vector2(-0.14, -1.9));
-        joint10.setLimitEnabled(false);
-        joint10.setLimits(Math.toRadians(0.0), Math.toRadians(0.0));
-        joint10.setReferenceAngle(Math.toRadians(0.0));
-        joint10.setMotorEnabled(false);
-        joint10.setMotorSpeed(Math.toRadians(0.0));
-        joint10.setMaximumMotorTorque(0.0);
-        joint10.setCollisionAllowed(false);
-        world.addJoint(joint10);
-
 
     }
 
 
+    public void setJoint(RevoluteJoint joint, int x) {
+        if (!joint.isMotorEnabled()) {
+            joint.setMotorEnabled(true);
+        }
+        switch (x) {
+            case 1:
+                joint.setMotorSpeed(Math.toRadians(jointSpeed));
+                break;
+            case 0:
+                joint.setMotorSpeed(0);
+                break;
+            case -1:
+                joint.setMotorSpeed(Math.toRadians(-jointSpeed));
+                break;
+        }
+    }
+
+    public void relaxJoint(RevoluteJoint joint) {
+        if (joint.isMotorEnabled()) {
+            joint.setMotorEnabled(false);
+        }
+    }
+
+    public boolean isFoot1OnGround() {
+        return foot1.getWorldCenter().y < -3.37;
+    }
+
+    public boolean isFoot2OnGround() {
+        return foot2.getWorldCenter().y < -3.37;
+    }
+
+//    public State getState() {
+//        return new State(this);
+//    }
+
+    public int boolToInt(boolean b) {
+        return b ? 1 : 0;
+    }
+
+    public boolean hasFallen() {
+
+        return torso.getWorldCenter().y < - 2.9;
+    }
+
+    public double torsoChangeSinceLastFrame()
+    {
+        return torso.getChangeInPosition().x*100;
+    }
 }
