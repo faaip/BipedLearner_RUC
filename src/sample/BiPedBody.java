@@ -301,7 +301,7 @@ public class BiPedBody {
 
     public boolean hasFallen() {
 
-        return torso.getWorldCenter().y < - 2.3;
+        return (torso.getWorldCenter().y < - 2.1|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
     }
 
     public double torsoChangeSinceLastFrame()
