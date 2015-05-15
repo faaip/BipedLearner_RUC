@@ -3,6 +3,7 @@ package QLearning;
 import aima.core.agent.Action;
 
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -14,8 +15,12 @@ public class ActionsFunction implements aima.core.probability.mdp.ActionsFunctio
         return null;
     }
 
-    public Set<JointAction> jointActions(State s)
+    public ArrayList<JointAction> jointActions(State s)
     {
         return s.getActions();
+
+//        return s.
+
+//        return null;
     }
 }

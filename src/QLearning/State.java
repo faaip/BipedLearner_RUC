@@ -30,11 +30,11 @@ public class State {
     // -
     boolean exitState = false;
 
-    public Set<JointAction> getActions() {
+    public ArrayList<JointAction> getActions() {
         return actions;
     }
 
-    public static Set<JointAction> actions = new HashSet<JointAction>();
+    public static ArrayList<JointAction> actions = new ArrayList<>();
 
     public Map<JointAction, Double> q = new HashMap<JointAction, Double>();
 
@@ -215,6 +215,6 @@ public class State {
 
 
 
-                return null;
+                return actions.get((int) (Math.random()*actions.size()));
     }
 }

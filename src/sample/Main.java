@@ -22,7 +22,7 @@ public class
         Main {
     static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.7; // Decay rate
+    public static double gamma = 0.5; // Decay rate
     public static double learningRate = 0.2; // Learning rate
     private static int ne = 4;
     public static int generation = 1;
@@ -77,14 +77,19 @@ public class
         initState = walker.getState();
 
         while(2>1) {
-
+            world.initializeWorld();
 
             double n = 0;
             double accumulatedReward = 0;
             while (!walker.hasFallen() && n < 1000000) {
 
-//                JointAction action = agent.execute(walker);
+
+                JointAction action = agent.execute(walker);
+                action.doAction();
+
+
                 n++;
+
 
 
 
@@ -112,7 +117,6 @@ public class
 //                accumulatedReward+=currentState.getReward();
 //
             }
-            world.initializeWorld();
             System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
 
             if(accumulatedReward > bestReward){bestReward = accumulatedReward;}

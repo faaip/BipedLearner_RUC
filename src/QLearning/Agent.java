@@ -43,9 +43,13 @@ public class Agent {
             System.out.println(s);}
         if(a == null){this.a = s.getRandomAction();}
 
+
+
         // TO-DO - why is this sPrime?!
         State sPrime = walker.getState();
         double rPrime = walker.reward();
+
+
 
         // if terminal
         if(walker.hasFallen())
@@ -53,9 +57,10 @@ public class Agent {
             Q.put(new Pair<>(sPrime, noneAction), rPrime); // What is a none action?!
         }
 
+
+
         // If State s not null
         if(s != null) {
-            System.out.println("YES");
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
@@ -66,10 +71,16 @@ public class Agent {
                 Qsa = 0.0;
             }
 
+            if(r == null)
+            {r = walker.reward();
+                System.out.println("Reward: " + r);}
+
+
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
-        }
 
+
+        }
 
 
         return a;
