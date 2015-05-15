@@ -83,7 +83,7 @@ public class
             double accumulatedReward = 0;
             while (!walker.hasFallen() && n < 1000000) {
 
-                JointAction action = agent.execute(walker);
+//                JointAction action = agent.execute(walker);
                 n++;
 
 
