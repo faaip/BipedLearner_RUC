@@ -26,7 +26,9 @@ public class GUI {
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(300, 300);
         gui.setTitle("Controls");
-        // gui.setBackground(Color.red); // why you no work?
+
+
+
 
         // Add controls
 //        JButton skip1 = new JButton("Skip 1 minute");
@@ -39,6 +41,9 @@ public class GUI {
 
         // Panel for controls
         JPanel controls = new JPanel();
+        controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
+        controls.setBackground(Color.white);
+
 
 //        skip1.addActionListener(e -> {
 //            synchronized (ThreadSync.lock) {
@@ -72,7 +77,6 @@ public class GUI {
 
 //        controls.add(skip10);
 //        controls.add(skip1);
-        controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
         controls.add(reset);
         controls.add(amountSlider);
         controls.add(simSpeed);
@@ -81,9 +85,10 @@ public class GUI {
 
         // Panel for info monitoring
         JPanel info = new JPanel();
-
-
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        info.setBackground(Color.yellow);
+
+
         info.add(generationNo);
         info.add(highScore);
 
