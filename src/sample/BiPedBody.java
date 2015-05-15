@@ -29,7 +29,7 @@ public class BiPedBody extends GameObject{
     GameObject foot2;
 
     // Joints
-    public ArrayList<RevoluteJoint> joints = new ArrayList<>();
+    public static ArrayList<RevoluteJoint> joints = new ArrayList<>();
     RevoluteJoint hip1;
     RevoluteJoint hip2;
     RevoluteJoint knee1;
@@ -243,17 +243,6 @@ public class BiPedBody extends GameObject{
         joints.add(knee2);
         joints.add(ankle1);
         joints.add(ankle2);
-
-        // Create actions
-        for(RevoluteJoint joint : joints){
-            Collections.reverse(State.actions);
-            State.actions.add(new JointAction(joint));
-            for (int i = -1; i <= 1; i++) {
-                State.actions.add(new JointAction(joint,1));
-            }
-
-        }
-
     }
 
     public void setJoint(RevoluteJoint joint, int x) {

@@ -252,13 +252,13 @@ public class BiPedBodyStupid {
         joints.add(ankle2);
 
         // Create actions
-        for(RevoluteJoint joint : joints){
-            State.actions.add(new JointAction(joint));
-            for (int i = -1; i <= 1; i++) {
-                State.actions.add(new JointAction(joint,1));
-            }
+       // for(RevoluteJoint joint : joints){
+         //   State.actions.add(new JointAction(joint));
+           // for (int i = -1; i <= 1; i++) {
+             //   State.actions.add(new JointAction(joint,1));
+            //}
 
-        }
+        //}
 
     }
 

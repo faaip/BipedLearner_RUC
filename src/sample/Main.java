@@ -3,6 +3,7 @@ package sample;
 import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
 import burlap.behavior.singleagent.Policy;
+
 import org.dyn4j.collision.manifold.Manifold;
 import org.dyn4j.collision.narrowphase.Penetration;
 import org.dyn4j.dynamics.Body;
@@ -80,6 +81,7 @@ public class
 
 
         while(2>1) {
+
             BiPedBody walker = Graphics2D.walker;
             double n = 0;
             double accumulatedReward = 0;
@@ -87,8 +89,10 @@ public class
 
                 // Analyse state
                 State currentState = analyser.getState(walker);
+
                 // Get action
                 JointAction action = currentState.getBestAction();
+
                 // Do action - or 80 % of the time
                 double r = Math.random();
                 if (r < 0.8) {
@@ -100,9 +104,13 @@ public class
                 State nextState = analyser.getState(walker);
                 // Update Q-Value
                 currentState.updateQ(currentState, action, nextState);
+
+                currentState.printQs();
+
                 accumulatedReward+=currentState.getReward();
 
                 n++;
+
             }
 //        world.newWalker();
             world.initializeWorld();

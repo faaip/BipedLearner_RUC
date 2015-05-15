@@ -6,6 +6,7 @@ import sample.BiPedBody;
 import sample.Main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class State extends burlap.oomdp.core.State {
 
     // -
     boolean exitState = false;
-    public static ArrayList<JointAction> actions = new ArrayList<JointAction>();
+    public  ArrayList<JointAction> actions = new ArrayList<JointAction>();
     public Map<JointAction, Double> q = new HashMap<JointAction, Double>();
 
 
@@ -45,8 +46,30 @@ public class State extends burlap.oomdp.core.State {
         {
         jointAngles.add(j.getJointAngle());
         }
+        // Add actions from body
+        fillActions();
+
         // Fill q with zero's inorder to avoid null point
         fillZero();
+
+    }
+
+    private void fillActions() {
+
+        // Create actions
+        if(this.actions.size() < 1) {
+            System.out.println("FILLACTIONS");
+            for (RevoluteJoint joint : BiPedBody.joints) {
+                Collections.reverse(actions);
+                actions.add(new JointAction(joint));
+                for (int i = -1; i <= 1; i++) {
+                    actions.add(new JointAction(joint, 1));
+                }
+
+            }
+            System.out.println( "ActionsSIZE  " + this.actions.size());
+
+        }
     }
 
     private void fillZero() {
@@ -85,6 +108,11 @@ public class State extends burlap.oomdp.core.State {
     @Override
     public boolean equals(Object o) {
         State s = (State) o;
+        int round = 25;
+
+        if(Math.round(Math.toDegrees(this.relativeAngle)/round) != Math.round(Math.toDegrees(s.relativeAngle)/round))
+        {return false;}
+
 
         if(s.foot1OnGround != this.foot1OnGround){return false;}
         if(s.foot2OnGround != this.foot2OnGround){return false;}
@@ -93,15 +121,12 @@ public class State extends burlap.oomdp.core.State {
         if(s.upperLeg2InFrontOfTorso != this.upperLeg2InFrontOfTorso){return false;}
         if(s.upperLeg1InFrontOfTorso != this.upperLeg1InFrontOfTorso){return false;}
 
-        int round = 25;
-
         for (int i = 0; i < this.jointAngles.size(); i++) {
             if(Math.round(Math.toDegrees(s.jointAngles.get(i)/round)) != Math.round(Math.toDegrees(s.jointAngles.get(i)/round)))
             {return false;}
         }
 
-        if(Math.round(Math.toDegrees(this.relativeAngle)/round) != Math.round(Math.toDegrees(s.relativeAngle)/round))
-        {return false;}
+
 
 
         return true;
@@ -118,24 +143,20 @@ public class State extends burlap.oomdp.core.State {
         double max = -100;
         JointAction action = null;
 
+
         for (JointAction a : actions) {
             if (q.get(a) > max) {
                 max = q.get(a);
                 action = a;
 
-
             }
         }
-//
 
         if(max == 0)
         {
-//            System.out.println("RANDOM ACTION");
 
             return actions.get((int) ((Math.random()*actions.size())));
         }
-
-//        System.out.println("ikke-random ACTION");
 
         return action;
     }
@@ -149,9 +170,9 @@ public class State extends burlap.oomdp.core.State {
 
         double newQ = oldQ + learningRate * (reward+gamma*nextState.q.get(nextState.getBestAction())-oldQ);
 
-
-//        System.out.println(newQ);
         oldState.q.put(action, newQ);
+
+
 
 
     }
@@ -163,5 +184,25 @@ public class State extends burlap.oomdp.core.State {
     public double getReward() {
 
         return -0.1 + (Graphics2D.walker.legsChangeSinceLastFrame());
+    }
+
+
+    public void printQs (){
+
+        System.out.println(this.actions.size() + "actions SIZE");
+
+        for (JointAction a : actions) {
+
+            if(!(q.get(a)== 0.0)){
+
+              //  System.out.println(q.size());
+
+                //System.out.println("q value not zero");
+
+
+            }
+
+        }
+
     }
 }
