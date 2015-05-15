@@ -59,7 +59,7 @@ public class GUI {
 
         learningRateSlider.addChangeListener(e1 -> {
             synchronized (ThreadSync.lock) {
-                learningRate = learningRateSlider.getValue();
+//                learningRate = learningRateSlider.getValue();
 
             }
             learnRate.setText(learningRate + " x Learning Rate");

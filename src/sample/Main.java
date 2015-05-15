@@ -60,7 +60,7 @@ public class
         // move on
 
         analyser = new StateAnalyser();
-//        BiPedBody walker = ExampleGraphics2D.walker;
+        BiPedBody walker = Graphics2D.walker;
 
         //Add actions
         State.fillActions();
@@ -73,50 +73,25 @@ public class
 
 
 
-        BiPedBody walker = Graphics2D.walker;
         initState = walker.getState();
 
+
+
         while(2>1) {
-            world.initializeWorld();
+
 
             double n = 0;
             double accumulatedReward = 0;
-            while (!walker.hasFallen() && n < 1000000) {
-
+            while (!Graphics2D.walker.hasFallen() && n < 1000000) {
 
                 JointAction action = agent.execute(walker);
                 action.doAction();
-
-
                 n++;
 
-
-
-
-//                // Analyse state
-//                State currentState = analyser.getState(walker);
-//
-//                // Get action
-//                JointAction action = currentState.getBestAction();
-////                System.out.println(action);
-//
-//                // Do action - or 80 % of the time
-//                double r = Math.random();
-//                if (r < 0.8) {
-//                    action.doAction();
-//                } else {
-//                    currentState.doRandomAction();
-//                }
-//                // Record outcome
-//                State nextState = analyser.getState(walker);
-//                // Update Q-Value
-//                currentState.updateQ(currentState, action, nextState);
-//
-//                currentState.printQs();
-//
-//                accumulatedReward+=currentState.getReward();
 //
             }
+            world.initializeWorld();
+
             System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
 
             if(accumulatedReward > bestReward){bestReward = accumulatedReward;}

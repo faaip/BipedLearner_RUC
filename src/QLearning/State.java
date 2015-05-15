@@ -212,9 +212,7 @@ public class State {
 
     public JointAction getRandomAction() {
 
-
-
-
+        System.out.println(actions.get((int) (Math.random()*actions.size())));
                 return actions.get((int) (Math.random()*actions.size()));
     }
 }

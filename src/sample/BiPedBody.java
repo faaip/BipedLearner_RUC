@@ -3,6 +3,7 @@ package sample;
 import QLearning.JointAction;
 import QLearning.State;
 import Rendering_dyn4j.GameObject;
+import Rendering_dyn4j.Graphics2D;
 import org.dyn4j.collision.CategoryFilter;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
@@ -297,7 +298,7 @@ public class BiPedBody extends GameObject{
     public double reward() {
 
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
-        return -2+(torso.getChangeInPosition().x);
+        return -2+(Graphics2D.walker.torso.getChangeInPosition().x);
 //        return -2+(knee1.getAnchor1().x+knee2.getAnchor1().x+foot1.getWorldCenter().distance(0,0)+foot2.getWorldCenter().distance(0,0)+torso.getWorldCenter().y*2);
 //        return (-10+(upperLeg1.getChangeInPosition().x+upperLeg2.getChangeInPosition().x)*100+foot1.getWorldCenter().x+foot2.getWorldCenter().x);
     }
@@ -310,4 +311,7 @@ public class BiPedBody extends GameObject{
     }
 
 
+    public void printLocation() {
+        System.out.println(Graphics2D.walker.torso.getWorldCenter().y);
+    }
 }
