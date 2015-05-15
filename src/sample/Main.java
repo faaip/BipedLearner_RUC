@@ -78,6 +78,8 @@ public class
 
 
 
+        //Add actions to State
+        State.fillActions();
 
 
         while(2>1) {

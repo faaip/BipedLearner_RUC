@@ -27,7 +27,7 @@ public class State extends burlap.oomdp.core.State {
 
     // -
     boolean exitState = false;
-    public  ArrayList<JointAction> actions = new ArrayList<JointAction>();
+    public static  ArrayList<JointAction> actions = new ArrayList<JointAction>();
     public Map<JointAction, Double> q = new HashMap<JointAction, Double>();
 
 
@@ -46,18 +46,17 @@ public class State extends burlap.oomdp.core.State {
         {
         jointAngles.add(j.getJointAngle());
         }
-        // Add actions from body
-        fillActions();
+
 
         // Fill q with zero's inorder to avoid null point
         fillZero();
 
     }
 
-    private void fillActions() {
+    public static void fillActions() {
 
         // Create actions
-        if(this.actions.size() < 1) {
+        if(actions.size() < 1) {
             System.out.println("FILLACTIONS");
             for (RevoluteJoint joint : BiPedBody.joints) {
                 Collections.reverse(actions);
@@ -67,7 +66,7 @@ public class State extends burlap.oomdp.core.State {
                 }
 
             }
-            System.out.println( "ActionsSIZE  " + this.actions.size());
+            System.out.println( "ActionsSIZE  " + actions.size());
 
         }
     }
