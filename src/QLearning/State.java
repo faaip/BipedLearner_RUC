@@ -1,16 +1,18 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
+import aima.core.agent.Action;
+import aima.core.search.framework.*;
+import aima.core.search.framework.ActionsFunction;
+import aima.core.util.FrequencyCounter;
+import aima.core.util.datastructure.Pair;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import sample.BiPedBody;
 import sample.Main;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class State extends burlap.oomdp.core.State {
+public class State {
 
     // State features
     private boolean torsoLeaningForward;
@@ -27,7 +29,13 @@ public class State extends burlap.oomdp.core.State {
 
     // -
     boolean exitState = false;
-    public static  ArrayList<JointAction> actions = new ArrayList<JointAction>();
+
+    public Set<JointAction> getActions() {
+        return actions;
+    }
+
+    public static Set<JointAction> actions = new HashSet<JointAction>();
+
     public Map<JointAction, Double> q = new HashMap<JointAction, Double>();
 
 
@@ -57,9 +65,7 @@ public class State extends burlap.oomdp.core.State {
 
         // Create actions
         if(actions.size() < 1) {
-            System.out.println("FILLACTIONS");
             for (RevoluteJoint joint : BiPedBody.joints) {
-                Collections.reverse(actions);
                 actions.add(new JointAction(joint));
                 for (int i = -1; i <= 1; i++) {
                     actions.add(new JointAction(joint, i));
@@ -154,7 +160,7 @@ public class State extends burlap.oomdp.core.State {
         if(max == 0)
         {
 
-            return actions.get((int) ((Math.random()*actions.size())));
+//            return actions.get((int) ((Math.random()*actions.size())));
         }
 
         return action;
@@ -177,7 +183,7 @@ public class State extends burlap.oomdp.core.State {
     }
 
     public void doRandomAction() {
-        actions.get((int) (Math.random()*actions.size())).doAction();
+//        actions.get((int) (Math.random()*actions.size())).doAction();
     }
 
     public double getReward() {
@@ -201,5 +207,11 @@ public class State extends burlap.oomdp.core.State {
 
         }
 
+    }
+
+
+    public JointAction getRandomAction() {
+
+        return actions.
     }
 }

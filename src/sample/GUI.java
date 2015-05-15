@@ -31,7 +31,7 @@ public class GUI {
         JSlider amountSlider = new JSlider(1, 50,1);
         JLabel simSpeed = new JLabel(simulationSpeed+" x Speed \n" );
         JSlider learningRateSlider = new JSlider(0, 10, 10); //double to int
-        JLabel learnRate = new JLabel(learningRate+ " x Learning Rate");
+        JLabel learnRate = new JLabel(learningRate/10 + " x Learning Rate");
 
         // Panel for controls
         JPanel controls = new JPanel();
@@ -51,7 +51,6 @@ public class GUI {
         learningRateSlider.addChangeListener(e1 -> {
             synchronized (ThreadSync.lock) {
                 learningRate = learningRateSlider.getValue();
-                world.step((int) Math.floor(learningRateSlider.getValue() / world.getStepFrequency()));
             }
             learnRate.setText(learningRate + " x Learning Rate");
 
@@ -60,7 +59,6 @@ public class GUI {
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
                 simulationSpeed = amountSlider.getValue();
-                world.step((int) Math.floor(amountSlider.getValue() / world.getStepFrequency()));
             }
             simSpeed.setText(simulationSpeed + " x Speed");
 //            System.out.println(simulationSpeed + " x Speed");

@@ -1,12 +1,14 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
+import aima.core.agent.Action;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 
-public class JointAction {
+public class JointAction implements Action {
     RevoluteJoint joint; // Joint used in action
     boolean motorOn; // is motor on or is joint relaxed in this particular action
     int a; // Optional int indicating negative, locked or positive action
+    boolean noOp;
 
     // Constructor a "non-action"
     public JointAction(RevoluteJoint joint) {
@@ -21,8 +23,14 @@ public class JointAction {
         this.motorOn = true;
     }
 
+    // Third constructor for noOp
+    public JointAction(boolean noOp) {
+        this.noOp = noOp;
+    }
+
     // Execute appropriate method for action
     public void doAction() {
+        if(noOp){;}
         if (this.motorOn) {
             Graphics2D.walker.setJoint(this.joint, this.a);
         } else {
@@ -35,5 +43,10 @@ public class JointAction {
     public String toString()
     {
         return "Action " + a + " motor on: " + motorOn;
+    }
+
+    @Override
+    public boolean isNoOp() {
+        return !motorOn;
     }
 }
