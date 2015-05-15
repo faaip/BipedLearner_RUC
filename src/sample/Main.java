@@ -20,6 +20,9 @@ public class
     public static GUI gui;
     public static Graphics2D world;
     public static CollisionListener cl;
+    public static double bestReward;
+    public static double bestDistance;
+    public static int bestGeneration;
 
     public static void main(String[] args) {
 
@@ -47,7 +50,6 @@ public class
         analyser = new StateAnalyser();
         System.out.println("this happened");
 //        BiPedBody walker = ExampleGraphics2D.walker;
-
 
         cl = new CollisionListener() {
             @Override
@@ -104,8 +106,15 @@ public class
             }
 //        world.newWalker();
             world.initializeWorld();
-            System.out.println("Generation: " + generation + ". Reward: " + accumulatedReward + ". Number of states: " + analyser.states.size() + ". Distance: " + walker.torso.getWorldCenter().distance(0, 0));
+            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
+
+            if(accumulatedReward > bestReward){bestReward = accumulatedReward;}
+            if(walker.torso.getWorldCenter().distance(0, 0) > bestDistance)
+            {bestDistance = walker.torso.getWorldCenter().distance(0, 0);
+            bestGeneration=generation;}
+
             generation++;
+
 
         }
     }

@@ -45,7 +45,7 @@ public class GUI {
 
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
-                            simulationSpeed = amountSlider.getValue();
+                simulationSpeed = amountSlider.getValue();
             }
             simSpeed.setText(simulationSpeed + " x Speed");
 //            System.out.println(simulationSpeed + " x Speed");
