@@ -15,9 +15,6 @@ import org.dyn4j.geometry.Vector2;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by frederikjuutilainen on 11/05/15.
- */
 public class BiPedBody extends GameObject{
 
     World world;
