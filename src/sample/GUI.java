@@ -3,6 +3,7 @@ package sample;
 import javax.swing.*;
 
 import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.ThreadSync;
 
 /**
  * Created by frederikjuutilainen on 05/05/15.
@@ -31,17 +32,21 @@ public class GUI {
         JPanel controls = new JPanel();
 
         skip1.addActionListener(e -> {
-            world.step(60);
-//        world.step((int) Math.floor(1/world.getStepFrequency()));
+            synchronized (ThreadSync.lock) {
+                world.step((int) Math.floor(60 * 1 / world.getStepFrequency()));
+            }
         });
         skip10.addActionListener(e -> {
-            world.step((int) Math.floor(60*10/world.getStepFrequency()));
-
+            synchronized (ThreadSync.lock) {
+                world.step((int) Math.floor(60 * 60 / world.getStepFrequency()));
+            }
         });
 
 
         amountSlider.addChangeListener(e -> {
-            simulationSpeed = amountSlider.getValue();
+            synchronized (ThreadSync.lock) {
+                            simulationSpeed = amountSlider.getValue();
+            }
             simSpeed.setText(simulationSpeed + " x Speed");
 //            System.out.println(simulationSpeed + " x Speed");
         });

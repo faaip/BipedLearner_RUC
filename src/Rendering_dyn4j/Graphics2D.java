@@ -225,6 +225,8 @@ public class Graphics2D extends JFrame {
         thread.start();
 
 
+
+
     }
 
 
@@ -274,6 +276,11 @@ public class Graphics2D extends JFrame {
         double elapsedTime = ((double) diff / NANO_TO_BASE)*GUI.simulationSpeed;
         // update the world with the elapsed time
         this.world.update(elapsedTime, Integer.MAX_VALUE);
+
+        // Sync to threadsync
+        synchronized (ThreadSync.lock) {
+            world.update(elapsedTime);
+        }
     }
 
     public double getElapsedTime()
