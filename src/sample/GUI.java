@@ -5,6 +5,8 @@ import javax.swing.*;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
+import java.awt.*;
+
 /**
  * Created by frederikjuutilainen on 05/05/15.
  */
@@ -23,18 +25,25 @@ public class GUI {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(300, 300);
+        gui.setTitle("Controls");
+
+
+
 
         // Add controls
 //        JButton skip1 = new JButton("Skip 1 minute");
 //        JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
         JSlider amountSlider = new JSlider(1, 50,1);
-        JLabel simSpeed = new JLabel(simulationSpeed+" x Speed \n" );
+        JLabel simSpeed = new JLabel(simulationSpeed+" x Speed" );
         JSlider learningRateSlider = new JSlider(0, 10, 10); //double to int
-        JLabel learnRate = new JLabel(learningRate/10 + " x Learning Rate");
+        JLabel learnRate = new JLabel(learningRate+ " x Learning Rate");
 
         // Panel for controls
         JPanel controls = new JPanel();
+        controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
+        controls.setBackground(Color.white);
+
 
 //        skip1.addActionListener(e -> {
 //            synchronized (ThreadSync.lock) {
@@ -51,6 +60,7 @@ public class GUI {
         learningRateSlider.addChangeListener(e1 -> {
             synchronized (ThreadSync.lock) {
                 learningRate = learningRateSlider.getValue();
+
             }
             learnRate.setText(learningRate + " x Learning Rate");
 
@@ -59,6 +69,7 @@ public class GUI {
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
                 simulationSpeed = amountSlider.getValue();
+                world.step((int) Math.floor(amountSlider.getValue() / world.getStepFrequency()));
             }
             simSpeed.setText(simulationSpeed + " x Speed");
 //            System.out.println(simulationSpeed + " x Speed");
@@ -74,6 +85,8 @@ public class GUI {
 
         // Panel for info monitoring
         JPanel info = new JPanel();
+        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        info.setBackground(Color.yellow);
 
 
         info.add(generationNo);
@@ -103,4 +116,6 @@ public class GUI {
         generationNo.setText("Generation #" + Main.generation);
         highScore.setText("Highscore was gen. #" + Main.bestGeneration + " dist: " + Math.round(Main.bestDistance*100));
     }
+
+
 }
