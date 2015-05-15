@@ -5,6 +5,8 @@ import javax.swing.*;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
+import java.awt.*;
+
 /**
  * Created by frederikjuutilainen on 05/05/15.
  */
@@ -23,13 +25,15 @@ public class GUI {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(300, 300);
+        gui.setTitle("Controls");
+        // gui.setBackground(Color.red); // why you no work?
 
         // Add controls
 //        JButton skip1 = new JButton("Skip 1 minute");
 //        JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
         JSlider amountSlider = new JSlider(1, 50,1);
-        JLabel simSpeed = new JLabel(simulationSpeed+" x Speed \n" );
+        JLabel simSpeed = new JLabel(simulationSpeed+" x Speed" );
         JSlider learningRateSlider = new JSlider(0, 10, 10); //double to int
         JLabel learnRate = new JLabel(learningRate+ " x Learning Rate");
 
@@ -51,7 +55,7 @@ public class GUI {
         learningRateSlider.addChangeListener(e1 -> {
             synchronized (ThreadSync.lock) {
                 learningRate = learningRateSlider.getValue();
-                world.step((int) Math.floor(learningRateSlider.getValue() / world.getStepFrequency()));
+
             }
             learnRate.setText(learningRate + " x Learning Rate");
 
@@ -68,6 +72,7 @@ public class GUI {
 
 //        controls.add(skip10);
 //        controls.add(skip1);
+        controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
         controls.add(reset);
         controls.add(amountSlider);
         controls.add(simSpeed);
@@ -78,6 +83,7 @@ public class GUI {
         JPanel info = new JPanel();
 
 
+        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
         info.add(generationNo);
         info.add(highScore);
 
@@ -105,4 +111,6 @@ public class GUI {
         generationNo.setText("Generation #" + Main.generation);
         highScore.setText("Highscore was gen. #" + Main.bestGeneration + " dist: " + Math.round(Main.bestDistance*100));
     }
+
+
 }
