@@ -49,38 +49,10 @@ public class
         // move on
 
         analyser = new StateAnalyser();
-        System.out.println("this happened");
 //        BiPedBody walker = ExampleGraphics2D.walker;
-
-        cl = new CollisionListener() {
-            @Override
-            public boolean collision(Body body, Body body1) {
-                return true;
-            }
-
-            @Override
-            public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Penetration penetration) {
-                return false;
-            }
-
-            @Override
-            public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Manifold manifold) {
-                return false;
-            }
-
-            @Override
-            public boolean collision(ContactConstraint contactConstraint) {
-                return false;
-            }
-        };
-
-        world.addListener(cl);
-
-
 
         //Add actions
         State.fillActions();
-
 
         while(2>1) {
 
@@ -94,6 +66,7 @@ public class
 
                 // Get action
                 JointAction action = currentState.getBestAction();
+                System.out.println(action);
 
                 // Do action - or 80 % of the time
                 double r = Math.random();

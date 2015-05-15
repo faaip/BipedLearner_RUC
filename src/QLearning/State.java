@@ -62,11 +62,11 @@ public class State extends burlap.oomdp.core.State {
                 Collections.reverse(actions);
                 actions.add(new JointAction(joint));
                 for (int i = -1; i <= 1; i++) {
-                    actions.add(new JointAction(joint, 1));
+                    actions.add(new JointAction(joint, i));
                 }
 
             }
-            System.out.println( "ActionsSIZE  " + actions.size());
+            System.out.println(actions);
 
         }
     }
@@ -187,8 +187,6 @@ public class State extends burlap.oomdp.core.State {
 
 
     public void printQs (){
-
-        System.out.println(this.actions.size() + "actions SIZE");
 
         for (JointAction a : actions) {
 
