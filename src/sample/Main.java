@@ -112,8 +112,9 @@ public class
             if(walker.torso.getWorldCenter().distance(0, 0) > bestDistance)
             {bestDistance = walker.torso.getWorldCenter().distance(0, 0);
             bestGeneration=generation;}
-
             generation++;
+
+            gui.update();
 
 
         }

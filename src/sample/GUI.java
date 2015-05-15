@@ -13,7 +13,10 @@ public class GUI {
     private static double amount = 1;
     public static JLabel angleLabel = new JLabel();
     public static int simulationSpeed =1;
-    
+    static JLabel generationNo = new JLabel("Generation # " + 0);
+    static JLabel highScore = new JLabel("Highscore: ");
+
+
 
     public GUI(Graphics2D world)
     {
@@ -22,25 +25,25 @@ public class GUI {
         gui.setSize(300, 300);
 
         // Add controls
-        JButton skip1 = new JButton("Skip 1 minute");
-        JButton skip10 = new JButton("Skip 10 minutes");
+//        JButton skip1 = new JButton("Skip 1 minute");
+//        JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
-        JSlider amountSlider = new JSlider(1, 100,1);
+        JSlider amountSlider = new JSlider(1, 50,1);
         JLabel simSpeed = new JLabel(simulationSpeed+" x Speed");
 
         // Panel for controls
         JPanel controls = new JPanel();
 
-        skip1.addActionListener(e -> {
-            synchronized (ThreadSync.lock) {
-                world.step((int) Math.floor(60 * 1 / world.getStepFrequency()));
-            }
-        });
-        skip10.addActionListener(e -> {
-            synchronized (ThreadSync.lock) {
-                world.step((int) Math.floor(60 * 60 / world.getStepFrequency()));
-            }
-        });
+//        skip1.addActionListener(e -> {
+//            synchronized (ThreadSync.lock) {
+//                world.step((int) Math.floor(60 * 1 / world.getStepFrequency()));
+//            }
+//        });
+//        skip10.addActionListener(e -> {
+//            synchronized (ThreadSync.lock) {
+//                world.step((int) Math.floor(60 * 60 / world.getStepFrequency()));
+//            }
+//        });
 
 
         amountSlider.addChangeListener(e -> {
@@ -52,14 +55,18 @@ public class GUI {
 //            System.out.println(simulationSpeed + " x Speed");
         });
 
-        controls.add(skip10);
-        controls.add(skip1);
+//        controls.add(skip10);
+//        controls.add(skip1);
         controls.add(reset);
         controls.add(amountSlider);
         controls.add(simSpeed);
 
         // Panel for info monitoring
         JPanel info = new JPanel();
+
+
+        info.add(generationNo);
+        info.add(highScore);
 
 //        angleLabel.setText("Angle is: " + world.balancer.getAngle());
 
@@ -79,5 +86,10 @@ public class GUI {
 
     public int getSimulationSpeed() {
         return simulationSpeed;
+    }
+
+    public void update() {
+        generationNo.setText("Generation #" + Main.generation);
+        highScore.setText("Highscore was gen. #" + Main.bestGeneration + " dist: " + Math.round(Main.bestDistance*100));
     }
 }
