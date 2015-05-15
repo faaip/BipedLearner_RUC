@@ -273,13 +273,16 @@ public class Graphics2D extends JFrame {
         // set the last time
         this.last = time;
         // convert from nanoseconds to seconds
-        double elapsedTime = ((double) diff / NANO_TO_BASE)*GUI.simulationSpeed;
+        double elapsedTime = ((double) diff / NANO_TO_BASE);
+
+        // Multiply with simulation speed
+        elapsedTime = elapsedTime*GUI.simulationSpeed;
         // update the world with the elapsed time
-        this.world.update(elapsedTime, Integer.MAX_VALUE);
+//        this.world.update(elapsedTime, Integer.MAX_VALUE);
 
         // Sync to threadsync
         synchronized (ThreadSync.lock) {
-            world.update(elapsedTime);
+            this.world.update(elapsedTime, Integer.MAX_VALUE);
         }
     }
 

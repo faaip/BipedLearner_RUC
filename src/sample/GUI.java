@@ -25,7 +25,7 @@ public class GUI {
         JButton skip1 = new JButton("Skip 1 minute");
         JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
-        JSlider amountSlider = new JSlider(1, 50,1);
+        JSlider amountSlider = new JSlider(1, 100,1);
         JLabel simSpeed = new JLabel(simulationSpeed+" x Speed");
 
         // Panel for controls
@@ -46,6 +46,7 @@ public class GUI {
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
                 simulationSpeed = amountSlider.getValue();
+                world.step((int) Math.floor(amountSlider.getValue() / world.getStepFrequency()));
             }
             simSpeed.setText(simulationSpeed + " x Speed");
 //            System.out.println(simulationSpeed + " x Speed");
