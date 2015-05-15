@@ -37,8 +37,13 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.dyn4j.collision.manifold.Manifold;
+import org.dyn4j.collision.narrowphase.Penetration;
+import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.dynamics.CollisionListener;
 import org.dyn4j.dynamics.World;
+import org.dyn4j.dynamics.contact.ContactConstraint;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
@@ -61,6 +66,7 @@ public class Graphics2D extends JFrame {
     public static Balancer balancer;
     public static BiPedBody walker;
     public static GameObject floor;
+    public static CollisionListener cl;
 
     /**
      * The serial version id
@@ -175,11 +181,13 @@ public class Graphics2D extends JFrame {
 
         walker = new BiPedBody(this.world);
 
+
+
     }
 
-    public void newWalker()
+    public void addListener(CollisionListener cl)
     {
-        // Walker object
+        this.world.addListener(cl);
     }
 
 
@@ -266,6 +274,11 @@ public class Graphics2D extends JFrame {
         double elapsedTime = ((double) diff / NANO_TO_BASE)*GUI.simulationSpeed;
         // update the world with the elapsed time
         this.world.update(elapsedTime, Integer.MAX_VALUE);
+    }
+
+    public double getElapsedTime()
+    {
+        return world.getAccumulatedTime();
     }
 
 

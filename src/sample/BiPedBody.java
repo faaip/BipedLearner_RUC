@@ -13,16 +13,16 @@ import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by frederikjuutilainen on 11/05/15.
  */
-public class BiPedBody {
+public class BiPedBody extends GameObject{
 
     World world;
 
     // Limbs
-
     GameObject torso;
     GameObject upperLeg1;
     GameObject upperLeg2;
@@ -136,7 +136,7 @@ public class BiPedBody {
         // Hip
         hip1 = new RevoluteJoint(torso, upperLeg1, new Vector2(0.0, -.6));
         hip1.setLimitEnabled(true);
-        hip1.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
+        hip1.setLimits(Math.toRadians(-50.0), Math.toRadians(60.0));
         hip1.setReferenceAngle(Math.toRadians(0.0));
         hip1.setMotorEnabled(true);
 //        hip1.setMotorSpeed(Math.toRadians(0.0));
@@ -158,7 +158,7 @@ public class BiPedBody {
         // Ankle
         ankle1 = new RevoluteJoint(lowerLeg1, foot1, new Vector2(0, -2.3));
         ankle1.setLimitEnabled(true);
-        ankle1.setLimits(Math.toRadians(-35.0), Math.toRadians(35.0));
+        ankle1.setLimits(Math.toRadians(-15.0), Math.toRadians(15.0));
         ankle1.setReferenceAngle(Math.toRadians(0.0));
         ankle1.setMotorEnabled(true);
 //        ankle1.setMotorSpeed(Math.toRadians(0.0));
@@ -209,7 +209,7 @@ public class BiPedBody {
         // Hip
         hip2 = new RevoluteJoint(torso, upperLeg2, new Vector2(0.0, -.6));
         hip2.setLimitEnabled(true);
-        hip2.setLimits(Math.toRadians(-90.0), Math.toRadians(60.0));
+        hip2.setLimits(Math.toRadians(-50.0), Math.toRadians(60.0));
         hip2.setReferenceAngle(Math.toRadians(0.0));
         hip2.setMotorEnabled(true);
         hip2.setMotorSpeed(Math.toRadians(0.0));
@@ -231,7 +231,7 @@ public class BiPedBody {
         // Ankle
         ankle2 = new RevoluteJoint(lowerLeg2, foot2, new Vector2(0, -2.3));
         ankle2.setLimitEnabled(true);
-        ankle2.setLimits(Math.toRadians(-35.0), Math.toRadians(35.0));
+        ankle2.setLimits(Math.toRadians(-15.0), Math.toRadians(15.0));
         ankle2.setReferenceAngle(Math.toRadians(0.0));
         ankle2.setMotorEnabled(true);
         ankle2.setMotorSpeed(Math.toRadians(0.0));
@@ -249,6 +249,7 @@ public class BiPedBody {
 
         // Create actions
         for(RevoluteJoint joint : joints){
+            Collections.reverse(State.actions);
             State.actions.add(new JointAction(joint));
             for (int i = -1; i <= 1; i++) {
                 State.actions.add(new JointAction(joint,1));
@@ -263,13 +264,13 @@ public class BiPedBody {
             joint.setMotorEnabled(true);
         }
         switch (x) {
-            case 1:
+            case -1:
                 joint.setMotorSpeed(Math.toRadians(jointSpeed));
                 break;
             case 0:
                 joint.setMotorSpeed(0);
                 break;
-            case -1:
+            case 1:
                 joint.setMotorSpeed(Math.toRadians(-jointSpeed));
                 break;
         }
@@ -298,13 +299,28 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (torso.getWorldCenter().y < - 1.7|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
+        return (torso.getWorldCenter().y < - 1.2|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
     }
 
-    public double torsoChangeSinceLastFrame()
+    public double legsChangeSinceLastFrame()
     {
-        return torso.getChangeInPosition().x*100;
+        return (upperLeg1.getChangeInPosition().x+upperLeg2.getChangeInPosition().x)*100;
     }
 
 
+    public double reward() {
+
+
+        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
+//        return -2+(torso.getChangeInPosition().x);
+//        return -2+(knee1.getAnchor1().x+knee2.getAnchor1().x+foot1.getWorldCenter().distance(0,0)+foot2.getWorldCenter().distance(0,0)+torso.getWorldCenter().y*2);
+//        return (-10+(upperLeg1.getChangeInPosition().x+upperLeg2.getChangeInPosition().x)*100+foot1.getWorldCenter().x+foot2.getWorldCenter().x);
+    }
+
+    public double getRelativeAngle() {
+
+//        return torso.getWorldVector(this).getAngleBetween(new Vector2(1,0));
+
+        return (new Vector2(hip2.getAnchor1(),torso.getWorldCenter()).getAngleBetween(new Vector2(1,0)));
+    }
 }

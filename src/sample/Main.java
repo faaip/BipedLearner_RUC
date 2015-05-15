@@ -3,16 +3,23 @@ package sample;
 import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
 import burlap.behavior.singleagent.Policy;
+import org.dyn4j.collision.manifold.Manifold;
+import org.dyn4j.collision.narrowphase.Penetration;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.dynamics.CollisionListener;
+import org.dyn4j.dynamics.contact.ContactConstraint;
 
 public class
         Main {
     static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.2; // Decay rate
-    public static double learningRate = 0.2; // Learning rate
+    public static double gamma = 0.7; // Decay rate
+    public static double learningRate = 0.6; // Learning rate
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
+    public static CollisionListener cl;
 
     public static void main(String[] args) {
 
@@ -42,14 +49,39 @@ public class
 //        BiPedBody walker = ExampleGraphics2D.walker;
 
 
-        System.out.println(State.actions.size());
+        cl = new CollisionListener() {
+            @Override
+            public boolean collision(Body body, Body body1) {
+                return true;
+            }
+
+            @Override
+            public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Penetration penetration) {
+                return false;
+            }
+
+            @Override
+            public boolean collision(Body body, BodyFixture bodyFixture, Body body1, BodyFixture bodyFixture1, Manifold manifold) {
+                return false;
+            }
+
+            @Override
+            public boolean collision(ContactConstraint contactConstraint) {
+                return false;
+            }
+        };
+
+        world.addListener(cl);
+
+
 
 
 
         while(2>1) {
             BiPedBody walker = Graphics2D.walker;
-            while (!walker.hasFallen()) {
-//            currentState.getAction();
+            double n = 0;
+            double accumulatedReward = 0;
+            while (!walker.hasFallen() && n < 1000000) {
 
                 // Analyse state
                 State currentState = analyser.getState(walker);
@@ -66,15 +98,21 @@ public class
                 State nextState = analyser.getState(walker);
                 // Update Q-Value
                 currentState.updateQ(currentState, action, nextState);
-//            System.out.println(currentState.q);
+                accumulatedReward+=currentState.getReward();
 
+                n++;
             }
 //        world.newWalker();
             world.initializeWorld();
-            System.out.println("Generation: " + generation + " has terminated!");
+            System.out.println("Generation: " + generation + ". Reward: " + accumulatedReward + ". Number of states: " + analyser.states.size() + ". Distance: " + walker.torso.getWorldCenter().distance(0, 0));
             generation++;
+
         }
     }
+
+
+
+
 
 
 }

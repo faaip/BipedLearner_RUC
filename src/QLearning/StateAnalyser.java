@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class StateAnalyser {
 
-    HashSet<State> states = new HashSet<>();
+    public HashSet<State> states = new HashSet<>();
     private Map<State,List<QValue>> qValues;
 
     public State getState(BiPedBody walker) {
@@ -21,11 +21,12 @@ public class StateAnalyser {
         //else
         //add to states and return this new state
 
+
         if (states.contains(walker.getState())) {
-//            System.out.println("Old state");
+//            System.out.println("Old state " + states.size());
             return walker.getState();
         } else {
-//            System.out.println("New state!");
+//            System.out.println("New state number: " + states.size());
             states.add(new State(walker));
             return walker.getState();
         }
