@@ -98,7 +98,7 @@ public class QLearningAgent<S, A extends Action> extends
 	 * @param Ne
 	 *            is fixed parameter for use in the method f(u, n).
 	 * @param Rplus
-	 *            R+ is an optimistic estimate of the best possible reward
+	 *            R+ is an optimistic estimate of the ifbest possible reward
 	 *            obtainable in any state, which is used in the method f(u, n).
 	 */
 	public QLearningAgent(ActionsFunction<S, A> actionsFunction,

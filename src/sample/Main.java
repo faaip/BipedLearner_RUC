@@ -86,6 +86,7 @@ public class
 
                 JointAction action = agent.execute(walker);
                 action.doAction();
+//                System.out.println(action);
                 n++;
 
 //

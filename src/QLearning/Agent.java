@@ -13,20 +13,17 @@ import sample.Main;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by frederikjuutilainen on 15/05/15.
- */
 public class Agent {
     private JointAction noneAction = new JointAction(true);
     private double alpha = 0.0; // Learning rate
     private double gamma = 0.0; // Decay rate
-    private double Rplus = 4.0; // Optimistic reward prediction?
+    private double Rplus = 6.0; // Optimistic reward prediction?
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
 
-    private int Ne = 4;
+    private int Ne = 2;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
@@ -64,6 +61,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
+            System.out.println(Nsa.getCount(sa) + " - " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);
@@ -79,11 +77,54 @@ public class Agent {
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
+            System.out.println("Reward: " + r);
+        }
 
+        if (isTerminal(sPrime)) {
+            s = null;
+            a = null;
+            r = null;
+        } else
+    {
+            s = sPrime;
+            a = argmaxAPrime(sPrime);
+            r = rPrime;
         }
 
 
         return a;
+    }
+
+    private JointAction argmaxAPrime(State sPrime) {
+        JointAction a = null;
+        double max = Double.NEGATIVE_INFINITY;
+        for (JointAction aPrime : Main.actionsFunction.jointActions(sPrime)) {
+            Pair<State, JointAction> sPrimeAPrime = new Pair<State, JointAction>(sPrime, aPrime);
+            double explorationValue = f(Q.get(sPrimeAPrime), Nsa
+                    .getCount(sPrimeAPrime));
+            if (explorationValue > max) {
+                max = explorationValue;
+                a = aPrime;
+            }
+        }
+        return a;
+    }
+
+    private boolean isTerminal(State s) {
+        boolean terminal = false;
+//        if (null != s && Main.actionsFunction.actions.size() == 0) {
+//            // No actions possible in state is considered terminal.
+//            terminal = true;
+//        }
+        return terminal;
+    }
+
+    protected double f(Double u, int n) {
+        // A Simple definition of f(u, n):
+        if (null == u || n < Ne) {
+            return Rplus;
+        }
+        return u;
     }
 
     protected double alpha(FrequencyCounter<Pair<State, JointAction>> Nsa, State s, JointAction a) {

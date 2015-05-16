@@ -12,6 +12,7 @@ import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Vector2;
+import scpsolver.graph.Graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -297,9 +298,10 @@ public class BiPedBody extends GameObject{
 
     public double reward() {
 
+        return -0.5+(Graphics2D.walker.torso.getChangeInPosition().x);
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
-        return -2+(Graphics2D.walker.torso.getChangeInPosition().x);
-//        return -2+(knee1.getAnchor1().x+knee2.getAnchor1().x+foot1.getWorldCenter().distance(0,0)+foot2.getWorldCenter().distance(0,0)+torso.getWorldCenter().y*2);
+//        return -2+(Graphics2D.walker.torso.getChangeInPosition().x);
+//        return -2+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2);
 //        return (-10+(upperLeg1.getChangeInPosition().x+upperLeg2.getChangeInPosition().x)*100+foot1.getWorldCenter().x+foot2.getWorldCenter().x);
     }
 
