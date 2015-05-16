@@ -1,5 +1,6 @@
 package QLearning;
 
+import Rendering_dyn4j.Graphics2D;
 import aima.core.agent.Action;
 import aima.core.learning.reinforcement.PerceptStateReward;
 import aima.core.learning.reinforcement.agent.QLearningAgent;
@@ -17,7 +18,7 @@ public class Agent {
     private JointAction noneAction = new JointAction(true);
     private double alpha = 0.0; // Learning rate
     private double gamma = 0.0; // Decay rate
-    private double Rplus = 6.0; // Optimistic reward prediction?
+    private double Rplus = 100.0; // Optimistic reward prediction?
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -32,21 +33,22 @@ public class Agent {
         this.alpha = alpha;
         this.gamma = gamma;
         this.s = Main.initState;
-        this.walker = walker;
+        this.walker = Graphics2D.walker;
     }
 
     public JointAction execute(){
 
         // Puts current state if state is null
-        if(s == null){this.s = walker.getState();}
+        if(s == null){this.s = this.walker.getState();}
         if(a == null){this.a = Main.initAction;}
 
+
         // TO-DO - why is this sPrime?!
-        State sPrime = walker.getState();
-        double rPrime = walker.reward();
+        State sPrime = this.walker.getState();
+        double rPrime = this.walker.reward();
 
         // if terminal
-        if(walker.hasFallen())
+        if(this.walker.hasFallen())
         {
             Q.put(new Pair<>(sPrime, noneAction), rPrime); // What is a none action?!
         }
@@ -67,7 +69,7 @@ public class Agent {
             }
 
             if(r == null)
-            {r = walker.reward();
+            {r = this.walker.reward();
                 System.out.println("Reward: " + r);}
 
 
@@ -88,6 +90,7 @@ public class Agent {
             r = rPrime;
         }
 
+        walker.getState().doRandomAction();
 
         return a;
     }

@@ -300,7 +300,7 @@ public class BiPedBody extends GameObject{
 
         double base = 250;
 
-        double reward = Graphics2D.walker.torso.getWorldCenter().x*50;
+        double reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle())+Math.toDegrees(Graphics2D.walker.knee1.getJointAngle());
 
 //        System.out.println("Reward was: " + reward);
         return reward;

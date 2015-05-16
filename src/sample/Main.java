@@ -80,19 +80,25 @@ public class
         initState = Graphics2D.walker.getState();
 
         while (2 > 1) {
-
+            world.initializeWorld();
+            boolean hasFallen = Graphics2D.walker.hasFallen();
 
             double n = 0;
             double accumulatedReward = 0;
-//            while (!Graphics2D.walker.hasFallen() && n < 1000000) {
+            while (!(hasFallen) && n < 1000000) {
+//                System.out.println("Has fallen " + hasFallen);
 
                 JointAction action = agent.execute();
                 action.doAction();
                 n++;
-//            }
-//            world.initializeWorld();
+            if(hasFallen) {
+                System.out.println("HAS FAALLLLLEEEN!");
+            }
+                hasFallen = Graphics2D.walker.hasFallen();
 
-//            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
+            }
+
+            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
 
             if (accumulatedReward > bestReward) {
                 bestReward = accumulatedReward;

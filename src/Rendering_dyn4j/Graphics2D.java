@@ -62,11 +62,8 @@ import sample.*;
  */
 public class Graphics2D extends JFrame {
 
-    public static ArrayList<BiPedBody> bodyList = new ArrayList<>();
-    public static Balancer balancer;
     public static BiPedBody walker;
     public static GameObject floor;
-    public static CollisionListener cl;
 
     /**
      * The serial version id
@@ -197,9 +194,6 @@ public class Graphics2D extends JFrame {
         this.world.addBody(wall2);
 
         walker = new BiPedBody(this.world);
-
-
-
     }
 
     public void addListener(CollisionListener cl)
