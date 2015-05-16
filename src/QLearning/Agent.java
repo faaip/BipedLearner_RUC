@@ -36,17 +36,12 @@ public class Agent {
     public JointAction execute(BiPedBody walker){
 
         // Puts current state if state is null
-        if(s == null){this.s = walker.getState();
-            System.out.println(s);}
-        if(a == null){this.a = s.getRandomAction();}
-
-
+        if(s == null){this.s = walker.getState();}
+        if(a == null){this.a = Main.initAction;}
 
         // TO-DO - why is this sPrime?!
         State sPrime = walker.getState();
         double rPrime = walker.reward();
-
-
 
         // if terminal
         if(walker.hasFallen())
@@ -61,7 +56,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-            System.out.println(Nsa.getCount(sa) + " - " + Q.get(sa));
+//            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);
@@ -77,7 +72,7 @@ public class Agent {
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
-            System.out.println("Reward: " + r);
+//            System.out.println("Reward: " + r);
         }
 
         if (isTerminal(sPrime)) {
