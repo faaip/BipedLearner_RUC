@@ -298,10 +298,13 @@ public class BiPedBody extends GameObject{
 
     public double reward() {
 
+        double base = 250;
 
-//        System.out.println(-0.5+(Graphics2D.walker.foot2.getWorldCenter().y));
+        double reward = Graphics2D.walker.torso.getWorldCenter().x*50;
+
+//        System.out.println("Reward was: " + reward);
+        return reward;
 //        return -0.5+(Graphics2D.walker.foot1.getWorldCenter().y);
-        return -0.5+(Graphics2D.walker.torso.getChangeInPosition().x);
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
 //        return -2+(Graphics2D.walker.torso.getChangeInPosition().x);
 //        return -2+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2);

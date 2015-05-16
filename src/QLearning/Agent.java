@@ -22,18 +22,20 @@ public class Agent {
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
+    private BiPedBody walker;
 
     private int Ne = 2;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
-    public Agent(double alpha, double gamma) {
+    public Agent(double alpha, double gamma, BiPedBody walker) {
         this.alpha = alpha;
         this.gamma = gamma;
         this.s = Main.initState;
+        this.walker = walker;
     }
 
-    public JointAction execute(BiPedBody walker){
+    public JointAction execute(){
 
         // Puts current state if state is null
         if(s == null){this.s = walker.getState();}

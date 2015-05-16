@@ -34,8 +34,7 @@ public class JointAction implements Action {
         if (this.motorOn) {
             Graphics2D.walker.setJoint(this.joint, this.a);
         } else {
-            Graphics2D.walker.relaxJoint(this.joint
-            );
+            Graphics2D.walker.relaxJoint(this.joint);
         }
     }
 

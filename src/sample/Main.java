@@ -23,8 +23,8 @@ public class
         Main {
     public static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.9; // Decay rate
-    public static double learningRate = 0.2; // Learning rate
+    public static double gamma = 0.2; // Decay rate
+    public static double learningRate = 0.5; // Learning rate
     private static int ne = 4;
     public static int generation = 1;
     public static GUI gui;
@@ -62,7 +62,7 @@ public class
         // move on
 
         analyser = new StateAnalyser();
-        BiPedBody walker = Graphics2D.walker;
+
 
         //Add actions
         State.fillActions();
@@ -75,31 +75,30 @@ public class
         initAction = Graphics2D.walker.getState().getRandomAction();
         initAction.doAction();
 
-        Agent agent = new Agent(learningRate, gamma);
+        Agent agent = new Agent(learningRate, gamma,Graphics2D.walker);
 
-        initState = walker.getState();
+        initState = Graphics2D.walker.getState();
 
         while (2 > 1) {
 
 
             double n = 0;
             double accumulatedReward = 0;
-            while (!Graphics2D.walker.hasFallen() && n < 1000000) {
+//            while (!Graphics2D.walker.hasFallen() && n < 1000000) {
 
-                JointAction action = agent.execute(Graphics2D.walker);
+                JointAction action = agent.execute();
                 action.doAction();
-//                System.out.println(action);
                 n++;
-            }
-            world.initializeWorld();
+//            }
+//            world.initializeWorld();
 
-            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
+//            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
 
             if (accumulatedReward > bestReward) {
                 bestReward = accumulatedReward;
             }
-            if (walker.torso.getWorldCenter().distance(0, 0) > bestDistance) {
-                bestDistance = walker.torso.getWorldCenter().distance(0, 0);
+            if (Graphics2D.walker.torso.getWorldCenter().distance(0, 0) > bestDistance) {
+                bestDistance = Graphics2D.walker.torso.getWorldCenter().distance(0, 0);
                 bestGeneration = generation;
             }
             generation++;

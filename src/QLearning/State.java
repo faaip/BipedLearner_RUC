@@ -186,10 +186,6 @@ public class State {
 //        actions.get((int) (Math.random()*actions.size())).doAction();
     }
 
-    public double getReward() {
-
-        return -0.1 + (Graphics2D.walker.legsChangeSinceLastFrame());
-    }
 
 
     public void printQs (){
