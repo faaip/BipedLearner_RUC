@@ -75,6 +75,10 @@ public class GUI {
 //            System.out.println(simulationSpeed + " x Speed");
         });
 
+        reset.addActionListener(e -> {
+            Graphics2D.walker.delete();
+        });
+
 //        controls.add(skip10);
 //        controls.add(skip1);
         controls.add(reset);

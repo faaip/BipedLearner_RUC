@@ -3,29 +3,17 @@ package sample;
 import QLearning.*;
 import QLearning.ActionsFunction;
 import Rendering_dyn4j.Graphics2D;
-import aima.core.agent.Action;
-import aima.core.learning.reinforcement.PerceptStateReward;
-import aima.core.learning.reinforcement.agent.QLearningAgent;
-import aima.core.search.framework.*;
 import burlap.behavior.singleagent.Policy;
 
-import org.dyn4j.collision.manifold.Manifold;
-import org.dyn4j.collision.narrowphase.Penetration;
-import org.dyn4j.dynamics.Body;
-import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.CollisionListener;
-import org.dyn4j.dynamics.contact.ContactConstraint;
-import org.dyn4j.dynamics.joint.Joint;
-
-import java.util.Set;
 
 public class
         Main {
     public static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.2; // Decay rate
-    public static double learningRate = 0.5; // Learning rate
-    private static int ne = 4;
+    public static double gamma = 0.5; // Decay rate
+    public static double learningRate = 0.2; // Learning rate
+    private static int ne = 6;
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
@@ -73,30 +61,43 @@ public class
 
 
         initAction = Graphics2D.walker.getState().getRandomAction();
-        initAction.doAction();
+//        initAction.doAction();
 
-        Agent agent = new Agent(learningRate, gamma,Graphics2D.walker);
+        Agent agent = new Agent(learningRate, gamma);
 
         initState = Graphics2D.walker.getState();
 
+
         while (2 > 1) {
-            world.initializeWorld();
+
             boolean hasFallen = Graphics2D.walker.hasFallen();
 
             double n = 0;
             double accumulatedReward = 0;
-            while (!(hasFallen) && n < 1000000) {
+            while (!Graphics2D.walker.hasFallen() || Graphics2D.walker.isInSight()) {
 //                System.out.println("Has fallen " + hasFallen);
 
                 JointAction action = agent.execute();
                 action.doAction();
-                n++;
-            if(hasFallen) {
-                System.out.println("HAS FAALLLLLEEEN!");
-            }
-                hasFallen = Graphics2D.walker.hasFallen();
+//                Graphics2D.walker.getState().doRandomAction();
 
+                n++;
+
+                hasFallen = Graphics2D.walker.hasFallen();
             }
+
+//            Graphics2D.world.removeBody(Graphics2D.walker);
+            Graphics2D.walker.delete();
+
+//            world.initializeWorld();
+
+
+//           World world = Graphics2D.walker.getWorld();
+//            world.initializeWorld();
+//            Graphics2D.walker.
+//            world.resetWalker();
+
+//            agent.setWalker();
 
             System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
 

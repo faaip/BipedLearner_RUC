@@ -113,7 +113,7 @@ public class State {
     @Override
     public boolean equals(Object o) {
         State s = (State) o;
-        int round = 25;
+        int round = 5;
 
         if(Math.round(Math.toDegrees(this.relativeAngle)/round) != Math.round(Math.toDegrees(s.relativeAngle)/round))
         {return false;}
@@ -166,24 +166,12 @@ public class State {
         return action;
     }
 
-    public void updateQ(State oldState, JointAction action, State nextState) {
-        double oldQ = oldState.q.get(action);
-        double gamma = Main.gamma;
-        double learningRate = Main.learningRate;
-        double reward = -0.1 + (Graphics2D.walker.reward());
 
-
-        double newQ = oldQ + learningRate * (reward+gamma*nextState.q.get(nextState.getBestAction())-oldQ);
-
-        oldState.q.put(action, newQ);
-
-
-
-
-    }
 
     public void doRandomAction() {
-//        actions.get((int) (Math.random()*actions.size())).doAction();
+        JointAction action = actions.get((int) (Math.random() * actions.size()));
+
+        action.doAction();
     }
 
 
@@ -208,6 +196,6 @@ public class State {
 
     public JointAction getRandomAction() {
         System.out.println("Random action taken");
-        return actions.get((int) (Math.random()*actions.size()));
+        return Graphics2D.walker.getState().actions.get((int) (Math.random()*actions.size()));
     }
 }

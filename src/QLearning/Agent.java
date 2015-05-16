@@ -10,6 +10,7 @@ import aima.core.util.datastructure.Pair;
 import org.dyn4j.dynamics.joint.Joint;
 import sample.BiPedBody;
 import sample.Main;
+import scpsolver.graph.Graph;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,42 +19,39 @@ public class Agent {
     private JointAction noneAction = new JointAction(true);
     private double alpha = 0.0; // Learning rate
     private double gamma = 0.0; // Decay rate
-    private double Rplus = 100.0; // Optimistic reward prediction?
+    private double Rplus = 50.0; // Optimistic reward prediction?
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
-    private BiPedBody walker;
+    private BiPedBody walker = Graphics2D.walker;
 
     private int Ne = 2;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
-    public Agent(double alpha, double gamma, BiPedBody walker) {
+    public Agent(double alpha, double gamma) {
         this.alpha = alpha;
         this.gamma = gamma;
         this.s = Main.initState;
-        this.walker = Graphics2D.walker;
     }
 
     public JointAction execute(){
 
         // Puts current state if state is null
-        if(s == null){this.s = this.walker.getState();}
+        if(s == null){this.s = Graphics2D.walker.getState();}
         if(a == null){this.a = Main.initAction;}
 
 
         // TO-DO - why is this sPrime?!
-        State sPrime = this.walker.getState();
-        double rPrime = this.walker.reward();
+        State sPrime = Graphics2D.walker.getState();
+        double rPrime = Graphics2D.walker.reward();
 
         // if terminal
-        if(this.walker.hasFallen())
+        if(Graphics2D.walker.hasFallen())
         {
             Q.put(new Pair<>(sPrime, noneAction), rPrime); // What is a none action?!
         }
-
-
 
         // If State s not null
         if(s != null) {
@@ -69,7 +67,7 @@ public class Agent {
             }
 
             if(r == null)
-            {r = this.walker.reward();
+            {r = Graphics2D.walker.reward();
                 System.out.println("Reward: " + r);}
 
 
@@ -90,9 +88,17 @@ public class Agent {
             r = rPrime;
         }
 
-        walker.getState().doRandomAction();
-
         return a;
+    }
+
+    public void setWalker()
+    {
+        this.walker = Graphics2D.walker;
+    }
+
+    public BiPedBody getWalker()
+    {
+        return Graphics2D.walker;
     }
 
     private JointAction argmaxAPrime(State sPrime) {
@@ -137,7 +143,7 @@ public class Agent {
         double max = Double.NEGATIVE_INFINITY;
         if (Main.actionsFunction.jointActions(sPrime).size() == 0) {
             // a terminal state
-            // TO-DO WHAT IS TERMINAL
+            // TODO: WHAT IS TERMINAL
             max = Q.get(new Pair<State, JointAction>(sPrime, noneAction));
         } else {
             for (JointAction aPrime : Main.actionsFunction.jointActions((sPrime))) {

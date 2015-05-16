@@ -8,10 +8,7 @@ import org.dyn4j.collision.CategoryFilter;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
-import org.dyn4j.geometry.Convex;
-import org.dyn4j.geometry.Geometry;
-import org.dyn4j.geometry.Mass;
-import org.dyn4j.geometry.Vector2;
+import org.dyn4j.geometry.*;
 import scpsolver.graph.Graph;
 
 import java.util.ArrayList;
@@ -80,14 +77,16 @@ public class BiPedBody extends GameObject{
 
 
     // Constructor
-    public BiPedBody(World world) {
-        this.world = world;
+    public BiPedBody() {
+        this.world = Graphics2D.world;
+
         // Torso
         torso = new GameObject();
         {// Fixture4
             Convex c = Geometry.createRectangle(0.6, 1.5);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
+            torso.translate(0,0);
             torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
@@ -245,6 +244,7 @@ public class BiPedBody extends GameObject{
         joints.add(knee2);
         joints.add(ankle1);
         joints.add(ankle2);
+
     }
 
     public void setJoint(RevoluteJoint joint, int x) {
@@ -298,11 +298,14 @@ public class BiPedBody extends GameObject{
 
     public double reward() {
 
-        double base = 250;
+        if(Graphics2D.walker.hasFallen()){return -150;}
 
-        double reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle())+Math.toDegrees(Graphics2D.walker.knee1.getJointAngle());
+        double base = 200;
 
-//        System.out.println("Reward was: " + reward);
+//        double reward = base+((Graphics2D.walker.foot2.getWorldCenter().y * 100));
+        double reward = 1+((Graphics2D.walker.foot1.getChangeInPosition().x)+(Graphics2D.walker.foot2.getChangeInPosition().x))*500;
+
+        System.out.println("Reward was: " + reward);
         return reward;
 //        return -0.5+(Graphics2D.walker.foot1.getWorldCenter().y);
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
@@ -322,4 +325,44 @@ public class BiPedBody extends GameObject{
     public void printLocation() {
         System.out.println(Graphics2D.walker.torso.getWorldCenter().y);
     }
+
+    public void delete() {
+//        for(RevoluteJoint joint : joints)
+//        {
+//            Graphics2D.world.removeJoint(joint);
+//        }
+//
+//        Graphics2D.world.removeBody(torso);
+//        Graphics2D.world.removeBody(upperLeg1);
+//        Graphics2D.world.removeBody(upperLeg2);
+//        Graphics2D.world.removeBody(lowerLeg1);
+//        Graphics2D.world.removeBody(lowerLeg2);
+//        Graphics2D.world.removeBody(foot1);
+//        Graphics2D.world.removeBody(foot2);
+
+
+        torso.setTransform(new Transform());
+        upperLeg1.setTransform(Transform.IDENTITY);
+        upperLeg2.setTransform(Transform.IDENTITY);
+        lowerLeg1.setTransform(Transform.IDENTITY);
+        lowerLeg2.setTransform(Transform.IDENTITY);
+        foot1.setTransform(Transform.IDENTITY);
+        foot2.setTransform(Transform.IDENTITY);
+
+        torso.translate(0, 0);
+        upperLeg1.translate(0, -1.0);
+        upperLeg2.translate(0, -1.0);
+        lowerLeg1.translate(0, -1.8);
+        lowerLeg2.translate(0, -1.8);
+        foot1.translate(0.15, -2.3);
+        foot2.translate(0.15, -2.3);
+
+        Graphics2D.walker.clearAccumulatedForce();
+        Graphics2D.walker.clearAccumulatedTorque();
+
+
+
+    }
+
+    public boolean isInSight() {return Graphics2D.walker.getWorldCenter().x > 6 || Graphics2D.walker.getWorldCenter().x < -6;}
 }

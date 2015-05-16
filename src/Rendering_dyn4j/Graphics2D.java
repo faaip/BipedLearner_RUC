@@ -96,7 +96,7 @@ public class Graphics2D extends JFrame {
     /**
      * The dynamics engine
      */
-     protected World world;
+     public static World world;
 
     /**
      * Wether the example is stopped or not
@@ -172,28 +172,17 @@ public class Graphics2D extends JFrame {
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
-        // Create walls
-        Rectangle wall1Rect = new Rectangle(1.0, 10.0);
-        GameObject wall1 = new GameObject();
-        BodyFixture wall1Fixture = new BodyFixture(Geometry.createRectangle(1.0, 10.0));
-        wall1.addFixture(wall1Fixture);
-        wall1.setMass(Mass.Type.INFINITE);
-
-        Rectangle wall2Rect = new Rectangle(1.0, 10.0);
-        GameObject wall2 = new GameObject();
-        BodyFixture wall2Fixture = new BodyFixture(Geometry.createRectangle(1.0, 10.0));
-        wall2.addFixture(wall2Fixture);
-        wall2.setMass(Mass.Type.INFINITE);
-
         // move the floor down a bit
         floor.translate(0.0, -2.95);
         this.world.addBody(floor);
-        wall1.translate(5,2);
-        this.world.addBody(wall1);
-        wall2.translate(-5,2);
-        this.world.addBody(wall2);
 
-        walker = new BiPedBody(this.world);
+        walker = new BiPedBody();
+    }
+
+    public void resetWalker()
+    {
+        walker = new BiPedBody();
+
     }
 
     public void addListener(CollisionListener cl)
