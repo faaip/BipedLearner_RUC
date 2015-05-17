@@ -19,14 +19,14 @@ public class Agent {
     private JointAction noneAction = new JointAction(true);
     private double alpha = 0.0; // Learning rate
     private double gamma = 0.0; // Decay rate
-    private double Rplus = 50.0; // Optimistic reward prediction?
+    private double Rplus = 15.0; // Optimistic reward prediction? //TODO Figure this out
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
     private BiPedBody walker = Graphics2D.walker;
 
-    private int Ne = 2;
+    private int Ne = 25; //TODO figures this out
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
@@ -70,9 +70,14 @@ public class Agent {
             {r = Graphics2D.walker.reward();
                 System.out.println("Reward: " + r);}
 
-
+            //TODO Check this, is reward inserted correctly?!
+            r = Graphics2D.walker.reward();
+            if(Graphics2D.walker.hasFallen()){r = -100.0;}
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
+
+//            Q.put(sa, Qsa + alpha(Nsa, s, a)
+//                    * (r + gamma * maxAPrime(sPrime) - Qsa));
 
 //            System.out.println("Reward: " + r);
         }
@@ -128,8 +133,10 @@ public class Agent {
     protected double f(Double u, int n) {
         // A Simple definition of f(u, n):
         if (null == u || n < Ne) {
+//            System.out.println("R PLUS");
             return Rplus;
         }
+//        System.out.println(" U U U U U ");
         return u;
     }
 

@@ -119,12 +119,12 @@ public class State {
         {return false;}
 
 
-        if(s.foot1OnGround != this.foot1OnGround){return false;}
-        if(s.foot2OnGround != this.foot2OnGround){return false;}
-        if(s.torsoLeaningForward != this.torsoLeaningForward){return false;}
-        if(s.knee1Forward != this.knee1Forward){return false;}
-        if(s.upperLeg2InFrontOfTorso != this.upperLeg2InFrontOfTorso){return false;}
-        if(s.upperLeg1InFrontOfTorso != this.upperLeg1InFrontOfTorso){return false;}
+//        if(s.foot1OnGround != this.foot1OnGround){return false;}
+//        if(s.foot2OnGround != this.foot2OnGround){return false;}
+//        if(s.torsoLeaningForward != this.torsoLeaningForward){return false;}
+//        if(s.knee1Forward != this.knee1Forward){return false;}
+//        if(s.upperLeg2InFrontOfTorso != this.upperLeg2InFrontOfTorso){return false;}
+//        if(s.upperLeg1InFrontOfTorso != this.upperLeg1InFrontOfTorso){return false;}
 
         for (int i = 0; i < this.jointAngles.size(); i++) {
             if(Math.round(Math.toDegrees(s.jointAngles.get(i)/round)) != Math.round(Math.toDegrees(s.jointAngles.get(i)/round)))

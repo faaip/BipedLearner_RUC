@@ -19,13 +19,14 @@ public class BiPedBody extends GameObject{
     World world;
 
     // Limbs
-    GameObject torso;
+   public GameObject torso;
     GameObject upperLeg1;
     GameObject upperLeg2;
     GameObject lowerLeg1;
     GameObject lowerLeg2;
     GameObject foot1;
     GameObject foot2;
+    ArrayList<GameObject> limbs = new ArrayList<>();
 
     // Joints
     public static ArrayList<RevoluteJoint> joints = new ArrayList<>();
@@ -38,9 +39,9 @@ public class BiPedBody extends GameObject{
 
     // TO-DO : MOVE THIS LIST OF ACTIONS TO ANOTHER CLASS
 
-    Double maxHipTorque = 150.0;
-    Double maxKneeTorque = 150.0;
-    Double maxAnkleTorque = 70.0;
+    Double maxHipTorque = 250.0;
+    Double maxKneeTorque = 250.0;
+    Double maxAnkleTorque = 150.0;
     Double jointSpeed = 100.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
@@ -83,10 +84,10 @@ public class BiPedBody extends GameObject{
         // Torso
         torso = new GameObject();
         {// Fixture4
-            Convex c = Geometry.createRectangle(0.6, 1.5);
+            Convex c = Geometry.createRectangle(0.6, 1.0);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
-            torso.translate(0,0);
+            torso.translate(0, 0);
             torso.setMass(Mass.Type.NORMAL);
         }
         world.addBody(torso);
@@ -245,6 +246,15 @@ public class BiPedBody extends GameObject{
         joints.add(ankle1);
         joints.add(ankle2);
 
+        // Add limbs to arraylist
+        limbs.add(torso);
+        limbs.add(upperLeg1);
+        limbs.add(upperLeg2);
+        limbs.add(lowerLeg1);
+        limbs.add(lowerLeg2);
+        limbs.add(foot1);
+        limbs.add(foot2);
+
     }
 
     public void setJoint(RevoluteJoint joint, int x) {
@@ -287,7 +297,7 @@ public class BiPedBody extends GameObject{
     }
 
     public boolean hasFallen() {
-        return (torso.getWorldCenter().y < - 1.2|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
+        return (torso.getWorldCenter().y < - 1.8|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
     }
 
     public double legsChangeSinceLastFrame()
@@ -298,16 +308,24 @@ public class BiPedBody extends GameObject{
 
     public double reward() {
 
-        if(Graphics2D.walker.hasFallen()){return -150;}
+        if(Graphics2D.walker.hasFallen()){
+            System.out.println("BAD REWARD!");return -150;}
 
         double base = 200;
 
-//        double reward = base+((Graphics2D.walker.foot2.getWorldCenter().y * 100));
-        double reward = 1+((Graphics2D.walker.foot1.getChangeInPosition().x)+(Graphics2D.walker.foot2.getChangeInPosition().x))*500;
+//        double torsoAngle = Math.abs(Math.toDegrees(Graphics2D.walker.getRelativeAngle()))-90;
+//        System.out.println(torsoAngle);
 
-        System.out.println("Reward was: " + reward);
+//        double reward = (Graphics2D.walker.foot1.getWorldCenter().y)*1000;
+
+        double reward = -0.05+((((Graphics2D.walker.foot2.getChangeInPosition().x+Graphics2D.walker.foot1.getChangeInPosition().x )+Graphics2D.walker.torso.getChangeInPosition().y)* 1500));
+//            double reward = (torso.getWorldCenter().x)*10;
+//        double reward =Math.toDegrees(Graphics2D.walker.knee1.getJointAngle());
+//        double reward = -2+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;
+
+//        System.out.println("Reward was: " + reward);
+        Main.accumulatedReward+=reward;
         return reward;
-//        return -0.5+(Graphics2D.walker.foot1.getWorldCenter().y);
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
 //        return -2+(Graphics2D.walker.torso.getChangeInPosition().x);
 //        return -2+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2);
@@ -357,12 +375,43 @@ public class BiPedBody extends GameObject{
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
 
-        Graphics2D.walker.clearAccumulatedForce();
-        Graphics2D.walker.clearAccumulatedTorque();
+//        Graphics2D.walker.clearAccumulatedForce();
+//        Graphics2D.walker.clearForce();
+//        Graphics2D.walker.clearAccumulatedTorque();
+//        Graphics2D.walker.clearTorque();
+//        Graphics2D.walker.setActive(true);
+//        Graphics2D.walker.setAsleep(false);
+//        Graphics2D.walker.torso.clearAccumulatedForce();
+//        Graphics2D.walker.upperLeg1.clearAccumulatedForce();
+//        Graphics2D.walker.upperLeg2.clearAccumulatedForce();
+//        Graphics2D.walker.lowerLeg1.clearAccumulatedForce();
+//        Graphics2D.walker.lowerLeg2.clearAccumulatedForce();
+//        Graphics2D.walker.foot1.clearAccumulatedForce();
+//        Graphics2D.walker.foot2.clearAccumulatedForce();
+//        Graphics2D.walker.setLinearVelocity(0,0);
 
+
+        for(GameObject limb : limbs)
+        {
+            limb.clearForce();
+            limb.clearTorque();
+            limb.clearAccumulatedTorque();
+            limb.clearAccumulatedForce();
+            limb.setAngularVelocity(0.0);
+            limb.setLinearVelocity(0.0,0.0);
+        }
+
+        for(RevoluteJoint joint : joints)
+        {
+        }
 
 
     }
 
-    public boolean isInSight() {return Graphics2D.walker.getWorldCenter().x > 6 || Graphics2D.walker.getWorldCenter().x < -6;}
-}
+    public boolean isInSight() {
+        if(Graphics2D.walker.torso.getWorldCenter().x > -6){
+            return true;
+            }
+        if(Graphics2D.walker.torso.getWorldCenter().x < 6)return true;
+        return false;}
+    }
