@@ -1,4 +1,4 @@
-package sample;
+package Rendering_dyn4j;
 
 import QLearning.JointAction;
 import QLearning.State;
@@ -9,6 +9,7 @@ import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import org.dyn4j.geometry.*;
+import sample.Main;
 import scpsolver.graph.Graph;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class BiPedBody extends GameObject{
     Double maxHipTorque = 250.0;
     Double maxKneeTorque = 250.0;
     Double maxAnkleTorque = 150.0;
-    Double jointSpeed = 100.0;
+    Double jointSpeed = 60.0;
 
     // Categories (for avoiding collision between leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1, 1);
@@ -309,21 +310,24 @@ public class BiPedBody extends GameObject{
     public double reward() {
 
         if(Graphics2D.walker.hasFallen()){
-            System.out.println("BAD REWARD!");return -150;}
+            System.out.println("BAD REWARD!");return -1000;}
 
+        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){return 800;}
+//
         double base = 200;
 
 //        double torsoAngle = Math.abs(Math.toDegrees(Graphics2D.walker.getRelativeAngle()))-90;
 //        System.out.println(torsoAngle);
 
 //        double reward = (Graphics2D.walker.foot1.getWorldCenter().y)*1000;
+//        double reward = Gra
 
-        double reward = -0.05+((((Graphics2D.walker.foot2.getChangeInPosition().x+Graphics2D.walker.foot1.getChangeInPosition().x )+Graphics2D.walker.torso.getChangeInPosition().y)* 1500));
+        double reward = -0.1+((((Graphics2D.walker.lowerLeg2.getChangeInPosition().x+Graphics2D.walker.lowerLeg1.getChangeInPosition().x )+Graphics2D.walker.torso.getChangeInPosition().y)* 500));
 //            double reward = (torso.getWorldCenter().x)*10;
 //        double reward =Math.toDegrees(Graphics2D.walker.knee1.getJointAngle());
-//        double reward = -2+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;
+//        double reward = -48+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;
 
-//        System.out.println("Reward was: " + reward);
+        System.out.println("Reward was: " + reward);
         Main.accumulatedReward+=reward;
         return reward;
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
@@ -333,6 +337,8 @@ public class BiPedBody extends GameObject{
     }
 
     public double getRelativeAngle() {
+
+//        System.out.println(Math.toDegrees(new Vector2(hip2.getAnchor1(),torso.getWorldCenter()).getAngleBetween(new Vector2(1,0))));
 
 //        return torso.getWorldVector(this).getAngleBetween(new Vector2(1,0));
 

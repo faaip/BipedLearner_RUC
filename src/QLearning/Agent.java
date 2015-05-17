@@ -1,16 +1,10 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
-import aima.core.agent.Action;
-import aima.core.learning.reinforcement.PerceptStateReward;
-import aima.core.learning.reinforcement.agent.QLearningAgent;
-import aima.core.probability.mdp.ActionsFunction;
 import aima.core.util.FrequencyCounter;
 import aima.core.util.datastructure.Pair;
-import org.dyn4j.dynamics.joint.Joint;
-import sample.BiPedBody;
+import Rendering_dyn4j.BiPedBody;
 import sample.Main;
-import scpsolver.graph.Graph;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,15 +12,15 @@ import java.util.Map;
 public class Agent {
     private JointAction noneAction = new JointAction(true);
     private double alpha = 0.0; // Learning rate
-    private double gamma = 0.0; // Decay rate
-    private double Rplus = 15.0; // Optimistic reward prediction? //TODO Figure this out
+    private double gamma = 0.0025; // Decay rate
+    private double Rplus = 4.5; // Optimistic reward prediction? //TODO Figure this out
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
     private BiPedBody walker = Graphics2D.walker;
 
-    private int Ne = 25; //TODO figures this out
+    private int Ne = 5; //TODO figures this out
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
@@ -82,10 +76,11 @@ public class Agent {
 //            System.out.println("Reward: " + r);
         }
 
+        // TODO setTerminalState
         if (isTerminal(sPrime)) {
-            s = null;
-            a = null;
-            r = null;
+//            s = null;
+//            a = null;
+//            r = null;
         } else
     {
             s = sPrime;
@@ -124,9 +119,12 @@ public class Agent {
     private boolean isTerminal(State s) {
         boolean terminal = false;
 //        if (null != s && Main.actionsFunction.actions.size() == 0) {
-//            // No actions possible in state is considered terminal.
+            // No actions possible in state is considered terminal.
 //            terminal = true;
 //        }
+
+        if(Graphics2D.walker.hasFallen()){terminal = true;}
+
         return terminal;
     }
 

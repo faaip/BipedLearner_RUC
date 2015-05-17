@@ -31,19 +31,14 @@ import java.awt.Toolkit;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.dyn4j.collision.manifold.Manifold;
-import org.dyn4j.collision.narrowphase.Penetration;
-import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.CollisionListener;
 import org.dyn4j.dynamics.World;
-import org.dyn4j.dynamics.contact.ContactConstraint;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;

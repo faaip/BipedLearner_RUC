@@ -1,14 +1,8 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
-import aima.core.agent.Action;
-import aima.core.search.framework.*;
-import aima.core.search.framework.ActionsFunction;
-import aima.core.util.FrequencyCounter;
-import aima.core.util.datastructure.Pair;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
-import sample.BiPedBody;
-import sample.Main;
+import Rendering_dyn4j.BiPedBody;
 
 import java.util.*;
 

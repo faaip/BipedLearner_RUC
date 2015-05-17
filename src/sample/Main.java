@@ -14,8 +14,8 @@ public class
         Main {
     public static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.005; // Decay rate
-    public static double learningRate = 0.2; // Learning rate
+    public static double gamma = 0.95; // Decay rate
+    public static double learningRate = 0.4; // Learning rate
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
@@ -69,7 +69,7 @@ public class
         Agent agent = new Agent(learningRate, gamma);
 
         initState = Graphics2D.walker.getState();
-        initState.doRandomAction();
+//        initState.doRandomAction();
 
 
         while (2 > 1) {

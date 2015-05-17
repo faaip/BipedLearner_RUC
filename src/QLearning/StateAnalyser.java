@@ -1,12 +1,9 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
-import Rendering_dyn4j.Graphics2DRenderer;
 import aima.core.learning.reinforcement.PerceptStateReward;
 import burlap.behavior.singleagent.QValue;
-import burlap.behavior.statehashing.StateHashTuple;
-import sample.BiPedBody;
-import sample.Main;
+import Rendering_dyn4j.BiPedBody;
 
 import java.util.HashSet;
 import java.util.List;
