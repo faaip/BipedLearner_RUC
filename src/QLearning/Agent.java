@@ -20,7 +20,7 @@ public class Agent {
     private Double r = null;
     private BiPedBody walker = Graphics2D.walker;
 
-    private int Ne = 1; //TODO figures this out
+    private int Ne = 1;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
@@ -45,7 +45,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-//            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
+            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);

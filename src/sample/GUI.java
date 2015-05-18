@@ -7,14 +7,13 @@ import Rendering_dyn4j.ThreadSync;
 
 import java.awt.*;
 
-/**
- * Created by frederikjuutilainen on 05/05/15.
- */
+
+//TODO Comment and clean
 public class GUI {
 
     private static double amount = 1;
     public static JLabel angleLabel = new JLabel();
-    public static int simulationSpeed =1;
+    public static int simulationSpeed =300;
     static JLabel generationNo = new JLabel("Generation # " + 0);
     static JLabel highScore = new JLabel("Highscore: ");
     public static double learningRate = 100;
@@ -44,19 +43,6 @@ public class GUI {
         controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
         controls.setBackground(Color.white);
 
-
-//        skip1.addActionListener(e -> {
-//            synchronized (ThreadSync.lock) {
-//                world.step((int) Math.floor(60 * 1 / world.getStepFrequency()));
-//            }
-//        });
-//        skip10.addActionListener(e -> {
-//            synchronized (ThreadSync.lock) {
-//                world.step((int) Math.floor(60 * 60 / world.getStepFrequency()));
-//            }
-//        });
-
-
         learningRateSlider.addChangeListener(e1 -> {
             synchronized (ThreadSync.lock) {
 //                learningRate = learningRateSlider.getValue();
@@ -68,19 +54,18 @@ public class GUI {
 
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
+
+                // TODO pause simulation while slider is adjusted
                 simulationSpeed = amountSlider.getValue();
                 world.step((int) Math.floor(amountSlider.getValue() / world.getStepFrequency()));
             }
             simSpeed.setText(simulationSpeed + " x Speed");
-//            System.out.println(simulationSpeed + " x Speed");
         });
 
         reset.addActionListener(e -> {
             Graphics2D.walker.resetPosition();
         });
 
-//        controls.add(skip10);
-//        controls.add(skip1);
         controls.add(reset);
         controls.add(amountSlider);
         controls.add(simSpeed);
@@ -96,10 +81,6 @@ public class GUI {
         info.add(generationNo);
         info.add(highScore);
 
-//        angleLabel.setText("Angle is: " + world.balancer.getAngle());
-
-//        info.add(angleLabel);
-
         // Panels are added to splitpane
         JSplitPane split = new JSplitPane();
         split.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -107,11 +88,7 @@ public class GUI {
         split.setRightComponent(controls);
         gui.add(split);
         gui.setVisible(true);
-
     }
-
-
-
     public int getSimulationSpeed() {
         return simulationSpeed;
     }

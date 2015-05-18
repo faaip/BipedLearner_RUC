@@ -5,14 +5,15 @@ import aima.core.learning.reinforcement.PerceptStateReward;
 import burlap.behavior.singleagent.QValue;
 import Rendering_dyn4j.BiPedBody;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 public class StateAnalyser {
+    // TODO description and comments
 
     public HashSet<State> states = new HashSet<>();
-
     public State getState(BiPedBody walker) {
 
         //if states does contain an aproximate state
@@ -22,6 +23,8 @@ public class StateAnalyser {
 
         if (states.contains(walker.getState())) {
 //            System.out.println("Old state " + states.size());
+
+//            return states.
             return walker.getState();
         } else {
 //            System.out.println("New state number: " + states.size());
@@ -34,28 +37,8 @@ public class StateAnalyser {
         System.out.println(states);
     }
 
-    public List<QValue> getQs(){
-
-        return null;
-    }
 
 
-    public PerceptStateReward percept(State currentState)
-    {
-        PerceptStateReward p = new PerceptStateReward() {
-            @Override
-            public Object state() {
-                return currentState;
-            }
-
-            @Override
-            public double reward() {
-                return Graphics2D.walker.reward();
-            }
-        };
-
-        return p;
-    }
 }
 
 
