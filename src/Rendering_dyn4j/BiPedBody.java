@@ -351,7 +351,6 @@ public class BiPedBody {
     }
 
     public void resetPosition() {
-
         torso.setTransform(new Transform());
         upperLeg1.setTransform(Transform.IDENTITY);
         upperLeg2.setTransform(Transform.IDENTITY);
