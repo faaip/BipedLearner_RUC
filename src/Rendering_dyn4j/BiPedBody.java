@@ -359,6 +359,7 @@ public class BiPedBody {
         foot1.setTransform(Transform.IDENTITY);
         foot2.setTransform(Transform.IDENTITY);
 
+        // Set bodyparts to initial positions
         torso.translate(0, 0);
         upperLeg1.translate(0, -1.0);
         upperLeg2.translate(0, -1.0);
@@ -367,6 +368,7 @@ public class BiPedBody {
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
 
+        // Clears force
         for(GameObject limb : limbs)
         {
             limb.clearForce();
