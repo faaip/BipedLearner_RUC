@@ -5,10 +5,7 @@ import QLearning.ActionsFunction;
 import Rendering_dyn4j.Graphics2D;
 import burlap.behavior.singleagent.Policy;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.dyn4j.dynamics.CollisionListener;
-import scpsolver.graph.Graph;
 
 public class
         Main {
@@ -94,7 +91,7 @@ public class
             }
 
 //            Graphics2D.world.removeBody(Graphics2D.walker);
-            Graphics2D.walker.delete();
+            Graphics2D.walker.resetPosition();
 //            System.out.println("Angular velocity: " + Graphics2D.walker.torso.getAngularVelocity());
 
 

@@ -350,20 +350,7 @@ public class BiPedBody {
         System.out.println(Graphics2D.walker.torso.getWorldCenter().y);
     }
 
-    public void delete() {
-//        for(RevoluteJoint joint : joints)
-//        {
-//            Graphics2D.world.removeJoint(joint);
-//        }
-//
-//        Graphics2D.world.removeBody(torso);
-//        Graphics2D.world.removeBody(upperLeg1);
-//        Graphics2D.world.removeBody(upperLeg2);
-//        Graphics2D.world.removeBody(lowerLeg1);
-//        Graphics2D.world.removeBody(lowerLeg2);
-//        Graphics2D.world.removeBody(foot1);
-//        Graphics2D.world.removeBody(foot2);
-
+    public void resetPosition() {
 
         torso.setTransform(new Transform());
         upperLeg1.setTransform(Transform.IDENTITY);
@@ -380,22 +367,6 @@ public class BiPedBody {
         lowerLeg2.translate(0, -1.8);
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
-
-//        Graphics2D.walker.clearAccumulatedForce();
-//        Graphics2D.walker.clearForce();
-//        Graphics2D.walker.clearAccumulatedTorque();
-//        Graphics2D.walker.clearTorque();
-//        Graphics2D.walker.setActive(true);
-//        Graphics2D.walker.setAsleep(false);
-//        Graphics2D.walker.torso.clearAccumulatedForce();
-//        Graphics2D.walker.upperLeg1.clearAccumulatedForce();
-//        Graphics2D.walker.upperLeg2.clearAccumulatedForce();
-//        Graphics2D.walker.lowerLeg1.clearAccumulatedForce();
-//        Graphics2D.walker.lowerLeg2.clearAccumulatedForce();
-//        Graphics2D.walker.foot1.clearAccumulatedForce();
-//        Graphics2D.walker.foot2.clearAccumulatedForce();
-//        Graphics2D.walker.setLinearVelocity(0,0);
-
 
         for(GameObject limb : limbs)
         {

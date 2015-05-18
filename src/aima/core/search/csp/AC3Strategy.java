@@ -24,7 +24,7 @@ import aima.core.util.datastructure.FIFOQueue;
  *    revised = false
  *    for each x in Di do
  *       if no value y in Dj allows (x ,y) to satisfy the constraint between Xi and Xj then
- *          delete x from Di
+ *          resetPosition x from Di
  *          revised = true
  *    return revised
  * </code>

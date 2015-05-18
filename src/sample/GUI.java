@@ -76,7 +76,7 @@ public class GUI {
         });
 
         reset.addActionListener(e -> {
-            Graphics2D.walker.delete();
+            Graphics2D.walker.resetPosition();
         });
 
 //        controls.add(skip10);
