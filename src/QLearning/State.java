@@ -30,9 +30,6 @@ public class State {
 
     public static ArrayList<JointAction> actions = new ArrayList<>();
 
-    public Map<JointAction, Double> q = new HashMap<JointAction, Double>();
-
-
     // Constructor in case of new state
     public State(BiPedBody walker) {
         this.torsoLeaningForward = walker.isTorsoLeaningForward();
@@ -48,11 +45,6 @@ public class State {
         {
         jointAngles.add(j.getJointAngle());
         }
-
-
-        // Fill q with zero's inorder to avoid null point
-        fillZero();
-
     }
 
     public static void fillActions() {
@@ -71,16 +63,13 @@ public class State {
         }
     }
 
-    private void fillZero() {
-        for (JointAction a : actions) {
-//            q.put(a, Double.valueOf(Math.random()));
-            q.put(a,0.0);
-        }
-    }
-
     @Override
     public int hashCode() {
-        return toString().hashCode();
+//        System.out.println(toString());
+
+        // TODO new hashCode
+
+        return 0;
     }
 
     @Override
@@ -107,25 +96,19 @@ public class State {
     @Override
     public boolean equals(Object o) {
         State s = (State) o;
-        int round = 5;
+        int round = 20;
 
+        //Checks degree compared to world
         if(Math.round(Math.toDegrees(this.relativeAngle)/round) != Math.round(Math.toDegrees(s.relativeAngle)/round))
         {return false;}
 
-
-//        if(s.foot1OnGround != this.foot1OnGround){return false;}
-//        if(s.foot2OnGround != this.foot2OnGround){return false;}
-//        if(s.torsoLeaningForward != this.torsoLeaningForward){return false;}
-//        if(s.knee1Forward != this.knee1Forward){return false;}
-//        if(s.upperLeg2InFrontOfTorso != this.upperLeg2InFrontOfTorso){return false;}
-//        if(s.upperLeg1InFrontOfTorso != this.upperLeg1InFrontOfTorso){return false;}
-
+        // Checks degrees of each joints
         for (int i = 0; i < this.jointAngles.size(); i++) {
-            if(Math.round(Math.toDegrees(s.jointAngles.get(i)/round)) != Math.round(Math.toDegrees(s.jointAngles.get(i)/round)))
-            {return false;}
+            if(Math.round(Math.toDegrees(s.jointAngles.get(i)/round)) != Math.round(Math.toDegrees(this.jointAngles.get(i)/round)))
+            {
+                return false;
+            }
         }
-
-
 
 
         return true;
@@ -138,55 +121,11 @@ public class State {
         return b ? 1 : 0;
     }
 
-    public JointAction getBestAction() {
-        double max = -100;
-        JointAction action = null;
-
-
-        for (JointAction a : actions) {
-            if (q.get(a) > max) {
-                max = q.get(a);
-                action = a;
-
-            }
-        }
-
-        if(max == 0)
-        {
-
-//            return actions.get((int) ((Math.random()*actions.size())));
-        }
-
-        return action;
-    }
-
-
-
     public void doRandomAction() {
         JointAction action = actions.get((int) (Math.random() * actions.size()));
 
         action.doAction();
     }
-
-
-
-    public void printQs (){
-
-        for (JointAction a : actions) {
-
-            if(!(q.get(a)== 0.0)){
-
-              //  System.out.println(q.size());
-
-                //System.out.println("q value not zero");
-
-
-            }
-
-        }
-
-    }
-
 
     public JointAction getRandomAction() {
         System.out.println("Random action taken");

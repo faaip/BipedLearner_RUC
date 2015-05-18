@@ -136,7 +136,7 @@ public class BiPedBody {
         // Hip
         hip1 = new RevoluteJoint(torso, upperLeg1, new Vector2(0.0, -.6));
         hip1.setLimitEnabled(true);
-        hip1.setLimits(Math.toRadians(-50.0), Math.toRadians(60.0));
+        hip1.setLimits(Math.toRadians(-50.0), Math.toRadians(5.0));
         hip1.setReferenceAngle(Math.toRadians(0.0));
         hip1.setMotorEnabled(true);
 //        hip1.setMotorSpeed(Math.toRadians(0.0));
@@ -209,7 +209,7 @@ public class BiPedBody {
         // Hip
         hip2 = new RevoluteJoint(torso, upperLeg2, new Vector2(0.0, -.6));
         hip2.setLimitEnabled(true);
-        hip2.setLimits(Math.toRadians(-50.0), Math.toRadians(60.0));
+        hip2.setLimits(Math.toRadians(-50.0), Math.toRadians(65.0));
         hip2.setReferenceAngle(Math.toRadians(0.0));
         hip2.setMotorEnabled(true);
         hip2.setMotorSpeed(Math.toRadians(0.0));
@@ -298,7 +298,7 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (torso.getWorldCenter().y < - 1.8|| knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9);
+        return (torso.getWorldCenter().y < - 1.8 /* || knee1.getAnchor1().y < -1.9 || knee2.getAnchor1().y < -1.9*/);
     }
 
     public double legsChangeSinceLastFrame()
@@ -309,25 +309,28 @@ public class BiPedBody {
 
     public double reward() {
 
-        if(Graphics2D.walker.hasFallen()){
-            System.out.println("BAD REWARD!");return -1000;}
+//        if(Graphics2D.walker.hasFallen()){
+//            System.out.println("BAD REWARD!");return -1000;}
 
-        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){return -800;}
+        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){
+            return -1800000;}
 //
         double base = 200;
 
 //        double torsoAngle = Math.abs(Math.toDegrees(Graphics2D.walker.getRelativeAngle()))-90;
 //        System.out.println(torsoAngle);
 
-//        double reward = (Graphics2D.walker.foot1.getWorldCenter().y)*1000;
 //        double reward = Gra
 
-        double reward = -0.1+((((Graphics2D.walker.lowerLeg2.getChangeInPosition().x+Graphics2D.walker.lowerLeg1.getChangeInPosition().x )+Graphics2D.walker.torso.getChangeInPosition().y)* 500));
-//            double reward = (torso.getWorldCenter().x)*10;
-//        double reward =Math.toDegrees(Graphics2D.walker.knee1.getJointAngle());
+        double reward = -0.1+((((Graphics2D.walker.foot2.getChangeInPosition().x+Graphics2D.walker.foot1.getChangeInPosition().x )* 500)))+Graphics2D.walker.torso.getWorldCenter().y;
+//            double reward = 1+((torso.getWorldCenter().y)*10);
+//        double reward =Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
 //        double reward = -48+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;
 
-        System.out.println("Reward was: " + reward);
+//        double reward = Graphics2D.walker.torso.getWorldCenter().y;
+
+
+//        System.out.println("Reward was: " + reward);
         Main.accumulatedReward+=reward;
         return reward;
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));

@@ -24,13 +24,15 @@ public class JointAction implements Action {
     }
 
     // Third constructor for noOp
-    public JointAction(boolean noOp) {
-        this.noOp = noOp;
+    public JointAction() {
+        this.noOp = true;
     }
 
     // Execute appropriate method for action
     public void doAction() {
-        if(noOp){;}
+        if (noOp) {
+            ;
+        }
         if (this.motorOn) {
             Graphics2D.walker.setJoint(this.joint, this.a);
         } else {
@@ -39,8 +41,7 @@ public class JointAction implements Action {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Action " + a + " motor on: " + motorOn;
     }
 

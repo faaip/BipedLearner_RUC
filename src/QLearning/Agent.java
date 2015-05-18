@@ -10,40 +10,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Agent {
-    private JointAction noneAction = new JointAction(true);
+    private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate TODO - how to set a learning rate
     private double gamma; // Decay rate TODO - how to calculate good gamma with large number of states
-    private double Rplus = 4.5; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double Rplus = 2.5; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
     private BiPedBody walker = Graphics2D.walker;
 
-    private int Ne = 5; //TODO figures this out
+    private int Ne = 1; //TODO figures this out
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
     public Agent(double alpha, double gamma) {
         this.alpha = alpha;
         this.gamma = gamma;
-        this.s = Main.initState;
+        this.s = Graphics2D.walker.getState();
+        this.a = Main.initAction;
     }
 
     public JointAction execute(){
-
-        // Puts current state if state is null
-        if(s == null){this.s = Graphics2D.walker.getState();}
-        if(a == null){this.a = Main.initAction;}
-
-        // TODO - why is this sPrime?!
-        State sPrime = Graphics2D.walker.getState();
+        State sPrime = Main.analyser.getState(Graphics2D.walker);
         double rPrime = Graphics2D.walker.reward();
 
-        // if terminal - TODO terminal state (find ud af noOp og terminal state)
-        if(Graphics2D.walker.hasFallen())
-        {
-            Q.put(new Pair<>(sPrime, noneAction), rPrime); // What is a none action?!
+        // if terminal
+        if (isTerminal(sPrime)) {
+            Q.put(new Pair<>(sPrime, noneAction), rPrime);
         }
 
         // If State s not null
@@ -53,7 +47,7 @@ public class Agent {
             Nsa.incrementFor(sa);
 //            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
 
-            // Get Q-value (TODO ændrer q-values sig?)
+            // Get Q-value
             Double Qsa = Q.get(sa);
             if (Qsa == null) {
                 Qsa = 0.0;
@@ -63,27 +57,21 @@ public class Agent {
             {r = Graphics2D.walker.reward();
                 System.out.println("Reward: " + r);}
 
-            //TODO Check this, is reward inserted correctly?!
             r = Graphics2D.walker.reward();
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
-//            Q.put(sa, Qsa + alpha(Nsa, s, a)
-//                    * (r + gamma * maxAPrime(sPrime) - Qsa));
-
-//            System.out.println("Reward: " + r);
         }
 
-        // TODO setTerminalState
         if (isTerminal(sPrime)) {
-//            s = null;
-//            a = null;
-//            r = null;
+            s = null;
+            a = null;
+            r = null;
         } else
     {
-            s = sPrime;
-            a = argmaxAPrime(sPrime);
-            r = rPrime;
+            this.s = sPrime;
+            this.a = argmaxAPrime(sPrime);
+            this.r = rPrime;
         }
 
         return a;
@@ -105,14 +93,15 @@ public class Agent {
     }
 
     private boolean isTerminal(State s) {
-        // TODO fix me
         boolean terminal = false;
 //        if (null != s && Main.actionsFunction.actions.size() == 0) {
             // No actions possible in state is considered terminal.
 //            terminal = true;
 //        }
 
-        if(Graphics2D.walker.hasFallen()){terminal = true;}
+        // TODO fix me with a collisionlistener
+        if(Graphics2D.walker.hasFallen()){
+            terminal = true;}
 
         return terminal;
     }

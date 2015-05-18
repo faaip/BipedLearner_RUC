@@ -11,8 +11,8 @@ public class
         Main {
     public static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.998; // Decay rate
-    public static double learningRate = 0.95; // Learning rate
+    public static double gamma = 0.995; // Decay rate
+    public static double learningRate = 1; // Learning rate
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
@@ -51,67 +51,63 @@ public class
 
         analyser = new StateAnalyser();
 
-
         //Add actions
         State.fillActions();
 
-        JointAction noOp = new JointAction(false);
+        JointAction noOp = new JointAction();
 
         actionsFunction = new ActionsFunction();
-
-
         initAction = Graphics2D.walker.getState().getRandomAction();
-//        initAction.doAction();
+        initAction.doAction();
 
         Agent agent = new Agent(learningRate, gamma);
 
         initState = Graphics2D.walker.getState();
-//        initState.doRandomAction();
 
-
-        while (2 > 1) {
+        while (2 > 1) { // TODO whileRunning
 
             boolean hasFallen = Graphics2D.walker.hasFallen();
 
-//            System.out.println(Graphics2D.world.getAccumulatedTime());
-
             double n = 0;
             accumulatedReward = 0;
-            while (!Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight()) {
-//                System.out.println("Has fallen " + hasFallen);
+            double t = 0;
+            boolean isTerminal = false;
+            while (!isTerminal /* !Graphics2D.walker.hasFallen() || Graphics2D.walker.isInSight()*/) {
+                if (t > 400000) {
+                    // Observe and execute
+                    JointAction action = agent.execute();
+                    if (action != null) {
+                        action.doAction();
+                    } else {
+                        Graphics2D.walker.resetPosition();
+                        print();
+                        isTerminal = true;
+                    }
 
-                JointAction action = agent.execute();
-                action.doAction();
-//                Graphics2D.walker.getState().doRandomAction();
+                    t = 0;
+                }
+                t += world.getElapsedTime();
 
-
-                n++;
-
-                hasFallen = Graphics2D.walker.hasFallen();
             }
 
-//            Graphics2D.world.removeBody(Graphics2D.walker);
-            Graphics2D.walker.resetPosition();
-//            System.out.println("Angular velocity: " + Graphics2D.walker.torso.getAngularVelocity());
-
-
-
-            System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
-            if (accumulatedReward > bestReward) {
-                bestReward = accumulatedReward;
-                bestGeneration = generation;
-            }
-//            if (Graphics2D.walker.torso.getWorldCenter().distance(0, 0) > bestDistance) {
-//                bestDistance = Graphics2D.walker.torso.getWorldCenter().distance(0, 0);
-//                bestGeneration = generation;
-//            }
-            generation++;
-
-            gui.update();
 
 
         }
+
+    }
+
+    private static void print() {
+        generation++;
+        if (accumulatedReward > bestReward) {
+            bestReward = accumulatedReward;
+            bestGeneration = generation;
+        }
+        gui.update();
+        System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
+
     }
 
 
 }
+
+

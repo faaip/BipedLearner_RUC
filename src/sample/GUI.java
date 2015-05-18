@@ -34,7 +34,7 @@ public class GUI {
 //        JButton skip1 = new JButton("Skip 1 minute");
 //        JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
-        JSlider amountSlider = new JSlider(1, 50,1);
+        JSlider amountSlider = new JSlider(1, 300,1);
         JLabel simSpeed = new JLabel(simulationSpeed+" x Speed" );
         JSlider learningRateSlider = new JSlider(0, 10, 10); //double to int
         JLabel learnRate = new JLabel(learningRate+ " x Learning Rate");

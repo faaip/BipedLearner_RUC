@@ -164,6 +164,7 @@ public class Graphics2D extends JFrame {
         Rectangle floorRect = new Rectangle(15.0, 1.0);
         floor = new GameObject();
         BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
+        floorFixture.setFriction(90.0);
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
