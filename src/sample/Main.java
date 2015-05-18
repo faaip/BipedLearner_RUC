@@ -14,7 +14,7 @@ public class
         Main {
     public static StateAnalyser analyser;
     static Policy learningPolicy;
-    public static double gamma = 0.95; // Decay rate
+    public static double gamma = 0.998; // Decay rate
     public static double learningRate = 0.4; // Learning rate
     public static int generation = 1;
     public static GUI gui;

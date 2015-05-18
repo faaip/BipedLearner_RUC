@@ -406,12 +406,6 @@ public class BiPedBody extends GameObject{
             limb.setAngularVelocity(0.0);
             limb.setLinearVelocity(0.0,0.0);
         }
-
-        for(RevoluteJoint joint : joints)
-        {
-        }
-
-
     }
 
     public boolean isInSight() {
