@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Agent {
     private JointAction noneAction = new JointAction(true);
-    private double alpha = 0.0; // Learning rate
+    private double alpha; // Learning rate
     private double gamma = 0.001; // Decay rate
     private double Rplus = 4.5; // Optimistic reward prediction? //TODO Figure this out
 
