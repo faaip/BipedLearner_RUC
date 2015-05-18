@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class Agent {
     private JointAction noneAction = new JointAction(true);
-    private double alpha; // Learning rate
-    private double gamma = 0.001; // Decay rate
-    private double Rplus = 4.5; // Optimistic reward prediction? //TODO Figure this out
+    private double alpha; // Learning rate TODO - how to set a learning rate
+    private double gamma; // Decay rate TODO - how to calculate good gamma with large number of states
+    private double Rplus = 4.5; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -36,12 +36,11 @@ public class Agent {
         if(s == null){this.s = Graphics2D.walker.getState();}
         if(a == null){this.a = Main.initAction;}
 
-
-        // TO-DO - why is this sPrime?!
+        // TODO - why is this sPrime?!
         State sPrime = Graphics2D.walker.getState();
         double rPrime = Graphics2D.walker.reward();
 
-        // if terminal
+        // if terminal - TODO terminal state (find ud af noOp og terminal state)
         if(Graphics2D.walker.hasFallen())
         {
             Q.put(new Pair<>(sPrime, noneAction), rPrime); // What is a none action?!
@@ -54,7 +53,7 @@ public class Agent {
             Nsa.incrementFor(sa);
 //            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
 
-            // Get Q-value
+            // Get Q-value (TODO ændrer q-values sig?)
             Double Qsa = Q.get(sa);
             if (Qsa == null) {
                 Qsa = 0.0;
@@ -66,7 +65,6 @@ public class Agent {
 
             //TODO Check this, is reward inserted correctly?!
             r = Graphics2D.walker.reward();
-            if(Graphics2D.walker.hasFallen()){r = -100.0;}
             Q.put(sa, Qsa + alpha(Nsa, s, a)
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
@@ -91,16 +89,6 @@ public class Agent {
         return a;
     }
 
-    public void setWalker()
-    {
-        this.walker = Graphics2D.walker;
-    }
-
-    public BiPedBody getWalker()
-    {
-        return Graphics2D.walker;
-    }
-
     private JointAction argmaxAPrime(State sPrime) {
         JointAction a = null;
         double max = Double.NEGATIVE_INFINITY;
@@ -117,6 +105,7 @@ public class Agent {
     }
 
     private boolean isTerminal(State s) {
+        // TODO fix me
         boolean terminal = false;
 //        if (null != s && Main.actionsFunction.actions.size() == 0) {
             // No actions possible in state is considered terminal.
@@ -141,6 +130,9 @@ public class Agent {
     protected double alpha(FrequencyCounter<Pair<State, JointAction>> Nsa, State s, JointAction a) {
         // Default implementation is just to return a fixed parameter value
         // irrespective of the # of times a state action has been encountered
+
+        // TODO alpha method
+
         return alpha;
     }
 

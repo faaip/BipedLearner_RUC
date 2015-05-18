@@ -118,7 +118,7 @@ public class GUI {
 
     public void update() {
         generationNo.setText("Generation #" + Main.generation);
-        highScore.setText("Highscore was gen. #" + Main.bestGeneration + " dist: " + Math.round(Main.bestDistance*100));
+        highScore.setText("Highscore was gen. #" + Main.bestGeneration + " reward: ");
     }
 
 

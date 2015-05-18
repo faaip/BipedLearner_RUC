@@ -15,7 +15,7 @@ public class
     public static StateAnalyser analyser;
     static Policy learningPolicy;
     public static double gamma = 0.998; // Decay rate
-    public static double learningRate = 0.4; // Learning rate
+    public static double learningRate = 0.95; // Learning rate
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
@@ -104,10 +104,10 @@ public class
                 bestReward = accumulatedReward;
                 bestGeneration = generation;
             }
-            if (Graphics2D.walker.torso.getWorldCenter().distance(0, 0) > bestDistance) {
-                bestDistance = Graphics2D.walker.torso.getWorldCenter().distance(0, 0);
-                bestGeneration = generation;
-            }
+//            if (Graphics2D.walker.torso.getWorldCenter().distance(0, 0) > bestDistance) {
+//                bestDistance = Graphics2D.walker.torso.getWorldCenter().distance(0, 0);
+//                bestGeneration = generation;
+//            }
             generation++;
 
             gui.update();

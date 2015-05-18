@@ -15,7 +15,7 @@ import scpsolver.graph.Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BiPedBody extends GameObject{
+public class BiPedBody {
 
     World world;
 
@@ -312,7 +312,7 @@ public class BiPedBody extends GameObject{
         if(Graphics2D.walker.hasFallen()){
             System.out.println("BAD REWARD!");return -1000;}
 
-        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){return 800;}
+        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){return -800;}
 //
         double base = 200;
 
