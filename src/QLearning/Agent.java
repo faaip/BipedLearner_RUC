@@ -45,7 +45,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
+//            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);
