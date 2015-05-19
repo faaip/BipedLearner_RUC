@@ -18,19 +18,26 @@ public class
     public static boolean simulationRunning = true;
     public static JointAction initAction;
     public static StateAnalyser analyser = new StateAnalyser();
-    public static boolean ProgramRun = false;
+    public static boolean startNow;
+
 
     public static void main(String[] args) {
+
 
         //Start window
         StartWindow startWindow = new StartWindow();
         System.out.println("Selected mode: " + startWindow.modeSelected);
+        //run(startWindow.modeSelected);
+
     }
+
 
     public static void run(int modeSelected) {
 
         //GUI
         gui = new GUI(simulation);
+
+        System.out.println("NEW GUI MADE");
 
         //Add actions
         State.fillActions();

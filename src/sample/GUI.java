@@ -19,12 +19,10 @@ public class GUI {
 
 
     public GUI(Graphics2D world) {
-
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(350, 1000);
         gui.setTitle("Controls");
-
 
         // Add controls
 //        JButton skip1 = new JButton("Skip 1 minute");
@@ -106,7 +104,6 @@ public class GUI {
         generationNo.setText("Generation #" + Main.generation);
         highScore.setText("Highscore was gen. #" + Main.bestGeneration + " reward: ");
     }
-
 
 
 }

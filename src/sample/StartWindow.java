@@ -8,6 +8,7 @@ import java.awt.*;
  */
 public class StartWindow {
     public static int modeSelected;
+    public static boolean runNow = false;
     public StartWindow() {
 
         JFrame startFrame = new JFrame();
@@ -48,6 +49,5 @@ public class StartWindow {
             Main.run(modeSelected);
 
         });
-
     }
 }
