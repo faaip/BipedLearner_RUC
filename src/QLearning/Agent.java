@@ -13,7 +13,7 @@ public class Agent {
     private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate TODO - how to set a learning rate
     private double gamma; // Decay rate TODO - how to calculate good gamma with large number of states
-    private double Rplus = 2.5; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double Rplus = 0; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -45,7 +45,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-            System.out.println("State-Action count: " + Nsa.getCount(sa) + " - " + Q.get(sa));
+            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);

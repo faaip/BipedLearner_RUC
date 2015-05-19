@@ -10,8 +10,8 @@ import org.dyn4j.dynamics.CollisionListener;
 public class
         Main {
     public static StateAnalyser analyser;
-    public static double gamma = 0.995; // Decay rate
-    public static double learningRate = 1; // Learning rate
+    public static double gamma = 0.8; // Decay rate
+    public static double learningRate = 0.8; // Learning rate
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
