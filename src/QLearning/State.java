@@ -29,15 +29,6 @@ public class State {
 
     // Constructor in case of new state
     public State(BiPedBody walker) {
-        //TODO delete this booleans NOT the FOREACH
-        this.torsoLeaningForward = walker.isTorsoLeaningForward();
-        this.knee1Forward = walker.isKnee1Forward();
-        this.foot1Forward = walker.isFoot1Forward();
-        this.foot1OnGround = walker.isFoot1OnGround();
-        this.foot2OnGround = walker.isFoot2OnGround();
-        this.upperLeg1InFrontOfTorso = walker.isUpperLeg1InFrontOfTorso();
-        this.upperLeg2InFrontOfTorso = walker.isUpperLeg1InFrontOfTorso();
-        this.relativeAngle = walker.getRelativeAngle();
 
         for(RevoluteJoint j : walker.joints)
         {
@@ -48,22 +39,21 @@ public class State {
     public static void fillActions() {
         // Create actions
         //TODO if delete
-        if(actions.size() < 1) {
+       // if(actions.size() < 1) {
+        System.out.println("Fill Joints happen");
             for (RevoluteJoint joint : BiPedBody.joints) {
                 actions.add(new JointAction(joint));
                 for (int i = -1; i <= 1; i++) {
                     actions.add(new JointAction(joint, i));
                 }
             }
-        }
+        //}
     }
 
     @Override
     public int hashCode() {
-//        System.out.println(toString());
 
-        // TODO new hashCode
-
+        //TODO hashCode
         return 0;
     }
 

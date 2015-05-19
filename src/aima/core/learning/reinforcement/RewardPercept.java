@@ -12,7 +12,7 @@ import aima.core.agent.Percept;
  * @author Ciaran O'Reilly
  * @author Ravi Mohan
  */
-public interface RewardPercept extends Percept {
+public interface  RewardPercept extends Percept {
 	/**
 	 * 
 	 * @return the reward part of the percept ('hardwired').

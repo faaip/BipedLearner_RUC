@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class Agent {
     private JointAction noneAction = new JointAction();
-    private double alpha; // Learning rate TODO - how to set a learning rate
-    private double gamma; // Decay rate TODO - how to calculate good gamma with large number of states
+    private double alpha; // Learning rate TODO - ADD TO GUI
+    private double gamma; // Decay rate TODO - ADD TO GUI
     private double Rplus = 0; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
@@ -120,7 +120,7 @@ public class Agent {
         // Default implementation is just to return a fixed parameter value
         // irrespective of the # of times a state action has been encountered
 
-        // TODO alpha method
+        // TODO alpha method - Maybe not
 
         return alpha;
     }
@@ -129,7 +129,6 @@ public class Agent {
         double max = Double.NEGATIVE_INFINITY;
         if (Main.actionsFunction.jointActions(sPrime).size() == 0) {
             // a terminal state
-            // TODO: WHAT IS TERMINAL
             max = Q.get(new Pair<State, JointAction>(sPrime, noneAction));
         } else {
             for (JointAction aPrime : Main.actionsFunction.jointActions((sPrime))) {
