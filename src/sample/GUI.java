@@ -12,6 +12,7 @@ import java.awt.*;
 //TODO Comment and clean
 public class GUI {
 
+
     public static int simulationSpeed = 1;
     static JLabel generationNo = new JLabel("Generation # " + 0);
     static JLabel highScore = new JLabel("Highscore: ");
@@ -100,29 +101,5 @@ public class GUI {
     }
 
 
-    public static void startWindow() {
 
-        JFrame startFrame = new JFrame();
-        startFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        startFrame.setSize(350, 300);
-        startFrame.setTitle("Start");
-
-
-        JPanel startPanel = new JPanel();
-
-        String[] modes = {"Mode 1", "Mode 2", "Mode 3"};
-        JComboBox modeList = new JComboBox(modes);
-        modeList.setMinimumSize(new Dimension(100, 100));
-
-        JButton start = new JButton("Start");
-
-        startPanel.setLayout(new GridLayout(0, 1));
-        startPanel.add(new JLabel("Choose a mode: ", JLabel.CENTER));
-        startPanel.add(modeList);
-        startPanel.add(start);
-
-        startFrame.add(startPanel);
-        startFrame.setVisible(true);
-
-    }
 }
