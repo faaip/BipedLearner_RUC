@@ -17,7 +17,7 @@ public class GUI {
     static JLabel generationNo = new JLabel("Generation # " + 0);
     static JLabel highScore = new JLabel("Highscore: ");
     public static HighScoreList highScoreList = new HighScoreList();
-    public static int modeSelected;
+    public static int modeSelected = 0;
 
 
     public GUI(Graphics2D world) {
@@ -30,31 +30,35 @@ public class GUI {
         JPanel startPanel = new JPanel();
         //startPanel.setMinimumSize(new Dimension(100,100));
 
-        String[] modes = {"Mode 1", "Mode 2", "Mode 3"};
+        String[] modes = {"Reward for walking forward", "Reward for elevated feet", "Reward for bending one knee"};
         JComboBox modeMenu = new JComboBox(modes);
 
+        JLabel modeWalking = new JLabel ("Reward for walking forward",JLabel.CENTER);
+        JLabel modeFeet = new JLabel ("Reward for elevated feet",JLabel.CENTER);
+        JLabel modeKnee = new JLabel ( "Reward for bending one knee",JLabel.CENTER);
+        JLabel chooseLabel = new JLabel("Choose reward mode: ", JLabel.CENTER);
+
         modeMenu.addActionListener(e -> {
-                    if (modeMenu.getSelectedIndex() == 0) modeSelected = 0;
-                    if (modeMenu.getSelectedIndex() == 1) modeSelected = 1;
-                    if (modeMenu.getSelectedIndex() == 2) modeSelected = 3;
-
-
+                    if (modeMenu.getSelectedIndex() == 0) {modeSelected = 0; startPanel.add(modeWalking);}
+                    if (modeMenu.getSelectedIndex() == 1) {modeSelected = 1; startPanel.add(modeFeet);}
+                    if (modeMenu.getSelectedIndex() == 2) {modeSelected = 3; startPanel.add(modeKnee);}
                 }
         );
 
         JButton start = new JButton("Start");
 
         startPanel.setLayout(new GridLayout(0, 1));
-        startPanel.add(new JLabel("Choose a mode: ", JLabel.CENTER));
+        startPanel.add(chooseLabel);
+
         startPanel.add(modeMenu);
         startPanel.add(start);
 
         start.addActionListener(e -> {
 
             simulationSpeed = 1;
+            start.setVisible(false);
             modeMenu.setVisible(false);
-
-
+            chooseLabel.setVisible(false);
 
         });
 
@@ -131,6 +135,11 @@ public class GUI {
         split.setOrientation(JSplitPane.VERTICAL_SPLIT);
         split.setRightComponent(controls);
         split.setLeftComponent(info);
+
+
+       // modeFeet.setVisible(false);
+        //modeKnee.setVisible(false);
+        //modeWalking.setVisible(false);
 
         JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,startPanel,split);
         gui.add(mainSplit);

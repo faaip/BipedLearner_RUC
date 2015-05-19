@@ -312,7 +312,7 @@ public class BiPedBody {
             double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
         }
         if (StartWindow.modeSelected == 1) {
-            //Reward for having the legs up
+            //Reward for having the feets up
             double reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot1.getWorldCenter().y) * 100;
         }
         if (StartWindow.modeSelected == 2) {
@@ -331,7 +331,7 @@ public class BiPedBody {
 //        System.out.println(torsoAngle);
 
 
-        double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
+       // double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
 //            double reward = 1+((torso.getWorldCenter().y)*10);
 //        double reward =Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
 //        double reward = -48+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;
@@ -340,6 +340,7 @@ public class BiPedBody {
 
 
 //        System.out.println("Reward was: " + reward);
+        double reward = 0.0;
         Main.accumulatedReward += reward;
         return reward;
 //        return (-1+(new Vector2(0,0).distance(torso.getWorldCenter().x,torso.getWorldCenter().y)));
