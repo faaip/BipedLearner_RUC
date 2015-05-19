@@ -16,6 +16,7 @@ public class GUI {
     public static int simulationSpeed = 1;
     static JLabel generationNo = new JLabel("Generation # " + 0);
     static JLabel highScore = new JLabel("Highscore: ");
+    public static HighScoreList highScoreList = new HighScoreList();
 
 
     public GUI(Graphics2D world) {
@@ -53,6 +54,8 @@ public class GUI {
 //            Graphics2D.walker.torso.applyImpulse(-75);
             Main.simulationRunning = false;
             System.out.println(Main.simulationRunning);
+            highScoreList.add(new Generation(2));
+
         });
 
         controls.add(reset);
@@ -65,12 +68,14 @@ public class GUI {
         info.setLayout(new GridLayout(3, 3));
         info.setBackground(Color.yellow);
 
-        HighScoreList highScoreList = new HighScoreList();
+
         //todo add labels
 
 
+        JPanel jPanel = new JPanel();
+        jPanel.add(new JScrollPane(highScoreList.jList));
 
-        info.add(highScoreList.jList);
+        info.add(jPanel);
 
 //        info.add(generationNo);
 //        info.add(highScore);
@@ -101,6 +106,7 @@ public class GUI {
     }
 
     public void update() {
+
         generationNo.setText("Generation #" + Main.generation);
         highScore.setText("Highscore was gen. #" + Main.bestGeneration + " reward: ");
     }
