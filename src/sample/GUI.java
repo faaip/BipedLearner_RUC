@@ -36,7 +36,7 @@ public class GUI {
         JLabel modeWalking = new JLabel ("Reward for walking forward",JLabel.CENTER);
         JLabel modeFeet = new JLabel ("Reward for elevated feet",JLabel.CENTER);
         JLabel modeKnee = new JLabel ( "Reward for bending one knee",JLabel.CENTER);
-        JLabel chooseLabel = new JLabel("Choose reward mode: ", JLabel.CENTER);
+        JLabel chooseLabel = new JLabel("You need to choose a reward mode: ", JLabel.CENTER);
 
         modeMenu.addActionListener(e -> {
                     if (modeMenu.getSelectedIndex() == 0) {modeSelected = 0; startPanel.add(modeWalking);}
