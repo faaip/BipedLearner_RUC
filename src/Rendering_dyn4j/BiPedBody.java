@@ -7,6 +7,8 @@ import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import org.dyn4j.geometry.*;
 import sample.Main;
+import sample.StartWindow;
+import scpsolver.graph.Graph;
 
 import java.util.ArrayList;
 
@@ -305,6 +307,21 @@ public class BiPedBody {
             return -100;
         }
 
+        if (StartWindow.modeSelected == 0) {
+            //Reward for walking forward
+            double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
+        }
+        if (StartWindow.modeSelected == 1) {
+            //Reward for having the legs up
+            double reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot1.getWorldCenter().y) * 100;
+        }
+        if (StartWindow.modeSelected == 2) {
+            //Bending Knee 1
+            double reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
+
+        }
+
+
 //        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){
 //            return -1800000;}
 //
@@ -314,7 +331,7 @@ public class BiPedBody {
 //        System.out.println(torsoAngle);
 
 
-        double reward = -0.1+(((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
+        double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
 //            double reward = 1+((torso.getWorldCenter().y)*10);
 //        double reward =Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
 //        double reward = -48+(Graphics2D.walker.knee1.getAnchor1().x+Graphics2D.walker.knee2.getAnchor1().x+Graphics2D.walker.foot1.getWorldCenter().distance(0,0)+Graphics2D.walker.foot2.getWorldCenter().distance(0,0)+Graphics2D.walker.torso.getWorldCenter().y*2)*10;

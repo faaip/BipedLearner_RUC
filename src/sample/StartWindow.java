@@ -33,13 +33,6 @@ public class StartWindow {
         JButton start = new JButton("Start");
         start.setMinimumSize(new Dimension(100, 100));
 
-        start.addActionListener(e->{
-
-            GUI gui = new GUI(Main.simulation);
-        });
-
-
-
 
         startPanel.setLayout(new GridLayout(0, 1));
         startPanel.add(new JLabel("Choose a mode: ", JLabel.CENTER));
@@ -48,6 +41,13 @@ public class StartWindow {
 
         startFrame.add(startPanel);
         startFrame.setVisible(true);
+
+        start.addActionListener(e -> {
+
+            startFrame.setVisible(false);
+            Main.run(modeSelected);
+
+        });
 
     }
 }

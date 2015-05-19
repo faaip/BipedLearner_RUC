@@ -9,7 +9,7 @@ public class
     public static double learningRate = 0.8; // Learning rate
     public static int generation = 1;
     public static Graphics2D simulation = new Graphics2D();
-    public static GUI gui = new GUI(simulation);
+    public static GUI gui;
     public static double bestReward;
     public static double accumulatedReward;
     public static double bestDistance;
@@ -18,18 +18,19 @@ public class
     public static boolean simulationRunning = true;
     public static JointAction initAction;
     public static StateAnalyser analyser = new StateAnalyser();
+    public static boolean ProgramRun = false;
 
     public static void main(String[] args) {
 
-
-        //TODO POP up window
-
         //Start window
-//        StartWindow startWindow = new StartWindow();
-//        System.out.println("Selected mode: " + startWindow.modeSelected);
+        StartWindow startWindow = new StartWindow();
+        System.out.println("Selected mode: " + startWindow.modeSelected);
+    }
 
+    public static void run(int modeSelected) {
 
-
+        //GUI
+        gui = new GUI(simulation);
 
         //Add actions
         State.fillActions();
@@ -57,7 +58,6 @@ public class
                     JointAction action = agent.execute();
                     if (action != null) {
                         action.doAction();
-                        System.out.println(action);
                     } else {
                         // If null is returned, agent is at a terminal state
                         isTerminal = true;
@@ -74,18 +74,17 @@ public class
         }
     }
 
+
     private static void print() {
         generation++;
         if (accumulatedReward > bestReward) {
             bestReward = accumulatedReward;
             bestGeneration = generation;
         }
-//        gui.highScoreList.add(new Generation(accumulatedReward));
         gui.update();
         System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
     }
-
-
 }
+
 
 

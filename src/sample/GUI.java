@@ -19,6 +19,7 @@ public class GUI {
 
 
     public GUI(Graphics2D world) {
+
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(350, 1000);
