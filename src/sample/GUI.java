@@ -21,7 +21,7 @@ public class GUI {
     {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        gui.setSize(300, 300);
+        gui.setSize(350, 1000);
         gui.setTitle("Controls");
 
 
@@ -66,12 +66,17 @@ public class GUI {
 
         // Panel for info monitoring
         JPanel info = new JPanel();
-        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        info.setLayout(new GridLayout(3, 3));
         info.setBackground(Color.yellow);
 
-
+        //todo add labels
         info.add(generationNo);
         info.add(highScore);
+        // info.add(exploringLabel);
+        // info.add(actionLabel);
+        // info.add(NsaLabel);
+        // info.add(currentStateLabel);
+        // info.add(currentGenLabel);
 
         // Panels are added to splitpane
         JSplitPane split = new JSplitPane();
@@ -80,6 +85,13 @@ public class GUI {
         split.setRightComponent(controls);
         gui.add(split);
         gui.setVisible(true);
+
+
+        // Panel for graphs
+     //   JPanel graphs = new JPanel();
+     //  graphs.setLayout(new GridBagLayout());
+     //   graphs.setBackground(Color.BLACK);
+
     }
     public int getSimulationSpeed() {
         return simulationSpeed;
