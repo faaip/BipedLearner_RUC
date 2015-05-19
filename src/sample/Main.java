@@ -19,17 +19,19 @@ public class
     public static JointAction initAction;
     public static StateAnalyser analyser = new StateAnalyser();
     public static boolean startNow;
+    public static int mode = 0;
 
 
     public static void main(String[] args) {
 
+        System.out.println(mode);
 
-        run(gui.modeSelected);
+        run();
 
     }
 
 
-    public static void run(int modeSelected) {
+    public static void run() {
 
         System.out.println("YES");
 

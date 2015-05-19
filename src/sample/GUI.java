@@ -39,9 +39,12 @@ public class GUI {
         JLabel chooseLabel = new JLabel("You need to choose a reward mode: ", JLabel.CENTER);
 
         modeMenu.addActionListener(e -> {
-                    if (modeMenu.getSelectedIndex() == 0) {modeSelected = 0; startPanel.add(modeWalking);}
-                    if (modeMenu.getSelectedIndex() == 1) {modeSelected = 1; startPanel.add(modeFeet);}
-                    if (modeMenu.getSelectedIndex() == 2) {modeSelected = 2; startPanel.add(modeKnee);}
+                    Main.mode = modeMenu.getSelectedIndex();
+                    System.out.println(Main.mode);
+
+//                    if (modeMenu.getSelectedIndex() == 0) {modeSelected = 0; startPanel.add(modeWalking);}
+//                    if (modeMenu.getSelectedIndex() == 1) {modeSelected = 1; startPanel.add(modeFeet);}
+//                    if (modeMenu.getSelectedIndex() == 2) {modeSelected = 2; startPanel.add(modeKnee);}
                 }
         );
 
@@ -54,12 +57,10 @@ public class GUI {
         startPanel.add(start);
 
         start.addActionListener(e -> {
-
             simulationSpeed = 1;
             start.setVisible(false);
             modeMenu.setVisible(false);
             chooseLabel.setVisible(false);
-
         });
 
 

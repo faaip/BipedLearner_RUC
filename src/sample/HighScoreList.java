@@ -17,6 +17,8 @@ public class HighScoreList{
 
     public HighScoreList() {
 
+        jList.setPreferredSize(new Dimension(5000,120));
+
     }
 
     public void add(Generation g) {
