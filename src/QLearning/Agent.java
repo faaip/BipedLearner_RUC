@@ -13,7 +13,7 @@ public class Agent {
     private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate TODO - ADD TO GUI
     private double gamma; // Decay rate TODO - ADD TO GUI
-    private double Rplus = 0; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double Rplus = 2; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -45,7 +45,7 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-//            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
+            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);
@@ -80,7 +80,7 @@ public class Agent {
     private JointAction argmaxAPrime(State sPrime) {
         JointAction a = null;
         double max = Double.NEGATIVE_INFINITY;
-        for (JointAction aPrime : Main.actionsFunction.jointActions(sPrime)) {
+        for (JointAction aPrime : sPrime.getActions()) {
             Pair<State, JointAction> sPrimeAPrime = new Pair<State, JointAction>(sPrime, aPrime);
             double explorationValue = f(Q.get(sPrimeAPrime), Nsa
                     .getCount(sPrimeAPrime));
@@ -118,11 +118,11 @@ public class Agent {
 
     private double maxAPrime(State sPrime) {
         double max = Double.NEGATIVE_INFINITY;
-        if (Main.actionsFunction.jointActions(sPrime).size() == 0) {
+        if (sPrime.getActions().size() == 0) {
             // a terminal state
             max = Q.get(new Pair<State, JointAction>(sPrime, noneAction));
         } else {
-            for (JointAction aPrime : Main.actionsFunction.jointActions((sPrime))) {
+            for (JointAction aPrime : sPrime.getActions()) {
                 Double Q_sPrimeAPrime = Q.get(new Pair<State, JointAction>(sPrime, aPrime));
                 if (null != Q_sPrimeAPrime && Q_sPrimeAPrime > max) {
                     max = Q_sPrimeAPrime;

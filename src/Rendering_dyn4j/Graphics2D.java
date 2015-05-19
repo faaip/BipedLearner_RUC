@@ -148,6 +148,14 @@ public class Graphics2D extends JFrame {
 
         // setup the world
         this.initializeWorld();
+
+        this.setTitle("Machine Learning");
+
+        // show it
+        this.setVisible(true);
+
+        // start it
+        this.start();
     }
 
     /**
