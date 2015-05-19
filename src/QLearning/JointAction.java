@@ -42,7 +42,19 @@ public class JointAction implements Action {
 
     @Override
     public String toString() {
-        return "Action " + a + " motor on: " + motorOn;
+        // TODO make me useful!
+
+//        if (joint.getUpperLimit() == Math.toRadians(150.0)){System.exit(1);}
+
+
+
+
+        return " Action: " + a + " Motor on: " + motorOn;
+
+
+
+//        return joint.getAnchor1()+"";
+
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Agent {
     private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate TODO - ADD TO GUI
     private double gamma; // Decay rate TODO - ADD TO GUI
-    private double Rplus = 2; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double Rplus = -10; // Optimistic reward prediction? //TODO find optimal Rplus
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -31,7 +31,7 @@ public class Agent {
         this.a = Main.initAction;
     }
 
-    public JointAction execute(){
+    public JointAction execute() {
         State sPrime = Main.analyser.getState(Graphics2D.walker);
         double rPrime = Graphics2D.walker.reward();
 
@@ -41,7 +41,7 @@ public class Agent {
         }
 
         // If State s not null
-        if(s != null) {
+        if (s != null) {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
@@ -53,9 +53,10 @@ public class Agent {
                 Qsa = 0.0;
             }
 
-            if(r == null)
-            {r = Graphics2D.walker.reward();
-                System.out.println("Reward: " + r);}
+            if (r == null) {
+                r = Graphics2D.walker.reward();
+                System.out.println("Reward: " + r);
+            }
 
             r = Graphics2D.walker.reward();
             Q.put(sa, Qsa + alpha(Nsa, s, a)
@@ -67,8 +68,7 @@ public class Agent {
             s = null;
             a = null;
             r = null;
-        } else
-    {
+        } else {
             this.s = sPrime;
             this.a = argmaxAPrime(sPrime);
             this.r = rPrime;

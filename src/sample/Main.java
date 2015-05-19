@@ -25,8 +25,8 @@ public class
         //TODO POP up window
 
         //Start window
-        StartWindow startWindow = new StartWindow();
-        System.out.println("Selected mode: " + startWindow.modeSelected);
+//        StartWindow startWindow = new StartWindow();
+//        System.out.println("Selected mode: " + startWindow.modeSelected);
 
 
 
@@ -57,6 +57,7 @@ public class
                     JointAction action = agent.execute();
                     if (action != null) {
                         action.doAction();
+                        System.out.println(action);
                     } else {
                         // If null is returned, agent is at a terminal state
                         isTerminal = true;
@@ -79,6 +80,7 @@ public class
             bestReward = accumulatedReward;
             bestGeneration = generation;
         }
+//        gui.highScoreList.add(new Generation(accumulatedReward));
         gui.update();
         System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
     }

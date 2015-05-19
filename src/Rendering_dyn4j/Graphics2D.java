@@ -292,7 +292,7 @@ public class Graphics2D extends JFrame {
 
     public double getElapsedTime()
     {
-        return world.getAccumulatedTime();
+        return world.getAccumulatedTime()*GUI.simulationSpeed;
     }
 
 

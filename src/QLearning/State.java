@@ -31,7 +31,7 @@ public class State {
 
         System.out.println("Fill Joints happen");
         for (RevoluteJoint joint : BiPedBody.joints) {
-            actions.add(new JointAction(joint));
+//            actions.add(new JointAction(joint)); // TODO kommenter ud
             for (int i = -1; i <= 1; i++) {
                 actions.add(new JointAction(joint, i));
             }

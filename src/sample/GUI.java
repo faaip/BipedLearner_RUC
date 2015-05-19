@@ -66,9 +66,15 @@ public class GUI {
         info.setLayout(new GridLayout(3, 3));
         info.setBackground(Color.yellow);
 
+        HighScoreList highScoreList = new HighScoreList();
         //todo add labels
-        info.add(generationNo);
-        info.add(highScore);
+
+
+
+        info.add(highScoreList.jList);
+
+//        info.add(generationNo);
+//        info.add(highScore);
         // info.add(exploringLabel);
         // info.add(actionLabel);
         // info.add(NsaLabel);

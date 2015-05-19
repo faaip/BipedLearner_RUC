@@ -378,4 +378,9 @@ public class BiPedBody {
         // Checks if walkers torso is roughly inside the rendering frame
         return (Graphics2D.walker.torso.getWorldCenter().x > -4.5 && Graphics2D.walker.torso.getWorldCenter().x < 5.5);
     }
+
+
+
+
+
 }
