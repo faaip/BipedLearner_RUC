@@ -46,6 +46,7 @@ public class StartWindow {
         start.addActionListener(e -> {
 
             startFrame.setVisible(false);
+            startFrame.dispose();
             Main.run(modeSelected);
 
         });

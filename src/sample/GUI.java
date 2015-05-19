@@ -13,10 +13,11 @@ import java.awt.*;
 public class GUI {
 
 
-    public static int simulationSpeed = 1;
+    public static int simulationSpeed = 0;
     static JLabel generationNo = new JLabel("Generation # " + 0);
     static JLabel highScore = new JLabel("Highscore: ");
     public static HighScoreList highScoreList = new HighScoreList();
+    public static int modeSelected;
 
 
     public GUI(Graphics2D world) {
@@ -25,11 +26,45 @@ public class GUI {
         gui.setSize(350, 1000);
         gui.setTitle("Controls");
 
+
+        JPanel startPanel = new JPanel();
+        //startPanel.setMinimumSize(new Dimension(100,100));
+
+        String[] modes = {"Mode 1", "Mode 2", "Mode 3"};
+        JComboBox modeMenu = new JComboBox(modes);
+
+        modeMenu.addActionListener(e -> {
+                    if (modeMenu.getSelectedIndex() == 0) modeSelected = 0;
+                    if (modeMenu.getSelectedIndex() == 1) modeSelected = 1;
+                    if (modeMenu.getSelectedIndex() == 2) modeSelected = 3;
+
+
+                }
+        );
+
+        JButton start = new JButton("Start");
+
+        startPanel.setLayout(new GridLayout(0, 1));
+        startPanel.add(new JLabel("Choose a mode: ", JLabel.CENTER));
+        startPanel.add(modeMenu);
+        startPanel.add(start);
+
+        start.addActionListener(e -> {
+
+            simulationSpeed = 1;
+            modeMenu.setVisible(false);
+
+
+
+        });
+
+
+
         // Add controls
 //        JButton skip1 = new JButton("Skip 1 minute");
 //        JButton skip10 = new JButton("Skip 10 minutes");
         JButton reset = new JButton("Reset walker");
-        JSlider amountSlider = new JSlider(1, 25, simulationSpeed);
+        JSlider amountSlider = new JSlider(1, 25, 1);
         JLabel simSpeed = new JLabel(simulationSpeed + " x Speed");
 
 
@@ -58,9 +93,11 @@ public class GUI {
 
         });
 
+
         controls.add(reset);
         controls.add(amountSlider);
         controls.add(simSpeed);
+
 
 
         // Panel for info monitoring
@@ -86,12 +123,20 @@ public class GUI {
         // info.add(currentGenLabel);
 
         // Panels are added to splitpane
+
+
+
+
         JSplitPane split = new JSplitPane();
         split.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        split.setLeftComponent(info);
         split.setRightComponent(controls);
-        gui.add(split);
+        split.setLeftComponent(info);
+
+        JSplitPane mainSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,startPanel,split);
+        gui.add(mainSplit);
         gui.setVisible(true);
+
+
 
 
         // Panel for graphs

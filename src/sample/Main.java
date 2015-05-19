@@ -9,7 +9,7 @@ public class
     public static double learningRate = 0.8; // Learning rate
     public static int generation = 1;
     public static Graphics2D simulation = new Graphics2D();
-    public static GUI gui;
+    public static GUI gui = new GUI(simulation);
     public static double bestReward;
     public static double accumulatedReward;
     public static double bestDistance;
@@ -24,18 +24,17 @@ public class
     public static void main(String[] args) {
 
 
-        //Start window
-        StartWindow startWindow = new StartWindow();
-        System.out.println("Selected mode: " + startWindow.modeSelected);
-        //run(startWindow.modeSelected);
+        run(gui.modeSelected);
 
     }
 
 
     public static void run(int modeSelected) {
 
+        System.out.println("YES");
+
         //GUI
-        gui = new GUI(simulation);
+
 
         System.out.println("NEW GUI MADE");
 
