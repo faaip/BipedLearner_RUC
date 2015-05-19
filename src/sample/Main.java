@@ -12,7 +12,7 @@ public class
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
-//    public static CollisionListener cl;
+    //    public static CollisionListener cl;
     public static double bestReward;
     public static double accumulatedReward;
     public static double bestDistance;
@@ -53,32 +53,32 @@ public class
 
         initState = Graphics2D.walker.getState();
 
-
         while (2 > 1) { // TODO whileRunning
-
             accumulatedReward = 0;
             double t = 0;
             boolean isTerminal = false;
-            while (/* !isTerminal  ||*/ Graphics2D.walker.isInSight()) { //TODO isInSight - not working now
+            while (!isTerminal) {
+                // Reset if out of sight
+                if (!Graphics2D.walker.isInSight()) {
+                    isTerminal = true;
+                }
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if (action != null) {
                         action.doAction();
                     } else {
-                        Graphics2D.walker.resetPosition();
-                        print();
+                        // If null is returned, agent is at a terminal state
                         isTerminal = true;
                     }
-
-                    t = 0;
-
-
+                    t = 0; // Reset time to zero
                 }
-
-                t += world.getElapsedTime();
-
-
+                t += world.getElapsedTime(); // Increment time
+            }
+            // When loop is breaked, information is printed and walker is reset to initial position
+            if (isTerminal) {
+                print();
+                Graphics2D.walker.resetPosition();
             }
         }
     }

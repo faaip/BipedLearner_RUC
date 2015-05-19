@@ -65,7 +65,7 @@ public class GUI {
 
         reset.addActionListener(e -> {
 //            Graphics2D.walker.resetPosition();
-            Graphics2D.walker.torso.applyImpulse(-25);
+            Graphics2D.walker.torso.applyImpulse(-75);
         });
 
         controls.add(reset);
