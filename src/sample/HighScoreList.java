@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
-public class HighScoreList {
+public class HighScoreList{
 
     DefaultListModel<String> model = new DefaultListModel<>();
-    ArrayList<Generation> aList = new ArrayList<Generation>();
+    ArrayList<Generation> aList = new ArrayList<>();
     public JList<String> jList = new JList<>(model);
 
 
@@ -17,16 +18,13 @@ public class HighScoreList {
     }
 
     public void add(Generation g) {
-        aList.add(new Generation(Math.random()));
+        aList.add(g);
 
-        Collections.sort(aList);
-
+        jList.clearSelection();
         model.clear();
-
-        for(Generation s :aList){
-            model.addElement(s.accumulatedReward+"");
+        for (Generation s : aList) {
+            model.addElement("#" + s.generationNumber + " " + s.accumulatedReward);
         }
     }
-
 
 }
