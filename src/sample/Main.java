@@ -5,7 +5,7 @@ import Rendering_dyn4j.Graphics2D;
 
 public class
         Main {
-    public static double gamma = 0.8; // Decay rate
+    public static double gamma = 0.1; // Decay rate
     public static double learningRate = 0.8; // Learning rate
     public static int generation = 1;
     public static Graphics2D simulation = new Graphics2D();
