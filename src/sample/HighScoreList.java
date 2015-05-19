@@ -1,5 +1,7 @@
 package sample;
 
+import Rendering_dyn4j.ThreadSync;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,13 +20,16 @@ public class HighScoreList{
     }
 
     public void add(Generation g) {
-        aList.add(g);
+        synchronized (ThreadSync.lock) {
+            aList.add(g);
+            jList.clearSelection();
+            model.clear();
+            for (Generation s : aList) {
+                model.addElement("#" + s.generationNumber + " " + s.accumulatedReward);
+            }
 
-        jList.clearSelection();
-        model.clear();
-        for (Generation s : aList) {
-            model.addElement("#" + s.generationNumber + " " + s.accumulatedReward);
         }
+
     }
 
 }
