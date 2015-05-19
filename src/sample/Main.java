@@ -40,7 +40,7 @@ public class
                 if (!Graphics2D.walker.isInSight()) {
                     isTerminal = true;
                 }
-//                if (t > 400000) {
+                if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if (action != null) {
@@ -48,7 +48,7 @@ public class
                     } else {
                         // If null is returned, agent is at a terminal state
                         isTerminal = true;
-//                    }
+                    }
                     t = 0; // Reset time to zero
                 }
                 t += simulation.getElapsedTime(); // Increment time
