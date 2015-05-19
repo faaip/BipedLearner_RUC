@@ -2,10 +2,17 @@ package sample;
 
 import QLearning.*;
 import QLearning.ActionsFunction;
+import Rendering_dyn4j.Collision;
 import Rendering_dyn4j.Graphics2D;
 import burlap.behavior.singleagent.Policy;
 
+import org.dyn4j.collision.broadphase.DynamicAABBTree;
+import org.dyn4j.collision.manifold.Manifold;
+import org.dyn4j.collision.narrowphase.Penetration;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.CollisionListener;
+import org.dyn4j.dynamics.contact.ContactConstraint;
 
 public class
         Main {
@@ -56,6 +63,9 @@ public class
 
         initState = Graphics2D.walker.getState();
 
+
+
+
         while (2 > 1) { // TODO whileRunning
 
             accumulatedReward = 0;
@@ -70,12 +80,22 @@ public class
                     } else {
                         Graphics2D.walker.resetPosition();
                         print();
-                        isTerminal = true;
+//                        isTerminal = true;
                     }
 
                     t = 0;
+//                    if(Collision.cl.collision(Graphics2D.walker.torso,Graphics2D.floor))
+//                    {
+//                        System.exit(1);
+//                    }
+
+
                 }
+//                System.out.println(cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
+
                 t += world.getElapsedTime();
+
+
 
             }
         }
