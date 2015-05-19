@@ -27,7 +27,6 @@ public class State {
 
     private static ArrayList<JointAction> actions = new ArrayList<>();
 
-    // Constructor in case of new state
     public State(BiPedBody walker) {
 
         for (RevoluteJoint j : walker.joints) {
@@ -37,8 +36,7 @@ public class State {
 
     public static void fillActions() {
         // Create actions
-        //TODO if delete
-        // if(actions.size() < 1) {
+
         System.out.println("Fill Joints happen");
         for (RevoluteJoint joint : BiPedBody.joints) {
             actions.add(new JointAction(joint));
@@ -46,7 +44,6 @@ public class State {
                 actions.add(new JointAction(joint, i));
             }
         }
-        //}
     }
 
     @Override
@@ -84,10 +81,9 @@ public class State {
         return true;
     }
 
-    //first random action
-    //TODO move it
+
     public JointAction getRandomAction() {
-        System.out.println("Random action taken");
+        //Returns a random action
         return Graphics2D.walker.getState().actions.get((int) (Math.random() * actions.size()));
     }
 }
