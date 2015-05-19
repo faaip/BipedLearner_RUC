@@ -26,7 +26,7 @@ public class BiPedBody {
     GameObject lowerLeg1;
     GameObject lowerLeg2;
     GameObject foot1;
-    GameObject foot2;
+    public GameObject foot2;
     ArrayList<GameObject> limbs = new ArrayList<>();
 
     // Joints
@@ -298,7 +298,7 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (torso.getWorldCenter().y < - 1.9  || knee1.getAnchor1().y < -2.0 || knee2.getAnchor1().y < -2.0);
+        return (Collision.cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
     }
 
     public double legsChangeSinceLastFrame()
@@ -309,8 +309,7 @@ public class BiPedBody {
 
     public double reward() {
 
-        if(Graphics2D.walker.hasFallen()){
-            System.out.println("BAD REWARD!");return -2000;}
+        if(Graphics2D.walker.hasFallen()){return -200;}
 
 //        if(Graphics2D.walker.torso.getWorldCenter().y < - 1.6){
 //            return -1800000;}
