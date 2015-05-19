@@ -1,19 +1,14 @@
 package Rendering_dyn4j;
 
-import QLearning.JointAction;
 import QLearning.State;
-import Rendering_dyn4j.GameObject;
-import Rendering_dyn4j.Graphics2D;
 import org.dyn4j.collision.CategoryFilter;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import org.dyn4j.geometry.*;
 import sample.Main;
-import scpsolver.graph.Graph;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class BiPedBody {
 
@@ -298,7 +293,7 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (Collision.cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
+        return (CollisionListener.cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
     }
 
     public double legsChangeSinceLastFrame()

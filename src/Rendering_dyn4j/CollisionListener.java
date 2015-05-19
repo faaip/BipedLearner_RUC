@@ -12,8 +12,8 @@ import org.dyn4j.dynamics.contact.ContactConstraint;
 /**
  * Created by frederikjuutilainen on 19/05/15.
  */
-public class Collision {
-   public static CollisionListener cl = new CollisionListener() {
+public class CollisionListener {
+   public static org.dyn4j.dynamics.CollisionListener cl = new org.dyn4j.dynamics.CollisionListener() {
 
        DynamicAABBTree dynamicAABBTree = new DynamicAABBTree(3);
 
