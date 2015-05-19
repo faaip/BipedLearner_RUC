@@ -83,6 +83,7 @@ public class
 
     private static void print() {
         generation++;
+        gui.highScoreList.add(new Generation(generation,accumulatedReward,0));
         if (accumulatedReward > bestReward) {
             bestReward = accumulatedReward;
             bestGeneration = generation;

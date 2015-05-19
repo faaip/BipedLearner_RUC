@@ -80,7 +80,6 @@ public class GUI {
 
         amountSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
-
                 // TODO pause simulation while slider is adjusted
                 simulationSpeed = amountSlider.getValue();
                 world.step((int) Math.floor(amountSlider.getValue() / world.getStepFrequency()));
@@ -93,7 +92,6 @@ public class GUI {
 //            Graphics2D.walker.torso.applyImpulse(-75);
             Main.simulationRunning = false;
             System.out.println(Main.simulationRunning);
-            highScoreList.add(new Generation(2));
 
         });
 
@@ -113,16 +111,15 @@ public class GUI {
         //todo add labels
 
 
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JScrollPane(highScoreList.jList));
+        JPanel highScores = new JPanel();
+        highScores.add(new JScrollPane(highScoreList.jList));
 
-        info.add(jPanel);
-
-//        info.add(generationNo);
-//        info.add(highScore);
-        // info.add(exploringLabel);
-        // info.add(actionLabel);
-        // info.add(NsaLabel);
+        info.add(highScores);
+        info.add(generationNo);
+        info.add(highScore);
+//         info.add(exploringLabel);
+//         info.add(actionLabel);
+//         info.add(NsaLabel);
         // info.add(currentStateLabel);
         // info.add(currentGenLabel);
 
