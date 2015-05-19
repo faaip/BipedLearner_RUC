@@ -25,8 +25,8 @@ public class
         //TODO POP up window
 
         //Start window
-        GUI.startWindow();
-        System.out.println("Selected mode: " + GUI.modeSelected);
+        StartWindow startWindow = new StartWindow();
+        System.out.println("Selected mode: " + startWindow.modeSelected);
 
 
 
