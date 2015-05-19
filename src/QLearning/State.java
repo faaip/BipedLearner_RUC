@@ -10,14 +10,6 @@ public class State {
     // TODO comments and description
 
     // State features
-    private boolean torsoLeaningForward;
-    private boolean knee1Forward;
-    private boolean foot1Forward;
-    private boolean foot1OnGround;
-    private boolean foot2OnGround;
-    private boolean upperLeg1InFrontOfTorso;
-    private boolean upperLeg2InFrontOfTorso;
-
     private double relativeAngle; // Bodys relative angle to surrounding
     private ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
 
@@ -29,10 +21,10 @@ public class State {
 
     // Constructor in case of new state
     public State(BiPedBody walker) {
-
         for (RevoluteJoint j : walker.joints) {
             jointAngles.add(j.getJointAngle());
         }
+        this.relativeAngle = walker.getRelativeAngle();
     }
 
     public static void fillActions() {

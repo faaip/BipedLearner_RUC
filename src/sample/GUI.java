@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
+import org.dyn4j.geometry.Vector2;
 
 import java.awt.*;
 
@@ -63,7 +64,8 @@ public class GUI {
         });
 
         reset.addActionListener(e -> {
-            Graphics2D.walker.resetPosition();
+//            Graphics2D.walker.resetPosition();
+            Graphics2D.walker.torso.applyImpulse(-25);
         });
 
         controls.add(reset);

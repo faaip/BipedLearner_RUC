@@ -54,14 +54,12 @@ public class
         initState = Graphics2D.walker.getState();
 
 
-
-
         while (2 > 1) { // TODO whileRunning
 
             accumulatedReward = 0;
             double t = 0;
             boolean isTerminal = false;
-            while (!isTerminal /* !Graphics2D.walker.hasFallen() || Graphics2D.walker.isInSight()*/) { //TODO isInSight - not working now
+            while (/* !isTerminal  ||*/ Graphics2D.walker.isInSight()) { //TODO isInSight - not working now
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
@@ -70,21 +68,15 @@ public class
                     } else {
                         Graphics2D.walker.resetPosition();
                         print();
-//                        isTerminal = true;
+                        isTerminal = true;
                     }
 
                     t = 0;
-//                    if(Collision.cl.collision(Graphics2D.walker.torso,Graphics2D.floor))
-//                    {
-//                        System.exit(1);
-//                    }
 
 
                 }
-//                System.out.println(cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
 
                 t += world.getElapsedTime();
-
 
 
             }
@@ -99,7 +91,6 @@ public class
         }
         gui.update();
         System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
-
     }
 
 
