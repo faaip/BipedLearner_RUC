@@ -41,7 +41,7 @@ public class GUI {
         modeMenu.addActionListener(e -> {
                     if (modeMenu.getSelectedIndex() == 0) {modeSelected = 0; startPanel.add(modeWalking);}
                     if (modeMenu.getSelectedIndex() == 1) {modeSelected = 1; startPanel.add(modeFeet);}
-                    if (modeMenu.getSelectedIndex() == 2) {modeSelected = 3; startPanel.add(modeKnee);}
+                    if (modeMenu.getSelectedIndex() == 2) {modeSelected = 2; startPanel.add(modeKnee);}
                 }
         );
 

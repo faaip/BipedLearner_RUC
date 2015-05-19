@@ -309,15 +309,15 @@ public class BiPedBody {
 
         if (StartWindow.modeSelected == 0) {
             //Reward for walking forward
-            double reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
+            return -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
         }
         if (StartWindow.modeSelected == 1) {
             //Reward for having the feets up
-            double reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot1.getWorldCenter().y) * 100;
+            return -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot1.getWorldCenter().y) * 100;
         }
         if (StartWindow.modeSelected == 2) {
             //Bending Knee 1
-            double reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
+            return Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
 
         }
 
