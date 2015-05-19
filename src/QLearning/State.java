@@ -54,6 +54,7 @@ public class State {
     public int hashCode() {
 
         //TODO hashCode
+//        return jointAngles.hashCode();
         return 0;
     }
 

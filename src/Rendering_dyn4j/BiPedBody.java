@@ -293,7 +293,7 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (CollisionListener.cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
+        return (CollisionDetector.cl.collision(Graphics2D.walker.torso,Graphics2D.floor));
     }
 
     public double legsChangeSinceLastFrame()

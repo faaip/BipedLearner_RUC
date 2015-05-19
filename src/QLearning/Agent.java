@@ -93,17 +93,8 @@ public class Agent {
     }
 
     private boolean isTerminal(State s) {
-        boolean terminal = false;
-//        if (null != s && Main.actionsFunction.actions.size() == 0) {
-            // No actions possible in state is considered terminal.
-//            terminal = true;
-//        }
-
-        // TODO fix me with a collisionlistener
-        if(Graphics2D.walker.hasFallen()){
-            terminal = true;}
-
-        return terminal;
+        // State is terminal if the walker has fallen
+        return Graphics2D.walker.hasFallen();
     }
 
     protected double f(Double u, int n) {

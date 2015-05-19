@@ -12,7 +12,7 @@ public class
     public static int generation = 1;
     public static GUI gui;
     public static Graphics2D world;
-    public static CollisionListener cl;
+//    public static CollisionListener cl;
     public static double bestReward;
     public static double accumulatedReward;
     public static double bestDistance;

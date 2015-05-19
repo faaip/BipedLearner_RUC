@@ -22,7 +22,7 @@ public class StateAnalyser {
         //add to states and return this new state
 
         if (states.contains(walker.getState())) {
-//            System.out.println("Old state " + states.size());
+            System.out.println("Old state " + states.size());
 
 //            return states.
             return walker.getState();
