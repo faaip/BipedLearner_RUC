@@ -1,15 +1,9 @@
 package QLearning;
 
-import Rendering_dyn4j.Graphics2D;
-import aima.core.learning.reinforcement.PerceptStateReward;
-import burlap.behavior.singleagent.QValue;
 import Rendering_dyn4j.BiPedBody;
 import sample.Main;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 public class StateAnalyser {
     // TODO description and comments

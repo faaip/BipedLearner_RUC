@@ -7,6 +7,7 @@ import Rendering_dyn4j.BiPedBody;
 import sample.Main;
 import scpsolver.graph.Graph;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,6 @@ public class Agent {
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null;
-    private BiPedBody walker = Graphics2D.walker;
 
     private int Ne = 1;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
@@ -98,11 +98,13 @@ public class Agent {
             this.r = rPrime;
         }
 
-        return a;
+        if(a != null) {Main.gui.update(a);}
+            return a;
     }
 
     private JointAction argmaxAPrime(State sPrime) {
         JointAction a = null;
+        Collections.shuffle(sPrime.getActions()); // Shuffle list for random actions
         double max = Double.NEGATIVE_INFINITY;
         for (JointAction aPrime : sPrime.getActions()) {
             Pair<State, JointAction> sPrimeAPrime = new Pair<State, JointAction>(sPrime, aPrime);

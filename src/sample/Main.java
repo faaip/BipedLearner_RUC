@@ -80,18 +80,16 @@ public class
             }
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
-                print();
+                addToHighScore();
                 Graphics2D.walker.resetPosition();
             }
         }
     }
 
 
-    private static void print() {
+    private static void addToHighScore() {
         gui.highScoreList.add(new Generation(generation, accumulatedReward, 0));
         generation++;
-        gui.update();
-        System.out.println("Generation " + generation + " Reward: " + accumulatedReward + " State no: " + analyser.states.size() + " Dist: " + Graphics2D.walker.torso.getWorldCenter().distance(0, 0) + " Best reward: " + bestReward + " Best distance: " + bestDistance + " Best generation: " + bestGeneration);
     }
 }
 

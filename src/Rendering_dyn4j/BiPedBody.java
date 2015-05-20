@@ -77,7 +77,8 @@ public class BiPedBody {
 
         // Torso
         torso = new GameObject();
-        {// Fixture4
+        torso.setUserData("torso");
+        {
             Convex c = Geometry.createRectangle(0.6, 1.0);
             BodyFixture bf = new BodyFixture(c);
             torso.addFixture(bf);
@@ -89,6 +90,7 @@ public class BiPedBody {
         // Leg 1
         // Upper leg
         upperLeg1 = new GameObject();
+        upperLeg1.setUserData("upper leg 1");
         {// Fixture4
             Convex c = Geometry.createRectangle(0.4, 1.05);
             BodyFixture bf = new BodyFixture(c);
@@ -102,6 +104,7 @@ public class BiPedBody {
 
         // Lower leg
         lowerLeg1 = new GameObject();
+        lowerLeg1.setUserData("lower leg 1");
         {// Fixture4
             Convex c = Geometry.createRectangle(0.32, 1.05);
             BodyFixture bf = new BodyFixture(c);
@@ -114,6 +117,7 @@ public class BiPedBody {
 
         // Foot
         foot1 = new GameObject();
+        foot1.setUserData("foot 1");
         {// Fixture4
             Convex c = Geometry.createRectangle(0.6, 0.25);
             BodyFixture bf = new BodyFixture(c);
@@ -135,6 +139,7 @@ public class BiPedBody {
 //        hip1.setMotorSpeed(Math.toRadians(0.0));
         hip1.setMaximumMotorTorque(maxHipTorque);
         hip1.setCollisionAllowed(false);
+        hip1.setUserData("hip1");
         world.addJoint(hip1);
 
         // Knee - TODO set smaller limits
@@ -146,6 +151,7 @@ public class BiPedBody {
 //        knee1.setMotorSpeed(Math.toRadians(0.0));
         knee1.setMaximumMotorTorque(maxKneeTorque);
         knee1.setCollisionAllowed(false);
+        knee1.setUserData("knee1");
         world.addJoint(knee1);
 
         // Ankle
@@ -157,6 +163,7 @@ public class BiPedBody {
 //        ankle1.setMotorSpeed(Math.toRadians(0.0));
         ankle1.setMaximumMotorTorque(maxAnkleTorque);
         ankle1.setCollisionAllowed(false);
+        ankle1.setUserData("ankle1");
         world.addJoint(ankle1);
 
         // Leg 2
@@ -169,6 +176,7 @@ public class BiPedBody {
             upperLeg2.addFixture(bf);
             upperLeg2.translate(0, -1.0);
             upperLeg2.setMass(Mass.Type.NORMAL);
+            upperLeg2.setUserData("upper leg 2");
 
         }
         world.addBody(upperLeg2);
@@ -182,6 +190,7 @@ public class BiPedBody {
             lowerLeg2.addFixture(bf);
             lowerLeg2.translate(0, -1.8);
             lowerLeg2.setMass(Mass.Type.NORMAL);
+            lowerLeg2.setUserData("lower leg 2");
         }
         world.addBody(lowerLeg2);
 
@@ -194,6 +203,7 @@ public class BiPedBody {
             foot2.addFixture(bf);
             foot2.translate(0.15, -2.3);
             foot2.setMass(Mass.Type.NORMAL);
+            foot2.setUserData("foot2");
 
         }
         world.addBody(foot2);
@@ -208,6 +218,7 @@ public class BiPedBody {
         hip2.setMotorSpeed(Math.toRadians(0.0));
         hip2.setMaximumMotorTorque(maxHipTorque);
         hip2.setCollisionAllowed(false);
+        hip2.setUserData("hip2");
         world.addJoint(hip2);
 
         // Knee
@@ -219,6 +230,7 @@ public class BiPedBody {
         knee2.setMotorSpeed(Math.toRadians(0.0));
         knee2.setMaximumMotorTorque(maxKneeTorque);
         knee2.setCollisionAllowed(false);
+        knee2.setUserData("knee2");
         world.addJoint(knee2);
 
         // Ankle
@@ -230,6 +242,7 @@ public class BiPedBody {
         ankle2.setMotorSpeed(Math.toRadians(0.0));
         ankle2.setMaximumMotorTorque(maxAnkleTorque);
         ankle2.setCollisionAllowed(false);
+        ankle2.setUserData("ankle2");
         world.addJoint(ankle2);
 
         // Add joints to list
@@ -311,7 +324,6 @@ public class BiPedBody {
                     return -500;
                 }
                 reward = -0.5 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + (Graphics2D.walker.torso.getWorldCenter().y*4);
-                System.out.println(reward);
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)

@@ -4,11 +4,12 @@ import Rendering_dyn4j.ThreadSync;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class HighScoreList{
+public class HighScoreList {
 
     DefaultListModel<String> model = new DefaultListModel<>();
     ArrayList<Generation> aList = new ArrayList<>();
@@ -16,23 +17,16 @@ public class HighScoreList{
 
 
     public HighScoreList() {
-
-//        jList.setPreferredSize(new Dimension(5000,120));
-
     }
 
-    public void add(Generation g) {
-        synchronized (ThreadSync.lock) {
-            aList.add(g);
-//            jList.clearSelection();
-            model.clear();
-            Collections.sort(aList);
-            for (Generation s : aList) {
-                model.addElement("#" + s.generationNumber + " " + s.accumulatedReward);
+    public void add(Generation g)  {
+        model.clear();
+        aList.add(g);
+        Collections.sort(aList);
+        for (Generation s : aList) {
+            synchronized (ThreadSync.lock) {
+                model.addElement("#" + s.generationNumber + " - " + new DecimalFormat("#.###").format(s.accumulatedReward));
             }
-
         }
-
     }
-
 }

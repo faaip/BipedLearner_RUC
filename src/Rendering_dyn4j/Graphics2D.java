@@ -42,7 +42,9 @@ import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
+import org.dyn4j.geometry.Vector2;
 import sample.*;
+import scpsolver.graph.Graph;
 
 
 /**
@@ -167,9 +169,9 @@ public class Graphics2D extends JFrame {
     public void initializeWorld() {
         // create the world
         this.world = new World();
+        world.shiftCoordinates(new Vector2(1000,0)); // TODO TEST
 
         // create the floor
-        Rectangle floorRect = new Rectangle(15.0, 1.0);
         floor = new GameObject();
         BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
         floorFixture.setFriction(1000.0); // TODO what value
@@ -194,7 +196,7 @@ public class Graphics2D extends JFrame {
             BodyFixture wall2Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
             wall2.addFixture(wall2Fixture);
             wall2.setMass(Mass.Type.INFINITE);
-            wall2.translate(6,0);
+            wall2.translate(6, 0);
 
             world.addBody(wall1);
             world.addBody(wall2);
@@ -267,8 +269,13 @@ public class Graphics2D extends JFrame {
 
         // before we render everything im going to flip the y axis and move the
         // origin to the center (instead of it being in the top left corner)
+        // TODO her flyttes kameraet, kommenter det!
         AffineTransform yFlip = AffineTransform.getScaleInstance(1, -1);
+//        int walkerX = (int) (Graphics2D.walker.torso.getWorldCenter().x*SCALE);
+//        AffineTransform move = AffineTransform.getTranslateInstance(400-walkerX, -300);
         AffineTransform move = AffineTransform.getTranslateInstance(400, -300);
+
+
         g.transform(yFlip);
         g.transform(move);
 

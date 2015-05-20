@@ -2,6 +2,7 @@ package sample;
 
 import javax.swing.*;
 
+import QLearning.JointAction;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 import org.apache.log4j.Layout;
@@ -25,12 +26,13 @@ public class GUI {
     private static JLabel currentNsa;
     private static JLabel currentQ;
     private static JLabel agentStatus;
+    private static JLabel currentAction;
 
 
     public GUI(Graphics2D world) {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        gui.setSize(350, 1000);
+        gui.setSize(350, 500);
         gui.setLocation(820, 0);
         gui.setTitle("Controls");
 
@@ -42,12 +44,14 @@ public class GUI {
         currentNsa = new JLabel("Current Nsa count: " + 0);
         currentQ = new JLabel("Number of states explored: " + 0);
         agentStatus = new JLabel("Agent is exploring");
+        currentAction = new JLabel("Action: ");
 
         // add components
         currentBipedPanel.add(generationLabel);
         currentBipedPanel.add(statesLabel);
         currentBipedPanel.add(currentNsa);
         currentBipedPanel.add(currentQ);
+        currentBipedPanel.add(currentAction);
         currentBipedPanel.add(agentStatus);
 
         //Panel for controls
@@ -55,8 +59,8 @@ public class GUI {
         JButton resetButton = new JButton("Reset walker");
         control.setLayout(new GridLayout(0, 1));
         JToggleButton pauseButton = new JToggleButton("Pause");
-        JLabel simSpeed = new JLabel(simulationSpeed + " x Speed",SwingConstants.CENTER);
-        JSlider simSpeedSlider = new JSlider(1,150, 1);
+        JLabel simSpeed = new JLabel(simulationSpeed + " x Speed", SwingConstants.CENTER);
+        JSlider simSpeedSlider = new JSlider(1, 50, 1);
 
         pauseButton.addChangeListener(e1 -> {
             if (simulationSpeed != 0) {
@@ -95,7 +99,6 @@ public class GUI {
         gui.setVisible(true);
 
 
-
         simSpeedSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
                 simulationSpeed = simSpeedSlider.getValue();
@@ -116,7 +119,6 @@ public class GUI {
         // Panel for info monitoring
         JPanel info = new JPanel();
         info.setLayout(new GridLayout(3, 3));
-
 
 
     }
@@ -147,4 +149,9 @@ public class GUI {
     }
 
 
+    public void update(JointAction action) {
+        synchronized (ThreadSync.lock) {
+            currentAction.setText("Action: " + action.toString());
+        }
+    }
 }

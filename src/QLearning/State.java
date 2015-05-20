@@ -17,6 +17,11 @@ public class State {
         return actions;
     }
 
+    public void shuffleActions()
+    {
+        Collections.shuffle(actions);
+    }
+
     private static ArrayList<JointAction> actions = new ArrayList<>();
 
     public State(BiPedBody walker) {
@@ -36,6 +41,8 @@ public class State {
                 actions.add(new JointAction(joint, i));
             }
         }
+
+//        Collections.reverse(actions);
     }
 
     @Override

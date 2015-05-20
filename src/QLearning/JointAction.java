@@ -42,13 +42,11 @@ public class JointAction implements Action {
 
     @Override
     public String toString() {
-
-
-
-        return " Action: " + a + " Motor on: " + motorOn;
-
-
-
+        if (noOp) {
+            return "noOp";
+        } else {
+            return joint.getUserData() + " Action: " + a + " Motor on: " + motorOn;
+        }
     }
 
     @Override
