@@ -95,24 +95,9 @@ public class GUI {
         gui.setVisible(true);
 
 
-        // TODO startknappen skal lave en agent og en world afhængigt af mode selected
-        // TODO alle actions listeners skal køre i synced thread
-
-
-        // Add controls
-//        JButton skip1 = new JButton("Skip 1 minute");
-//        JButton skip10 = new JButton("Skip 10 minutes");
-
-
-        // Panel for controls
-//        JPanel controls = new JPanel();
-//        controls.setLayout(new BoxLayout(controls, BoxLayout.PAGE_AXIS));
-//        controls.setBackground(Color.white);
-
 
         simSpeedSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
-                // TODO pause simulation while slider is adjusted
                 simulationSpeed = simSpeedSlider.getValue();
                 world.step((int) Math.floor(simSpeedSlider.getValue() / world.getStepFrequency()));
             }
@@ -133,31 +118,6 @@ public class GUI {
         info.setLayout(new GridLayout(3, 3));
 
 
-        //todo add labels
-
-
-//        info.add(highScores);
-
-//         info.add(exploringLabel);
-//         info.add(actionLabel);
-//         info.add(NsaLabel);
-        // info.add(currentStateLabel);
-        // info.add(currentGenLabel);
-
-        // Panels are added to splitpane
-
-
-        // modeFeet.setVisible(false);
-        //modeKnee.setVisible(false);
-        //modeWalking.setVisible(false);
-
-//        gui.add(mainSplit);
-
-
-        // Panel for graphs
-        //   JPanel graphs = new JPanel();
-        //  graphs.setLayout(new GridBagLayout());
-        //   graphs.setBackground(Color.BLACK);
 
     }
 

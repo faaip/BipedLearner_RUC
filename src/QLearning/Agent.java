@@ -10,11 +10,13 @@ import scpsolver.graph.Graph;
 import java.util.HashMap;
 import java.util.Map;
 
+//TODO Comment, Clean og lave referencer til AIMA
+
 public class Agent {
     private JointAction noneAction = new JointAction();
-    private double alpha; // Learning rate TODO - ADD TO GUI
-    private double gamma; // Decay rate TODO - ADD TO GUI
-    private double Rplus = 10; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double alpha; // Learning rate
+    private double gamma; // Decay rate
+    private double Rplus = 10; // Optimistic reward prediction? //
     private int mode;
 
     private State s = null; // S (previous State)
@@ -28,6 +30,7 @@ public class Agent {
 
     public Agent(int mode) {
         this.mode = mode;
+        //TODO find optimal values
         switch (mode) {
             case 0:
                 this.Rplus = 3;
@@ -80,7 +83,7 @@ public class Agent {
             }
 
             r = Graphics2D.walker.reward();
-            Q.put(sa, Qsa + alpha(Nsa, s, a)
+            Q.put(sa, Qsa + alpha
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
         }
@@ -130,15 +133,6 @@ public class Agent {
         }
 //        System.out.println(" U U U U U ");
         return u;
-    }
-
-    protected double alpha(FrequencyCounter<Pair<State, JointAction>> Nsa, State s, JointAction a) {
-        // Default implementation is just to return a fixed parameter value
-        // irrespective of the # of times a state action has been encountered
-
-        // TODO alpha method - Maybe not
-
-        return alpha;
     }
 
     private double maxAPrime(State sPrime) {
