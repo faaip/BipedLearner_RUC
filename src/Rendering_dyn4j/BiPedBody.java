@@ -137,7 +137,7 @@ public class BiPedBody {
         hip1.setCollisionAllowed(false);
         world.addJoint(hip1);
 
-        // Knee
+        // Knee - TODO set smaller limits
         knee1 = new RevoluteJoint(upperLeg1, lowerLeg1, new Vector2(0.0, -1.4));
         knee1.setLimitEnabled(true);
         knee1.setLimits(Math.toRadians(0.0), Math.toRadians(150.0));
@@ -202,7 +202,7 @@ public class BiPedBody {
         // Hip
         hip2 = new RevoluteJoint(torso, upperLeg2, new Vector2(0.0, -.6));
         hip2.setLimitEnabled(true);
-        hip2.setLimits(Math.toRadians(-50.0), Math.toRadians(65.0));
+        hip2.setLimits(Math.toRadians(-50.0), Math.toRadians(5.0));
         hip2.setReferenceAngle(Math.toRadians(0.0));
         hip2.setMotorEnabled(true);
         hip2.setMotorSpeed(Math.toRadians(0.0));
@@ -303,15 +303,19 @@ public class BiPedBody {
         int mode = Main.mode;
         double reward = 0;
 
+        // TODO minus reward
+
         switch (mode) {
             case 0:
                 if (Graphics2D.walker.hasFallen()) {
-                    return -100;
+                    return -500;
                 }
-                reward = -0.1 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + Graphics2D.walker.torso.getWorldCenter().y;
+                reward = -0.5 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + (Graphics2D.walker.torso.getWorldCenter().y*4);
+                System.out.println(reward);
                 break;
             case 1:
-                reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot1.getWorldCenter().y) * 100;
+                // TODO extra bonus for begge fødder højt (ikke bare summen)
+                reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot2.getWorldCenter().y) * 1000;
                 break;
             case 2:
                 reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());

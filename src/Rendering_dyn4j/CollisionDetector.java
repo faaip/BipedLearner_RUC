@@ -19,11 +19,12 @@ public class CollisionDetector {
 
        @Override
         public boolean collision(Body body, Body body1) {
+           synchronized (ThreadSync.lock) {
+               dynamicAABBTree.add(body);
+               dynamicAABBTree.add(body1);
+               return dynamicAABBTree.detect(body,body1);
 
-            dynamicAABBTree.add(body);
-            dynamicAABBTree.add(body1);
-
-            return dynamicAABBTree.detect(body,body1);
+           }
         }
 
         @Override

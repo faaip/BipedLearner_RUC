@@ -4,6 +4,7 @@ import Rendering_dyn4j.Graphics2D;
 import aima.core.learning.reinforcement.PerceptStateReward;
 import burlap.behavior.singleagent.QValue;
 import Rendering_dyn4j.BiPedBody;
+import sample.Main;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +30,7 @@ public class StateAnalyser {
         } else {
 //            System.out.println("New state number: " + states.size());
             states.add(new State(walker));
+            Main.gui.update();
             return walker.getState();
         }
     }

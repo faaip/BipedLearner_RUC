@@ -5,6 +5,7 @@ import aima.core.util.FrequencyCounter;
 import aima.core.util.datastructure.Pair;
 import Rendering_dyn4j.BiPedBody;
 import sample.Main;
+import scpsolver.graph.Graph;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,8 @@ public class Agent {
     private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate TODO - ADD TO GUI
     private double gamma; // Decay rate TODO - ADD TO GUI
-    private double Rplus = -10; // Optimistic reward prediction? //TODO find optimal Rplus
+    private double Rplus = 10; // Optimistic reward prediction? //TODO find optimal Rplus
+    private int mode;
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
@@ -24,11 +26,29 @@ public class Agent {
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
     Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
-    public Agent(double alpha, double gamma) {
+    public Agent(int mode) {
+        this.mode = mode;
+        switch (mode) {
+            case 0:
+                this.Rplus = 3;
+                this.gamma = 0.9; // Lots of reliance of future reward
+                this.alpha = 0.8; // Large number of states = high learning rate
+                break;
+            case 1:
+                this.Rplus = 2;
+                this.gamma = 0.2;
+                this.alpha = 0.5;
+
+                break;
+            case 2:
+                break;
+        }
+
         this.alpha = alpha;
         this.gamma = gamma;
         this.s = Graphics2D.walker.getState();
         this.a = Main.initAction;
+
     }
 
     public JointAction execute() {
@@ -45,13 +65,14 @@ public class Agent {
             // Increment frequencies
             Pair<State, JointAction> sa = new Pair<>(s, a);
             Nsa.incrementFor(sa);
-            System.out.println("State-Action count: " + Nsa.getCount(sa) + ". Q = " + Q.get(sa));
 
             // Get Q-value
             Double Qsa = Q.get(sa);
             if (Qsa == null) {
                 Qsa = 0.0;
             }
+
+            Main.gui.update(Nsa.getCount(sa),Qsa); // Update gui with info for current actions
 
             if (r == null) {
                 r = Graphics2D.walker.reward();
@@ -94,7 +115,11 @@ public class Agent {
 
     private boolean isTerminal(State s) {
         // State is terminal if the walker has fallen
-        return Graphics2D.walker.hasFallen();
+        if(mode == 0) {
+            return Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight(); // Falling is a terminal state in mode 0
+        }
+
+        return false;
     }
 
     protected double f(Double u, int n) {

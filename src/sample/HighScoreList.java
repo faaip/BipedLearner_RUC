@@ -17,15 +17,16 @@ public class HighScoreList{
 
     public HighScoreList() {
 
-        jList.setPreferredSize(new Dimension(5000,120));
+//        jList.setPreferredSize(new Dimension(5000,120));
 
     }
 
     public void add(Generation g) {
         synchronized (ThreadSync.lock) {
             aList.add(g);
-            jList.clearSelection();
+//            jList.clearSelection();
             model.clear();
+            Collections.sort(aList);
             for (Generation s : aList) {
                 model.addElement("#" + s.generationNumber + " " + s.accumulatedReward);
             }

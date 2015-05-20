@@ -60,6 +60,8 @@ public class State {
         int round = 20;
 
         //Checks degree compared to world
+
+        // TODO relative angle er i virkeligheden
         if (Math.round(Math.toDegrees(this.relativeAngle) / round) != Math.round(Math.toDegrees(s.relativeAngle) / round)) {
             return false;
         }

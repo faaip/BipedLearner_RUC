@@ -180,6 +180,29 @@ public class Graphics2D extends JFrame {
         floor.translate(0.0, -2.95);
         this.world.addBody(floor);
 
+        if(Main.mode != 0)
+        {
+            // Add walls
+            Rectangle wall1Rect = new Rectangle(1.0, 15.0);
+            GameObject wall1 = new GameObject();
+            BodyFixture wall1Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
+            wall1.addFixture(wall1Fixture);
+            wall1.setMass(Mass.Type.INFINITE);
+            wall1.translate(-6,0);
+
+            GameObject wall2 = new GameObject();
+            BodyFixture wall2Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
+            wall2.addFixture(wall2Fixture);
+            wall2.setMass(Mass.Type.INFINITE);
+            wall2.translate(6,0);
+
+            world.addBody(wall1);
+            world.addBody(wall2);
+
+        }
+
+
+
         walker = new BiPedBody();
     }
 
