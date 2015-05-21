@@ -33,7 +33,7 @@ public class Agent {
         //TODO find optimal values
         switch (mode) {
             case 0:
-                this.Rplus = 3;
+                this.Rplus = 10;
                 this.gamma = 0.9; // Lots of reliance of future reward
                 this.alpha = 0.8; // Large number of states = high learning rate
                 break;

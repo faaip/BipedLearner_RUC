@@ -320,10 +320,20 @@ public class BiPedBody {
 
         switch (mode) {
             case 0:
-                if (Graphics2D.walker.hasFallen()) {
-                    return -500;
+//                if (Graphics2D.walker.hasFallen()) {
+//                //    return -200;
+//                }
+                if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) > 0) {
+                    reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 5000);
                 }
-                reward = -0.5 + (((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 600)) + (Graphics2D.walker.torso.getWorldCenter().y*4);
+                if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) < 0) {
+                    reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 1000);
+                }
+                if (reward == 0) {
+                    reward = -10;
+                }
+
+
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
@@ -334,9 +344,10 @@ public class BiPedBody {
                 break;
 
 
-
         }
         Main.accumulatedReward += reward;
+
+
         return reward;
     }
 

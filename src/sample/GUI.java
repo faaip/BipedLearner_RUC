@@ -95,7 +95,10 @@ public class GUI {
 
 
         // Panels are added
-        gui.add(splitPane2);
+        if(Main.mode == 0){gui.add(splitPane2);}
+        else{
+            gui.setSize(350, 250);
+            gui.add(splitPane1);}
         gui.setVisible(true);
 
 

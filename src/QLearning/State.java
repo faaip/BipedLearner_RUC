@@ -46,7 +46,9 @@ public class State {
 //        }
 //        this.relativeAngle = walker.getRelativeAngle();
 
-        int round = 20;
+        // TODO clean me
+
+        int round = 10;
 
         for (RevoluteJoint j : walker.joints) {
 //            jointAngles.add(Math.toDegrees(j.getJointAngle()));
@@ -55,8 +57,6 @@ public class State {
         }
         this.relativeAngle = (double) (Math.round(Math.toDegrees(walker.getRelativeAngle()) / round));
 
-
-        System.out.println(this.toString());
     }
 
     public State(State s) {

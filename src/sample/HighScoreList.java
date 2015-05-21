@@ -36,7 +36,7 @@ public class HighScoreList {
     public void add(Generation g) {
         synchronized (ThreadSync.lock) {
 //            model.addRow(new Object[][]{g.generationNumber, new Double(g.accumulatedReward)});
-            model.addRow(new Integer[]{g.generationNumber});
+            model.addRow(new Double[]{(double)g.generationNumber,g.accumulatedReward});
 //            model.addRow(new Object[]{g.generationNumber, new DecimalFormat("#.###").format(g.accumulatedReward)});
         }
 
