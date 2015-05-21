@@ -7,29 +7,64 @@ import Rendering_dyn4j.BiPedBody;
 import java.util.*;
 
 public class State {
+
     // TODO comments and description
 
+    public double getRelativeAngle() {
+        return relativeAngle;
+    }
+
+    public ArrayList<Double> getJointAngles() {
+        return jointAngles;
+    }
+
+    public void setRelativeAngle(double relativeAngle) {
+        this.relativeAngle = relativeAngle;
+    }
+
+    public void setJointAngles(ArrayList<Double> jointAngles) {
+        this.jointAngles = jointAngles;
+    }
+
     // State features
-    private double relativeAngle; // Bodys relative angle to surrounding
-    private ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
+    public double relativeAngle; // Bodys relative angle to surrounding
+    public ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
 
     public ArrayList<JointAction> getActions() {
         return actions;
     }
 
-    public void shuffleActions()
-    {
+    public void shuffleActions() {
         Collections.shuffle(actions);
     }
 
     private static ArrayList<JointAction> actions = new ArrayList<>();
 
     public State(BiPedBody walker) {
+//        for (RevoluteJoint j : walker.joints) {
+//            jointAngles.add(j.getJointAngle());
+//        }
+//        this.relativeAngle = walker.getRelativeAngle();
+
+        int round = 20;
+
         for (RevoluteJoint j : walker.joints) {
-            jointAngles.add(j.getJointAngle());
+//            jointAngles.add(Math.toDegrees(j.getJointAngle()));
+            jointAngles.add((double) (Math.round(Math.toDegrees(j.getJointAngle()) / round)));
+
         }
-        this.relativeAngle = walker.getRelativeAngle();
+        this.relativeAngle = (double) (Math.round(Math.toDegrees(walker.getRelativeAngle()) / round));
+
+
+        System.out.println(this.toString());
     }
+
+    public State(State s) {
+        this.setRelativeAngle(s.getRelativeAngle());
+        this.jointAngles.clear();
+        this.jointAngles.addAll(s.getJointAngles());
+    }
+
 
     public static void fillActions() {
         // Create actions

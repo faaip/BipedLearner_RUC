@@ -2,6 +2,7 @@ package sample;
 
 import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.ThreadSync;
 
 import javax.swing.*;
 
@@ -88,8 +89,10 @@ public class
 
 
     private static void addToHighScore() {
-        gui.highScoreList.add(new Generation(generation, accumulatedReward, 0));
-        generation++;
+        synchronized (ThreadSync.lock) {
+            gui.highScoreList.add(new Generation(generation, accumulatedReward, 0));
+            generation++;
+        }
     }
 }
 

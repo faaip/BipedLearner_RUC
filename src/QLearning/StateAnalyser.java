@@ -9,6 +9,8 @@ public class StateAnalyser {
     // TODO description and comments
 
     public HashSet<State> states = new HashSet<>();
+    private int  noOfStates = 0;
+
     public State getState(BiPedBody walker) {
 
         //if states does contain an aproximate state
@@ -21,11 +23,15 @@ public class StateAnalyser {
 
 //            return states.
             return walker.getState();
+//            return getApproximate(walker.getState());
         } else {
-//            System.out.println("New state number: " + states.size());
+            System.out.println("New state number: " + states.size());
             states.add(new State(walker));
+            noOfStates++;
             Main.gui.update();
             return walker.getState();
+
+            // TODO den returnerer ikke den approximerede!!
         }
     }
 
@@ -33,6 +39,17 @@ public class StateAnalyser {
         System.out.println(states);
     }
 
+    private State getApproximate(State s) {
+
+        int round = 20;
+        State approxState = new State(s);
+        Math.round(Math.toDegrees(approxState.relativeAngle)/ round);
+
+
+        return approxState;
+
+
+    }
 
 
 }

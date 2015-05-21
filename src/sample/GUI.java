@@ -63,16 +63,20 @@ public class GUI {
         JSlider simSpeedSlider = new JSlider(1, 50, 1);
 
         pauseButton.addChangeListener(e1 -> {
-            if (simulationSpeed != 0) {
-                simulationSpeed = 0;
-            } else {
-                simulationSpeed = simSpeedSlider.getValue();
+            synchronized (ThreadSync.lock) {
+                if (simulationSpeed != 0) {
+                    simulationSpeed = 0;
+                } else {
+                    simulationSpeed = simSpeedSlider.getValue();
+                }
             }
         });
 
         resetButton.addActionListener(e1 -> {
-            Graphics2D.walker.resetPosition();
-            Main.generation++;
+            synchronized (ThreadSync.lock) {
+                Graphics2D.walker.resetPosition();
+                Main.generation++;
+            }
         });
 
         // Add Components to panel
@@ -83,7 +87,7 @@ public class GUI {
 
 
         // Panels for high score
-        JScrollPane highScorePane = new JScrollPane(highScoreList.jList);
+        JScrollPane highScorePane = new JScrollPane(highScoreList.table);
 
         // Split panes
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, currentBipedPanel, control);
@@ -91,36 +95,21 @@ public class GUI {
 
 
         // Panels are added
-        //gui.add(currentBipedPanel);
-//        gui.add(control);
-//        gui.add(highScores);
         gui.add(splitPane2);
-//        gui.add(highScores);
         gui.setVisible(true);
 
 
         simSpeedSlider.addChangeListener(e -> {
             synchronized (ThreadSync.lock) {
                 simulationSpeed = simSpeedSlider.getValue();
+                simSpeed.setText(simulationSpeed + " x Speed");
                 world.step((int) Math.floor(simSpeedSlider.getValue() / world.getStepFrequency()));
             }
-            simSpeed.setText(simulationSpeed + " x Speed");
         });
-
-        resetButton.addActionListener(e -> {
-//            Graphics2D.walker.resetPosition();
-//            Graphics2D.walker.torso.applyImpulse(-75);
-//            Main.simulationRunning = false;
-//            System.out.println(Main.simulationRunning);
-
-        });
-
 
         // Panel for info monitoring
         JPanel info = new JPanel();
         info.setLayout(new GridLayout(3, 3));
-
-
     }
 
     public int getSimulationSpeed() {
