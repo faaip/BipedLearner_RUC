@@ -80,6 +80,7 @@ public class Main {
         synchronized (ThreadSync.lock) {
             gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored));
             generation++;
+            gui.update();
         }
     }
 }
