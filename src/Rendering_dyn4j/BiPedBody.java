@@ -322,9 +322,9 @@ public class BiPedBody {
 
         switch (mode) {
             case 0:
-//                if (Graphics2D.walker.hasFallen()) {
-//                //    return -200;
-//                }
+                if (Graphics2D.walker.hasFallen()) {
+                    return -200;
+                }
                 if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) > 0) {
                     reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 5000);
                 }
