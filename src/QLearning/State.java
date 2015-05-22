@@ -31,7 +31,7 @@ public class State {
     public static void fillActions() {
         // This methods creates actions for all joints.
         for (RevoluteJoint joint : BiPedBody.joints) {
-            actions.add(new JointAction(joint)); // New relaxed action (!motorOn)
+//            actions.add(new JointAction(joint)); // New relaxed action (!motorOn) // TODO - udkommenter
             for (int i = -1; i <= 1; i++) { // Loop that creates three actions for increase, decrease and "lock" joint
                 actions.add(new JointAction(joint, i));
             }
