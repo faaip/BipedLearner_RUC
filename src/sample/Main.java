@@ -78,7 +78,7 @@ public class Main {
 
     private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
-            gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored));
+            gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
             generation++;
             gui.update();
         }

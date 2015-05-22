@@ -18,7 +18,7 @@ public class State {
     public double worldAngle; // Torso angle relative to World
     public ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
     private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions. Static since actions are the same for all states
-    final public static int roundFactor = 20; // Round factor - the higher the number the lower precision in states
+    final public static int roundFactor = 10; // Round factor - the higher the number the lower precision in states
 
     public State(BiPedBody walker) {
         // Constructor for a new state with the walker as input.

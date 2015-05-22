@@ -5,8 +5,6 @@ import aima.core.util.FrequencyCounter;
 import aima.core.util.datastructure.Pair;
 import Rendering_dyn4j.BiPedBody;
 import sample.Main;
-import scpsolver.graph.Graph;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +38,7 @@ public class Agent {
                 this.alpha = 0.8; // Large number of states = high learning rate
                 break;
             case 1:
-                this.Rplus = 2;
+                this.Rplus = 20;
                 this.gamma = 0.2;
                 this.alpha = 0.5;
 

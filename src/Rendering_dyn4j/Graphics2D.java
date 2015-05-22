@@ -47,7 +47,6 @@ import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
 import org.dyn4j.geometry.Vector2;
 import sample.*;
-import scpsolver.graph.Graph;
 
 /**
  * Class used to show a simple example of using the dyn4j project using

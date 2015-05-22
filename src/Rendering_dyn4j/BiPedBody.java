@@ -309,6 +309,11 @@ public class BiPedBody {
                 (CollisionDetector.cl.collision(Graphics2D.walker.upperLeg2, Graphics2D.floor));
     }
 
+    private boolean feetOnTheGround()
+    {
+        return (CollisionDetector.cl.collision(Graphics2D.walker.foot1, Graphics2D.floor) || (CollisionDetector.cl.collision(Graphics2D.walker.foot2, Graphics2D.floor)));
+    }
+
     public double legsChangeSinceLastFrame() {
         return (upperLeg1.getChangeInPosition().x + upperLeg2.getChangeInPosition().x) * 100;
     }
@@ -322,9 +327,7 @@ public class BiPedBody {
 
         switch (mode) {
             case 0:
-                if (Graphics2D.walker.hasFallen()) {
-                    return -200;
-                }
+
                 if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) > 0) {
                     reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 5000);
                 }
@@ -334,12 +337,14 @@ public class BiPedBody {
                 if (reward == 0) {
                     reward = -10;
                 }
-
-
+                if (Graphics2D.walker.hasFallen()) {
+                    reward = -100;
+                }
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
-                reward = -0.1 + ((Graphics2D.walker.foot2.getWorldCenter().y) * 1000);
+                reward = 1500 + ((Graphics2D.walker.foot2.getWorldCenter().y+Graphics2D.walker.foot1.getWorldCenter().y) * 1000);
+                if(!feetOnTheGround()){reward+=1000;}
                 break;
             case 2:
                 reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
