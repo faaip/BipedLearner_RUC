@@ -14,8 +14,7 @@ This class contains methods for collision detection. This is done using the Coll
 
 public class CollisionDetector {
     public static CollisionListener cl = new CollisionListener() {
-        DynamicAABBTree dynamicAABBTree = new DynamicAABBTree(); // TODO måske new DynamicAABTree(3);
-
+        DynamicAABBTree dynamicAABBTree = new DynamicAABBTree();
         @Override
         public boolean collision(Body body, Body body1) {
             synchronized (ThreadSync.lock) {

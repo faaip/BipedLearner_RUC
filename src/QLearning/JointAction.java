@@ -33,8 +33,8 @@ public class JointAction implements Action {
         this.noOp = true;
     }
 
-    // Execute appropriate method for action
     public void doAction() {
+        // this method is called in order to execute an action
         synchronized (ThreadSync.lock) {
             if (noOp) {
                 ;
@@ -49,6 +49,7 @@ public class JointAction implements Action {
 
     @Override
     public String toString() {
+        // Overridden tostring
         if (noOp) {
             return "noOp";
         } else {
@@ -58,6 +59,7 @@ public class JointAction implements Action {
 
     @Override
     public boolean isNoOp() {
-        return !motorOn;
+        // isNoOp indicates if this is a none operation
+        return noOp;
     }
 }

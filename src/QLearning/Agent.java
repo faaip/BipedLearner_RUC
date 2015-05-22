@@ -13,6 +13,8 @@ import java.util.Map;
 
 //TODO Comment, Clean og lave referencer til AIMA
 
+
+
 public class Agent {
     private JointAction noneAction = new JointAction();
     private double alpha; // Learning rate
@@ -75,7 +77,7 @@ public class Agent {
                 Qsa = 0.0;
             }
 
-            Main.gui.update(Nsa.getCount(sa),Qsa); // Update gui with info for current actions
+            Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
 
             if (r == null) {
                 r = Graphics2D.walker.reward();
@@ -98,8 +100,10 @@ public class Agent {
             this.r = rPrime;
         }
 
-        if(a != null) {Main.gui.update(a);}
-            return a;
+        if (a != null) {
+            Main.gui.update(a);
+        }
+        return a;
     }
 
     private JointAction argmaxAPrime(State sPrime) {
@@ -120,7 +124,7 @@ public class Agent {
 
     private boolean isTerminal(State s) {
         // State is terminal if the walker has fallen
-        if(mode == 0) {
+        if (mode == 0) {
             return Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight(); // Falling is a terminal state in mode 0
         }
 
@@ -130,10 +134,8 @@ public class Agent {
     protected double f(Double u, int n) {
         // A Simple definition of f(u, n):
         if (null == u || n < Ne) {
-//            System.out.println("R PLUS");
             return Rplus;
         }
-//        System.out.println(" U U U U U ");
         return u;
     }
 
