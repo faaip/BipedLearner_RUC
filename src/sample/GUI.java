@@ -90,8 +90,9 @@ public class GUI {
         resetButton.addActionListener(e1 -> {
             // Action listener for resetting position of walker
             synchronized (ThreadSync.lock) {
-                Graphics2D.walker.resetPosition();
                 Main.generation++;
+                Graphics2D.walker.resetPosition();
+                update();
             }
         });
 
