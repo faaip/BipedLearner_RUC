@@ -95,7 +95,7 @@ public class GUI {
             }
         });
 
-        pauseButton.addActionListener(e1 -> {
+        pauseButton.addChangeListener(e1 -> {
             //Action Listener for pausing or resuming simulation
             synchronized (ThreadSync.lock) {
                 if (Main.simulation.getSimulationSpeed() != 0) {

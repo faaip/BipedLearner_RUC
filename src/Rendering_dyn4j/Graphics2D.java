@@ -115,7 +115,7 @@ public class Graphics2D extends JFrame {
         this.simulationSpeed = simulationSpeed;
     }
 
-    private int simulationSpeed;
+    private int simulationSpeed = 1;
 
     /**
      * Default constructor for the window
