@@ -141,8 +141,6 @@ public final class Graphics2DRenderer {
 		// draw the outline
 		g.setColor(getOutlineColor(color));
 		g.draw(p);
-
-
 	}
 	
 	/**

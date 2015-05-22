@@ -2,7 +2,6 @@ package Rendering_dyn4j;
 
 import java.awt.Color;
 import java.awt.geom.AffineTransform;
-
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Convex;

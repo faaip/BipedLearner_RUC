@@ -22,6 +22,9 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+// TODO kommenter gameLoop og initializeWorld
+
 package Rendering_dyn4j;
 
 import java.awt.Canvas;
@@ -45,7 +48,6 @@ import org.dyn4j.geometry.Rectangle;
 import org.dyn4j.geometry.Vector2;
 import sample.*;
 import scpsolver.graph.Graph;
-
 
 /**
  * Class used to show a simple example of using the dyn4j project using
@@ -104,6 +106,16 @@ public class Graphics2D extends JFrame {
      * The time stamp for the last iteration
      */
     protected long last;
+
+    public int getSimulationSpeed() {
+        return simulationSpeed;
+    }
+
+    public void setSimulationSpeed(int simulationSpeed) {
+        this.simulationSpeed = simulationSpeed;
+    }
+
+    private int simulationSpeed;
 
     /**
      * Default constructor for the window
@@ -266,12 +278,8 @@ public class Graphics2D extends JFrame {
 
         // before we render everything im going to flip the y axis and move the
         // origin to the center (instead of it being in the top left corner)
-        // TODO her flyttes kameraet, kommenter det!
         AffineTransform yFlip = AffineTransform.getScaleInstance(1, -1);
-//        int walkerX = (int) (Graphics2D.walker.torso.getWorldCenter().x*SCALE);
-//        AffineTransform move = AffineTransform.getTranslateInstance(400-walkerX, -300);
         AffineTransform move = AffineTransform.getTranslateInstance(400, -300);
-
 
         g.transform(yFlip);
         g.transform(move);
@@ -307,7 +315,7 @@ public class Graphics2D extends JFrame {
         double elapsedTime = ((double) diff / NANO_TO_BASE);
 
         // Multiply with simulation speed
-        elapsedTime = elapsedTime*GUI.simulationSpeed;
+        elapsedTime = elapsedTime*simulationSpeed;
         // update the world with the elapsed time
 //        this.world.update(elapsedTime, Integer.MAX_VALUE);
 
@@ -319,7 +327,7 @@ public class Graphics2D extends JFrame {
 
     public double getElapsedTime()
     {
-        return world.getAccumulatedTime()*GUI.simulationSpeed;
+        return world.getAccumulatedTime()*simulationSpeed;
     }
 
 

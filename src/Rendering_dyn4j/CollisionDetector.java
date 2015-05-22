@@ -9,21 +9,16 @@ import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.dynamics.CollisionListener;
 import org.dyn4j.dynamics.contact.ContactConstraint;
 
-/**
- * Created by frederikjuutilainen on 19/05/15.
- */
+
 public class CollisionDetector {
    public static org.dyn4j.dynamics.CollisionListener cl = new org.dyn4j.dynamics.CollisionListener() {
-
        DynamicAABBTree dynamicAABBTree = new DynamicAABBTree(3);
-
        @Override
         public boolean collision(Body body, Body body1) {
            synchronized (ThreadSync.lock) {
                dynamicAABBTree.add(body);
                dynamicAABBTree.add(body1);
                return dynamicAABBTree.detect(body,body1);
-
            }
         }
 

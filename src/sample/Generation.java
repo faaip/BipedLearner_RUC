@@ -4,11 +4,13 @@ public class Generation implements Comparable {
 
     double accumulatedReward;
     int generationNumber;
+    int noOfStatesExplored;
     String name;
 
     public Generation(int generationNumber, double accumulatedReward, int noOfStatesExplored) {
         this.generationNumber = generationNumber;
         this.accumulatedReward = accumulatedReward;
+        this.noOfStatesExplored = noOfStatesExplored;
     }
 
 

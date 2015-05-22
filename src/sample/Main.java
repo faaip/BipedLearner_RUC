@@ -4,47 +4,32 @@ import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
-import javax.swing.*;
-
-public class
-        Main {
-    public static double gamma = 0.5; // Decay rate
-    public static double learningRate = 0.8; // Learning rate
+public class Main {
     public static int generation = 0;
     public static Graphics2D simulation;
     public static GUI gui;
-    public static double bestReward;
     public static double accumulatedReward;
-    public static double bestDistance;
-    public static int bestGeneration;
     public static State initState;
     public static JointAction initAction;
     public static StateAnalyser analyser = new StateAnalyser();
-    public static boolean startNow;
     public static int mode = 0;
-
+    public static int noOfStatesExplored;
 
     public static void main(String[] args) {
-
-        ModeSelection modeSelection = new ModeSelection();
-        modeSelection.askUser();
-
-        JOptionPane start = new JOptionPane();
-        start.createDialog("WHAT");
+        try {
+            ModeSelection modeSelection = new ModeSelection();
+            modeSelection.askUser();
+        } catch (java.lang.NullPointerException e) {
+            // Program exit if mode == null
+            System.exit(0);
+        }
+        learn();
     }
 
+    public static void learn() {
 
-    public static void run() {
         simulation = new Graphics2D();
         gui = new GUI(simulation);
-
-
-        System.out.println("YES");
-
-        //GUI
-
-
-        System.out.println("NEW GUI MADE");
 
         //Add actions
         State.fillActions();
@@ -59,6 +44,8 @@ public class
 
         while (2 > 1) {
             accumulatedReward = 0;
+            noOfStatesExplored = 0;
+
             double t = 0;
             boolean isTerminal = false;
             while (!isTerminal) {
@@ -81,16 +68,15 @@ public class
             }
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
-                addToHighScore();
+                updateGuiTable();
                 Graphics2D.walker.resetPosition();
             }
         }
     }
 
-
-    private static void addToHighScore() {
+    private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
-            gui.highScoreList.add(new Generation(generation, accumulatedReward, 0));
+            gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored));
             generation++;
         }
     }

@@ -26,7 +26,7 @@ public class StateAnalyser {
 //            return getApproximate(walker.getState());
         } else {
             states.add(new State(walker));
-            noOfStates++;
+            Main.noOfStatesExplored++;
             Main.gui.update();
             return walker.getState();
         }
