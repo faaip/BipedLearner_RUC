@@ -51,13 +51,15 @@ public class GUI {
         JPanel control = new JPanel();
         JButton resetButton = new JButton("Reset walker"); // Button for resetting walker to initial position
         control.setLayout(new GridLayout(0, 1));
-        JToggleButton pauseButton = new JToggleButton("Pause"); // Button for pausing simulation
+        JToggleButton pauseButton = new JToggleButton("Pause simulation"); // Button for pausing simulation
         JLabel simSpeed = new JLabel(Main.simulation.getSimulationSpeed() + " x Speed", SwingConstants.CENTER);
         JSlider simSpeedSlider = new JSlider(1, 50, 1); // Slider for simulation speed
+        JButton randomAction = new JButton("Force random action");
 
         // Add Components to panel
         control.add(resetButton);
         control.add(pauseButton);
+        control.add(randomAction);
         control.add(simSpeed);
         control.add(simSpeedSlider);
 
@@ -105,6 +107,13 @@ public class GUI {
                     Main.simulation.setSimulationSpeed(simSpeedSlider.getValue());
                 }
             }
+        });
+
+        randomAction.addActionListener(e -> {
+            // In cases where the bi-ped is to lazy to explore, one can force a random action by using this button
+            JointAction random = Graphics2D.walker.getState().getRandomAction();
+            random.doAction();
+            update(random);
         });
 
 

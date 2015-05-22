@@ -1,6 +1,7 @@
 package QLearning;
 
 import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.ThreadSync;
 import aima.core.agent.Action;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 
@@ -30,9 +31,16 @@ public class JointAction implements Action {
 
     // Execute appropriate method for action
     public void doAction() {
-        if (noOp) {;}
-        if (this.motorOn) {Graphics2D.walker.setJoint(this.joint, this.a);} else {
-            Graphics2D.walker.relaxJoint(this.joint);}
+        synchronized (ThreadSync.lock) {
+            if (noOp) {
+                ;
+            }
+            if (this.motorOn) {
+                Graphics2D.walker.setJoint(this.joint, this.a);
+            } else {
+                Graphics2D.walker.relaxJoint(this.joint);
+            }
+        }
     }
 
     @Override

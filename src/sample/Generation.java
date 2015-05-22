@@ -1,30 +1,19 @@
 package sample;
 
-public class Generation implements Comparable {
+/*
+This class is for creating generation objects that saves information
+ */
+
+public class Generation  {
 
     double accumulatedReward;
     int generationNumber;
     int noOfStatesExplored;
-    String name;
 
     public Generation(int generationNumber, double accumulatedReward, int noOfStatesExplored) {
+        // This constructor takes information from each ended iteration of bi-ped walkers´
         this.generationNumber = generationNumber;
         this.accumulatedReward = accumulatedReward;
         this.noOfStatesExplored = noOfStatesExplored;
-    }
-
-
-    @Override
-    public int compareTo(Object o) {
-        Generation g = (Generation) o;
-
-        if (g.accumulatedReward > this.accumulatedReward) {
-            return 1;
-        }
-        if (g.accumulatedReward < this.accumulatedReward) {
-            return -1;
-        }
-
-        return 0;
     }
 }

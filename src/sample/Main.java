@@ -27,7 +27,6 @@ public class Main {
     }
 
     public static void learn() {
-
         simulation = new Graphics2D();
         gui = new GUI(simulation);
 
@@ -43,6 +42,7 @@ public class Main {
         initState = Graphics2D.walker.getState();
 
         while (2 > 1) {
+
             accumulatedReward = 0;
             noOfStatesExplored = 0;
 
@@ -57,7 +57,9 @@ public class Main {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if (action != null) {
-                        action.doAction();
+                        synchronized (ThreadSync.lock) {
+                            action.doAction();
+                        }
                     } else {
                         // If null is returned, agent is at a terminal state
                         isTerminal = true;
