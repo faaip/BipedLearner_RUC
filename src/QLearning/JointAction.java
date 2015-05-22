@@ -5,27 +5,31 @@ import Rendering_dyn4j.ThreadSync;
 import aima.core.agent.Action;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 
+/*
+This represents an action and therefore implements Action from aima.core.
+ */
+
 public class JointAction implements Action {
     RevoluteJoint joint; // Joint used in action
-    boolean motorOn; // is motor on or is joint relaxed in this particular action
-    int a; // Optional int indicating negative, locked or positive action
+    boolean motorOn; // is motor on or is joint relaxed in this action
+    int a; // int indicating negative (-1), locked (0) or positive motor input (1)
     boolean noOp;
 
     public JointAction(RevoluteJoint joint) {
-        // Constructor a "non-action"
+        // Constructor for a relaxed joint action
         this.joint = joint;
         this.motorOn = false;
     }
 
-    // Overloaded constructor for a joint and an integer indicating the action
     public JointAction(RevoluteJoint joint, int i) {
+        // Constructor for an action
         this.joint = joint;
-        this.a = i;
+        this.a = i; // Integer indicating a negative, zero or positive motor speed
         this.motorOn = true;
     }
 
-    // Third constructor for noOp
     public JointAction() {
+        // Third constructor for none operation (noOp) used in terminal states
         this.noOp = true;
     }
 

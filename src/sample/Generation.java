@@ -11,7 +11,7 @@ public class Generation  {
     int noOfStatesExplored;
 
     public Generation(int generationNumber, double accumulatedReward, int noOfStatesExplored) {
-        // This constructor takes information from each ended iteration of bi-ped walkers´
+        // This constructor takes information from each ended iteration of bi-ped walkers
         this.generationNumber = generationNumber;
         this.accumulatedReward = accumulatedReward;
         this.noOfStatesExplored = noOfStatesExplored;
