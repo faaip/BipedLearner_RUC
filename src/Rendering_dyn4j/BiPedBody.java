@@ -304,7 +304,10 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (CollisionDetector.cl.collision(Graphics2D.walker.torso, Graphics2D.floor));
+
+        return (CollisionDetector.cl.collision(Graphics2D.walker.torso, Graphics2D.floor))||
+                (CollisionDetector.cl.collision(Graphics2D.walker.upperLeg1, Graphics2D.floor))||
+                (CollisionDetector.cl.collision(Graphics2D.walker.upperLeg2, Graphics2D.floor));
     }
 
     public double legsChangeSinceLastFrame() {
