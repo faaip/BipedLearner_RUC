@@ -28,7 +28,7 @@ public class Agent {
 
     private int Ne = 1;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
-    Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
+    public Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
     public Agent(int mode) {
         this.mode = mode;
@@ -57,7 +57,7 @@ public class Agent {
     }
 
     public JointAction execute() {
-        State sPrime = Main.analyser.getState(Graphics2D.walker);
+        State sPrime = Graphics2D.walker.getState();
         double rPrime = Graphics2D.walker.reward();
 
         // if terminal

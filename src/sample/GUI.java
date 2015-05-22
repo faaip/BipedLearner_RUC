@@ -33,9 +33,9 @@ public class GUI {
         JPanel currentBipedPanel = new JPanel();
         currentBipedPanel.setLayout(new GridLayout(0, 1));
         generationLabel = new JLabel("Current walker is generation #" + Main.generation);
-        statesLabel = new JLabel("Number of states explored: " + Main.analyser.states.size());
+        statesLabel = new JLabel("Number of Q-values: " + 0);
         currentNsa = new JLabel("Current Nsa count: " + 0);
-        currentQ = new JLabel("Number of states explored: " + 0);
+        currentQ = new JLabel("Current Q: " + 0);
         agentStatus = new JLabel("Agent is exploring");
         currentAction = new JLabel("Action: ");
 
@@ -123,6 +123,7 @@ public class GUI {
         // Method for updating gui with current Nsa count and Q-value
         synchronized (ThreadSync.lock) {
             currentNsa.setText("Current Nsa count: " + Nsa);
+            statesLabel.setText("Number of Q-values: " + Main.agent.Q.size());
             if (Q == 0.0) {
                 currentQ.setText("Current Q: " + null);
                 agentStatus.setText("Agent is exploring");
@@ -137,7 +138,7 @@ public class GUI {
         // Overloaded method for updating gui labels
         synchronized (ThreadSync.lock) {
             generationLabel.setText("Current walker is generation #" + Main.generation);
-            statesLabel.setText("Number of states explored: " + Main.analyser.states.size());
+             // TODO FIX ME
         }
     }
 

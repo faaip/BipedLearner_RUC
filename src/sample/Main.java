@@ -11,9 +11,9 @@ public class Main {
     public static double accumulatedReward;
     public static State initState;
     public static JointAction initAction;
-    public static StateAnalyser analyser = new StateAnalyser();
     public static int mode = 0;
     public static int noOfStatesExplored;
+    public static Agent agent;
 
     public static void main(String[] args) {
         try {
@@ -37,7 +37,7 @@ public class Main {
         initAction = Graphics2D.walker.getState().getRandomAction();
         initAction.doAction();
 
-        Agent agent = new Agent(mode);
+        agent = new Agent(mode);
 
         initState = Graphics2D.walker.getState();
 
