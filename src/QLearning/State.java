@@ -117,7 +117,6 @@ public class State {
         return true;
     }
 
-
     public JointAction getRandomAction() {
         //Returns a random action
         return Graphics2D.walker.getState().actions.get((int) (Math.random() * actions.size()));

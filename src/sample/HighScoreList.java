@@ -12,40 +12,33 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class HighScoreList {
-    String[] columnNames = {"Generation #", "Accumulated Reward"};
-    DefaultTableModel model = new DefaultTableModel();
-    public JTable table = new JTable(model);
-    TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+    Object[][] data;
+    Object[] columns = {"Generation #", "Total reward"};
+    DefaultTableModel model = new DefaultTableModel(data,columns) {
+        @Override
+        public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return Integer.class;
+                case 1:
+                    return Double.class;
+                default:
+                    return String.class;
+            }
+        }
+    };
+    public JTable table = new JTable(model){
+    };
 
     public HighScoreList() {
-        model.addColumn("Generation #");
-        model.addColumn("Accumulated reward");
-        sorter.setSortsOnUpdates(true);
-        table.setRowSorter(sorter);
-
-        table.setDefaultRenderer(Integer.class, new DefaultTableCellRenderer() {
-            private NumberFormat numberFormat = new DecimalFormat("#,###,###");
-            @Override
-            protected void setValue(Object aValue) {
-                Integer value = (Integer) aValue;
-                super.setValue(numberFormat.format(value));
-            }
-        });
+        table.setAutoCreateRowSorter(true);
     }
 
     public void add(Generation g) {
         synchronized (ThreadSync.lock) {
-//            model.addRow(new Object[][]{g.generationNumber, new Double(g.accumulatedReward)});
-            model.addRow(new Double[]{(double)g.generationNumber,g.accumulatedReward});
-//            model.addRow(new Object[]{g.generationNumber, new DecimalFormat("#.###").format(g.accumulatedReward)});
+            model.addRow(new Object[]{new Integer(g.generationNumber), new Double(g.accumulatedReward)});
         }
-
-
-
-
     }
-
-
 }
 
 

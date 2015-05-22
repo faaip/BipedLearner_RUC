@@ -200,10 +200,7 @@ public class Graphics2D extends JFrame {
 
             world.addBody(wall1);
             world.addBody(wall2);
-
         }
-
-
 
         walker = new BiPedBody();
     }

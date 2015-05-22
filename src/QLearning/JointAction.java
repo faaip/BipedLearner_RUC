@@ -10,8 +10,8 @@ public class JointAction implements Action {
     int a; // Optional int indicating negative, locked or positive action
     boolean noOp;
 
-    // Constructor a "non-action"
     public JointAction(RevoluteJoint joint) {
+        // Constructor a "non-action"
         this.joint = joint;
         this.motorOn = false;
     }
@@ -30,14 +30,9 @@ public class JointAction implements Action {
 
     // Execute appropriate method for action
     public void doAction() {
-        if (noOp) {
-            ;
-        }
-        if (this.motorOn) {
-            Graphics2D.walker.setJoint(this.joint, this.a);
-        } else {
-            Graphics2D.walker.relaxJoint(this.joint);
-        }
+        if (noOp) {;}
+        if (this.motorOn) {Graphics2D.walker.setJoint(this.joint, this.a);} else {
+            Graphics2D.walker.relaxJoint(this.joint);}
     }
 
     @Override

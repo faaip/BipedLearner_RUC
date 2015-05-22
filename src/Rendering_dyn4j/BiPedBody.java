@@ -337,7 +337,7 @@ public class BiPedBody {
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
-                reward = -0.1 + (Graphics2D.walker.foot1.getWorldCenter().y) + (Graphics2D.walker.foot2.getWorldCenter().y) * 1000;
+                reward = -0.1 + ((Graphics2D.walker.foot2.getWorldCenter().y) * 1000);
                 break;
             case 2:
                 reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
@@ -399,6 +399,4 @@ public class BiPedBody {
         // Checks if walkers torso is roughly inside the rendering frame
         return (Graphics2D.walker.torso.getWorldCenter().x > -4.5 && Graphics2D.walker.torso.getWorldCenter().x < 5.5);
     }
-
-
 }
