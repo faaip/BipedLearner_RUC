@@ -187,6 +187,7 @@ public class Graphics2D extends JFrame {
         floor = new GameObject();
         BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
         floorFixture.setFriction(1000.0); // TODO what value
+       // floor.setLinearDamping(0.9);
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
