@@ -34,16 +34,19 @@ public class Agent {
         switch (mode) {
             case 0:
                 this.Rplus = 25;
-                this.gamma = 0.9; // Lots of reliance of future reward
-                this.alpha = 1; // Large number of states = high learning rate
+                this.gamma = 0.9; // Lots of reliance of future reward - decay rate
+                this.alpha = 1; // Large number of states = high learning rate - learning rate
                 break;
             case 1:
-                this.Rplus = 20;
-                this.gamma = 0.2;
-                this.alpha = 0.5;
+                this.Rplus = 800;
+                this.gamma = 0.1;
+                this.alpha = 0.9;
 
                 break;
             case 2:
+                this.Rplus = 150;
+                this.gamma = 0.1;
+                this.alpha = 0.9;
                 break;
         }
 
@@ -126,7 +129,6 @@ public class Agent {
         if (mode == 0) {
             return Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight(); // Falling is a terminal state in mode 0
         }
-
         return false;
     }
 
