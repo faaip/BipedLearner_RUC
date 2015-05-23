@@ -44,33 +44,6 @@ public class BiPedBody {
     CategoryFilter f1 = new CategoryFilter(1, 1);
     CategoryFilter f2 = new CategoryFilter(2, 2);
 
-    // Features for identifying state
-    public boolean isFoot1Forward() {
-        return (hip1.getJointAngle() + knee1.getJointAngle() < hip2.getJointAngle() + knee2.getJointAngle());
-    }
-
-    public boolean isKnee1Forward() {
-        return (hip1.getJointAngle() < hip2.getJointAngle());
-    }
-
-    public boolean isTorsoLeaningForward() {
-
-        Vector2 measure = new Vector2(hip1.getAnchor1(), new Vector2(0, 1));
-
-        return torso.getWorldVector(measure).getAngleBetween(measure) > 0;
-    }
-
-    public boolean isUpperLeg1InFrontOfTorso() {
-
-        return upperLeg1.getWorldCenter().x > torso.getWorldCenter().x;
-    }
-
-    public boolean isUpperLeg2InFrontOfTorso() {
-
-        return upperLeg2.getWorldCenter().x > torso.getWorldCenter().x;
-    }
-
-
     // Constructor
     public BiPedBody() {
         this.world = Graphics2D.world;
@@ -354,23 +327,14 @@ public class BiPedBody {
         }
         Main.accumulatedReward += reward;
 
+        System.out.println(reward);
 
         return reward;
     }
 
 
     public double getRelativeAngle() {
-
-//        System.out.println(Math.toDegrees(new Vector2(hip2.getAnchor1(),torso.getWorldCenter()).getAngleBetween(new Vector2(1,0))));
-
-//        return torso.getWorldVector(this).getAngleBetween(new Vector2(1,0));
-
         return (new Vector2(hip2.getAnchor1(), torso.getWorldCenter()).getAngleBetween(new Vector2(1, 0)));
-    }
-
-
-    public void printLocation() {
-        System.out.println(Graphics2D.walker.torso.getWorldCenter().y);
     }
 
     public void resetPosition() {

@@ -15,6 +15,12 @@ public class Main {
     public static int noOfStatesExplored;
     public static Agent agent;
 
+    // TODO Måske skal actions kun incrementere grader med ex. 5 fremfor full action
+    // TODO Alle actions skal ikke være tilgængelige i alle states, hvis angle er tæt på max == action not available - sænker kompleksiteten
+    // TODO Vi kan overveje om randomaction ved inactivity skal ske automatisk fremfor "forced" af gui
+    // TODO Vi skal undersøge betydelsen af terminal state
+
+
     public static void main(String[] args) {
         try {
             ModeSelection modeSelection = new ModeSelection();
@@ -37,8 +43,7 @@ public class Main {
         initAction = Graphics2D.walker.getState().getRandomAction();
         initAction.doAction();
 
-        agent = new Agent(mode);
-
+        agent = new Agent(mode); // Agent is created based on chosen reward mode
         initState = Graphics2D.walker.getState();
 
         while (2 > 1) {

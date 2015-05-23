@@ -9,7 +9,7 @@ import java.util.*;
 
 /*
 This class is for states. It takes BiPedBody as an input and creates an approximate state from the values of the BiPedBody joints.
-These variables are then rounded in order to create an apprixomiate state
+These variables are then rounded in order to create an approximate state.
  */
 
 public class State {

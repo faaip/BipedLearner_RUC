@@ -33,9 +33,9 @@ public class Agent {
         //TODO find optimal values
         switch (mode) {
             case 0:
-                this.Rplus = 10;
-                this.gamma = 0.3; // Lots of reliance of future reward
-                this.alpha = 0.8; // Large number of states = high learning rate
+                this.Rplus = 25;
+                this.gamma = 0.9; // Lots of reliance of future reward
+                this.alpha = 1; // Large number of states = high learning rate
                 break;
             case 1:
                 this.Rplus = 20;
@@ -121,6 +121,7 @@ public class Agent {
     }
 
     private boolean isTerminal(State s) {
+        // TODO måske betyder terminal state at den ikke gider lære.
         // State is terminal if the walker has fallen
         if (mode == 0) {
             return Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight(); // Falling is a terminal state in mode 0
