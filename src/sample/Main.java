@@ -21,7 +21,6 @@ public class Main {
     // TODO Vi kan overveje om randomaction ved inactivity skal ske automatisk fremfor "forced" af gui
     // TODO Vi skal undersøge betydelsen af terminal state
 
-
     public static void main(String[] args) {
         try {
             ModeSelection modeSelection = new ModeSelection();
