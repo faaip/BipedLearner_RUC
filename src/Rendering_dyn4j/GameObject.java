@@ -36,7 +36,7 @@ public class GameObject extends Body {
 
             // transform the coordinate system from world coordinates to local coordinates
             AffineTransform lt = new AffineTransform();
-            lt.translate(this.transform.getTranslationX() * Graphics2D.SCALE, this.transform.getTranslationY() * Graphics2D.SCALE);
+            lt.translate(this.transform.getTranslationX() * Simulation.SCALE, this.transform.getTranslationY() * Simulation.SCALE);
             lt.rotate(this.transform.getRotation());
 
             // apply the transform
@@ -46,7 +46,7 @@ public class GameObject extends Body {
             for (BodyFixture fixture : this.fixtures) {
                 // get the shape on the fixture
                 Convex convex = fixture.getShape();
-                Graphics2DRenderer.render(g, convex, Graphics2D.SCALE, color);
+                Graphics2DRenderer.render(g, convex, Simulation.SCALE, color);
             }
 
             // set the original transform

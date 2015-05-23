@@ -46,7 +46,7 @@ public class BiPedBody {
 
     // Constructor
     public BiPedBody() {
-        this.world = Graphics2D.world;
+        this.world = Simulation.world;
 
         // Torso
         torso = new GameObject();
@@ -277,14 +277,14 @@ public class BiPedBody {
     }
 
     public boolean hasFallen() {
-        return (CollisionDetector.cl.collision(Graphics2D.walker.torso, Graphics2D.floor)) ||
-                (CollisionDetector.cl.collision(Graphics2D.walker.upperLeg1, Graphics2D.floor)) ||
-                (CollisionDetector.cl.collision(Graphics2D.walker.upperLeg2, Graphics2D.floor));
+        return (CollisionDetector.cl.collision(Simulation.walker.torso, Simulation.floor)) ||
+                (CollisionDetector.cl.collision(Simulation.walker.upperLeg1, Simulation.floor)) ||
+                (CollisionDetector.cl.collision(Simulation.walker.upperLeg2, Simulation.floor));
     }
 
     private boolean feetOnTheGround()
     {
-        return (CollisionDetector.cl.collision(Graphics2D.walker.foot1, Graphics2D.floor) || (CollisionDetector.cl.collision(Graphics2D.walker.foot2, Graphics2D.floor)));
+        return (CollisionDetector.cl.collision(Simulation.walker.foot1, Simulation.floor) || (CollisionDetector.cl.collision(Simulation.walker.foot2, Simulation.floor)));
     }
 
     public double legsChangeSinceLastFrame() {
@@ -301,27 +301,27 @@ public class BiPedBody {
         switch (mode) {
             case 0:
 
-                if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) > 0) {
-                    reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 5000);
+                if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000);
                 }
-                if ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) < 0) {
-                    reward = ((Graphics2D.walker.foot2.getChangeInPosition().x + Graphics2D.walker.foot1.getChangeInPosition().x) * 1000);
+                if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 1000);
                 }
                 if (reward == 0) {
                     reward = -10;
                 }
-                if (Graphics2D.walker.hasFallen()) {
+                if (Simulation.walker.hasFallen()) {
                     reward = -100;
                 }
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
-                reward = 1500 + ((Graphics2D.walker.foot2.getWorldCenter().y+Graphics2D.walker.foot1.getWorldCenter().y) * 1000);
+                reward = 1500 + ((Simulation.walker.foot2.getWorldCenter().y+ Simulation.walker.foot1.getWorldCenter().y) * 1000);
                 if(!feetOnTheGround()){reward+=1000;}
                 System.out.println(reward);
                 break;
             case 2:
-                reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
+                reward = Math.toDegrees(Simulation.walker.knee2.getJointAngle());
                 System.out.println(reward);
 
                 break;
@@ -370,6 +370,6 @@ public class BiPedBody {
 
     public boolean isInSight() {
         // Checks if walkers torso is roughly inside the rendering frame
-        return (Graphics2D.walker.torso.getWorldCenter().x > -5.5 && Graphics2D.walker.torso.getWorldCenter().x < 5.5);
+        return (Simulation.walker.torso.getWorldCenter().x > -5.5 && Simulation.walker.torso.getWorldCenter().x < 5.5);
     }
 }

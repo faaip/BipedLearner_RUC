@@ -1,7 +1,6 @@
 package QLearning;
 
-import Rendering_dyn4j.Graphics2D;
-import Rendering_dyn4j.ThreadSync;
+import Rendering_dyn4j.Simulation;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 import Rendering_dyn4j.BiPedBody;
 
@@ -77,7 +76,7 @@ public class State {
 
     public JointAction getRandomAction() {
         //Returns a random action
-        return Graphics2D.walker.getState().actions.get((int) (Math.random() * actions.size()));
+        return Simulation.walker.getState().actions.get((int) (Math.random() * actions.size()));
     }
 
     public ArrayList<JointAction> getActions() {

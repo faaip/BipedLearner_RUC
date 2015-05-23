@@ -3,7 +3,7 @@ package sample;
 import javax.swing.*;
 
 import QLearning.JointAction;
-import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
 
 import java.awt.*;
@@ -23,7 +23,7 @@ public class GUI {
     private static JLabel agentStatus; // Label indicating if agent is exploring or learning
     private static JLabel currentAction; // Label for current action
 
-    public GUI(Graphics2D world)  {
+    public GUI(Simulation world)  {
         JFrame gui = new JFrame();
         gui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gui.setSize(350, 500);
@@ -96,7 +96,7 @@ public class GUI {
             // Action listener for resetting position of walker
             synchronized (ThreadSync.lock) {
                 Main.generation++;
-                Graphics2D.walker.resetPosition();
+                Simulation.walker.resetPosition();
                 update();
             }
         });
@@ -122,7 +122,7 @@ public class GUI {
 
         randomAction.addActionListener(e -> {
             // In cases where the bi-ped is to lazy to explore, one can force a random action by using this button
-            JointAction random = Graphics2D.walker.getState().getRandomAction();
+            JointAction random = Simulation.walker.getState().getRandomAction();
             random.doAction();
             update(random);
         });

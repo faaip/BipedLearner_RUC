@@ -59,10 +59,10 @@ public final class Graphics2DRenderer {
 	public static final void render(Graphics2D g, Shape shape, double scale, Color color) {
 		// no-op
 		if (shape == null) return;
-		
+
 		// just default the color
 		if (color == null) color = Color.ORANGE;
-		
+
 		if (shape instanceof Circle) {
 			Graphics2DRenderer.render(g, (Circle)shape, scale, color);
 		} else if (shape instanceof Polygon) {

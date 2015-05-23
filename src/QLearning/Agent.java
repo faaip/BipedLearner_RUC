@@ -1,9 +1,8 @@
 package QLearning;
 
-import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.Simulation;
 import aima.core.util.FrequencyCounter;
 import aima.core.util.datastructure.Pair;
-import Rendering_dyn4j.BiPedBody;
 import sample.Main;
 import java.util.Collections;
 import java.util.HashMap;
@@ -52,14 +51,14 @@ public class Agent {
 
         this.alpha = alpha;
         this.gamma = gamma;
-        this.s = Graphics2D.walker.getState();
+        this.s = Simulation.walker.getState();
         this.a = Main.initAction;
 
     }
 
     public JointAction execute() {
-        State sPrime = Graphics2D.walker.getState();
-        double rPrime = Graphics2D.walker.reward();
+        State sPrime = Simulation.walker.getState();
+        double rPrime = Simulation.walker.reward();
 
         // if terminal
         if (isTerminal(sPrime)) {
@@ -81,11 +80,11 @@ public class Agent {
             Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
 
             if (r == null) {
-                r = Graphics2D.walker.reward();
+                r = Simulation.walker.reward();
                 System.out.println("Reward: " + r);
             }
 
-            r = Graphics2D.walker.reward();
+            r = Simulation.walker.reward();
             Q.put(sa, Qsa + alpha
                     * (r + gamma * maxAPrime(sPrime) - Qsa));
 
@@ -127,7 +126,7 @@ public class Agent {
         // TODO måske betyder terminal state at den ikke gider lære.
         // State is terminal if the walker has fallen
         if (mode == 0) {
-            return Graphics2D.walker.hasFallen() || !Graphics2D.walker.isInSight(); // Falling is a terminal state in mode 0
+            return Simulation.walker.hasFallen() || !Simulation.walker.isInSight(); // Falling is a terminal state in mode 0
         }
         return false;
     }

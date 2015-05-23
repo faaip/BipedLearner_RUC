@@ -58,7 +58,7 @@ import sample.*;
  * @version 3.1.5
  * @since 3.0.0
  */
-public class Graphics2D extends JFrame {
+public class Simulation extends JFrame {
 
     public static BiPedBody walker;
     public static GameObject floor;
@@ -119,7 +119,7 @@ public class Graphics2D extends JFrame {
     /**
      * Default constructor for the window
      */
-    public Graphics2D() {
+    public Simulation() {
         super("Graphics2D Example");
         // setup the JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -391,7 +391,7 @@ public class Graphics2D extends JFrame {
         }
 
         // create the example JFrame
-        Graphics2D window = new Graphics2D();
+        Simulation window = new Simulation();
         window.setTitle("Machine Learning");
 
         // show it

@@ -1,12 +1,12 @@
 package sample;
 
 import QLearning.*;
-import Rendering_dyn4j.Graphics2D;
+import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
 
 public class Main {
     public static int generation = 0;
-    public static Graphics2D simulation;
+    public static Simulation simulation;
     public static GUI gui;
     public static double accumulatedReward;
     public static State initState;
@@ -34,18 +34,18 @@ public class Main {
 
     public static void learn() {
         fileWriter = new OutputDataWriter("TEST");
-        simulation = new Graphics2D();
+        simulation = new Simulation();
         gui = new GUI(simulation);
 
         //Add actions
         State.fillActions();
 
         //First action
-        initAction = Graphics2D.walker.getState().getRandomAction();
+        initAction = Simulation.walker.getState().getRandomAction();
         initAction.doAction();
 
         agent = new Agent(mode); // Agent is created based on chosen reward mode
-        initState = Graphics2D.walker.getState();
+        initState = Simulation.walker.getState();
 
         double runTime = 0;
 
@@ -58,14 +58,14 @@ public class Main {
             boolean isTerminal = false;
             while (!isTerminal) {
                 // Reset if out of sight
-                if (!Graphics2D.walker.isInSight()) {
+                if (!Simulation.walker.isInSight()) {
                     isTerminal = true;
                 }
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if(Main.mode != 0) {
-                        fileWriter.add(new CsvData(runTime, Graphics2D.walker.reward()));
+                        fileWriter.add(new CsvData(runTime, Simulation.walker.reward()));
                     }
                     if (action != null) {
                         synchronized (ThreadSync.lock) {
@@ -86,7 +86,7 @@ public class Main {
                     fileWriter.add(new CsvData(generation, accumulatedReward)); // Add to filewriter
                 }
                 updateGuiTable();
-                Graphics2D.walker.resetPosition();
+                Simulation.walker.resetPosition();
             }
         }
     }
