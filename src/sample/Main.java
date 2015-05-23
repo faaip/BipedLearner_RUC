@@ -14,6 +14,7 @@ public class Main {
     public static int mode = 0;
     public static int noOfStatesExplored;
     public static Agent agent;
+    public static OutputDataWriter fileWriter;
 
     // TODO Måske skal actions kun incrementere grader med ex. 5 fremfor full action
     // TODO Alle actions skal ikke være tilgængelige i alle states, hvis angle er tæt på max == action not available - sænker kompleksiteten
@@ -33,6 +34,7 @@ public class Main {
     }
 
     public static void learn() {
+        fileWriter = new OutputDataWriter("Mode_" + mode + "_" + "test");
         simulation = new Graphics2D();
         gui = new GUI(simulation);
 
@@ -84,6 +86,9 @@ public class Main {
     private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
             gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
+
+            fileWriter.add(new Data(generation,accumulatedReward));
+
             generation++;
             gui.update();
         }

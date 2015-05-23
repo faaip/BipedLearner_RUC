@@ -7,6 +7,7 @@ import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
 import java.awt.*;
+import java.io.IOException;
 
 /*
 This class contains the components and method for the graphical user interface.
@@ -55,11 +56,13 @@ public class GUI {
         JLabel simSpeed = new JLabel(Main.simulation.getSimulationSpeed() + " x Speed", SwingConstants.CENTER);
         JSlider simSpeedSlider = new JSlider(1, 50, 1); // Slider for simulation speed
         JButton randomAction = new JButton("Force random action");
+        JButton outputCsvButton = new JButton("CSV");
 
         // Add Components to panel
         control.add(resetButton);
         control.add(pauseButton);
         control.add(randomAction);
+        control.add(outputCsvButton);
         control.add(simSpeed);
         control.add(simSpeedSlider);
 
@@ -95,6 +98,14 @@ public class GUI {
                 Main.generation++;
                 Graphics2D.walker.resetPosition();
                 update();
+            }
+        });
+
+        outputCsvButton.addActionListener(e2 -> {
+            try {
+                Main.fileWriter.createFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
