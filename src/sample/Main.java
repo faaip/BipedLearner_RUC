@@ -33,12 +33,14 @@ public class Main {
             System.exit(0);
         }
         learn();
+
     }
 
     public static void learn() {
         fileWriter = new OutputDataWriter();
         simulation = new Graphics2D();
         gui = new GUI(simulation);
+        System.out.println("TIME :"+ simulation.getElapsedTime());
 
         //Add actions
         State.fillActions();
@@ -49,6 +51,8 @@ public class Main {
 
         agent = new Agent(mode); // Agent is created based on chosen reward mode
         initState = Graphics2D.walker.getState();
+
+
 
         while (2 > 1) {
 

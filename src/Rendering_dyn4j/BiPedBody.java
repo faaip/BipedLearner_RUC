@@ -318,16 +318,18 @@ public class BiPedBody {
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
                 reward = 1500 + ((Graphics2D.walker.foot2.getWorldCenter().y+Graphics2D.walker.foot1.getWorldCenter().y) * 1000);
                 if(!feetOnTheGround()){reward+=1000;}
+                System.out.println(reward);
                 break;
             case 2:
                 reward = Math.toDegrees(Graphics2D.walker.knee2.getJointAngle());
+                System.out.println(reward);
+
                 break;
 
 
         }
         Main.accumulatedReward += reward;
 
-        System.out.println(reward);
 
         return reward;
     }
@@ -368,6 +370,6 @@ public class BiPedBody {
 
     public boolean isInSight() {
         // Checks if walkers torso is roughly inside the rendering frame
-        return (Graphics2D.walker.torso.getWorldCenter().x > -4.5 && Graphics2D.walker.torso.getWorldCenter().x < 5.5);
+        return (Graphics2D.walker.torso.getWorldCenter().x > -5.5 && Graphics2D.walker.torso.getWorldCenter().x < 5.5);
     }
 }
