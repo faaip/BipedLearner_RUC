@@ -4,10 +4,6 @@ import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Main {
     public static int generation = 0;
     public static Graphics2D simulation;
@@ -72,7 +68,7 @@ public class Main {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if(Main.mode != 0) {
-                        fileWriter.add(new CsvData(runTime, accumulatedReward));
+                        fileWriter.add(new CsvData(runTime, Graphics2D.walker.reward()));
                     }
                     if (action != null) {
                         synchronized (ThreadSync.lock) {

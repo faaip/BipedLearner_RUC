@@ -10,9 +10,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by frederikjuutilainen on 23/05/15.
- */
 public class OutputDataWriter {
     String filename;
     List<CsvData> dataList = new ArrayList<>();
