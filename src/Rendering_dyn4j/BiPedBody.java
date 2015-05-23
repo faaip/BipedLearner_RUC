@@ -326,9 +326,6 @@ public class BiPedBody {
 
         }
         Main.accumulatedReward += reward;
-
-        System.out.println(reward);
-
         return reward;
     }
 

@@ -4,6 +4,10 @@ import QLearning.*;
 import Rendering_dyn4j.Graphics2D;
 import Rendering_dyn4j.ThreadSync;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Main {
     public static int generation = 0;
     public static Graphics2D simulation;
@@ -36,7 +40,7 @@ public class Main {
     }
 
     public static void learn() {
-        fileWriter = new OutputDataWriter();
+        fileWriter = new OutputDataWriter("TEST");
         simulation = new Graphics2D();
         gui = new GUI(simulation);
 
@@ -49,6 +53,8 @@ public class Main {
 
         agent = new Agent(mode); // Agent is created based on chosen reward mode
         initState = Graphics2D.walker.getState();
+
+        double runTime = 0;
 
         while (2 > 1) {
 
@@ -65,6 +71,9 @@ public class Main {
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
+                    if(Main.mode != 0) {
+                        fileWriter.add(new CsvData(runTime, accumulatedReward));
+                    }
                     if (action != null) {
                         synchronized (ThreadSync.lock) {
                             action.doAction();
@@ -76,9 +85,13 @@ public class Main {
                     t = 0; // Reset time to zero
                 }
                 t += simulation.getElapsedTime(); // Increment time
+                runTime+=simulation.getElapsedTime();
             }
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
+                if(Main.mode == 0) {
+                    fileWriter.add(new CsvData(generation, accumulatedReward)); // Add to filewriter
+                }
                 updateGuiTable();
                 Graphics2D.walker.resetPosition();
             }
@@ -89,7 +102,7 @@ public class Main {
         synchronized (ThreadSync.lock) {
             gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
 
-            fileWriter.add(new CsvData(generation,accumulatedReward)); // Add to filewriter
+
 
             generation++;
             gui.update();
