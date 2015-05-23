@@ -23,6 +23,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+
         try {
             ModeSelection modeSelection = new ModeSelection();
             modeSelection.askUser();
@@ -34,7 +36,7 @@ public class Main {
     }
 
     public static void learn() {
-        fileWriter = new OutputDataWriter("Mode_" + mode + "_" + "test");
+        fileWriter = new OutputDataWriter();
         simulation = new Graphics2D();
         gui = new GUI(simulation);
 
@@ -87,7 +89,7 @@ public class Main {
         synchronized (ThreadSync.lock) {
             gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
 
-            fileWriter.add(new Data(generation,accumulatedReward));
+            fileWriter.add(new CsvData(generation,accumulatedReward)); // Add to filewriter
 
             generation++;
             gui.update();

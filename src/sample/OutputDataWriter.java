@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class OutputDataWriter {
     String filename;
-    List<Data> dataList = new ArrayList<>();
+    List<CsvData> dataList = new ArrayList<>();
 
-    public OutputDataWriter(String filename)
+    public OutputDataWriter()
     {
-        this.filename = filename + ".csv";
+        this.filename = "Test_" + Main.mode;
     }
 
 
-    public void add(Data data) {
+    public void add(CsvData data) {
          dataList.add(data);
 
     }
@@ -27,7 +27,9 @@ public class OutputDataWriter {
     public void createFile() throws IOException {
         FileWriter fileWriter = new FileWriter(filename);
 
-        for (Data d : dataList)
+        fileWriter.append("column 1, column 2" + "\n");
+
+        for (CsvData d : dataList)
         {
             fileWriter.append(""+d.generation);
             fileWriter.append(",");
