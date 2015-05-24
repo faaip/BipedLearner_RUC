@@ -30,7 +30,7 @@ public class ModeSelection {
         if(s.equals("Reward for upright position")){
             Main.mode = 3;
         }
-        if(s.equals("Reward for backward position")){
+        if(s.equals("Reward for backwards motion")){
             Main.mode = 4;
         }
 
