@@ -318,17 +318,16 @@ public class BiPedBody {
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
                 reward = 1500 + ((Simulation.walker.foot2.getWorldCenter().y+ Simulation.walker.foot1.getWorldCenter().y) * 1000);
                 if(!feetOnTheGround()){reward+=1000;}
-                System.out.println(reward);
                 break;
             case 2:
                 reward = Math.toDegrees(Simulation.walker.knee2.getJointAngle());
-                System.out.println(reward);
+//                System.out.println(reward);
 
                 break;
             case 3:
                 reward = 1500 + (Simulation.walker.torso.getWorldCenter().y*1000);
 
-                System.out.println(reward);
+//                System.out.println(reward);
                 break;
             case 4:
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {

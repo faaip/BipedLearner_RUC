@@ -5,6 +5,8 @@ import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
 import org.omg.CORBA.DomainManagerOperations;
 
+import java.io.IOException;
+
 public class Main {
     public static int generation = 0;
     public static Simulation simulation;
@@ -16,6 +18,8 @@ public class Main {
     public static int noOfStatesExplored;
     public static Agent agent;
     public static OutputDataWriter fileWriter;
+    public static long runTime = 0;
+
 
     // TODO Måske skal actions kun incrementere grader med ex. 5 fremfor full action
     // TODO Alle actions skal ikke være tilgængelige i alle states, hvis angle er tæt på max == action not available - sænker kompleksiteten
@@ -34,7 +38,6 @@ public class Main {
     }
 
     public static void learn() {
-        fileWriter = new OutputDataWriter("TEST");
         simulation = new Simulation();
         gui = new GUI(simulation);
 
@@ -48,9 +51,9 @@ public class Main {
         agent = new Agent(mode); // Agent is created based on chosen reward mode
         initState = Simulation.walker.getState();
 
-        double runTime = 0;
+        fileWriter = new OutputDataWriter("TEST");
 
-        while (2 > 1) {
+        while (2>1) {
 
             accumulatedReward = 0;
             noOfStatesExplored = 0;
@@ -66,6 +69,7 @@ public class Main {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if(Main.mode != 0) {
+
                         fileWriter.add(new CsvData(runTime, Simulation.walker.reward()));
                     }
                     if (action != null) {
@@ -79,7 +83,22 @@ public class Main {
                     t = 0; // Reset time to zero
                 }
                 t += simulation.getElapsedTime(); // Increment time
-                runTime+=simulation.getElapsedTime();
+
+                if(runTime > 1000000000)
+                {
+                    // Make csv
+                    try {
+                        Main.fileWriter.createFile();
+                    } catch (IOException e) {
+                        System.out.println(e + " CSV FAILED");
+                    }
+                    System.exit(0);
+
+                }
+
+                runTime+=simulation.getElapsedTime(); // Increment runtime
+
+
             }
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
@@ -90,14 +109,13 @@ public class Main {
                 Simulation.walker.resetPosition();
             }
         }
+
+
     }
 
     private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
             gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
-
-
-
             generation++;
             gui.update();
         }

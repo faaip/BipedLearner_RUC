@@ -14,6 +14,23 @@ import java.util.Map;
 
 public class Agent {
     private JointAction noneAction = new JointAction();
+
+    public double getAlpha() {
+        return alpha;
+    }
+
+    public double getGamma() {
+        return gamma;
+    }
+
+    public int getNe() {
+        return Ne;
+    }
+
+    public double getRplus() {
+        return Rplus;
+    }
+
     private double alpha; // Learning rate
     private double gamma; // Decay rate
     private double Rplus = 10; // Optimistic reward prediction? //
@@ -45,7 +62,8 @@ public class Agent {
             case 2:
                 this.Rplus = 150;
                 this.gamma = 0.1;
-                this.alpha = 1;
+                this.alpha = 0.3;
+                this.Ne = 1;
                 break;
             case 3:
                 this.Rplus = 1700;
@@ -57,12 +75,8 @@ public class Agent {
                 this.gamma = 0.9;
                 this.alpha = 1;
         }
-
-        this.alpha = alpha;
-        this.gamma = gamma;
         this.s = Simulation.walker.getState();
         this.a = Main.initAction;
-
     }
 
     public JointAction execute() {

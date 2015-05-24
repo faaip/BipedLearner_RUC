@@ -120,7 +120,6 @@ public class Simulation extends JFrame {
      * Default constructor for the window
      */
     public Simulation() {
-        super("Graphics2D Example");
         // setup the JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -177,10 +176,9 @@ public class Simulation extends JFrame {
      * Basically the same shapes from the Shapes test in
      * the TestBed.
      */
-    public void initializeWorld() {
+    private void initializeWorld() {
         // create the world
         this.world = new World();
-        world.shiftCoordinates(new Vector2(1000,0)); // TODO TEST
 
         // create the floor
         floor = new GameObject();
@@ -216,18 +214,6 @@ public class Simulation extends JFrame {
 
         walker = new BiPedBody();
     }
-
-    public void resetWalker()
-    {
-        walker = new BiPedBody();
-
-    }
-
-    public void addListener(CollisionListener cl)
-    {
-        this.world.addListener(cl);
-    }
-
 
     /**
      * Start active rendering the example.
@@ -370,38 +356,6 @@ public class Simulation extends JFrame {
     public synchronized boolean isStopped() {
         return this.stopped;
     }
-
-    /**
-     * Entry point for the example application.
-     *
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        // set the look and feel to the system look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-        // create the example JFrame
-        Simulation window = new Simulation();
-        window.setTitle("Machine Learning");
-
-        // show it
-        window.setVisible(true);
-
-        // start it
-        window.start();
-
-    }
-
 
     public void step(int i) {
         this.world.step(i);
