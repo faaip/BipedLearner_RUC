@@ -16,8 +16,8 @@ public class OutputDataWriter {
     List<CsvData> dataList = new ArrayList<>();
 
     public OutputDataWriter(String filename) {
-        this.filename = "Mode_" + Main.mode + "_" + type + ".csv";
-        this.filename = "Mode_" + Main.mode + "_" + Main.agent.getRplus() + "_"+ Main.agent.getAlpha() + "_"+ Main.agent.getGamma() + "_"+ Main.agent.getNe();
+//        this.filename = "Mode_" + Main.mode + "_" + type + ".csv";
+        this.filename = "Mode_" + Main.mode + "_" + Main.agent.getRplus() + "_"+ Main.agent.getAlpha() + "_"+ Main.agent.getGamma() + "_"+ Main.agent.getNe()+".csv";
 
     }
 
