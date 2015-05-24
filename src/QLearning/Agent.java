@@ -42,30 +42,30 @@ public class Agent {
 
     private int Ne = 1;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
-    public Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
+    public static Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
     public Agent(int mode) {
         this.mode = mode;
         //TODO find optimal values
         switch (mode) {
             case 0:
-                this.Rplus = 50;
-                this.gamma = 0.3; // Lots of reliance of future reward - decay rate
-                this.alpha = 1; // Large number of states = high learning rate - learning rate
+                this.Rplus =250;
+                this.gamma = 0.1; // Lots of reliance of future reward - decay rate
+                this.alpha = 0.9; // Large number of states = high learning rate - learning rate
                 break;
             case 1:
-                this.Rplus = 800;
-                this.gamma = 0.9;
-                this.alpha = 1;
+                this.Rplus = 500;
+                this.gamma = 1;
+                this.alpha = 0.9;
                 break;
             case 2:
                 this.Rplus = 150;
-                this.gamma = 0.1;
+                this.gamma = 1;
                 this.alpha = 0.9;
                 this.Ne = 1;
                 break;
             case 3:
-                this.Rplus = 1700;
+                this.Rplus = 30;
                 this.gamma = 0.5;
                 this.alpha = 1;
                 break;
