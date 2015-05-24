@@ -67,6 +67,7 @@ public class Main {
                     isTerminal = true;
                 }
                 if (t > 400000) {
+                    System.out.println("Q SIZE: " +agent.Q.size());
                     // Observe and execute
                     JointAction action = agent.execute();
                     if (Main.mode != 0) {
@@ -85,7 +86,7 @@ public class Main {
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
-                if (actionCounter >= 100000) {
+                if (actionCounter >= 10000000) {
                     // Make csv
                         try {
                             Main.fileWriter.createFile();
@@ -93,6 +94,7 @@ public class Main {
                         } catch (IOException e) {
                             System.out.println(e + " CSV FAILED");
                         }
+                    System.out.println(agent.Q.size());
                         System.exit(0);
                 }
 
