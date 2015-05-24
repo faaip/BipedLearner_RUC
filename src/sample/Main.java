@@ -70,7 +70,7 @@ public class Main {
                     // Observe and execute
                     JointAction action = agent.execute();
                     if (Main.mode != 0) {
-                        fileWriter.add(new CsvData(runTime, Simulation.walker.reward()));
+                        fileWriter.add(new CsvData(actionCounter, Simulation.walker.reward()));
                     }
                     if (action != null) {
                         synchronized (ThreadSync.lock) {
@@ -81,11 +81,12 @@ public class Main {
                         isTerminal = true;
                     }
                     t = 0; // Reset time to zero
+                    System.out.println(actionCounter);
                     actionCounter++;
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
-                if (actionCounter >= 100000) {
+                if (actionCounter >= 20000) {
                     // Make csv
                         try {
                             Main.fileWriter.createFile();

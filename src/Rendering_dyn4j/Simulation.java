@@ -183,8 +183,7 @@ public class Simulation extends JFrame {
         // create the floor
         floor = new GameObject();
         BodyFixture floorFixture = new BodyFixture(Geometry.createRectangle(15.0, 1.0));
-        floorFixture.setFriction(1000.0); // TODO what value
-       // floor.setLinearDamping(0.9);
+        floorFixture.setFriction(1000.0);
         floor.addFixture(floorFixture);
         floor.setMass(Mass.Type.INFINITE);
 
@@ -194,7 +193,7 @@ public class Simulation extends JFrame {
 
         if(Main.mode == 1 || Main.mode == 2)
         {
-            // Add walls
+            // Add walls, if needed by mode
             Rectangle wall1Rect = new Rectangle(1.0, 15.0);
             GameObject wall1 = new GameObject();
             BodyFixture wall1Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
@@ -303,7 +302,6 @@ public class Simulation extends JFrame {
         // Multiply with simulation speed
         elapsedTime = elapsedTime*simulationSpeed;
         // update the world with the elapsed time
-//        this.world.update(elapsedTime, Integer.MAX_VALUE);
 
         // Sync to threadsync
         synchronized (ThreadSync.lock) {

@@ -15,13 +15,13 @@ public class BiPedBody {
     World world;
 
     // Limbs
-    public GameObject torso;
+    GameObject torso;
     GameObject upperLeg1;
     GameObject upperLeg2;
     GameObject lowerLeg1;
     GameObject lowerLeg2;
     GameObject foot1;
-    public GameObject foot2;
+    GameObject foot2;
     ArrayList<GameObject> limbs = new ArrayList<>();
 
     // Joints
@@ -300,15 +300,14 @@ public class BiPedBody {
 
         switch (mode) {
             case 0:
-
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
                     reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000 );
                 }
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 1000);
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * -1000);
                 }
                 if (reward == 0) {
-                    reward = -10;
+                    reward = -1000000;
                 }
                 if (Simulation.walker.hasFallen()) {
                     reward = -100;
@@ -349,6 +348,7 @@ public class BiPedBody {
         Main.accumulatedReward += reward;
 
 
+        System.out.println(reward);
         return reward;
     }
 

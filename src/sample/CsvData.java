@@ -2,12 +2,12 @@ package sample;
 
 
 public class CsvData {
-    int generation;
+    long actionNumber;
     double score;
     double time;
 
-    public CsvData(int generation, double score) {
-        this.generation = generation;
+    public CsvData(long actionNumber, double score) {
+        this.actionNumber = actionNumber;
         this.score = score;
     }
 

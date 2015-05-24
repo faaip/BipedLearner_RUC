@@ -32,21 +32,15 @@ public class OutputDataWriter {
 
         fileWriter.append("column 1, column 2" + "\n");
 
-        if (Main.mode == 0) {
+
             for (CsvData d : dataList) {
-                fileWriter.append("" + d.generation);
+                fileWriter.append("" + d.actionNumber);
                 fileWriter.append(",");
                 fileWriter.append("" + d.score);
                 fileWriter.append("\n");
             }
-        } else {
-            for (CsvData d : dataList) {
-                fileWriter.append("" + d.time);
-                fileWriter.append(",");
-                fileWriter.append("" + d.score);
-                fileWriter.append("\n");
-            }
-        }
+
+
 
         // Output
         fileWriter.flush();
