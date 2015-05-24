@@ -302,10 +302,10 @@ public class BiPedBody {
             case 0:
 
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000 + Simulation.walker.torso.getWorldCenter().x*100 );
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000 );
                 }
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 1000 +Simulation.walker.torso.getWorldCenter().x*100);
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 1000);
                 }
                 if (reward == 0) {
                     reward = -10;
@@ -326,11 +326,9 @@ public class BiPedBody {
 
                 break;
             case 3:
-                reward = Simulation.walker.torso.getWorldCenter().y*1000;
-                if (Simulation.walker.hasFallen()) {
-                    reward = -1000;
-                }
+                reward = 1500 + (Simulation.walker.torso.getWorldCenter().y*1000);
 
+                System.out.println(reward);
                 break;
             case 4:
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {

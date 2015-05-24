@@ -75,7 +75,7 @@ public class GUI {
 
         // Panels are added to frame
         // highScorePane is only added if the reward mode is "0"
-        if (Main.mode == 0) {
+        if (Main.mode == 0 || Main.mode == 3 || Main.mode == 4) {
             gui.add(splitPane2);
         } else {
             gui.setSize(350, 250);

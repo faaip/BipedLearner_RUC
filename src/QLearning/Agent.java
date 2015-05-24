@@ -48,8 +48,8 @@ public class Agent {
                 this.alpha = 1;
                 break;
             case 3:
-                this.Rplus = 50;
-                this.gamma = 0.3;
+                this.Rplus = 1700;
+                this.gamma = 0.5;
                 this.alpha = 1;
                 break;
             case 4:
