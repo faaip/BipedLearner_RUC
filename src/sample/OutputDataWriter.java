@@ -40,8 +40,6 @@ public class OutputDataWriter {
                 fileWriter.append("\n");
             }
 
-
-
         // Output
         fileWriter.flush();
         fileWriter.close();
