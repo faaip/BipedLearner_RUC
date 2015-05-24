@@ -32,21 +32,30 @@ public class Agent {
         //TODO find optimal values
         switch (mode) {
             case 0:
-                this.Rplus = 25;
-                this.gamma = 0.9; // Lots of reliance of future reward - decay rate
+                this.Rplus = 50;
+                this.gamma = 0.3; // Lots of reliance of future reward - decay rate
                 this.alpha = 1; // Large number of states = high learning rate - learning rate
                 break;
             case 1:
                 this.Rplus = 800;
-                this.gamma = 0.1;
-                this.alpha = 0.9;
+                this.gamma = 0.9;
+                this.alpha = 1;
 
                 break;
             case 2:
                 this.Rplus = 150;
                 this.gamma = 0.1;
-                this.alpha = 0.9;
+                this.alpha = 1;
                 break;
+            case 3:
+                this.Rplus = 50;
+                this.gamma = 0.3;
+                this.alpha = 1;
+                break;
+            case 4:
+                this.Rplus = 30;
+                this.gamma = 0.9;
+                this.alpha = 1;
         }
 
         this.alpha = alpha;
@@ -125,7 +134,7 @@ public class Agent {
     private boolean isTerminal(State s) {
         // TODO måske betyder terminal state at den ikke gider lære.
         // State is terminal if the walker has fallen
-        if (mode == 0) {
+        if (mode == 0 || mode == 4 || mode == 3) {
             return Simulation.walker.hasFallen() || !Simulation.walker.isInSight(); // Falling is a terminal state in mode 0
         }
         return false;

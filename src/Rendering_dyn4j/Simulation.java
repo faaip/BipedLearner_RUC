@@ -194,7 +194,7 @@ public class Simulation extends JFrame {
         floor.translate(0.0, -2.95);
         this.world.addBody(floor);
 
-        if(Main.mode != 0)
+        if(Main.mode == 1 || Main.mode == 2)
         {
             // Add walls
             Rectangle wall1Rect = new Rectangle(1.0, 15.0);

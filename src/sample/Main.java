@@ -3,6 +3,7 @@ package sample;
 import QLearning.*;
 import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
+import org.omg.CORBA.DomainManagerOperations;
 
 public class Main {
     public static int generation = 0;
@@ -82,7 +83,7 @@ public class Main {
             }
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
-                if(Main.mode == 0) {
+                if(Main.mode == 0 ) {
                     fileWriter.add(new CsvData(generation, accumulatedReward)); // Add to filewriter
                 }
                 updateGuiTable();

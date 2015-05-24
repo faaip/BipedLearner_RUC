@@ -9,7 +9,7 @@ The mode is set dependent on the mode chosen in the dropdown menu.
 
 public class ModeSelection {
     public void askUser() {
-        String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee"};
+        String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee", "Reward for upright position", "Reward for backwards motion"};
         String s = (String) JOptionPane.showInputDialog(
                 null,
                 "Choose behaviour:",
@@ -26,6 +26,12 @@ public class ModeSelection {
         }
         if (s.equals("Reward for bending one knee")) {
             Main.mode = 2;
+        }
+        if(s.equals("Reward for upright position")){
+            Main.mode=3;
+        }
+        if(s.equals("Reward for backward position")){
+            Main.mode=4;
         }
 
     }
