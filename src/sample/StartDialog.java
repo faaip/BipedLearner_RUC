@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
- * Created by frederikjuutilainen on 25/05/15.
- */
 public class StartDialog {
     private JDialog dialog = new JDialog();
     String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee", "Reward for upright position", "Reward for backwards motion"};
@@ -24,14 +21,6 @@ public class StartDialog {
         JLabel noOfStatesLabel = new JLabel("Theoretical number of states:",SwingConstants.CENTER);
         JLabel noOfStatesNumber = new JLabel(State.getTheoreticalNumberOfStates() + "",SwingConstants.CENTER);
         JButton runSimulationButton = new JButton("Start learning!");
-
-
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                System.exit(0);
-            }
-        });
 
         roundFactorSlider.addChangeListener(e1 ->
         {
