@@ -50,13 +50,13 @@ public class Agent {
         switch (mode) {
             case 0:
                 this.Rplus =250;
-                this.gamma = 0.1; // Lots of reliance of future reward - decay rate
-                this.alpha = 0.9; // Large number of states = high learning rate - learning rate
+                this.gamma = 0.8; // Lots of reliance of future reward - decay rate
+                this.alpha = 1.0; // Large number of states = high learning rate - learning rate
                 break;
             case 1:
                 this.Rplus = 500;
                 this.gamma = 0.2;
-                this.alpha = 0.9;
+                this.alpha = 1;
                 break;
             case 2:
                 this.Rplus = 150;

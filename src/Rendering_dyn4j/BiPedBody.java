@@ -142,7 +142,7 @@ public class BiPedBody {
         // Leg 2
         // Upper leg
         upperLeg2 = new GameObject();
-        {// Fixture4
+        {
             Convex c = Geometry.createRectangle(0.4, 1.05);
             BodyFixture bf = new BodyFixture(c);
             bf.setFilter(f2);
@@ -156,7 +156,7 @@ public class BiPedBody {
 
         // Lower leg
         lowerLeg2 = new GameObject();
-        {// Fixture4
+        {
             Convex c = Geometry.createRectangle(0.32, 1.05);
             BodyFixture bf = new BodyFixture(c);
             bf.setFilter(f2);
