@@ -22,6 +22,13 @@ public class StartDialog {
         JLabel noOfStatesNumber = new JLabel(State.getTheoreticalNumberOfStates() + "",SwingConstants.CENTER);
         JButton runSimulationButton = new JButton("Start learning!");
 
+//        dialog.addWindowListener(new WindowAdapter() { // FIX ME!!
+//            @Override
+//            public void windowClosed(WindowEvent e) {
+//                System.exit(0);
+//            }
+//        });
+
         roundFactorSlider.addChangeListener(e1 ->
         {
             State.roundFactor = roundFactorSlider.getValue();
