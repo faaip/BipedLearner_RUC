@@ -86,7 +86,7 @@ public class Main {
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
-                if (actionCounter >= 20000) {
+                if (actionCounter >= 50000) {
                     // Make csv
                         try {
                             Main.fileWriter.createFile();

@@ -12,21 +12,19 @@ These variables are then rounded in order to create an approximate state.
  */
 
 public class State {
-
     // State features
-    public double worldAngle; // Torso angle relative to World
-    public ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
+    private double worldAngle; // Torso angle relative to World
+    private ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
     private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions. Static since actions are the same for all states
-    final public static int roundFactor = 10; // Round factor - the higher the number the lower precision in states
+    final public static int roundFactor = 30; // Round factor - the higher the number the lower precision in states // TODO WHAT VALUE!!
 
     public State(BiPedBody walker) {
         // Constructor for a new state with the walker as input.
         // The jointangles from the walker are rounded and then added to the state in order to make the state approximate of the "actual" state
-        int round = roundFactor; // Rounding factor
         for (RevoluteJoint j : walker.joints) {
-            jointAngles.add((double) (Math.round(Math.toDegrees(j.getJointAngle()) / round)));
+            jointAngles.add((double) (Math.round(Math.toDegrees(j.getJointAngle()) / roundFactor)));
         }
-        this.worldAngle = (double) (Math.round(Math.toDegrees(walker.getRelativeAngle()) / round));
+        this.worldAngle = (double) (Math.round(Math.toDegrees(walker.getRelativeAngle()) / roundFactor));
     }
 
     public static void fillActions() {

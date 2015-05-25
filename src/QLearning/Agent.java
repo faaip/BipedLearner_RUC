@@ -33,7 +33,7 @@ public class Agent {
 
     private double alpha; // Learning rate
     private double gamma; // Decay rate
-    private double Rplus = 10; // Optimistic reward prediction? //
+    private double Rplus; // Optimistic reward prediction
     private int mode;
 
     private State s = null; // S (previous State)
@@ -41,7 +41,7 @@ public class Agent {
     private Double r = null;
 
     private int Ne = 1;
-    private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>(); // From aima
+    private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>();
     public static Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
     public Agent(int mode) {
@@ -55,13 +55,13 @@ public class Agent {
                 break;
             case 1:
                 this.Rplus = 500;
-                this.gamma = 1;
+                this.gamma = 0.2;
                 this.alpha = 0.9;
                 break;
             case 2:
                 this.Rplus = 150;
-                this.gamma = 1;
-                this.alpha = 0.9;
+                this.gamma = 0.1;
+                this.alpha = 0.1;
                 this.Ne = 1;
                 break;
             case 3:
@@ -86,47 +86,45 @@ public class Agent {
         if (isTerminal(sPrime)) {
             Q.put(new Pair<>(sPrime, noneAction), rPrime);
         }
+            // If State s not null
+            if (s != null) {
+                // Increment frequencies
+                Pair<State, JointAction> sa = new Pair<>(s, a);
+                Nsa.incrementFor(sa);
 
-        // If State s not null
-        if (s != null) {
-            // Increment frequencies
-            Pair<State, JointAction> sa = new Pair<>(s, a);
-            Nsa.incrementFor(sa);
+                // Get Q-value
+                Double Qsa = Q.get(sa);
+                if (Qsa == null) {
+                    Qsa = 0.0;
+                }
 
-            // Get Q-value
-            Double Qsa = Q.get(sa);
-            if (Qsa == null) {
-                Qsa = 0.0;
-            }
+                Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
 
-            Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
+                if (r == null) {
+                    r = Simulation.walker.reward();
+                    System.out.println("Reward: " + r);
+                }
 
-            if (r == null) {
                 r = Simulation.walker.reward();
-                System.out.println("Reward: " + r);
+                Q.put(sa, Qsa + alpha * (r + gamma * maxAPrime(sPrime) - Qsa));
+
             }
 
-            r = Simulation.walker.reward();
-            Q.put(sa, Qsa + alpha
-                    * (r + gamma * maxAPrime(sPrime) - Qsa));
+            if (isTerminal(sPrime)) {
+                s = null;
+                a = null;
+                r = null;
+            } else {
+                this.s = sPrime;
+                this.a = argmaxAPrime(sPrime);
+                this.r = rPrime;
+            }
 
+            if (a != null) {
+                Main.gui.update(a);
+            }
+            return a;
         }
-
-        if (isTerminal(sPrime)) {
-            s = null;
-            a = null;
-            r = null;
-        } else {
-            this.s = sPrime;
-            this.a = argmaxAPrime(sPrime);
-            this.r = rPrime;
-        }
-
-        if (a != null) {
-            Main.gui.update(a);
-        }
-        return a;
-    }
 
     private JointAction argmaxAPrime(State sPrime) {
         JointAction a = null;
