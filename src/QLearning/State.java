@@ -83,6 +83,7 @@ public class State {
 
     public static String getTheoreticalNumberOfStates() {
 
+        // TODO comment me!!
 
         int hipInterval = Math.round(55) / roundFactor;
         int kneeInterval = Math.round(150) / roundFactor;

@@ -282,8 +282,7 @@ public class BiPedBody {
                 (CollisionDetector.cl.collision(Simulation.walker.upperLeg2, Simulation.floor));
     }
 
-    private boolean feetOnTheGround()
-    {
+    private boolean feetOnTheGround() {
         return (CollisionDetector.cl.collision(Simulation.walker.foot1, Simulation.floor) || (CollisionDetector.cl.collision(Simulation.walker.foot2, Simulation.floor)));
     }
 
@@ -301,23 +300,23 @@ public class BiPedBody {
         switch (mode) {
             case 0:
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000 );
+                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000);
                 }
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
                     reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * -1000);
                 }
-                if (reward == 0) {
-                    reward = -1000000;
-                }
                 if (Simulation.walker.hasFallen()) {
-                    reward = -100;
+                    reward = -1000;
                 }
-                System.out.println(reward);
+
+                if((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) == 0){reward = - 1000;}
                 break;
             case 1:
                 // TODO extra bonus for begge fødder højt (ikke bare summen)
-                reward = 1500 + ((Simulation.walker.foot2.getWorldCenter().y+ Simulation.walker.foot1.getWorldCenter().y) * 1000);
-                if(!feetOnTheGround()){reward+=1000;}
+                reward = 1500 + ((Simulation.walker.foot2.getWorldCenter().y + Simulation.walker.foot1.getWorldCenter().y) * 1000);
+                if (!feetOnTheGround()) {
+                    reward += 1000;
+                }
                 break;
             case 2:
                 reward = Math.toDegrees(Simulation.walker.knee2.getJointAngle());
@@ -325,7 +324,7 @@ public class BiPedBody {
 
                 break;
             case 3:
-                reward = (Simulation.walker.torso.getWorldCenter().y*1000);
+                reward = (Simulation.walker.torso.getWorldCenter().y * 1000);
                 System.out.println(reward);
                 break;
             case 4:
@@ -372,6 +371,10 @@ public class BiPedBody {
         lowerLeg2.translate(0, -1.8);
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
+
+
+        int interval = (int) Math.toDegrees(hip1.getUpperLimit()) - (int) Math.toDegrees(hip1.getLowerLimit());
+
 
         // Clears force
         for (GameObject limb : limbs) {

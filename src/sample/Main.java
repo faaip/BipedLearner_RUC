@@ -72,6 +72,7 @@ public class Main {
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
+                    actionCounter++;
                     if (Main.mode != 0) {
                         fileWriter.add(new CsvData(actionCounter, Simulation.walker.reward()));
                     }
@@ -84,12 +85,10 @@ public class Main {
                         isTerminal = true;
                     }
                     t = 0; // Reset time to zero
-                    System.out.println(100000 - actionCounter);
-                    actionCounter++;
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
-                if (actionCounter >= 100000) {
+                if (generation >= 100000) {
                     // Make csv
                     try {
                         Main.fileWriter.createFile();
@@ -107,6 +106,7 @@ public class Main {
             // When loop is breaked, information is printed and walker is reset to initial position
             if (isTerminal) {
                 if (Main.mode == 0) {
+                    System.out.println(accumulatedReward);
                     fileWriter.add(new CsvData(generation, accumulatedReward)); // Add to filewriter
                 }
                 updateGuiTable();

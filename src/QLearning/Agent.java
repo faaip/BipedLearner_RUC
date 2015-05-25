@@ -10,8 +10,6 @@ import java.util.Map;
 
 //TODO Comment, Clean og lave referencer til AIMA
 
-
-
 public class Agent {
     private JointAction noneAction = new JointAction();
 
