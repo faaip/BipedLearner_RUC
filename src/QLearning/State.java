@@ -16,7 +16,7 @@ public class State {
     private double worldAngle; // Torso angle relative to World
     private ArrayList<Double> jointAngles = new ArrayList<>(); // Angles of joints
     private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions. Static since actions are the same for all states
-    final public static int roundFactor = 30; // Round factor - the higher the number the lower precision in states // TODO WHAT VALUE!!
+    public static int roundFactor = 15; // Round factor - the higher the number the lower precision in states // TODO WHAT VALUE!!
 
     public State(BiPedBody walker) {
         // Constructor for a new state with the walker as input.
@@ -79,5 +79,17 @@ public class State {
 
     public ArrayList<JointAction> getActions() {
         return actions;
+    }
+
+    public static String getTheoreticalNumberOfStates() {
+
+        int hipInterval = Math.round(55) / roundFactor;
+        int kneeInterval = Math.round(150) / roundFactor;
+        int ankleInterval = Math.round(30) / roundFactor;
+        int relativeAngle = Math.round(360) / roundFactor;
+
+        String n = (hipInterval*hipInterval*kneeInterval*kneeInterval*ankleInterval*ankleInterval*relativeAngle)+"";
+
+        return n;
     }
 }

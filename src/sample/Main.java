@@ -27,13 +27,16 @@ public class Main {
     // TODO Vi skal undersøge betydelsen af terminal state
 
     public static void main(String[] args) {
-        try {
-            ModeSelection modeSelection = new ModeSelection();
-            modeSelection.askUser();
-        } catch (java.lang.NullPointerException e) {
-            // Program exit if mode == null
-            System.exit(0);
-        }
+
+        StartDialog dialog = new StartDialog();
+
+//        try {
+//            ModeSelection modeSelection = new ModeSelection();
+//            modeSelection.askUser();
+//        } catch (java.lang.NullPointerException e) {
+//            // Program exit if mode == null
+//            System.exit(0);
+//        }
         learn();
     }
 
@@ -81,12 +84,12 @@ public class Main {
                         isTerminal = true;
                     }
                     t = 0; // Reset time to zero
-                    System.out.println(actionCounter);
+                    System.out.println(100000-actionCounter);
                     actionCounter++;
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
-                if (actionCounter >= 50000) {
+                if (actionCounter >= 100000) {
                     // Make csv
                         try {
                             Main.fileWriter.createFile();
