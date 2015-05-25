@@ -115,7 +115,7 @@ public class BiPedBody {
         hip1.setUserData("hip1");
         world.addJoint(hip1);
 
-        // Knee - TODO set smaller limits
+        // Knee
         knee1 = new RevoluteJoint(upperLeg1, lowerLeg1, new Vector2(0.0, -1.4));
         knee1.setLimitEnabled(true);
         knee1.setLimits(Math.toRadians(0.0), Math.toRadians(150.0));
