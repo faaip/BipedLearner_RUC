@@ -4,8 +4,6 @@ import QLearning.State;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class StartDialog {
     private JDialog dialog = new JDialog();

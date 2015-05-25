@@ -84,20 +84,21 @@ public class Main {
                         isTerminal = true;
                     }
                     t = 0; // Reset time to zero
-                    System.out.println(100000-actionCounter);
+                    System.out.println(100000 - actionCounter);
                     actionCounter++;
                 }
                 t += simulation.getElapsedTime(); // Increment time
 
                 if (actionCounter >= 100000) {
                     // Make csv
-                        try {
-                            Main.fileWriter.createFile();
-                            System.out.println("csv created");
-                        } catch (IOException e) {
-                            System.out.println(e + " CSV FAILED");
-                        }
-                        System.exit(0);
+                    try {
+                        Main.fileWriter.createFile();
+                        System.out.println("csv created");
+                    } catch (IOException e) {
+                        System.out.println(e + " CSV FAILED");
+                    }
+                    System.out.println("Q.Size = " + agent.Q.size());
+                    System.exit(0);
                 }
 
 //                runTime += simulation.getElapsedTime(); // Increment runtime
