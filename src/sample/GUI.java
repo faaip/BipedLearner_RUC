@@ -134,7 +134,7 @@ public class GUI {
         // Method for updating gui with current Nsa count and Q-value
         synchronized (ThreadSync.lock) {
             currentNsa.setText("Current Nsa count: " + Nsa);
-            statesLabel.setText("Number of Q-values: " + Main.agent.Q.size());
+            statesLabel.setText("Number of Q-values: " + Main.agent.getQsize());
             if (Q == 0.0) {
                 currentQ.setText("Current Q: " + null);
                 agentStatus.setText("Agent is exploring");

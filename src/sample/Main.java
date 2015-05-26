@@ -96,7 +96,7 @@ public class Main {
                     } catch (IOException e) {
                         System.out.println(e + " CSV FAILED");
                     }
-                    System.out.println("Q.Size = " + agent.Q.size());
+                    System.out.println("Q.Size = " + agent.getQsize());
                     System.exit(0);
                 }
 

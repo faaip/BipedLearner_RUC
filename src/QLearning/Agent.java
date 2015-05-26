@@ -40,7 +40,7 @@ public class Agent {
 
     private int Ne = 1;
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>();
-    public static Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
+    private Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
     public Agent(int mode) {
         this.mode = mode;
@@ -48,8 +48,8 @@ public class Agent {
         switch (mode) {
             case 0:
                 this.Rplus =250;
-                this.gamma = 0.8; // Lots of reliance of future reward - decay rate
-                this.alpha = 1.0; // Large number of states = high learning rate - learning rate
+                this.gamma = 0.2; // Lots of reliance of future reward - decay rate
+                this.alpha = 0.5; // Large number of states = high learning rate - learning rate
                 break;
             case 1:
                 this.Rplus = 500;
@@ -175,5 +175,9 @@ public class Agent {
             max = 0.0;
         }
         return max;
+    }
+
+    public int getQsize() {
+        return Q.size();
     }
 }
