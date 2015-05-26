@@ -292,12 +292,11 @@ public class BiPedBody {
 
 
     public double reward() {
-        int mode = Main.mode;
         double reward = 0;
 
         // TODO minus reward
 
-        switch (mode) {
+        switch (Main.mode) {
             case 0:
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
                     reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000);
