@@ -178,6 +178,6 @@ public class Agent {
     }
 
     public int getQsize() {
-        return Q.size();
+        return Q.size() ;
     }
 }
