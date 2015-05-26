@@ -94,7 +94,7 @@ public class Simulation extends JFrame {
     /**
      * The dynamics engine
      */
-     public static World world;
+    public static World world;
 
     /**
      * Wether the example is stopped or not
@@ -191,15 +191,14 @@ public class Simulation extends JFrame {
         floor.translate(0.0, -2.95);
         this.world.addBody(floor);
 
-        if(Main.mode == 1 || Main.mode == 2)
-        {
+        if (Main.mode == 1 || Main.mode == 2) {
             // Add walls, if needed by mode
             Rectangle wall1Rect = new Rectangle(1.0, 15.0);
             GameObject wall1 = new GameObject();
             BodyFixture wall1Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
             wall1.addFixture(wall1Fixture);
             wall1.setMass(Mass.Type.INFINITE);
-            wall1.translate(-6,0);
+            wall1.translate(-6, 0);
 
             GameObject wall2 = new GameObject();
             BodyFixture wall2Fixture = new BodyFixture(Geometry.createRectangle(1.0, 15.0));
@@ -246,8 +245,6 @@ public class Simulation extends JFrame {
         thread.setDaemon(true);
         // start the game loop
         thread.start();
-
-
 
 
     }
@@ -300,7 +297,7 @@ public class Simulation extends JFrame {
         double elapsedTime = ((double) diff / NANO_TO_BASE);
 
         // Multiply with simulation speed
-        elapsedTime = elapsedTime*simulationSpeed;
+        elapsedTime = elapsedTime * simulationSpeed;
         // update the world with the elapsed time
 
         // Sync to threadsync
@@ -309,9 +306,8 @@ public class Simulation extends JFrame {
         }
     }
 
-    public double getElapsedTime()
-    {
-        return world.getAccumulatedTime()*simulationSpeed;
+    public double getElapsedTime() {
+        return world.getAccumulatedTime() * simulationSpeed;
     }
 
 
@@ -359,8 +355,7 @@ public class Simulation extends JFrame {
         this.world.step(i);
     }
 
-    public double getStepFrequency()
-    {
+    public double getStepFrequency() {
         return this.world.getSettings().getStepFrequency();
     }
 }

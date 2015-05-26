@@ -3,22 +3,17 @@ package sample;
 import QLearning.*;
 import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
-import org.omg.CORBA.DomainManagerOperations;
-
-import java.io.IOException;
 
 public class Main {
     public static int generation = 0;
     public static Simulation simulation;
     public static GUI gui;
+    public static Agent agent;
     public static double accumulatedReward;
     public static State initState;
     public static JointAction initAction;
     public static int mode = 0;
-    public static int noOfStatesExplored;
-    public static Agent agent;
-    public static OutputDataWriter fileWriter;
-    public static long runTime = 0;
+
 
 
     // TODO Måske skal actions kun incrementere grader med ex. 5 fremfor full action
@@ -29,23 +24,15 @@ public class Main {
     public static void main(String[] args) {
 
         StartDialog dialog = new StartDialog();
-
-//        try {
-//            ModeSelection modeSelection = new ModeSelection();
-//            modeSelection.askUser();
-//        } catch (java.lang.NullPointerException e) {
-//            // Program exit if mode == null
-//            System.exit(0);
-//        }
         learn();
     }
 
     public static void learn() {
+        // Setup
         simulation = new Simulation();
         gui = new GUI(simulation);
 
-        //Add actions
-        State.fillActions();
+        State.fillActions(); //Add actions to static ArrayList in State
 
         //First action
         initAction = Simulation.walker.getState().getRandomAction();
@@ -54,72 +41,40 @@ public class Main {
         agent = new Agent(mode); // Agent is created based on chosen reward mode
         initState = Simulation.walker.getState();
 
-        fileWriter = new OutputDataWriter("TEST");
-        int actionCounter = 0;
-
-        while (2 > 1) {
-
+        while (true) {// Loops as long as program is running
             accumulatedReward = 0;
-            noOfStatesExplored = 0;
-
             double t = 0;
             boolean isTerminal = false;
+
             while (!isTerminal) {
-                // Reset if out of sight
-                if (!Simulation.walker.isInSight()) {
+                if (!Simulation.walker.isInSight()) { // Reset if out of sight
                     isTerminal = true;
                 }
                 if (t > 400000) {
                     // Observe and execute
                     JointAction action = agent.execute();
-                    actionCounter++;
-                    if (Main.mode != 0) {
-                        fileWriter.add(new CsvData(actionCounter, Simulation.walker.reward()));
-                    }
                     if (action != null) {
                         synchronized (ThreadSync.lock) {
                             action.doAction();
                         }
-                    } else {
-                        // If null is returned, agent is at a terminal state
+                    } else {// If null is returned, agent is at a terminal state
                         isTerminal = true;
                     }
                     t = 0; // Reset time to zero
                 }
                 t += simulation.getElapsedTime(); // Increment time
-
-                if (generation >= 100000) {
-                    // Make csv
-                    try {
-                        Main.fileWriter.createFile();
-                        System.out.println("csv created");
-                    } catch (IOException e) {
-                        System.out.println(e + " CSV FAILED");
-                    }
-                    System.out.println("Q.Size = " + agent.getQsize());
-                    System.exit(0);
-                }
-
-//                runTime += simulation.getElapsedTime(); // Increment runtime
-
             }
-            // When loop is breaked, information is printed and walker is reset to initial position
+            // When loop is breaked, gui is updated and walker is reset to initial position
             if (isTerminal) {
-                if (Main.mode == 0) {
-                    System.out.println(accumulatedReward);
-                    fileWriter.add(new CsvData(generation, accumulatedReward)); // Add to filewriter
-                }
                 updateGuiTable();
                 Simulation.walker.resetPosition();
             }
         }
-
-
     }
 
     private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
-            gui.highScoreList.add(new Generation(generation, accumulatedReward, noOfStatesExplored)); // TODO fix number of states explored
+            gui.highScoreTable.add(new Generation(generation, accumulatedReward)); // TODO fix number of states explored
             generation++;
             gui.update();
         }

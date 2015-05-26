@@ -9,7 +9,7 @@ This class contains a list of each generation of walkers. It is only added to th
 The class contains a JTable and a method for adding a new generation of walkers to the table after each iteration.
  */
 
-public class HighScoreList {
+public class HighScoreTable {
     private Object[][] data;
     private Object[] columns = {"Generation #", "Total reward"}; // TODO FJERN NUMBER OF NEW STATES
     private DefaultTableModel model = new DefaultTableModel(data,columns) {
@@ -28,7 +28,7 @@ public class HighScoreList {
         }
     };
     private JTable table = new JTable(model);
-    public HighScoreList() {
+    public HighScoreTable() {
         table.setAutoCreateRowSorter(true); // Table is automatically sorted
     }
 

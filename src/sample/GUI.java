@@ -7,7 +7,6 @@ import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
 
 import java.awt.*;
-import java.io.IOException;
 
 /*
 This class contains the components and method for the graphical user interface.
@@ -15,7 +14,7 @@ All actions listeners are synchronized to ThreadSync. Refer to the written repor
  */
 
 public class GUI {
-    public static HighScoreList highScoreList = new HighScoreList(); // JTable containing information for each generation
+    public static HighScoreTable highScoreTable = new HighScoreTable(); // JTable containing information for each generation
     private static JLabel generationLabel; //Label for no. of generation
     private static JLabel statesLabel; // Label for total number of states
     private static JLabel currentNsa; // Label for state-action frequency for current state-action pair
@@ -56,18 +55,16 @@ public class GUI {
         JLabel simSpeed = new JLabel(Main.simulation.getSimulationSpeed() + " x Speed", SwingConstants.CENTER);
         JSlider simSpeedSlider = new JSlider(1, 50, 1); // Slider for simulation speed
         JButton randomAction = new JButton("Force random action");
-        JButton outputCsvButton = new JButton("CSV");
 
         // Add Components to panel
         control.add(resetButton);
         control.add(pauseButton);
         control.add(randomAction);
-        control.add(outputCsvButton);
         control.add(simSpeed);
         control.add(simSpeedSlider);
 
         // Panels for highscore table
-        JScrollPane highScorePane = new JScrollPane(highScoreList.getTable());
+        JScrollPane highScorePane = new JScrollPane(highScoreTable.getTable());
 
         // Panels are added to two vertical split panes
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, currentBipedPanel, control);
@@ -87,8 +84,10 @@ public class GUI {
         simSpeedSlider.addChangeListener(e -> {
             // Slider for changing simulation speed
             synchronized (ThreadSync.lock) {
-                Main.simulation.setSimulationSpeed(simSpeedSlider.getValue());
-                simSpeed.setText(Main.simulation.getSimulationSpeed() + " x Speed");
+
+                    Main.simulation.setSimulationSpeed(simSpeedSlider.getValue());
+                    simSpeed.setText(Main.simulation.getSimulationSpeed() + " x Speed");
+
             }
         });
 
@@ -101,15 +100,7 @@ public class GUI {
             }
         });
 
-        outputCsvButton.addActionListener(e2 -> {
-            try {
-                Main.fileWriter.createFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        pauseButton.addChangeListener(e1 -> { // TODO hvis pause er slået til og slider benyttes, kan pause ikke længere blablabl
+        pauseButton.addChangeListener(e1 -> {
             //Action Listener for pausing or resuming simulation
             synchronized (ThreadSync.lock) {
                 if (Main.simulation.getSimulationSpeed() != 0) {
@@ -126,7 +117,6 @@ public class GUI {
             random.doAction();
             update(random);
         });
-
 
     }
 
@@ -149,7 +139,6 @@ public class GUI {
         // Overloaded method for updating gui labels
         synchronized (ThreadSync.lock) {
             generationLabel.setText("Current walker is generation #" + Main.generation);
-             // TODO FIX ME
         }
     }
 
