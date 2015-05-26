@@ -109,7 +109,7 @@ public class GUI {
             }
         });
 
-        pauseButton.addChangeListener(e1 -> {
+        pauseButton.addChangeListener(e1 -> { // TODO hvis pause er slået til og slider benyttes, kan pause ikke længere blablabl
             //Action Listener for pausing or resuming simulation
             synchronized (ThreadSync.lock) {
                 if (Main.simulation.getSimulationSpeed() != 0) {

@@ -81,17 +81,13 @@ public class State {
         return actions;
     }
 
-    public static String getTheoreticalNumberOfStates() {
-
-        // TODO comment me!!
-
+    public static long getTheoreticalNumberOfStates() {
+        // The numbers for these intervals are found by looking at the set upper- and lower limit in each joint
         int hipInterval = Math.round(55) / roundFactor;
         int kneeInterval = Math.round(150) / roundFactor;
         int ankleInterval = Math.round(30) / roundFactor;
         int relativeAngle = Math.round(360) / roundFactor;
 
-        String n = (hipInterval*hipInterval*kneeInterval*kneeInterval*ankleInterval*ankleInterval*relativeAngle)+"";
-
-        return n;
+        return (hipInterval*hipInterval*kneeInterval*kneeInterval*ankleInterval*ankleInterval*relativeAngle);
     }
 }

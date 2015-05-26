@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StartDialog {
-    private JDialog dialog = new JDialog();
+    private JDialog dialog = new JDialog(); // TODO fjern modes!!!Nye
     String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee", "Reward for upright position", "Reward for backwards motion"};
 
     public StartDialog() {
