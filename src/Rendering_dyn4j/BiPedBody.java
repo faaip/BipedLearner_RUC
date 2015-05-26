@@ -304,9 +304,7 @@ public class BiPedBody {
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
                     reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * -1000);
                 }
-                if (Simulation.walker.hasFallen()) {
-                    reward = -1000;
-                }
+                if (Simulation.walker.hasFallen()) {reward = -1000;}
 
                 if((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) == 0){reward = - 1000;}
                 break;

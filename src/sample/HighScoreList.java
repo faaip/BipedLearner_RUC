@@ -11,7 +11,7 @@ The class contains a JTable and a method for adding a new generation of walkers 
 
 public class HighScoreList {
     private Object[][] data;
-    private Object[] columns = {"Generation #", "Total reward", "Number of new states"}; // TODO FJERN NUMBER OF NEW STATES
+    private Object[] columns = {"Generation #", "Total reward"}; // TODO FJERN NUMBER OF NEW STATES
     private DefaultTableModel model = new DefaultTableModel(data,columns) {
         @Override // This method is overriden to ensure correction sorting in the table
         public Class getColumnClass(int column) {
@@ -34,7 +34,7 @@ public class HighScoreList {
 
     public void add(Generation g) {
         synchronized (ThreadSync.lock) { // The method for adding rows is synchronized to the threadsync object
-            model.addRow(new Object[]{new Integer(g.generationNumber), new Double(g.accumulatedReward), new Integer(g.noOfStatesExplored)});
+            model.addRow(new Object[]{new Integer(g.generationNumber), new Double(g.accumulatedReward)});
         }
     }
     public JTable getTable() {
