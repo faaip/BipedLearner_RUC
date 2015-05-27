@@ -2,201 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af2ff3d9-b7ed-474d-8eb6-7c75608a5cbf" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/burlap.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/opencsv_3_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/AgentProgram.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/EnvironmentObject.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/EnvironmentView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/impl/AbstractEnvironment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/impl/DynamicPercept.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/impl/DynamicState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/impl/ObjectWithDynamicAttributes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/agent/impl/aprog/SimpleReflexAgentProgram.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/cellworld/CellWorldAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/connectfour/ConnectFourAIPlayer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/connectfour/ConnectFourGame.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/eightpuzzle/EightPuzzleBoard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/eightpuzzle/EightPuzzleFunctionFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/AdaptableHeuristicFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/BidirectionalMapProblem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/ExtendableMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/MapEnvironment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/MapEnvironmentState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/MapStepCostFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/MoveToAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/map/Scenario.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/nqueens/NQueensFitnessFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/nqueens/QueenAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/ModelBasedReflexVacuumAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/NondeterministicVacuumAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/ReflexVacuumAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/VacuumEnvironment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/VacuumEnvironmentState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/VacuumEnvironmentViewActionTracker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/VacuumWorldGoalTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/vacuum/VacuumWorldResults.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/wumpusworld/AgentPercept.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/wumpusworld/WumpusFunctionFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/wumpusworld/WumpusKnowledgeBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/wumpusworld/action/Climb.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/environment/xyenv/Wall.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/framework/Attribute.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/framework/StringAttributeSpecification.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/inductive/DLTestFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/inductive/DecisionTree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/knowledge/Hypothesis.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/learners/AdaBoostLearner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/learners/CurrentBestLearner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/learners/DecisionListLearner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/learners/MajorityLearner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/BackPropLearning.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/FeedForwardNeuralNetwork.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/FunctionApproximator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/LogSigActivationFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/NNConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/NNExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/NNTrainingScheme.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/neural/Perceptron.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/reinforcement/agent/PassiveTDAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/reinforcement/agent/ReinforcementAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/reinforcement/example/CellWorldEnvironment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/reinforcement/example/CellWorldEnvironmentState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/learning/reinforcement/example/CellWorldPercept.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/common/Lexer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/common/Parser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/common/Token.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/PredicateCollector.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/Quantifiers.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/StandardizeApartInPlace.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/StandardizeApartIndexical.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/StandardizeApartIndexicalFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/StandardizeApartResult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/domain/FOLDomainAnswerLiteralAddedEvent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/domain/FOLDomainSkolemConstantAddedEvent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/domain/FOLDomainSkolemFunctionAddedEvent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/AbstractModulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/Demodulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/FOLFCAsk.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/FOLTFMResolution.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/InferenceResultPrinter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/Paramodulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/otter/ClauseSimplifier.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/otter/defaultimpl/DefaultLightestClauseHeuristic.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/AbstractProofStep.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofPrinter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepChainCancellation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepChainContrapositive.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepChainDropped.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepChainFromClause.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepClauseDemodulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepClauseParamodulation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepFoChAlreadyAFact.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepFoChAssertFact.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/inference/proof/ProofStepRenaming.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/kb/FOLKnowledgeBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/kb/FOLKnowledgeBaseFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/kb/data/CNF.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/kb/data/Clause.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/AbstractFOLVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/FOLVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/ast/Predicate.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/ast/Sentence.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/ast/TermEquality.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/fol/parsing/ast/Variable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/inference/DPLLSatisfiable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/inference/OptimizedDPLL.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/inference/SATPlan.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/inference/TTEntails.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/kb/KnowledgeBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/kb/data/ConjunctionOfClauses.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/kb/data/Literal.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/parsing/AbstractPLVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/parsing/PLParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/parsing/PLVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/parsing/ast/AtomicSentence.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/visitors/BasicGatherer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/visitors/ConvertToConjunctionOfClauses.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/visitors/MoveNotInwards.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/logic/propositional/visitors/SymbolCollector.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/CategoricalDistribution.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/Factor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/ProbabilityMass.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/ProbabilityModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/ConditionalProbabilityDistribution.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/FiniteNode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/Node.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/approx/GibbsAsk.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/approx/LikelihoodWeighting.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/approx/ParticleFiltering.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/impl/BayesNet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/impl/CPT.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/impl/DynamicBayesNet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/bayes/impl/FullCPTNode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/AbstractFiniteDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/BooleanDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/ContinuousDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/DiscreteDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/Domain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/FiniteDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/domain/FiniteIntegerDomain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/example/BayesNetExampleFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/example/ExampleRV.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/example/FullJointDistributionPairFairDiceModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/example/FullJointDistributionToothacheCavityCatchModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/example/FullJointDistributionToothacheCavityCatchWeatherModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/full/FullJointDistributionModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/hmm/HiddenMarkovModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/hmm/exact/FixedLagSmoothing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/mdp/MarkovDecisionProcess.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/mdp/impl/LookupPolicy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/mdp/search/ValueIteration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/proposition/AbstractTermProposition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/proposition/DerivedProposition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/proposition/IntegerSumProposition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/proposition/SentenceProposition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/probability/temporal/ForwardStepInference.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/adversarial/AdversarialSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/adversarial/MinimaxSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/csp/Assignment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/csp/CSP.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/csp/CSPStateListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/csp/Domain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/csp/ImprovedBacktrackingStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/BidirectionalProblem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/EvaluationFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/HeuristicFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/PathCostFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/PerceptToStateFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/QueueSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/Search.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/framework/SearchUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/informed/GreedyBestFirstEvaluationFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/informed/GreedyBestFirstSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/local/GeneticAlgorithm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/local/SimulatedAnnealingSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/nondeterministic/Path.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/online/LRTAStarAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/online/OnlineDFSAgent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/online/OnlineSearchProblem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/uninformed/DepthLimitedSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/search/uninformed/IterativeDeepeningSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/ArrayIterator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/DisjointSets.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/Randomizer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/SetOps.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/datastructure/FIFOQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/datastructure/Point2D.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/datastructure/PriorityQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/datastructure/TwoKeyHashMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/datastructure/XYLocation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aima/core/util/math/Interval.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dyn4j_003.iml" afterPath="$PROJECT_DIR$/BipedLearner_RUC.iml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Rendering_dyn4j/BiPedBody.java" afterPath="$PROJECT_DIR$/src/Rendering_dyn4j/BipedBody.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/QLearning/JointAction.java" afterPath="$PROJECT_DIR$/src/QLearning/JointAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Rendering_dyn4j/Simulation.java" afterPath="$PROJECT_DIR$/src/Rendering_dyn4j/Simulation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/StartDialog.java" afterPath="$PROJECT_DIR$/src/sample/StartDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/QLearning/State.java" afterPath="$PROJECT_DIR$/src/QLearning/State.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/dyn4j_3_1_11.xml" afterPath="$PROJECT_DIR$/.idea/libraries/dyn4j_3_1_11.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BipedLearner_RUC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -240,14 +46,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JointAction.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JointAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/QLearning/JointAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.3782542">
+            <state vertical-scroll-proportion="0.0">
               <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/GameObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Graphics2DRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/Graphics2DRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/Simulation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5058275">
+              <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -427,6 +263,116 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -632,7 +578,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32892805" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33039647" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -683,11 +629,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/QLearning/JointAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3782542">
+        <state vertical-scroll-proportion="0.0">
           <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/Graphics2DRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rendering_dyn4j/Simulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5058275">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
