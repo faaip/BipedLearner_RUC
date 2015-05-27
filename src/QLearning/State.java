@@ -12,11 +12,10 @@ These variables are then rounded in order to create an approximate state.
  */
 
 public class State {
-    // State features
     private int worldAngle; // Torso angle relative to World
     private ArrayList<Integer> jointAngles = new ArrayList<>(); // Angles of joints
-    private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions. Static since actions are the same for all states
-    public static int roundFactor = 15; // Round factor - the higher the number the lower precision in states // TODO WHAT VALUE!!
+    private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions.
+    public static int roundFactor = 15; // Round factor - the higher the number the lower precision in states
 
     public State(BiPedBody walker) {
         // Constructor for a new state with the walker as input.
@@ -88,6 +87,7 @@ public class State {
         int ankleInterval = Math.round(30) / roundFactor;
         int relativeAngle = Math.round(360) / roundFactor;
 
+        // These numbers are multiplied and the product is returned
         return (hipInterval*hipInterval*kneeInterval*kneeInterval*ankleInterval*ankleInterval*relativeAngle);
     }
 }

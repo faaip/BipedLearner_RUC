@@ -10,9 +10,15 @@ import sample.Main;
 
 import java.util.ArrayList;
 
+/*
+This class contains the limbs and joints of the biped body. It also contains method for getting a state from the current posture,
+returning the current reward, resetting the walker to its intial position and moving joints.
+ */
+
+
 public class BiPedBody {
 
-    World world;
+    World world; // The world object, which the body is added to
 
     // Limbs
     GameObject torso;
@@ -33,14 +39,13 @@ public class BiPedBody {
     RevoluteJoint ankle1;
     RevoluteJoint ankle2;
 
-    // TO-DO : MOVE THIS LIST OF ACTIONS TO ANOTHER CLASS
-
+    // Torque and jointspeed for movement of joints
     Double maxHipTorque = 250.0;
     Double maxKneeTorque = 250.0;
     Double maxAnkleTorque = 150.0;
     Double jointSpeed = 60.0;
 
-    // Categories (for avoiding collision between leg 1 and leg 2)
+    // Categories (for allowing overlap of leg 1 and leg 2)
     CategoryFilter f1 = new CategoryFilter(1, 1);
     CategoryFilter f2 = new CategoryFilter(2, 2);
 
@@ -50,7 +55,7 @@ public class BiPedBody {
 
         // Torso
         torso = new GameObject();
-        torso.setUserData("torso");
+        torso.setUserData("torso"); // User data set to allow for more readable toString() in JointAction
         {
             Convex c = Geometry.createRectangle(0.6, 1.0);
             BodyFixture bf = new BodyFixture(c);
@@ -78,7 +83,7 @@ public class BiPedBody {
         // Lower leg
         lowerLeg1 = new GameObject();
         lowerLeg1.setUserData("lower leg 1");
-        {// Fixture4
+        {
             Convex c = Geometry.createRectangle(0.32, 1.05);
             BodyFixture bf = new BodyFixture(c);
             bf.setFilter(f1);
@@ -109,7 +114,6 @@ public class BiPedBody {
         hip1.setLimits(Math.toRadians(-50.0), Math.toRadians(5.0));
         hip1.setReferenceAngle(Math.toRadians(0.0));
         hip1.setMotorEnabled(true);
-//        hip1.setMotorSpeed(Math.toRadians(0.0));
         hip1.setMaximumMotorTorque(maxHipTorque);
         hip1.setCollisionAllowed(false);
         hip1.setUserData("hip1");
@@ -121,7 +125,6 @@ public class BiPedBody {
         knee1.setLimits(Math.toRadians(0.0), Math.toRadians(150.0));
         knee1.setReferenceAngle(Math.toRadians(0.0));
         knee1.setMotorEnabled(true);
-//        knee1.setMotorSpeed(Math.toRadians(0.0));
         knee1.setMaximumMotorTorque(maxKneeTorque);
         knee1.setCollisionAllowed(false);
         knee1.setUserData("knee1");
@@ -133,7 +136,6 @@ public class BiPedBody {
         ankle1.setLimits(Math.toRadians(-15.0), Math.toRadians(15.0));
         ankle1.setReferenceAngle(Math.toRadians(0.0));
         ankle1.setMotorEnabled(true);
-//        ankle1.setMotorSpeed(Math.toRadians(0.0));
         ankle1.setMaximumMotorTorque(maxAnkleTorque);
         ankle1.setCollisionAllowed(false);
         ankle1.setUserData("ankle1");
@@ -169,7 +171,7 @@ public class BiPedBody {
 
         // Foot
         foot2 = new GameObject();
-        {// Fixture4
+        {
             Convex c = Geometry.createRectangle(0.6, 0.25);
             BodyFixture bf = new BodyFixture(c);
             bf.setFilter(f2);
@@ -238,6 +240,7 @@ public class BiPedBody {
     }
 
     public void setJoint(RevoluteJoint joint, int x) {
+        // setMotorSpeed for joint depending on x
         if (!joint.isMotorEnabled()) {
             joint.setMotorEnabled(true);
         }
@@ -246,7 +249,7 @@ public class BiPedBody {
                 joint.setMotorSpeed(Math.toRadians(jointSpeed));
                 break;
             case 0:
-                joint.setMotorSpeed(0);
+                joint.setMotorSpeed(0); // joint is "locked"
                 break;
             case 1:
                 joint.setMotorSpeed(Math.toRadians(-jointSpeed));
@@ -255,28 +258,19 @@ public class BiPedBody {
     }
 
     public void relaxJoint(RevoluteJoint joint) {
+        // Motor is turned of on joint
         if (joint.isMotorEnabled()) {
             joint.setMotorEnabled(false);
         }
     }
 
-    public boolean isFoot1OnGround() {
-        return foot1.getWorldCenter().y < -3.37;
-    }
-
-    public boolean isFoot2OnGround() {
-        return foot2.getWorldCenter().y < -3.37;
-    }
-
     public State getState() {
+        // Creates a new State object from posture and returns this state
         return new State(this);
     }
 
-    public int boolToInt(boolean b) {
-        return b ? 1 : 0;
-    }
-
     public boolean hasFallen() {
+        // Returns true if torso, upperleg1 or upperleg2 collides with Simulation.floor
         return (CollisionDetector.cl.collision(Simulation.walker.torso, Simulation.floor)) ||
                 (CollisionDetector.cl.collision(Simulation.walker.upperLeg1, Simulation.floor)) ||
                 (CollisionDetector.cl.collision(Simulation.walker.upperLeg2, Simulation.floor));
@@ -286,16 +280,11 @@ public class BiPedBody {
         return (CollisionDetector.cl.collision(Simulation.walker.foot1, Simulation.floor) || (CollisionDetector.cl.collision(Simulation.walker.foot2, Simulation.floor)));
     }
 
-    public double legsChangeSinceLastFrame() {
-        return (upperLeg1.getChangeInPosition().x + upperLeg2.getChangeInPosition().x) * 100;
-    }
-
-
     public double reward() {
+        // This checks values for limbs and returns an appropriate.
+        // The reward is different depending on the reward mode set at runtime
+        // The idea behind the different values returned is described in the Q-Learning chapter
         double reward = 0;
-
-        // TODO minus reward
-
         switch (Main.mode) {
             case 0:
                 if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
@@ -309,7 +298,6 @@ public class BiPedBody {
                 if((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) == 0){reward = - 1000;}
                 break;
             case 1:
-                // TODO extra bonus for begge fødder højt (ikke bare summen)
                 reward = 1500 + ((Simulation.walker.foot2.getWorldCenter().y + Simulation.walker.foot1.getWorldCenter().y) * 1000);
                 if (!feetOnTheGround()) {
                     reward += 1000;
@@ -317,42 +305,24 @@ public class BiPedBody {
                 break;
             case 2:
                 reward = Math.toDegrees(Simulation.walker.knee2.getJointAngle());
-//                System.out.println(reward);
-
                 break;
-            case 3:
-                reward = (Simulation.walker.torso.getWorldCenter().y * 1000);
-                System.out.println(reward);
-                break;
-            case 4:
-                if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) > 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * -1000);
-                }
-                if ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) < 0) {
-                    reward = ((Simulation.walker.foot2.getChangeInPosition().x + Simulation.walker.foot1.getChangeInPosition().x) * 5000);
-                }
-                if (reward == 0) {
-                    reward = -1000;
-                }
-                if (Simulation.walker.hasFallen()) {
-                    reward = -1000;
-                }
-                break;
-
-
         }
-        Main.accumulatedReward += reward;
 
-        return reward;
+        Main.accumulatedReward += reward; // Main.accumulatedReward incremented for use in the GUI.
+
+        return reward; // Reward returned
     }
 
 
     public double getRelativeAngle() {
+        // This method returns the angle the body and a straight horizontal vector
         return (new Vector2(hip2.getAnchor1(), torso.getWorldCenter()).getAngleBetween(new Vector2(1, 0)));
     }
 
-    public void resetPosition() {
-        torso.setTransform(new Transform());
+    public void resetPosition() {// Method for resetting position of all limbs
+
+        // Rotates all limbs back to initial position
+        torso.setTransform(Transform.IDENTITY);
         upperLeg1.setTransform(Transform.IDENTITY);
         upperLeg2.setTransform(Transform.IDENTITY);
         lowerLeg1.setTransform(Transform.IDENTITY);
@@ -368,10 +338,6 @@ public class BiPedBody {
         lowerLeg2.translate(0, -1.8);
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
-
-
-        int interval = (int) Math.toDegrees(hip1.getUpperLimit()) - (int) Math.toDegrees(hip1.getLowerLimit());
-
 
         // Clears force
         for (GameObject limb : limbs) {

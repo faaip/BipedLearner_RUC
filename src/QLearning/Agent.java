@@ -4,50 +4,38 @@ import Rendering_dyn4j.Simulation;
 import aima.core.util.FrequencyCounter;
 import aima.core.util.datastructure.Pair;
 import sample.Main;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO Comment, Clean og lave referencer til AIMA
+/*
+The Agent class is the learning agent. The code seen here is based largely on the one QLearningAgent included in the AIMA
+implementations of algorithms. This can be found on the AIMA github (https://github.com/aima-java/aima-java). The purpose of
+this class is contain Q-values, update these and around an action connected to the optimal policy for a given state.
+ */
+
 
 public class Agent {
-    private JointAction noneAction = new JointAction();
-
-    public double getAlpha() {
-        return alpha;
-    }
-
-    public double getGamma() {
-        return gamma;
-    }
-
-    public int getNe() {
-        return Ne;
-    }
-
-    public double getRplus() {
-        return Rplus;
-    }
-
+    private JointAction noneAction = new JointAction(); // A "none"-action
     private double alpha; // Learning rate
     private double gamma; // Decay rate
     private double Rplus; // Optimistic reward prediction
-    private int mode;
+    private int mode; // Reward mode for the walker
 
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
-    private Double r = null;
+    private Double r = null; // Reward
 
-    private int Ne = 1;
+    private int Ne = 1; // Variable used in exploration function
     private FrequencyCounter<Pair<State, JointAction>> Nsa = new FrequencyCounter<>();
     private Map<Pair<State, JointAction>, Double> Q = new HashMap<>();
 
-    public Agent(int mode) {
+    public Agent(int mode) { // Constructor with mode as input argument
         this.mode = mode;
-        //TODO find optimal values
-        switch (mode) {
+        switch (mode) { // Value for Rplus, gamma and alpha depend on mode.
             case 0:
-                this.Rplus =250;
+                this.Rplus = 250;
                 this.gamma = 0.2; // Lots of reliance of future reward - decay rate
                 this.alpha = 0.5; // Large number of states = high learning rate - learning rate
                 break;
@@ -62,67 +50,52 @@ public class Agent {
                 this.alpha = 0.1;
                 this.Ne = 1;
                 break;
-            case 3:
-                this.Rplus = 30;
-                this.gamma = 0.5;
-                this.alpha = 1;
-                break;
-            case 4:
-                this.Rplus = 30;
-                this.gamma = 0.9;
-                this.alpha = 1;
         }
-        this.s = Simulation.walker.getState();
-        this.a = Main.initAction;
+        this.s = Simulation.walker.getState(); // State is set to initial state for walker
+        this.a = Main.initAction; // Initial action
     }
 
     public JointAction execute() {
+        // This method returns a JointAction from the optimal policy
         State sPrime = Simulation.walker.getState();
         double rPrime = Simulation.walker.reward();
 
         // if terminal
-        if (isTerminal(sPrime)) {
+        if (isTerminal()) {
             Q.put(new Pair<>(sPrime, noneAction), rPrime);
         }
-            // If State s not null
-            if (s != null) {
-                // Increment frequencies
-                Pair<State, JointAction> sa = new Pair<>(s, a);
-                Nsa.incrementFor(sa);
+        // If State s not null
+        if (s != null) {
+            Pair<State, JointAction> sa = new Pair<>(s, a);
+            Nsa.incrementFor(sa);// Increment frequencies
 
-                // Get Q-value
-                Double Qsa = Q.get(sa);
-                if (Qsa == null) {
-                    Qsa = 0.0;
-                }
-
-                Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
-
-                if (r == null) {
-                    r = Simulation.walker.reward();
-                    System.out.println("Reward: " + r);
-                }
-
-                r = Simulation.walker.reward();
-                Q.put(sa, Qsa + alpha * (r + gamma * maxAPrime(sPrime) - Qsa));
-
+            // Get Q-value
+            Double Qsa = Q.get(sa);
+            if (Qsa == null) {
+                Qsa = 0.0;
             }
 
-            if (isTerminal(sPrime)) {
-                s = null;
-                a = null;
-                r = null;
-            } else {
-                this.s = sPrime;
-                this.a = argmaxAPrime(sPrime);
-                this.r = rPrime;
-            }
+            Main.gui.update(Nsa.getCount(sa), Qsa); // Update gui with info for current actions
 
-            if (a != null) {
-                Main.gui.update(a);
-            }
-            return a;
+            r = Simulation.walker.reward();
+            Q.put(sa, Qsa + alpha * (r + gamma * maxAPrime(sPrime) - Qsa));
         }
+
+        if (isTerminal()) { // if terminal, station, action and reward are set accordingly
+            s = null;
+            a = null;
+            r = null;
+        } else {
+            this.s = sPrime;
+            this.a = argmaxAPrime(sPrime);
+            this.r = rPrime;
+        }
+
+        if (a != null) {
+            Main.gui.update(a); // GUI is updated with action
+        }
+        return a; // JointAction is returned
+    }
 
     private JointAction argmaxAPrime(State sPrime) {
         JointAction a = null;
@@ -130,21 +103,19 @@ public class Agent {
         double max = Double.NEGATIVE_INFINITY;
         for (JointAction aPrime : sPrime.getActions()) {
             Pair<State, JointAction> sPrimeAPrime = new Pair<State, JointAction>(sPrime, aPrime);
-            double explorationValue = f(Q.get(sPrimeAPrime), Nsa
-                    .getCount(sPrimeAPrime));
+            double explorationValue = f(Q.get(sPrimeAPrime), Nsa.getCount(sPrimeAPrime));
             if (explorationValue > max) {
                 max = explorationValue;
                 a = aPrime;
             }
         }
-        return a;
+        return a; // returns a with highest expected utility
     }
 
-    private boolean isTerminal(State s) {
-        // TODO måske betyder terminal state at den ikke gider lære.
-        // State is terminal if the walker has fallen
-        if (mode == 0 || mode == 4 || mode == 3) {
-            return Simulation.walker.hasFallen() || !Simulation.walker.isInSight(); // Falling is a terminal state in mode 0
+    private boolean isTerminal() {
+        // Falling is only a terminal state in mode 0
+        if (mode == 0) {
+            return Simulation.walker.hasFallen() || !Simulation.walker.isInSight();
         }
         return false;
     }
@@ -171,13 +142,13 @@ public class Agent {
             }
         }
         if (max == Double.NEGATIVE_INFINITY) {
-            // Assign 0 as the mimics Q being initialized to 0 up front.
+            // Assign 0 as the Q if no max has been found
             max = 0.0;
         }
         return max;
     }
 
     public int getQsize() {
-        return Q.size() ;
+        return Q.size(); // Size of the Q HashMap
     }
 }
