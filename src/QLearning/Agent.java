@@ -22,7 +22,6 @@ public class Agent {
     private double gamma; // Decay rate
     private double Rplus; // Optimistic reward prediction
     private int mode; // Reward mode for the walker
-
     private State s = null; // S (previous State)
     private JointAction a = null; // A (previous action)
     private Double r = null; // Reward

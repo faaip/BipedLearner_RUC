@@ -84,10 +84,8 @@ public class GUI {
         simSpeedSlider.addChangeListener(e -> {
             // Slider for changing simulation speed
             synchronized (ThreadSync.lock) {
-
                     Main.simulation.setSimulationSpeed(simSpeedSlider.getValue());
                     simSpeed.setText(Main.simulation.getSimulationSpeed() + " x Speed");
-
             }
         });
 

@@ -4,6 +4,10 @@ import QLearning.*;
 import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
 
+/*
+This is the Main class for the BiPed learner.
+ */
+
 public class Main {
     public static int generation = 0;
     public static Simulation simulation;
@@ -14,16 +18,8 @@ public class Main {
     public static JointAction initAction;
     public static int mode = 0;
 
-
-
-    // TODO Måske skal actions kun incrementere grader med ex. 5 fremfor full action
-    // TODO Alle actions skal ikke være tilgængelige i alle states, hvis angle er tæt på max == action not available - sænker kompleksiteten
-    // TODO Vi kan overveje om randomaction ved inactivity skal ske automatisk fremfor "forced" af gui
-    // TODO Vi skal undersøge betydelsen af terminal state
-
     public static void main(String[] args) {
-
-        StartDialog dialog = new StartDialog();
+        StartDialog dialog = new StartDialog(); // Starting dialog window
         learn();
     }
 
@@ -74,7 +70,7 @@ public class Main {
 
     private static void updateGuiTable() {
         synchronized (ThreadSync.lock) {
-            gui.highScoreTable.add(new Generation(generation, accumulatedReward)); // TODO fix number of states explored
+            gui.highScoreTable.add(new Generation(generation, accumulatedReward));
             generation++;
             gui.update();
         }

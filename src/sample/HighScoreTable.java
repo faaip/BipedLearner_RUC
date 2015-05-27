@@ -20,8 +20,6 @@ public class HighScoreTable {
                     return Integer.class;
                 case 1:
                     return Double.class;
-                case 2:
-                    return Integer.class;
                 default:
                     return String.class;
             }

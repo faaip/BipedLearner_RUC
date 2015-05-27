@@ -339,7 +339,7 @@ public class BiPedBody {
         foot1.translate(0.15, -2.3);
         foot2.translate(0.15, -2.3);
 
-        // Clears force
+        // Clears force - this makes sure that no force is transferred when reset is performed
         for (GameObject limb : limbs) {
             limb.clearForce();
             limb.clearTorque();

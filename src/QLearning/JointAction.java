@@ -6,10 +6,10 @@ import aima.core.agent.Action;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 
 /*
-This class represents an action and therefore implements Action from aima.core.
+This class represents an action.
  */
 
-public class JointAction implements Action {
+public class JointAction {
     RevoluteJoint joint; // Joint used in action
     boolean motorOn; // is motor on or is joint relaxed in this action
     int a; // int indicating negative (-1), locked (0) or positive motor input (1)
@@ -55,7 +55,6 @@ public class JointAction implements Action {
         }
     }
 
-    @Override
     public boolean isNoOp() {
         // isNoOp indicates if this is a none operation
         return noOp;
