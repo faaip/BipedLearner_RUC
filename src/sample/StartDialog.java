@@ -1,13 +1,18 @@
 package sample;
 
 import QLearning.State;
-
 import javax.swing.*;
 import java.awt.*;
 
+/*
+This class is for the opening dialog window which is instantiated at runtime.
+In this dialog the user can choose mode and adjust rounding factor.
+ */
+
+
 public class StartDialog {
-    private JDialog dialog = new JDialog(); // TODO fjern modes!!!Nye
-    String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee", "Reward for upright position", "Reward for backwards motion"};
+    private JDialog dialog = new JDialog();
+    String[] rewardModes = {"Reward for forward motion", "Reward for elevated feet", "Reward for bending one knee"};
 
     public StartDialog() {
         JPanel startPanel = new JPanel();
@@ -20,13 +25,6 @@ public class StartDialog {
         JLabel noOfStatesNumber = new JLabel(State.getTheoreticalNumberOfStates() + "",SwingConstants.CENTER);
         JButton runSimulationButton = new JButton("Start learning!");
 
-//        dialog.addWindowListener(new WindowAdapter() { // FIX ME!!
-//            @Override
-//            public void windowClosed(WindowEvent e) {
-//                System.exit(0);
-//            }
-//        });
-
         roundFactorSlider.addChangeListener(e1 ->
         {
             State.roundFactor = roundFactorSlider.getValue();
@@ -36,7 +34,6 @@ public class StartDialog {
 
         runSimulationButton.addActionListener(e -> {
             Main.mode = modeComboBox.getSelectedIndex();
-            System.out.println(Main.mode);
             dialog.dispose();
         });
 

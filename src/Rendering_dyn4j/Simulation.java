@@ -36,16 +36,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.dynamics.CollisionListener;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.Mass;
 import org.dyn4j.geometry.Rectangle;
-import org.dyn4j.geometry.Vector2;
 import sample.*;
 
 /**
@@ -60,7 +56,7 @@ import sample.*;
  */
 public class Simulation extends JFrame {
 
-    public static BiPedBody walker;
+    public static BipedBody walker;
     public static GameObject floor;
 
     /**
@@ -210,7 +206,7 @@ public class Simulation extends JFrame {
             world.addBody(wall2);
         }
 
-        walker = new BiPedBody();
+        walker = new BipedBody();
     }
 
     /**

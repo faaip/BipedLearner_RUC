@@ -1,13 +1,13 @@
 package QLearning;
 
+import Rendering_dyn4j.BipedBody;
 import Rendering_dyn4j.Simulation;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
-import Rendering_dyn4j.BiPedBody;
 
 import java.util.*;
 
 /*
-This class is for states. It takes BiPedBody as an input and creates an approximate state from the values of the BiPedBody joints.
+This class is for states. It takes BipedBody as an input and creates an approximate state from the values of the BipedBody joints.
 These variables are then rounded in order to create an approximate state.
  */
 
@@ -17,7 +17,7 @@ public class State {
     private static ArrayList<JointAction> actions = new ArrayList<>(); // List containing possible actions.
     public static int roundFactor = 15; // Round factor - the higher the number the lower precision in states
 
-    public State(BiPedBody walker) {
+    public State(BipedBody walker) {
         // Constructor for a new state with the walker as input.
         // The jointangles from the walker are rounded and then added to the state in order to make the state approximate of the "actual" state
         for (RevoluteJoint j : walker.joints) {
@@ -28,7 +28,7 @@ public class State {
 
     public static void fillActions() {
         // This methods creates actions for all joints.
-        for (RevoluteJoint joint : BiPedBody.joints) {
+        for (RevoluteJoint joint : BipedBody.joints) {
             actions.add(new JointAction(joint)); // New relaxed action (!motorOn)
             for (int i = -1; i <= 1; i++) { // Loop that creates three actions for increase, decrease and "lock" joint
                 actions.add(new JointAction(joint, i));

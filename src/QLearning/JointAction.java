@@ -2,11 +2,11 @@ package QLearning;
 
 import Rendering_dyn4j.Simulation;
 import Rendering_dyn4j.ThreadSync;
-import aima.core.agent.Action;
 import org.dyn4j.dynamics.joint.RevoluteJoint;
 
 /*
-This class represents an action.
+This class represents an action. It has three different constructors for different types of actions
+and method for executing this action.
  */
 
 public class JointAction {
