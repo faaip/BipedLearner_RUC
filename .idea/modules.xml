@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BipedLearner_RUC.iml" filepath="$PROJECT_DIR$/BipedLearner_RUC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BiPedLearner_RUC.iml" filepath="$PROJECT_DIR$/BiPedLearner_RUC.iml" />
     </modules>
   </component>
 </project>

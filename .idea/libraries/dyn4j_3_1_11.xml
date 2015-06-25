@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="dyn4j-3.1.11">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/out/production/dyn4j_003/dyn4j-3.1.11.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

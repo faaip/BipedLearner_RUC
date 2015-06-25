@@ -38,8 +38,14 @@ public class State {
 
     @Override
     public int hashCode() {
-        // Hashcode is returned from the states toString, which contains the angles of the state
-        return toString().hashCode();
+        // LAST-MINUTE CHANGES:
+        // Originally the hashcode was returned from this states toString, which contains the angles of the state
+        // It now returns and 0, which is an expensive solution, but it seems to optimize performance.
+        // We have this explained more in-depth in the section "Last-minute changes" in the written report.
+
+//         return toString().hashCode();
+
+        return 0;
     }
 
     @Override
@@ -54,7 +60,7 @@ public class State {
 
     @Override
     public boolean equals(Object o) {
-        // equals method is found when collision are found when searching the hash set "states" in StateAnalyser
+        // equals method is found when collision are found when searching the HashMap Q in Agent-class
         State s = (State) o;
 
         //Checks degree compared to world
@@ -80,7 +86,7 @@ public class State {
         return actions;
     }
 
-    public static long getTheoreticalNumberOfStates() {
+    public static long getMaxNumberOfStates() {
         // The numbers for these intervals are found by looking at the set upper- and lower limit in each joint
         int hipInterval = Math.round(55) / roundFactor;
         int kneeInterval = Math.round(150) / roundFactor;

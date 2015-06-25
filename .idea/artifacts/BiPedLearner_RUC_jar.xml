@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BiPedLearner_RUC:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BiPedLearner_RUC_jar</output-path>
+    <root id="archive" name="BiPedLearner_RUC.jar">
+      <element id="module-output" name="BiPedLearner_RUC" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/dyn4j-3.1.11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

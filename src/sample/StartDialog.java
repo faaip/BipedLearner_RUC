@@ -21,15 +21,18 @@ public class StartDialog {
         JComboBox modeComboBox = new JComboBox(rewardModes);
         JLabel setRoundFactor = new JLabel("Round factor: " + State.roundFactor,SwingConstants.CENTER);
         JSlider roundFactorSlider = new JSlider(5, 30, 15);
-        JLabel noOfStatesLabel = new JLabel("Theoretical number of states:",SwingConstants.CENTER);
-        JLabel noOfStatesNumber = new JLabel(State.getTheoreticalNumberOfStates() + "",SwingConstants.CENTER);
+        JLabel noOfStatesLabel = new JLabel("Max number of states:",SwingConstants.CENTER);
+        JLabel noOfStatesNumber = new JLabel(State.getMaxNumberOfStates() + "",SwingConstants.CENTER);
         JButton runSimulationButton = new JButton("Start learning!");
+
+        modeComboBox.setSelectedIndex(1); // mode 1 is default, since this is more impressive than mode 0
+        modeComboBox.updateUI();
 
         roundFactorSlider.addChangeListener(e1 ->
         {
             State.roundFactor = roundFactorSlider.getValue();
             setRoundFactor.setText("Round factor: " + State.roundFactor);
-            noOfStatesNumber.setText(State.getTheoreticalNumberOfStates() + "");
+            noOfStatesNumber.setText(State.getMaxNumberOfStates() + "");
         });
 
         runSimulationButton.addActionListener(e -> {
