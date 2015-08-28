@@ -313,7 +313,6 @@ public class BipedBody {
         return reward; // Reward returned
     }
 
-
     public double getRelativeAngle() {
         // This method returns the angle the body and a straight horizontal vector
         return (new Vector2(hip2.getAnchor1(), torso.getWorldCenter()).getAngleBetween(new Vector2(1, 0)));
